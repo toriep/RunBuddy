@@ -107,14 +107,23 @@ function getDataFromCrimeData() {
 
 }
 
-function getDataFromWeather() {
-
+function getDataFromWeather(zipCode) {
+    var SGT_API = {
+        url: `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
+        success: displaySuccess,
+        method: 'post',
+        dataType: 'json',
+        error: displayError,
+    }
+    $.ajax(SGT_API);
 }
 
-function displaySuccess() {
-
+var response = null;
+function displaySuccess(response) {
+    response = response;
+    return response;
 }
 
 function displayError() {
-
+    console.log("AJAX call failed :(")
 }
