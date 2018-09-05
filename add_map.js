@@ -23,13 +23,24 @@ function initMap() {
     var marker = new google.maps.Marker({
         position: staticRunningTrail,
         map: map,
-        //icon:
+        animation: google.maps.Animation.DROP,
+        icon: "images/Winged_Shoe.png"
     });
     var infoWindow = new google.maps.InfoWindow({
         content: "<h3>Quail Hill Trailhead</h3>"
     })
 
-    marker.addListener('click',function(){
-        infoWindow.open(map,marker)
-    })
+    marker.addListener('click', toggleBounce);
+
+    // marker.addListener('click',function(){
+    //     infoWindow.open(map,marker)
+    // })
+}
+
+function toggleBounce() {
+    if(marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+    } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
 }
