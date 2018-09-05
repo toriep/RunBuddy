@@ -1,4 +1,4 @@
-
+const runningTrails = [];
 /**
  * Listen for the document to load and initialize the application
  */
@@ -57,8 +57,17 @@ function renderDirectionOnDom ( pick ) {
  * @returns: none
  * @calls: none
  */
-function renderAvailableLocationsForRunningOnDom ( location ) {
-
+function renderAvailableLocationsForRunningOnDom () {
+    let userLocation = $('#search_input').val();
+    const ajaxParameters = {
+        url: "http://yelp.ongandy.com/businesses",
+        method: 'POST',
+        data: {
+            api_key:'u7VrqD4pyVGW_uBAod5CCKlJiM4pTyFGYzKyYWXV8YHidu5BsdPN20PhYEJflT-vOhZ7mFXHpHCIeyKTA-0xZ9LJcCg_jDK-B3WvRCmYvU1DdCXioFo8mTSIhRmPW3Yx',
+            term: 'running trail park',
+            location: userLocation,
+        }
+    }
 }
 
 /***************************************************************************************************
@@ -121,10 +130,12 @@ function getDataFromWeather(zipCode) {
     $.ajax(SGT_API);
 }
 
+
 function displayWeatherSuccess(responseFromServer) {
     var weather = responseFromServer.wind;
     renderWeatherOnDom(weather);
     
+
 }
 
 function displayError() {
