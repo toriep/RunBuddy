@@ -14,12 +14,20 @@
       <div class="container">
           <div class="search_container">
               <div>
-                  <input type="text" class="form-control" id="search_input" placeholder="Current Location">
+
+
+                  <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
+
                   <button id="runButton">Run</button>
+                  <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
+                        <span class="glyphicon glyphicon-exclamation-sign"></span>
+                        Invalid zip code. Please check again.
+                  </div>
+               
               </div>
           </div>
           <div class="weather_container">
-          <div id='condition'></div>
+            <div id='condition'></div>
           </div>
       </div>
 
