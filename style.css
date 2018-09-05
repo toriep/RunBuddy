@@ -32,3 +32,8 @@ body {
     display: inline-block;
     text-align: center;
 }
+
+#map_page{
+    height: 600px;
+    width: 100vw;
+}
