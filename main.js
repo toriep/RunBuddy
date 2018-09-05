@@ -30,7 +30,7 @@ function addClickHandlersToElements(){
 
 /***************************************************************************************************
  * displayMapToDom - display map based on the the location (based on zip code or city user inputs)
- * @param: location
+ * @param: location //an array of objects
  * @returns: none
  * @calls: none
  */
