@@ -1,4 +1,4 @@
-
+const runningTrails = [];
 /**
  * Listen for the document to load and initialize the application
  */
@@ -15,7 +15,7 @@ $(document).ready(initializeApp);
 * initializes the application
 */
 function initializeApp(){
-    
+    addClickHandlersToElements();
 }
 
 /***************************************************************************************************
@@ -54,8 +54,17 @@ function renderDirectionOnDom ( pick ) {
  * @returns: none
  * @calls: none
  */
-function renderAvailableLocationsForRunningOnDom ( location ) {
-
+function renderAvailableLocationsForRunningOnDom () {
+    let userLocation = $('#search_input').val();
+    const ajaxParameters = {
+        url: "http://yelp.ongandy.com/businesses",
+        method: 'POST',
+        data: {
+            api_key:'u7VrqD4pyVGW_uBAod5CCKlJiM4pTyFGYzKyYWXV8YHidu5BsdPN20PhYEJflT-vOhZ7mFXHpHCIeyKTA-0xZ9LJcCg_jDK-B3WvRCmYvU1DdCXioFo8mTSIhRmPW3Yx',
+            term: 'running trail park',
+            location: userLocation,
+        }
+    }
 }
 
 /***************************************************************************************************
@@ -107,14 +116,23 @@ function getDataFromCrimeData() {
 
 }
 
-function getDataFromWeather() {
-
+function getDataFromWeather(zipCode) {
+    var SGT_API = {
+        url: `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
+        success: displaySuccess,
+        method: 'post',
+        dataType: 'json',
+        error: displayError,
+    }
+    $.ajax(SGT_API);
 }
 
-function displaySuccess() {
-
+var response = null;
+function displaySuccess(response) {
+    response = response;
+    return response;
 }
 
 function displayError() {
-
+    console.log("AJAX call failed :(")
 }
