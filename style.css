@@ -24,11 +24,16 @@ body {
 .search_container {
     position: absolute;
     top: 35%;
-    left: 35%;
+    left: 43%;
 }
 
 
 #search_input {
     display: inline-block;
     text-align: center;
+}
+
+#map_page{
+    height: 600px;
+    width: 100vw;
 }

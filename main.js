@@ -1,4 +1,4 @@
-
+const runningTrails = [];
 /**
  * Listen for the document to load and initialize the application
  */
@@ -33,7 +33,7 @@ function handleRunClicked() {
 }
 /***************************************************************************************************
  * displayMapToDom - display map based on the the location (based on zip code or city user inputs)
- * @param: location
+ * @param: location //an array of objects
  * @returns: none
  * @calls: none
  */
@@ -57,8 +57,17 @@ function renderDirectionOnDom ( pick ) {
  * @returns: none
  * @calls: none
  */
-function renderAvailableLocationsForRunningOnDom ( location ) {
-
+function renderAvailableLocationsForRunningOnDom () {
+    let userLocation = $('#search_input').val();
+    const ajaxParameters = {
+        url: "http://yelp.ongandy.com/businesses",
+        method: 'POST',
+        data: {
+            api_key:'u7VrqD4pyVGW_uBAod5CCKlJiM4pTyFGYzKyYWXV8YHidu5BsdPN20PhYEJflT-vOhZ7mFXHpHCIeyKTA-0xZ9LJcCg_jDK-B3WvRCmYvU1DdCXioFo8mTSIhRmPW3Yx',
+            term: 'running trail park',
+            location: userLocation,
+        }
+    }
 }
 
 /***************************************************************************************************
@@ -108,8 +117,21 @@ function getDataFromYelp() {
 
 }
 
-function getDataFromCrimeData() {
+function getDataFromMeetUp(zipCode) {
+    let SGT_API = {
+        url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=${zipCode}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
+        success: displayMeetUpSuccess,
+        method: 'post',
+        dataType: 'jsonp',
+        error: displayError,
+    }
+    $.ajax(SGT_API);
+}
 
+function displayMeetUpSuccess(response){
+    let meetUpResponse = response;
+    console.log(meetUpResponse)
+    return meetUpResponse;
 }
 
 function getDataFromWeather(zipCode) {
@@ -123,6 +145,10 @@ function getDataFromWeather(zipCode) {
     $.ajax(SGT_API);
 }
 
+function displaySuccess(response) {
+    response = response;
+    return response;
+
 function displayWeatherSuccess(responseFromServer) {
     let weather = {};
     weather.condition = responseFromServer.weather[0]['main'];
@@ -133,7 +159,6 @@ function displayWeatherSuccess(responseFromServer) {
     weather.wind = responseFromServer.wind['speed'];
     weather.clouds = responseFromServer.clouds['all'];
     renderWeatherOnDom(weather);
-    
 }
 
 function displayError() {
