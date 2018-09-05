@@ -11,28 +11,33 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo" async defer></script>
     <script type="text/javascript" src="main.js"></script>
-    <script src="auto_complete.js"></script>
-</head>
 
-<body>
-    <div class="container">
-        <div class="search_container">
-            <div>
+  </head>
+  <body>
+      <div class="container">
+          <div class="search_container">
+              <div>
 
-                <input type="text" class="form-control" id="search_input" placeholder="Current Location">
-                <button id="runButton">Run</button>
-            </div>
+
+                  <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
+
+                  <button id="runButton">Run</button>
+                  <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
+                        <span class="glyphicon glyphicon-exclamation-sign"></span>
+                        Invalid zip code. Please check again.
+                  </div>
+               
+              </div>
+          </div>
+                <div id="map_page">
+
         </div>
-
-        <div id="map_page">
-
-        </div>
-        <div class="weather_container">
+          <div class="weather_container">
             <div id='condition'></div>
-        </div>
+          </div>
+      </div>
 
-    </div>
-
-</body>
-
+  </body>
+  
 </html>
+

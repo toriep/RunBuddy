@@ -28,12 +28,18 @@ body {
     left: 43%;
 }
 
+.weather_container {
+    color: black; /*will be updated*/
+    font-weight: bolder;
+}
 
 #search_input {
     display: inline-block;
     text-align: center;
 }
-
+#error_msg {
+    color: red;
+}
 #map_page{
     height: 600px;
     width: 100vw;
