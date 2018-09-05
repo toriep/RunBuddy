@@ -14,6 +14,7 @@ body {
    background: url("images/background_pic.jpg");
    background-position: center;
    background-size: cover;
+   overflow: hidden;
 }
 
 .container {
