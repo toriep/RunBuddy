@@ -26,7 +26,7 @@ function initializeApp(){
 */
 function addClickHandlersToElements(){
     // $("#runButton").click(handleRunClicked); 
-    $('#runButton').click(renderAvailableLocationsForRunningOnDom);
+    $('#runButton').click(ajaxYelpCall);
 
 }
 
@@ -55,15 +55,15 @@ function renderDirectionOnDom ( pick ) {
 }
 
 /***************************************************************************************************
- * renderAvailableLocationsForRunningToDom - display available locations for running based on yelp database
+ * ajaxYelpCall - display available locations for running based on yelp database
  * @param: location
  * @returns: none
  * @calls: none
  */
-function renderAvailableLocationsForRunningOnDom () {
+function ajaxYelpCall () {
     console.log('testing');
     let userLocation = $('#search_input').val();
-    var ajaxParameters = {
+    const ajaxParameters = {
         dataType: 'JSON',
         url: "http://yelp.ongandy.com/businesses",
         method: 'POST',
@@ -124,16 +124,19 @@ function getDataFromGoogleMap() {
 }
 
 function getDataFromYelp(response) {
-    var businessesIndex = response.businesses;
-    console.log(businessesIndex);
-
+    const businessesIndex = response.businesses;
+    console.log(response.businesses);
     for ( let i = 0; i < businessesIndex.length; i++) {
         runningTrails.push(
             {
-                
+                name: businessesIndex[i].name,
+                location: businessesIndex[i].location,
+                coordinates: businessesIndex[i].coordinates,
+                image: businessesIndex[i].image_url,
             }
         )
     }
+    console.log(runningTrails);
 }
 
 function getDataFromMeetUp(zipCode) {
@@ -167,6 +170,7 @@ function getDataFromWeather(zipCode) {
 function displaySuccess(response) {
     response = response;
     return response;
+}
 
 function displayWeatherSuccess(responseFromServer) {
     let weather = {};
