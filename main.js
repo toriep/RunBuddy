@@ -87,7 +87,9 @@ function renderLocationPicturesOnDom ( location ) {
  * @calls: none
  */
 function renderWeatherOnDom ( weather ) {
-    $('.weather_page').text(weather);
+    $('.weather_container #condition').text('Weather condition: '+weather.condition);
+    $('.weather_container #condition').text('Current temp: '+weather.currentTempInF);
+
 }
 
 /***************************************************************************************************
@@ -133,11 +135,11 @@ function displayMeetUpSuccess(response){
 }
 
 function getDataFromWeather(zipCode) {
-    var SGT_API = {
+    let SGT_API = {
         url: `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
-        success: displayWeatherSuccess,
         method: 'post',
         dataType: 'json',
+        success: displayWeatherSuccess,
         error: displayError,
     }
     $.ajax(SGT_API);
@@ -148,7 +150,14 @@ function displaySuccess(response) {
     return response;
 
 function displayWeatherSuccess(responseFromServer) {
-    var weather = responseFromServer.wind;
+    let weather = {};
+    weather.condition = responseFromServer.weather[0]['main'];
+    weather.tempMinInF = ((responseFromServer.main['temp_min'])*0.1 * 9 / 5 + 32).toFixed(1);
+    weather.tempMaxInF = ((responseFromServer.main['temp_max'])*0.1 * 9 / 5 + 32).toFixed(1);
+    weather.currentTempInF = (((responseFromServer.main['temp'])*0.1) * 9 / 5 + 32).toFixed(1);
+    weather.humidity = responseFromServer.main['humidity'];
+    weather.wind = responseFromServer.wind['speed'];
+    weather.clouds = responseFromServer.clouds['all'];
     renderWeatherOnDom(weather);
 }
 
