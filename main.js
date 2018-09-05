@@ -25,9 +25,12 @@ function initializeApp(){
 *     
 */
 function addClickHandlersToElements(){
-    
+    $("#runButton").click(handleRunClicked); 
 }
-
+function handleRunClicked() {
+    var zipCode = $("#search_input").val();
+    getDataFromWeather(zipCode);
+}
 /***************************************************************************************************
  * displayMapToDom - display map based on the the location (based on zip code or city user inputs)
  * @param: location
@@ -83,8 +86,8 @@ function renderLocationPicturesOnDom ( location ) {
  * @returns: none
  * @calls: none
  */
-function renderWeatherOnDom ( location ) {
-
+function renderWeatherOnDom ( weather ) {
+    $('.weather_page').text(weather);
 }
 
 /***************************************************************************************************
@@ -119,7 +122,7 @@ function getDataFromCrimeData() {
 function getDataFromWeather(zipCode) {
     var SGT_API = {
         url: `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
-        success: displaySuccess,
+        success: displayWeatherSuccess,
         method: 'post',
         dataType: 'json',
         error: displayError,
@@ -127,10 +130,12 @@ function getDataFromWeather(zipCode) {
     $.ajax(SGT_API);
 }
 
-var response = null;
-function displaySuccess(response) {
-    response = response;
-    return response;
+
+function displayWeatherSuccess(responseFromServer) {
+    var weather = responseFromServer.wind;
+    renderWeatherOnDom(weather);
+    
+
 }
 
 function displayError() {
