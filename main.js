@@ -30,6 +30,7 @@ function addClickHandlersToElements(){
 
     // $("#runButton").click(handleRunClicked); 
     $('#runButton').click(ajaxYelpCall);
+    $('#runButton').click(redirectRunButton);
 
 
 }
@@ -94,7 +95,6 @@ function renderDirectionOnDom ( pick ) {
  * @calls: none
  */
 function ajaxYelpCall () {
-    console.log('testing');
     let userLocation = $('#search_input').val();
     const ajaxParameters = {
         dataType: 'JSON',
@@ -119,7 +119,7 @@ function ajaxYelpCall () {
  * @returns: none
  * @calls: none
  */
-function renderLocationPicturesOnDom ( location ) {
+function renderLocationPicturesOnDom ( runningTrailsArray ) {
 
 }
 
@@ -197,7 +197,7 @@ function displayMeetUpSuccess(response){
 }
 
 function getDataFromWeather(zipCode) {
-    let SGT_API = {
+    const SGT_API = {
         url: `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
         method: 'post',
         dataType: 'json',
@@ -225,5 +225,10 @@ function displayWeatherSuccess(responseFromServer) {
 }
 
 function displayError() {
-    console.log("AJAX call failed :(");
+    console.log("AJAX call failed :(")
+}
+
+function redirectRunButton() {
+    window.location.href = 'location_list.html';
+    return false;
 }
