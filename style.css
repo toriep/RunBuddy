@@ -39,6 +39,17 @@ body {
     font-size: 50px;
 }
 
+
+.weather_container {
+    color: black; /*will be updated*/
+    font-weight: bolder;
+}
+
+
+#error_msg {
+    color: red;
+}
+
 #map_page{
     height: 600px;
     width: 100vw;
