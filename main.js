@@ -25,14 +25,41 @@ function initializeApp(){
 *     
 */
 function addClickHandlersToElements(){
-    // $("#runButton").click(handleRunClicked); 
-    $('#runButton').click(renderAvailableLocationsForRunningOnDom);
-
+    $('#runButton').click(handleRunClicked);
 }
 
+/***************************************************************************************************
+* handleRunClicked
+* @params none
+* @returns  {undefined}
+* @calls: all four functions we want to display on each tab     
+*/
 function handleRunClicked() {
+    $('#search_input').focus( function() {
+        $('#error_msg').addClass('hidden');
+    });     //////////////////////////////////////////////
+
     var zipCode = $("#search_input").val();
-    getDataFromWeather(zipCode);
+        
+    if (checkIfInputZipIsValid(zipCode)) {
+        getDataFromWeather(zipCode);
+        renderAvailableLocationsForRunningOnDom();
+        //append your function calls here?????????????
+
+    } else {
+        $("#search_input").val('');
+        handleRunClicked();
+    } 
+    $('#error_msg').text('');
+}
+
+function checkIfInputZipIsValid (zip) {
+    var valid = true;
+    if (zip.length!=5 || isNaN(zip)) {
+        $('#error_msg').removeClass('hidden');
+        valid = false;
+    }    
+    return valid; 
 }
 /***************************************************************************************************
  * displayMapToDom - display map based on the the location (based on zip code or city user inputs)
@@ -97,22 +124,29 @@ function renderLocationPicturesOnDom ( location ) {
  * @calls: none
  */
 function renderWeatherOnDom ( weather ) {
-    $('.weather_container #condition').text('Weather condition: '+weather.condition);
-    $('.weather_container #condition').text('Current temp: '+weather.currentTempInF);
+    var imgSrc = getImgForWeather (weather);
+    var weatherDisplay = `Current temp: ${weather.currentTempInF} °F `;
+    $('.weather_container #condition').text(weatherDisplay);
+
 
 }
 
-/***************************************************************************************************
- * renderCrimeDataToDom - display crime data based on the location to show how safe 
- * it is to go running in the location
- * @param: location
- * @returns: none
- * @calls: none
- */
-function renderCrimeDataOnDom ( location ) {
-
+function getImgForWeather (weather) {
+    var imgSrc;
+    switch (weather.condition)  {
+        case 'Haze':
+            imgSrc = '.images/haze.img';
+            break;
+        case 'Clouds':
+            imgSrc = '.images/clouds.img';
+            break;
+        case 'Sunny':
+            imgSrc = '.images/sunny.img';
+            break;
+        default:
+            imgSrc = '.images/default.img';             
+    }
 }
-
 
 /***************************************************************************************************
  * get data from each server
@@ -167,6 +201,7 @@ function getDataFromWeather(zipCode) {
 function displaySuccess(response) {
     response = response;
     return response;
+}
 
 function displayWeatherSuccess(responseFromServer) {
     let weather = {};
@@ -181,5 +216,5 @@ function displayWeatherSuccess(responseFromServer) {
 }
 
 function displayError() {
-    console.log("AJAX call failed :(")
+    console.log("AJAX call failed :(");
 }
