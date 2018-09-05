@@ -1,4 +1,5 @@
 const runningTrails = [];
+
 /**
  * Listen for the document to load and initialize the application
  */
@@ -8,25 +9,26 @@ $(document).ready(initializeApp);
  * global variables here if any 
  */
 
- /***************************************************************************************************
-* initializeApp 
-* @params {undefined} none
-* @returns: {undefined} none
-* initializes the application
-*/
-function initializeApp(){
+/***************************************************************************************************
+ * initializeApp 
+ * @params {undefined} none
+ * @returns: {undefined} none
+ * initializes the application
+ */
+function initializeApp() {
     addClickHandlersToElements();
 }
 
 /***************************************************************************************************
-* addClickHandlerstoElements
-* @params {undefined} 
-* @returns  {undefined}
-*     
-*/
-function addClickHandlersToElements(){
 
+ * addClickHandlerstoElements
+ * @params {undefined} 
+ * @returns  {undefined}
+ *     
+ */
+function addClickHandlersToElements() {
     $('#runButton').click(handleRunClicked);
+
 
     // $("#runButton").click(handleRunClicked); 
     $('#runButton').click(ajaxYelpCall);
@@ -74,8 +76,35 @@ function checkIfInputZipIsValid (zip) {
  * @returns: none
  * @calls: none
  */
-function displayMapOnDom ( location ) {
+function displayMapOnDom() {
+    //Map options
+    const options = {
+        zoom: 10,
+        center: runningTrails[0],
+    }
+    //New map
+    let map = new google.maps.Map(document.getElementById("map_page"), options);
+    //Add marker
 
+    for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
+        let marker = new google.maps.Marker({
+            position: runningTrails[trailIndex].coordinates,
+            map: map,
+            animation: setTimeout(function(){google.maps.Animation.DROP},500),
+            icon: "images/Winged_Shoe.png"
+        });
+        let infoWindow = new google.maps.InfoWindow({
+            content: `<h3>${runningTrails[trailIndex].name}</h3>`
+        })
+
+        marker.addListener('click', function () {
+            if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+            } else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+        });
+    }
 }
 
 /***************************************************************************************************
@@ -84,7 +113,7 @@ function displayMapOnDom ( location ) {
  * @returns: none
  * @calls: none
  */
-function renderDirectionOnDom ( pick ) {
+function renderDirectionOnDom(pick) {
 
 }
 
@@ -94,14 +123,16 @@ function renderDirectionOnDom ( pick ) {
  * @returns: none
  * @calls: none
  */
+
 function ajaxYelpCall () {
+
     let userLocation = $('#search_input').val();
     const ajaxParameters = {
         dataType: 'JSON',
         url: "http://yelp.ongandy.com/businesses",
         method: 'POST',
         data: {
-            api_key:'u7VrqD4pyVGW_uBAod5CCKlJiM4pTyFGYzKyYWXV8YHidu5BsdPN20PhYEJflT-vOhZ7mFXHpHCIeyKTA-0xZ9LJcCg_jDK-B3WvRCmYvU1DdCXioFo8mTSIhRmPW3Yx',
+            api_key: 'u7VrqD4pyVGW_uBAod5CCKlJiM4pTyFGYzKyYWXV8YHidu5BsdPN20PhYEJflT-vOhZ7mFXHpHCIeyKTA-0xZ9LJcCg_jDK-B3WvRCmYvU1DdCXioFo8mTSIhRmPW3Yx',
             term: 'running trail park',
             location: userLocation,
         },
@@ -110,7 +141,7 @@ function ajaxYelpCall () {
             console.log('error');
         }
     }
-    $.ajax(ajaxParameters)
+    $.ajax(ajaxParameters);
 }
 
 /***************************************************************************************************
@@ -119,7 +150,9 @@ function ajaxYelpCall () {
  * @returns: none
  * @calls: none
  */
+
 function renderLocationPicturesOnDom ( runningTrailsArray ) {
+
 
 }
 
@@ -129,6 +162,7 @@ function renderLocationPicturesOnDom ( runningTrailsArray ) {
  * @returns: none
  * @calls: none
  */
+
 function renderWeatherOnDom ( weather ) {
     var imgSrc = getImgForWeather (weather);
     var weatherDisplay = `Current temp: ${weather.currentTempInF} °F `;
@@ -152,31 +186,42 @@ function getImgForWeather (weather) {
         default:
             imgSrc = '.images/default.img';             
     }
+
 }
 
 /***************************************************************************************************
  * get data from each server
  * 
  * 
-*/
+ */
 function getDataFromGoogleMap() {
 
 }
 
 function getDataFromYelp(response) {
     const businessesIndex = response.businesses;
-    console.log(response.businesses);
-    for ( let i = 0; i < businessesIndex.length; i++) {
-        runningTrails.push(
-            {
-                name: businessesIndex[i].name,
-                location: businessesIndex[i].location,
-                coordinates: businessesIndex[i].coordinates,
-                image: businessesIndex[i].image_url,
-            }
-        )
+    // let center = response.region.center;
+    let {
+        latitude,
+        longitude
+    } = response.region.center;
+    let center = new google.maps.LatLng(latitude, longitude);
+    runningTrails.push(center);
+    for (let i = 1; i < businessesIndex.length; i++) {
+        let {
+            latitude,
+            longitude
+        } = businessesIndex[i].coordinates;
+        let coordinates = new google.maps.LatLng(latitude, longitude);
+        runningTrails.push({
+            name: businessesIndex[i].name,
+            location: businessesIndex[i].location,
+            coordinates: coordinates,
+            image: businessesIndex[i].image_url,
+        })
     }
     console.log(runningTrails);
+    displayMapOnDom();
 }
 
 function getDataFromMeetUp(zipCode) {
@@ -190,7 +235,7 @@ function getDataFromMeetUp(zipCode) {
     $.ajax(SGT_API);
 }
 
-function displayMeetUpSuccess(response){
+function displayMeetUpSuccess(response) {
     let meetUpResponse = response;
     console.log(meetUpResponse)
     return meetUpResponse;
@@ -215,9 +260,9 @@ function displaySuccess(response) {
 function displayWeatherSuccess(responseFromServer) {
     let weather = {};
     weather.condition = responseFromServer.weather[0]['main'];
-    weather.tempMinInF = ((responseFromServer.main['temp_min'])*0.1 * 9 / 5 + 32).toFixed(1);
-    weather.tempMaxInF = ((responseFromServer.main['temp_max'])*0.1 * 9 / 5 + 32).toFixed(1);
-    weather.currentTempInF = (((responseFromServer.main['temp'])*0.1) * 9 / 5 + 32).toFixed(1);
+    weather.tempMinInF = ((responseFromServer.main['temp_min']) * 0.1 * 9 / 5 + 32).toFixed(1);
+    weather.tempMaxInF = ((responseFromServer.main['temp_max']) * 0.1 * 9 / 5 + 32).toFixed(1);
+    weather.currentTempInF = (((responseFromServer.main['temp']) * 0.1) * 9 / 5 + 32).toFixed(1);
     weather.humidity = responseFromServer.main['humidity'];
     weather.wind = responseFromServer.wind['speed'];
     weather.clouds = responseFromServer.clouds['all'];
