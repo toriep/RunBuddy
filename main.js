@@ -25,8 +25,11 @@ function initializeApp(){
 *     
 */
 function addClickHandlersToElements(){
-    $("#runButton").click(handleRunClicked); 
+    // $("#runButton").click(handleRunClicked); 
+    $('#runButton').click(renderAvailableLocationsForRunningOnDom);
+
 }
+
 function handleRunClicked() {
     var zipCode = $("#search_input").val();
     getDataFromWeather(zipCode);
@@ -58,16 +61,23 @@ function renderDirectionOnDom ( pick ) {
  * @calls: none
  */
 function renderAvailableLocationsForRunningOnDom () {
+    console.log('testing');
     let userLocation = $('#search_input').val();
-    const ajaxParameters = {
+    var ajaxParameters = {
+        dataType: 'JSON',
         url: "http://yelp.ongandy.com/businesses",
         method: 'POST',
         data: {
             api_key:'u7VrqD4pyVGW_uBAod5CCKlJiM4pTyFGYzKyYWXV8YHidu5BsdPN20PhYEJflT-vOhZ7mFXHpHCIeyKTA-0xZ9LJcCg_jDK-B3WvRCmYvU1DdCXioFo8mTSIhRmPW3Yx',
             term: 'running trail park',
             location: userLocation,
+        },
+        success: getDataFromYelp,
+        error: function (response) {
+            console.log('error');
         }
     }
+    $.ajax(ajaxParameters)
 }
 
 /***************************************************************************************************
@@ -113,8 +123,17 @@ function getDataFromGoogleMap() {
 
 }
 
-function getDataFromYelp() {
+function getDataFromYelp(response) {
+    var businessesIndex = response.businesses;
+    console.log(businessesIndex);
 
+    for ( let i = 0; i < businessesIndex.length; i++) {
+        runningTrails.push(
+            {
+                
+            }
+        )
+    }
 }
 
 function getDataFromMeetUp(zipCode) {
