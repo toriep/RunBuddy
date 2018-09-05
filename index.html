@@ -18,23 +18,30 @@
           <div class="search_container">
               <div>
 
-
-                  <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
-
-                  <button id="runButton">Run</button>
-                  <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
+                        <div class="input-group-btn">
+                          <button class="btn btn-default" id="runButton">
+                            <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                        </div>
+                 <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
                         <span class="glyphicon glyphicon-exclamation-sign"></span>
                         Invalid zip code. Please check again.
                   </div>
-               
+                </div>
               </div>
           </div>
+
                 <div id="map_page">
 
         </div>
+
           <div class="weather_container">
             <div id='condition'></div>
           </div>
+       
+        
       </div>
 
   </body>
