@@ -1,4 +1,4 @@
-
+const runningTrails = [];
 /**
  * Listen for the document to load and initialize the application
  */
@@ -15,7 +15,7 @@ $(document).ready(initializeApp);
 * initializes the application
 */
 function initializeApp(){
-    
+    addClickHandlersToElements();
 }
 
 /***************************************************************************************************
@@ -25,12 +25,15 @@ function initializeApp(){
 *     
 */
 function addClickHandlersToElements(){
-    
+    $("#runButton").click(handleRunClicked); 
 }
-
+function handleRunClicked() {
+    var zipCode = $("#search_input").val();
+    getDataFromWeather(zipCode);
+}
 /***************************************************************************************************
  * displayMapToDom - display map based on the the location (based on zip code or city user inputs)
- * @param: location
+ * @param: location //an array of objects
  * @returns: none
  * @calls: none
  */
@@ -54,8 +57,17 @@ function renderDirectionOnDom ( pick ) {
  * @returns: none
  * @calls: none
  */
-function renderAvailableLocationsForRunningOnDom ( location ) {
-
+function renderAvailableLocationsForRunningOnDom () {
+    let userLocation = $('#search_input').val();
+    const ajaxParameters = {
+        url: "http://yelp.ongandy.com/businesses",
+        method: 'POST',
+        data: {
+            api_key:'u7VrqD4pyVGW_uBAod5CCKlJiM4pTyFGYzKyYWXV8YHidu5BsdPN20PhYEJflT-vOhZ7mFXHpHCIeyKTA-0xZ9LJcCg_jDK-B3WvRCmYvU1DdCXioFo8mTSIhRmPW3Yx',
+            term: 'running trail park',
+            location: userLocation,
+        }
+    }
 }
 
 /***************************************************************************************************
@@ -74,8 +86,8 @@ function renderLocationPicturesOnDom ( location ) {
  * @returns: none
  * @calls: none
  */
-function renderWeatherOnDom ( location ) {
-
+function renderWeatherOnDom ( weather ) {
+    $('.weather_page').text(weather);
 }
 
 /***************************************************************************************************
@@ -116,13 +128,14 @@ function getDataFromMeetUp(zipCode) {
 
 function displayMeetUpSuccess(response){
     let meetUpResponse = response;
+    console.log(meetUpResponse)
     return meetUpResponse;
 }
 
 function getDataFromWeather(zipCode) {
     var SGT_API = {
         url: `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
-        success: displaySuccess,
+        success: displayWeatherSuccess,
         method: 'post',
         dataType: 'json',
         error: displayError,
@@ -133,6 +146,10 @@ function getDataFromWeather(zipCode) {
 function displaySuccess(response) {
     response = response;
     return response;
+
+function displayWeatherSuccess(responseFromServer) {
+    var weather = responseFromServer.wind;
+    renderWeatherOnDom(weather);
 }
 
 function displayError() {
