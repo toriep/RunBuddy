@@ -115,8 +115,21 @@ function getDataFromYelp() {
 
 }
 
-function getDataFromCrimeData() {
+function getDataFromMeetUp(zipCode) {
+    let SGT_API = {
+        url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=${zipCode}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
+        success: displayMeetUpSuccess,
+        method: 'post',
+        dataType: 'jsonp',
+        error: displayError,
+    }
+    $.ajax(SGT_API);
+}
 
+function displayMeetUpSuccess(response){
+    let meetUpResponse = response;
+    console.log(meetUpResponse)
+    return meetUpResponse;
 }
 
 function getDataFromWeather(zipCode) {
@@ -130,12 +143,13 @@ function getDataFromWeather(zipCode) {
     $.ajax(SGT_API);
 }
 
+function displaySuccess(response) {
+    response = response;
+    return response;
 
 function displayWeatherSuccess(responseFromServer) {
     var weather = responseFromServer.wind;
     renderWeatherOnDom(weather);
-    
-
 }
 
 function displayError() {
