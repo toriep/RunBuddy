@@ -17,7 +17,8 @@ function renderInformationOnDom(runningTrailsArray) {
         let addressOfPlace = $('<address>').append(addressOfPlace1, brLine1, addressOfPlace2);
 
         moreInfoButton.click(()=>{
-            $('.description').addClass('hidden');
+            $('.descriptionTab').empty();
+            // $('.description').addClass('hidden');
             $('.results').removeClass('hidden');
             $('.single_location_detail').removeClass('hidden');
             $('.list_result').addClass('hidden');
@@ -29,7 +30,7 @@ function renderInformationOnDom(runningTrailsArray) {
             let rating = $('<div>').text('Rating: ' + runningTrails[i].rating)
             let pointBCoordinates = runningTrails[i].coordinates
             descriptionDiv.append(nameOfPlace,imageOfPlace,addressOfPlace,distance,rating);
-            $('.location_list').append(descriptionDiv);
+            $('.descriptionTab').append(descriptionDiv);
             displayDirectionLineOnMap(pointBCoordinates);
         })
         locationDescriptionDiv.append(nameOfPlace, addressOfPlace, brLine2, moreInfoButton);
