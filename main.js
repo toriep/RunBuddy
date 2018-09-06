@@ -235,7 +235,9 @@ function getDataFromYelp(response) {
     displayMapOnDom();
 }
 
-function getDataFromMeetUp(zipCode) {
+function getDataFromMeetUp() {
+    let zipCode = $("#search_input").val();
+    debugger;
     let meetup= {
         url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=${zipCode}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
         success: displayMeetUpSuccess,
