@@ -49,6 +49,7 @@ function checkIfInputZipIsValid (zip) {
  * @calls: none
  */
 function displayMapOnDom() {
+    $(".landing_page").addClass("hidden");
     //Map options
     const options = {
         zoom: 10,
