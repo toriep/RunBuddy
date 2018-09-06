@@ -80,6 +80,7 @@ function displayMapOnDom() {
             }
         });
     }
+    renderInformationOnDom(runningTrails);
 }
 
 /***************************************************************************************************
@@ -129,7 +130,6 @@ function ajaxYelpCall () {
     }
     $.ajax(ajaxParameters);
 }
-
 
 /***************************************************************************************************
  * renderLocationPicturesToDom - display pictures of the location
