@@ -49,6 +49,7 @@ function checkIfInputZipIsValid (zip) {
  * @calls: none
  */
 function displayMapOnDom() {
+    $(".landing_page").addClass("hidden");
     //Map options
     const options = {
         zoom: 10,
@@ -65,11 +66,13 @@ function displayMapOnDom() {
             animation: setTimeout(function(){google.maps.Animation.DROP},500),
             icon: "images/Winged_Shoe.png"
         });
+        let contentString = "<h3>" + runningTrails[trailIndex].name + "</h3>";
         let infoWindow = new google.maps.InfoWindow({
-            content: `<h3>${runningTrails[trailIndex].name}</h3>`
+            content: contentString
         })
 
         marker.addListener('click', function () {
+            infoWindow.open(map,marker);
             if (marker.getAnimation() !== null) {
                 marker.setAnimation(null);
             } else {
@@ -208,6 +211,7 @@ function getDataFromYelp(response) {
     } = response.region.center;
     let center = new google.maps.LatLng(latitude, longitude);
     runningTrails.push(center);
+    console.log(businessesIndex);
     for (let i = 1; i < businessesIndex.length; i++) {
         let {
             latitude,
@@ -221,7 +225,7 @@ function getDataFromYelp(response) {
             image: businessesIndex[i].image_url,
         })
     }
-    console.log(runningTrails);
+    // console.log(runningTrails);
     displayMapOnDom();
 }
 
