@@ -93,6 +93,7 @@ a{
 
 /* Search List Result Box */
 .list_result {
+    display: -webkit-box;
     border: 1px solid darkgreen;
     background-color: whitesmoke;
     border-radius: 10px;
@@ -134,3 +135,19 @@ a{
     display: none;
 }
 
+.locationPicture {
+    display: inline-block;
+    width: 23vw;
+    height: 23vw;
+}
+
+.locationDescription {
+    display: inline-block;
+    width: 70vw;
+    padding-left: 5%;
+    font-size: 2.5rem;
+}
+
+.locationDescription p {
+    font-size: 4rem;
+}
