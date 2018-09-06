@@ -172,7 +172,13 @@ function renderWeatherOnDom ( weather ) {
     let line3 = $('<li>').append(`Humidity ${weather.humidity}%`);
     let weatherList = $('<ul class="weather_list">')
     weatherList.append(line0, line1, line2, line3);
-    $('.weather_display').append(weatherList);
+    $('.location_list').append(weatherList);
+}
+
+function displayWeather(){
+    $('.list_result').addClass('hidden');
+    $('.events').addClass('hidden');
+    $('.weather_list').removeClass('hidden');
 }
 
 function getImgForWeather (weather) {
@@ -271,6 +277,7 @@ function displayMeetUpSuccess(response){
 
 function displayMeetUp(){
     $('.list_result').addClass('hidden');
+    $('.weather_list').addClass('hidden');
     $('.events').removeClass('hidden');
 }
    
