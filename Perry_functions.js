@@ -13,8 +13,7 @@ function renderInformationOnDom(runningTrailsArray) {
         let brl = $('<br>'); //check
         let addressOfPlace2 = `${runningTrails[i].location.display_address[1]}`;
         let addressOfPlace = $('<adress>').append(addressOfPlace1, brl, addressOfPlace2);
-        locationDescriptionDiv.append(nameOfPlace, addressOfPlace, moreInfoButton);
-        listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
+
 
         let moreInfoButton = $('<button>').addClass('btn btn-success').text('More Info');
         moreInfoButton.click(()=>{
@@ -31,6 +30,9 @@ function renderInformationOnDom(runningTrailsArray) {
             $('.location_list').append(descriptionDiv);
             displayDirectionLineOnMap(pointBCoordinates);
         })
+        locationDescriptionDiv.append(nameOfPlace, addressOfPlace, moreInfoButton);
+        listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.location_list').append(listResultsDiv);
     }
+
 }
