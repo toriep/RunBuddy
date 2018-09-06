@@ -235,11 +235,25 @@ function getDataFromMeetUp(zipCode) {
     $.ajax(SGT_API);
 }
 
-function displayMeetUpSuccess(response) {
-    let meetUpResponse = response;
-    console.log(meetUpResponse)
-    return meetUpResponse;
-}
+function displayMeetUpSuccess(response){
+    let meetUpResponse = response.results;
+    let filteredMeetUpResults = [];
+    for ( let m = 0; m < meetUpResponse.length; m++) {
+        let formattedMeetUp = {};
+        let {address_1, city, state, zip, lat, lon} = meetUpResponse[m].venue;
+        let formattedAddress = {address: address_1,city,state,zip,lat,lon
+        } 
+        formattedMeetUp.address = formattedAddress;
+        let {description,name,event_url, time,} = meetUpResponse[m];
+        let formattedInfo = {description,eventName: name,link: event_url,time,}
+        formattedInfo.time = Date(parseInt(formattedInfo.time))
+        formattedMeetUp.info = formattedInfo;
+        filteredMeetUpResults.push(formattedMeetUp);
+    }
+       console.log(filteredMeetUpResults)
+    }
+   
+
 
 function getDataFromWeather(zipCode) {
     const SGT_API = {
