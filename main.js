@@ -171,7 +171,7 @@ function renderWeatherOnDom ( weather ) {
     let line1 = $('<li>').append(today);
     let line2 = $('<li>').append(tempInCity);
     let line3 = $('<li>').append(`Humidity ${weather.humidity}%`);
-    let weatherList = $('<ul class="weather_list">')
+    let weatherList = $('<ul class="weather_list hidden">')
     weatherList.append(line0, line1, line2, line3);
     // $('.weather_display').append(line0, line1, line2, line3);
     $('.location_list').append(weatherList);
