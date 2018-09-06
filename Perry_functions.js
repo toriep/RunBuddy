@@ -15,6 +15,7 @@ function renderInformationOnDom(runningTrailsArray) {
             let addressOfPlace = $('<p>').text(`${runningTrails[i].location.display_address[0]} ${runningTrails[i].location.display_address[1]}`);
             let distance = $('<div>').text(runningTrails[i].distance)
             let rating = $('<div>').text('Rating: ' + runningTrails[i].rating)
+            let coordinates = runningTrails[i].coordinates
             descriptionDiv.append(nameOfPlace,imageOfPlace,addressOfPlace,distance,rating);
             $('.location_list').append(descriptionDiv);
         })
