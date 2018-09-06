@@ -153,6 +153,7 @@ function renderWeatherOnDom ( weather ) {
     // $('.weather_tab #condition').append(weatherImage);
     let today = new Date();
     let hrs = today.getHours();
+
     if (hrs > 19 || hrs < 6) //it's night time
         $('.weather_tab').css("background-image", "url('images/nightTime.jpg')");
     else //it's day time
@@ -181,6 +182,9 @@ function getImgForWeather (weather) {
             break;
         case 'Clear':
             imgSrc = 'images/sunny.img';
+            break;
+        case 'Clear':
+            imgSrc = '.images/sunny.img';
             break;
         default:
             imgSrc = 'images/default.img';             
@@ -239,21 +243,22 @@ function displayMeetUpSuccess(response){
     let meetUpResponse = response.results;
     let filteredMeetUpResults = [];
     for ( let m = 0; m < meetUpResponse.length; m++) {
-        let formattedMeetUp = {};
-        if(meetUpResponse[m].venue){
-            let {address_1, city, state, zip, lat, lon} = meetUpResponse[m].venue;
-            let formattedAddress = {address: address_1,city,state,zip,lat,lon
-            } 
-            formattedMeetUp.address = formattedAddress;
-        }
-        let {description,name,event_url, time,} = meetUpResponse[m];
-        let formattedInfo = {description,eventName: name,link: event_url,time,}
+        // let formattedMeetUp = {};
+        // if(meetUpResponse[m].venue){
+        //     let {address_1, city, state, zip, lat, lon} = meetUpResponse[m].venue;
+        //     let formattedAddress = {address: address_1,city,state,zip,lat,lon
+        //     } 
+        //     formattedMeetUp.address = formattedAddress;
+        // }
+        let {description,name,event_url, time,group,yes_rsvp_count} = meetUpResponse[m];
+        let formattedInfo = {description,eventName: name,link: event_url,time,group,yes_rsvp_count}
         formattedInfo.time = Date(parseInt(formattedInfo.time))
-        formattedMeetUp.info = formattedInfo;
-        filteredMeetUpResults.push(formattedMeetUp);
+        // formattedMeetUp.info = formattedInfo;
+        filteredMeetUpResults.push(formattedInfo);
     }
        console.log(filteredMeetUpResults)
-    }
+       renderMeetUpOnDom(filteredMeetUpResults)
+}
    
 
 function getDataFromWeather(zipCode) {
