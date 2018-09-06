@@ -22,7 +22,7 @@ function renderMeetUpOnDom(meetup){
             text: meetup[m].eventName,
             href: meetup[m].link})
         let meetUp = $('.meetup');
-        let meetupDiv = $('<div>').addClass(`meetUp+${m}`);
+        let meetupDiv = $('<div>').addClass(`meetUp+${m} events`);
         meetupDiv = $(meetupDiv).append(time,groupName,eventName,members)
         $(meetUp).append(meetupDiv)
     }
