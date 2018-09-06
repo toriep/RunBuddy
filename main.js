@@ -79,6 +79,7 @@ function displayMapOnDom() {
             }
         });
     }
+    renderInformationOnDom(runningTrails);
 }
 
 /***************************************************************************************************
