@@ -92,12 +92,19 @@ a{
 }
 
 /* Search List Result Box */
-
 .list_result {
     display: -webkit-box;
+    border: 1px solid darkgreen;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 2%;
+    margin: 4% auto;
+    font-size: 1.4rem;
+    opacity: 0.9;
+    box-shadow: 5px 10px 18px black;
 }
 
-.list_result,.description {
+/* .description {
     border: 1px solid darkgreen;
     background-color: whitesmoke;
     border-radius: 10px;
@@ -107,7 +114,7 @@ a{
     font-size: 1.4rem;
     opacity: 0.9;
     box-shadow: 5px 10px 18px black;
-}
+} */
 
 /* Nav Bar */
 .nav_taps {
@@ -147,7 +154,7 @@ a{
 .locationDescription {
     display: inline-block;
     width: 70vw;
-    padding-left: 5%;
+    padding: 0 3%;
     font-size: 2.5rem;
 }
 
