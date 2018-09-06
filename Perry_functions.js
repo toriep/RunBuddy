@@ -3,18 +3,34 @@ function renderInformationOnDom(runningTrailsArray) {
     for ( let i = 1; i < runningTrailsArray.length; i++) {
         // console.log(runningTrailsArray[i]);
         let listResultsDiv = $('<div>').addClass('list_result');
-        let locationPictureDiv = $('<div>');
-        let imageOfPlace = $('<img>').attr('src', runningTrailsArray[i].image).addClass('locationPicture');
-        locationPictureDiv.append(imageOfPlace);
-        let locationDescriptionDiv = $('<div>').addClass('locationDescription');
-        let nameOfPlace = $('<p>').text(runningTrailsArray[i].name);
-        let addressOfPlace1 = `${runningTrails[i].location.display_address[0]}`;
-        let brl = $('<br>');
+
+        let locationPictureDiv = $('<div>'); //check 
+        let imageOfPlace = $('<img>').attr('src', runningTrailsArray[i].image).addClass('locationPicture'); //check
+        locationPictureDiv.append(imageOfPlace); //check
+        let locationDescriptionDiv = $('<div>').addClass('locationDescription'); //check
+        let nameOfPlace = $('<p>').text(runningTrailsArray[i].name); //check
+        let addressOfPlace1 = `${runningTrails[i].location.display_address[0]}`; //check
+        let brl = $('<br>'); //check
         let addressOfPlace2 = `${runningTrails[i].location.display_address[1]}`;
         let addressOfPlace = $('<adress>').append(addressOfPlace1, brl, addressOfPlace2);
-        let moreInfoButton = $('<button>').text('More Info');
         locationDescriptionDiv.append(nameOfPlace, addressOfPlace, moreInfoButton);
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
+
+        let moreInfoButton = $('<button>').addClass('btn btn-success').text('More Info');
+        moreInfoButton.click(()=>{
+            $('.single_location_detail').removeClass('hidden');
+            $('.list_result').addClass('hidden');
+            let descriptionDiv = $('<div>').addClass('description');
+            let imageOfPlace = $('<img>').attr('src', runningTrailsArray[i].image);
+            let nameOfPlace = $('<h3>').text(runningTrailsArray[i].name);
+            let addressOfPlace = $('<p>').text(`Address: ${runningTrails[i].location.display_address[0]} ${runningTrails[i].location.display_address[1]}`);
+            let distance = $('<div>').text(`Distance: ${runningTrails[i].distance}`)
+            let rating = $('<div>').text('Rating: ' + runningTrails[i].rating)
+            let pointBCoordinates = runningTrails[i].coordinates
+            descriptionDiv.append(nameOfPlace,imageOfPlace,addressOfPlace,distance,rating);
+            $('.location_list').append(descriptionDiv);
+            displayDirectionLineOnMap(pointBCoordinates);
+        })
         $('.location_list').append(listResultsDiv);
     }
 }

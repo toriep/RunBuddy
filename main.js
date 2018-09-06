@@ -58,7 +58,7 @@ function displayMapOnDom() {
     $(".map_page").removeClass("hidden");
     //Map options
     const options = {
-        zoom: 10,
+        zoom: 13,
         center: runningTrails[0],
     }
     //New map
@@ -174,7 +174,7 @@ function renderWeatherOnDom ( weather ) {
     //let weatherList = $('<ul class="weather_list">')
     //weatherList.append(line0, line1, line2, line3);
     $('.weather_display').append(line0, line1, line2, line3);
-    $('.weather_tab').append(weatherList);
+    //$('.weather_tab').append(weatherList);
 }
 
 function displayWeather(){
@@ -227,16 +227,20 @@ function getDataFromYelp(response) {
     runningTrails.push(center);
     console.log(businessesIndex);
     for (let i = 1; i < businessesIndex.length; i++) {
+        let yelpObject = {};
         let {
             latitude,
             longitude
         } = businessesIndex[i].coordinates;
         let coordinates = new google.maps.LatLng(latitude, longitude);
+        let {rating,distance} = businessesIndex[i];
         runningTrails.push({
             name: businessesIndex[i].name,
             location: businessesIndex[i].location,
             coordinates: coordinates,
             image: businessesIndex[i].image_url,
+            rating: businessesIndex[i].rating,
+            distance: (businessesIndex[i].distance/1000).toFixed(1) + " miles"
         })
     }
     // console.log(runningTrails);
@@ -260,17 +264,9 @@ function displayMeetUpSuccess(response){
     let meetUpResponse = response.results;
     let filteredMeetUpResults = [];
     for ( let m = 0; m < meetUpResponse.length; m++) {
-        // let formattedMeetUp = {};
-        // if(meetUpResponse[m].venue){
-        //     let {address_1, city, state, zip, lat, lon} = meetUpResponse[m].venue;
-        //     let formattedAddress = {address: address_1,city,state,zip,lat,lon
-        //     } 
-        //     formattedMeetUp.address = formattedAddress;
-        // }
         let {description,name,event_url, time,group,yes_rsvp_count} = meetUpResponse[m];
         let formattedInfo = {description,eventName: name,link: event_url,time,group,yes_rsvp_count}
         formattedInfo.time = Date(parseInt(formattedInfo.time))
-        // formattedMeetUp.info = formattedInfo;
         filteredMeetUpResults.push(formattedInfo);
     }
        console.log(filteredMeetUpResults)
