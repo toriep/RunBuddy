@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="c718 hackathon 2, team 1">
+    <meta name="author" content="Esther, Perry, Sarah, Torie, Mia">
+    <title>7.18 Hackathon 2 (Team 1)</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo" async defer></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script src="Esthers_functions.js"></script>
+    <script src="Perry_functions.js"></script>
+    <script src="Sarahs_functions.js"></script>
+    <script src="Torie_functions.js"></script>
+    <script src="Mias_functions.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="landing_page">
+            <div class="search_container">
+                <div class="logo"></div>
+                <div>
+                    <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" id="runButton">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                    <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
+                        <span class="glyphicon glyphicon-exclamation-sign"></span>
+                        Invalid zip code. Please check again.
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+    <div class="map_page">
+        <div id="map_area">
+        </div>
+        <div class="group_tabs">
+            <div class="location_list">
+                <div class="list_result">
+                    <img src="https://picsum.photos/200" alt="">
+                    <h3>Mile Square Park</h3>
+                    <p>Fountain Valley, CA</p>
+                    <p>Miles: 7.3</p>
+                    <button>More Info</button>
+                </div>
+
+                <div class="single_location">
+                    <h1></h1>
+                    <!-- navbar -->
+                    <div class="nav_taps">
+                        <div class="description_tab tabLinks">Description</div>
+                        <div class="direction_tab tabLinks">Direction</div>
+                        <div class="weather_tab tabLinks">Weather</div>
+                        <div class="meetup tabLinks">Meet-Up</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
