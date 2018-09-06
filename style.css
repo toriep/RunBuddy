@@ -24,7 +24,7 @@ body {
 
 .search_container {
     position: absolute;
-    top: 35%;
+    top: 15%;
     left: 35%;
     width: 35%;
 }
@@ -38,10 +38,11 @@ body {
 .glyphicon {
     height: 56px;
     font-size: 50px;
+    display: inline-block;
 }
 
 
-.weather_container {
+.weather_tab {
     color: black; /*will be updated*/
     font-weight: bolder;
 }
@@ -65,4 +66,20 @@ body {
 
 a{
     font-size: 2rem;
+}
+
+.weather_list {
+    list-style-type: none;
+}
+/* Search List Result Box */
+.list_result {
+    border: 1px solid darkgreen;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    width: 90%;
+    padding: 2%;
+    margin: 4% auto;
+    font-size: 1.4rem;
+    opacity: 0.9;
+    box-shadow: 5px 10px 18px black;
 }

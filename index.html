@@ -23,35 +23,41 @@
     <div class="container">
         <div class="landing_page">
             <div class="search_container">
+                <div class="logo"></div>
                 <div>
-
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" id="runButton">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </div>
-                        <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
-                            <span class="glyphicon glyphicon-exclamation-sign"></span>
-                            Invalid zip code. Please check again.
-                        </div>
+                    <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" id="runButton">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                    <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
+                        <span class="glyphicon glyphicon-exclamation-sign"></span>
+                        Invalid zip code. Please check again.
                     </div>
                 </div>
             </div>
         </div>
-        <div class="map_page">
-            <div id="map_area">
-            </div>
-            <div class="group_tabs">
-                <div class="location_list">
+    
 
+    <div class="map_page">
+        <div id="map_area">
+        </div>
+        <div class="group_tabs">
+            <div class="location_list">
+                <div class="list_result">
+                    <img src="https://picsum.photos/200" alt="">
+                    <h3>Mile Square Park</h3>
+                    <p>Fountain Valley, CA</p>
+                    <p>Miles: 7.3</p>
+                    <button>More Info</button>
                 </div>
+
                 <div class="single_location">
                     <h1></h1>
                     <div class="description_tab"></div>
                     <div class="direction_tab"></div>
-                    <div class="weather_container">
+                    <div class="weather_tab">
                         <div id='condition'></div>
                     </div>
                     <div class="meetup">
@@ -62,11 +68,14 @@
                             <div class="rsvp">15 OC Hikers & Backpackers! going </div>
                         </div> -->
                     </div>
-                </div>
+  <div class="meetup">
 
+                </div>
             </div>
+
         </div>
     </div>
+</div>
 </body>
 
 </html>
