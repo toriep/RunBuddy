@@ -36,6 +36,9 @@ function addClickHandlersToElements() {
       }
     });
     // $('#runButton').click(redirectRunButton);
+    // $('#runButton').click(()=>{
+    //     setTimeout(ajaxYelpCall, 500);
+    // });
 }
 
 
@@ -107,6 +110,9 @@ function renderDirectionOnDom(pick) {
  */
 
 function ajaxYelpCall () {
+    $('.landing_page').addClass('hidden')
+    $('.meerkat').removeClass('hidden')
+    debugger;
     let userLocation = $("#search_input").val();
     $('#search_input').focus( function() {
         $('#error_msg').addClass('hidden');
@@ -246,6 +252,8 @@ function getDataFromGoogleMap() {
 }
 
 function getDataFromYelp(response) {
+    $('.meerkat').addClass('hidden');
+    debugger;
     const businessesIndex = response.businesses;
     // let center = response.region.center;
     let {

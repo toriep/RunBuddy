@@ -1,5 +1,5 @@
 function renderInformationOnDom(runningTrailsArray) {
-
+    
     for ( let i = 1; i < runningTrailsArray.length; i++) {
         // console.log(runningTrailsArray[i]);
         let listResultsDiv = $('<div>').addClass('list_result');
