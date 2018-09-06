@@ -151,9 +151,23 @@ function renderLocationPicturesOnDom ( runningTrailsArray ) {
  */
 
 function renderWeatherOnDom ( weather ) {
-    var imgSrc = getImgForWeather (weather);
-    var weatherDisplay = `Current temp: ${weather.currentTempInF} °F `;
-    $('.weather_container #condition').text(weatherDisplay);
+    // let imgSrc = getImgForWeather (weather);
+    // let weatherImage = $('<img>');
+    // $('.weather_tab #condition').append(weatherImage);
+    let today = new Date();
+    let hrs = today.getHours();
+    if (hrs > 20 && hrs < 6) //it's night time
+        $('.weather_tab').style.backgroundImage = "url('images/nightTime.jpg')";
+    else //it's day time
+        $('.weather_tab').style.backgroundImage = "url('images/dayTime.jpg')";
+
+    let tempInCity = `Current temperature in ${weather.cityName}: ${weather.currentTempInF} °F `;
+    let line0 = $('<li>').append(weather.conditionDescription.toUpperCase());
+    let line1 = $('<li>').append(today);
+    let line2 = $('<li>').append(tempInCity);
+    let weatherList = $('<ul class="weather_list">')
+    weatherList.append(line0, line1, line2);
+    $('.weather_tab #condition').append(weatherList);
 
 
 }
@@ -168,6 +182,9 @@ function getImgForWeather (weather) {
             imgSrc = '.images/clouds.img';
             break;
         case 'Sunny':
+            imgSrc = '.images/sunny.img';
+            break;
+        case 'Clear':
             imgSrc = '.images/sunny.img';
             break;
         default:
@@ -263,10 +280,12 @@ function displaySuccess(response) {
 
 function displayWeatherSuccess(responseFromServer) {
     let weather = {};
+    weather.cityName = responseFromServer.name;
     weather.condition = responseFromServer.weather[0]['main'];
-    weather.tempMinInF = ((responseFromServer.main['temp_min']) * 0.1 * 9 / 5 + 32).toFixed(1);
-    weather.tempMaxInF = ((responseFromServer.main['temp_max']) * 0.1 * 9 / 5 + 32).toFixed(1);
-    weather.currentTempInF = (((responseFromServer.main['temp']) * 0.1) * 9 / 5 + 32).toFixed(1);
+    weather.conditionDescription = responseFromServer.weather[0]['description']; 
+    weather.tempMinInF = (responseFromServer.main['temp_min'] * 9 / 5 - 459.67).toFixed(1);
+    weather.tempMaxInF = (responseFromServer.main['temp_max'] * 9 / 5 - 459.67).toFixed(1);
+    weather.currentTempInF = (responseFromServer.main['temp'] * 9 / 5 - 459.67).toFixed(1);
     weather.humidity = responseFromServer.main['humidity'];
     weather.wind = responseFromServer.wind['speed'];
     weather.clouds = responseFromServer.clouds['all'];

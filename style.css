@@ -42,7 +42,7 @@ body {
 }
 
 
-.weather_container {
+.weather_tab {
     color: black; /*will be updated*/
     font-weight: bolder;
 }
@@ -57,6 +57,10 @@ body {
     width: 100vw;
 }
 
+
+.weather_list {
+    list-style-type: none;
+}
 /* Search List Result Box */
 .list_result {
     border: 1px solid darkgreen;
