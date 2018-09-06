@@ -83,7 +83,7 @@ function displayMapOnDom() {
         center: runningTrails[0],
     }
     //New map
-    let map = new google.maps.Map(document.getElementById("map_page"), options);
+    let map = new google.maps.Map(document.getElementById("map_area"), options);
     //Add marker
 
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
