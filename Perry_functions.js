@@ -17,6 +17,7 @@ function renderInformationOnDom(runningTrailsArray) {
 
         let moreInfoButton = $('<button>').addClass('btn btn-success').text('More Info');
         moreInfoButton.click(()=>{
+            $('.results').removeClass('hidden');
             $('.single_location_detail').removeClass('hidden');
             $('.list_result').addClass('hidden');
             let descriptionDiv = $('<div>').addClass('description');
