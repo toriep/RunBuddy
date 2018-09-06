@@ -62,8 +62,9 @@ body {
 }
 
 #map_area{
-    height: 600px;
-    width: 100vw;
+    height: 500px;
+    left: 4vw;
+    width: 90vw;
 }
 
 .meetup{
@@ -111,7 +112,10 @@ a{
 
 /* Nav Bar */
 .nav_taps {
-    height: 40px;
+    position: relative;
+    left: 4vw;
+    height: 4vh;
+    width: 90vw;
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #fff;
@@ -154,3 +158,4 @@ a{
 .locationDescription p {
     font-size: 4rem;
 }
+
