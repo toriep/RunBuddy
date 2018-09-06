@@ -24,56 +24,56 @@
             <img id="meerkat" src="meerkat.gif">
     </div>
     <div class="container">
+
         <div class="landing_page">
+
             <div class="search_container">
-                <div class="logo"><img src="runbuddylogogirl.png"></div>
+
+                <div class="logo">
+                    <img src="runbuddylogogirl.png">
+                </div>
                 <div class="form-inline">
                     <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
                     <div class="input-group-btn form-group">
                         <button class="btn btn-default" id="runButton">
                             <img id="runningMan" src="images/runningman.JPG">
                         </button>
+
                     </div>
-                    <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
+                    <div class="alert alert-warning hidden" id="error_msg">
                         <span class="glyphicon glyphicon-exclamation-sign"></span>
-                        Invalid zip code.<br>Please check again.
+                        Invalid zip code. Please check again.
                     </div>
                 </div>
+
             </div>
+
         </div>
-    
 
-    <div class="map_page hidden">
-        <div id="map_area">
-        </div>
-        <div class="group_tabs">
-            <button class="results btn btn-success hidden" onclick="displayResult()"><  TRAILS LIST</button>
-            <div class="location_list">
-                <!-- <div class="list_result">
-                    <img src="https://picsum.photos/200" alt="">
-                    <h3>Mile Square Park</h3>
-                    <p>Fountain Valley, CA</p>
-                    <p>Miles: 7.3</p>
-                    <button>More Info</button>
-                </div> -->
 
-                <div class="single_location_detail hidden">
-                    <h1></h1>
+        <div class="map_page hidden">
+            <div id="map_area">
+            </div>
+            <div class="group_tabs">
 
-                    <!-- navbar -->
-                    <div class="nav_taps">
-                        <div class="description_tab tabLinks" onclick="displayDescription()">Description</div>
-                        <div class="direction_tab tabLinks" onclick="displayDirection()">Direction</div>
-                        <div class="weather_tab tabLinks" onclick="displayWeather()">Weather
-                            <div class="weather_display"></div>
+                <div class="location_list">
+                    <div class="single_location_detail hidden">
+                        <h1></h1>
+                        <div class="nav_taps">
+                            <div class="results description_tab tabLinks hidden" onclick="displayResult()">
+                                Trail List</div>
+                            <div class="description_tab tabLinks" onclick="displayDescription()">Description</div>
+                            <div class="direction_tab tabLinks" onclick="displayDirection()">Direction</div>
+                            <div class="weather_tab tabLinks" onclick="displayWeather()">Weather
+                                <div class="weather_display"></div>
+                            </div>
+                            <div class="meetup tabLinks" onclick="displayMeetUp()">Meet-Up</div>
                         </div>
-                        <div class="meetup tabLinks" onclick="displayMeetUp()">Meet-Up</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
-</html>
 
+</html>
