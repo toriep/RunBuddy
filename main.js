@@ -154,25 +154,26 @@ function renderLocationPicturesOnDom ( runningTrailsArray ) {
  * @returns: none
  * @calls: none
  */
-
 function renderWeatherOnDom ( weather ) {
-    // let imgSrc = getImgForWeather (weather);
-    // let weatherImage = $('<img>');
-    // $('.weather_display #condition').append(weatherImage);
+    let imgSrc = getImgForWeather (weather);
+    let weatherImage = $('<img class="weather_icon">').attr({"src":imgSrc, "alt":imgSrc});
+    // $('.location_list').append(weatherImage);
     let today = new Date();
     let hrs = today.getHours();
     if (hrs > 19 || hrs < 6) //it's night time
-        $('.weather_display').css({"background-image": "url('images/nightTime.jpg')", "color":"white"});
+        $('.location_list').css({"background-image": "url('images/nightTime.jpg')", "color":"white"});
     else //it's day time
-        $('.weather_display').css("background-image", "url('images/dayTime.jpg')");
-
-    let tempInCity = `Current temperature in ${weather.cityName}: ${weather.currentTempInF} °F `;
+        $('.location_list').css("background-image", "url('images/dayTime.jpg')");
+    let headline = $('<p>').append(`${weather.cityName}`);
     let line0 = $('<li>').append(weather.conditionDescription.toUpperCase());
     let line1 = $('<li>').append(today);
-    let line2 = $('<li>').append(tempInCity);
-    let line3 = $('<li>').append(`Humidity ${weather.humidity}%`);
+    let line2 = $('<li>').append(`Current temperature: ${weather.currentTempInF} °F `);
+    let line3 = $('<li>').append(`High: ${weather.tempMaxInF} °F / Low: ${weather.tempMinInF} °F `);
+    let line4 = $('<li>').append(`Humidity: ${weather.humidity} %`);
+    let line5 = $('<li>').append(`Wind: ${weather.wind} m/s`);
+
     let weatherList = $('<ul class="weather_list hidden">')
-    weatherList.append(line0, line1, line2, line3);
+    weatherList.append(weatherImage, headline, line0, line1, line2, line3, line4, line5);
     // $('.weather_display').append(line0, line1, line2, line3);
     $('.location_list').append(weatherList);
 }
@@ -216,22 +217,22 @@ function getImgForWeather (weather) {
     var imgSrc;
     switch (weather.condition)  {
         case 'Haze':
-            imgSrc = 'images/haze.img';
+            imgSrc = 'images/haze.png';
             break;
         case 'Clouds':
-            imgSrc = 'images/clouds.img';
+            imgSrc = 'images/clouds.png';
             break;
+        case 'few clouds':
+            imgSrc = 'images/clouds.png';
+            break;    
         case 'Sunny':
-            imgSrc = 'images/sunny.img';
+            imgSrc = 'images/sunny.png';
             break;
         case 'Clear':
-            imgSrc = 'images/sunny.img';
-            break;
-        case 'Clear':
-            imgSrc = '.images/sunny.img';
+            imgSrc = 'images/clear.png';
             break;
         default:
-            imgSrc = 'images/default.img';             
+            imgSrc = 'images/default.png';             
     }
     return imgSrc;
 }
@@ -321,15 +322,14 @@ function displaySuccess(response) {
 
 function displayWeatherSuccess(responseFromServer) {
     let weather = {};
-    weather.cityName = responseFromServer.name;
     weather.condition = responseFromServer.weather[0]['main'];
+    weather.cityName = responseFromServer.name;
     weather.conditionDescription = responseFromServer.weather[0]['description']; 
     weather.tempMinInF = (responseFromServer.main['temp_min'] * 9 / 5 - 459.67).toFixed(1);
     weather.tempMaxInF = (responseFromServer.main['temp_max'] * 9 / 5 - 459.67).toFixed(1);
     weather.currentTempInF = (responseFromServer.main['temp'] * 9 / 5 - 459.67).toFixed(1);
     weather.humidity = responseFromServer.main['humidity'];
     weather.wind = responseFromServer.wind['speed'];
-    weather.clouds = responseFromServer.clouds['all'];
     renderWeatherOnDom(weather);
 }
 
