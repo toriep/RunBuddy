@@ -237,7 +237,8 @@ function displayMeetUpSuccess(response){
         filteredMeetUpResults.push(formattedMeetUp);
     }
        console.log(filteredMeetUpResults)
-    }
+       renderMeetUpOnDom(filteredMeetUpResults)
+}
    
 
 
