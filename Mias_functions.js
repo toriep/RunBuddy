@@ -1,7 +1,7 @@
-function displayDirectionLineOnMap() {
+function displayDirectionLineOnMap(pointBCoordinates) {
     $("#map_area").text();
     var pointA = runningTrails[0],
-        pointB = runningTrails[1].coordinates, 
+        pointB = pointBCoordinates, 
         myOptions = {
             zoom: 7,
             center: pointA
