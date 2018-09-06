@@ -58,7 +58,7 @@ function displayMapOnDom() {
     $(".map_page").removeClass("hidden");
     //Map options
     const options = {
-        zoom: 10,
+        zoom: 13,
         center: runningTrails[0],
     }
     //New map
@@ -174,7 +174,7 @@ function renderWeatherOnDom ( weather ) {
     //let weatherList = $('<ul class="weather_list">')
     //weatherList.append(line0, line1, line2, line3);
     $('.weather_display').append(line0, line1, line2, line3);
-    $('.weather_tab').append(weatherList);
+    //$('.weather_tab').append(weatherList);
 }
 
 function displayWeather(){
