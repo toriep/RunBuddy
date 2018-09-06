@@ -10,20 +10,20 @@ function renderMeetUpOnDom(meetup){
     for(let m=0; m<meetup.length;m++){
         let groupName = $('<h4>',{
             class: 'groupName',
-            text: meetup[m].group.name})
+            text: meetup[m].group.name.toUpperCase()})
         let members = $('<div>',{
             class: 'rsvp',
             text: `${meetup[m].yes_rsvp_count} ${meetup[m].group.who} going`})
-        let time = $('<div>',{
-            class: 'time',
-            text: meetup[m].time})
+        // let time = $('<div>',{
+        //     class: 'time',
+        //     text: meetup[m].time})
         let eventName = $('<a>',{
             class: 'rsvp',
             text: meetup[m].eventName,
             href: meetup[m].link})
-        let meetUp = $('.meetup');
-        let meetupDiv = $('<div>').addClass(`meetUp+${m} events`);
-        meetupDiv = $(meetupDiv).append(time,groupName,eventName,members)
+        let meetUp = $('.location_list');
+        let meetupDiv = $('<div>').addClass(`meetUp+${m} events hidden`);
+        meetupDiv = $(meetupDiv).append(groupName,eventName,members)
         $(meetUp).append(meetupDiv)
     }
 }
