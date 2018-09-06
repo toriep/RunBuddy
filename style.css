@@ -41,7 +41,7 @@ body {
 }
 
 
-.weather_container {
+.weather_tab {
     color: black; /*will be updated*/
     font-weight: bolder;
 }
@@ -54,4 +54,8 @@ body {
 #map_page{
     height: 600px;
     width: 100vw;
+}
+
+.weather_list {
+    list-style-type: none;
 }
