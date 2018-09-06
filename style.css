@@ -24,7 +24,7 @@ body {
     position: absolute;
     top: 35%;
     left: 30%;
-    width: 30%;
+    width: 35%;
 }
 
 .search_container input {
@@ -52,6 +52,7 @@ body {
 .weather_tab {
     color: black; /*will be updated*/
     font-weight: bolder;
+    font-size: 4rem;
 }
 
 #error_msg {
