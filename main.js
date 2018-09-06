@@ -32,7 +32,7 @@ function addClickHandlersToElements() {
 
     // $("#runButton").click(handleRunClicked); 
     $('#runButton').click(ajaxYelpCall);
-    $('#runButton').click(redirectRunButton);
+    // $('#runButton').click(redirectRunButton);
 
 
 }
@@ -52,7 +52,7 @@ function handleRunClicked() {
         
     if (checkIfInputZipIsValid(zipCode)) {
         getDataFromWeather(zipCode);
-        renderAvailableLocationsForRunningOnDom();
+        // renderAvailableLocationsForRunningOnDom();
         //append your function calls here?????????????
 
     } else {
@@ -287,7 +287,7 @@ function displayError() {
     console.log("AJAX call failed :(")
 }
 
-function redirectRunButton() {
-    window.location.href = 'location_list.html';
-    return false;
-}
+// function redirectRunButton() {
+//     window.location.href = 'location_list.html';
+//     return false;
+// }
