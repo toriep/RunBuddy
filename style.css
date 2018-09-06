@@ -1,9 +1,7 @@
-/* CSS goes here */
-
 * {
     box-sizing: border-box;
+    font-family: Sans-serif;
 }
-
 
 body {
    margin: 0;
@@ -24,7 +22,7 @@ body {
 
 .search_container {
     position: absolute;
-    top: 35%;
+    top: 15%;
     left: 35%;
     width: 35%;
 }
@@ -35,23 +33,45 @@ body {
     text-align: center;
 }
 
-.glyphicon {
-    height: 56px;
-    font-size: 50px;
+#runningMan {
+    height: 55px;
+    font-size: 30px;
 }
 
+.glyphicon-search {
+    height: 56px;
+    font-size: 50px;
+    display: inline-block;
+}
 
-.weather_container {
+.weather_tab {
     color: black; /*will be updated*/
     font-weight: bolder;
 }
 
-
 #error_msg {
-    color: red;
+    color: orangered;
+    text-align: center;
+    font-size: 2rem;
 }
 
-#map_page{
+#map_area{
     height: 600px;
     width: 100vw;
+}
+
+.weather_list {
+    list-style-type: none;
+}
+/* Search List Result Box */
+.list_result {
+    border: 1px solid darkgreen;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    width: 90%;
+    padding: 2%;
+    margin: 4% auto;
+    font-size: 1.4rem;
+    opacity: 0.9;
+    box-shadow: 5px 10px 18px black;
 }
