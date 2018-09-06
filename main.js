@@ -28,8 +28,14 @@ function initializeApp() {
  */
 function addClickHandlersToElements() {
     $('#runButton').click(ajaxYelpCall);
+    $('#runButton').click(getDataFromMeetUp);
+    let eventListener = $("#search_input");
+    eventListener.on("keyup", event => {
+      if (event.keyCode === 13) {//if enter key is released
+      $("#runButton").click();//runs the function attaches to click event off add button
+      }
+    });
     // $('#runButton').click(redirectRunButton);
-
 }
 
 
@@ -229,16 +235,18 @@ function getDataFromYelp(response) {
     displayMapOnDom();
 }
 
-function getDataFromMeetUp(zipCode) {
-    let SGT_API = {
+function getDataFromMeetUp() {
+    let zipCode = $("#search_input").val();
+    let meetup= {
         url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=${zipCode}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
         success: displayMeetUpSuccess,
         method: 'post',
         dataType: 'jsonp',
         error: displayError,
     }
-    $.ajax(SGT_API);
+    $.ajax(meetup);
 }
+
 
 function displayMeetUpSuccess(response){
     let meetUpResponse = response.results;
@@ -259,6 +267,11 @@ function displayMeetUpSuccess(response){
     }
        console.log(filteredMeetUpResults)
        renderMeetUpOnDom(filteredMeetUpResults)
+}
+
+function displayMeetUp(){
+    $('.list_result').addClass('hidden');
+    $('.events').removeClass('hidden');
 }
    
 
