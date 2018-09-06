@@ -55,6 +55,7 @@ function checkIfInputZipIsValid (zip) {
  */
 function displayMapOnDom() {
     $(".landing_page").addClass("hidden");
+    $(".map_page").removeClass("hidden");
     //Map options
     const options = {
         zoom: 10,
@@ -170,9 +171,10 @@ function renderWeatherOnDom ( weather ) {
     let line1 = $('<li>').append(today);
     let line2 = $('<li>').append(tempInCity);
     let line3 = $('<li>').append(`Humidity ${weather.humidity}%`);
-    let weatherList = $('<ul class="weather_list">')
-    weatherList.append(line0, line1, line2, line3);
-    $('.location_list').append(weatherList);
+    //let weatherList = $('<ul class="weather_list">')
+    //weatherList.append(line0, line1, line2, line3);
+    $('.weather_display').append(line0, line1, line2, line3);
+    $('.weather_tab').append(weatherList);
 }
 
 function displayWeather(){
