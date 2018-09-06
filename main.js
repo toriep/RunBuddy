@@ -191,6 +191,7 @@ function getDataFromYelp(response) {
     } = response.region.center;
     let center = new google.maps.LatLng(latitude, longitude);
     runningTrails.push(center);
+    console.log(businessesIndex);
     for (let i = 1; i < businessesIndex.length; i++) {
         let {
             latitude,
@@ -204,7 +205,7 @@ function getDataFromYelp(response) {
             image: businessesIndex[i].image_url,
         })
     }
-    console.log(runningTrails);
+    // console.log(runningTrails);
     displayMapOnDom();
 }
 
