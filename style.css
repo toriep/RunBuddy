@@ -92,7 +92,7 @@ a{
 }
 
 /* Search List Result Box */
-.list_result {
+.list_result,.description {
     border: 1px solid darkgreen;
     background-color: whitesmoke;
     border-radius: 10px;
