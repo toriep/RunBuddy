@@ -1,11 +1,21 @@
 function renderInformationOnDom(runningTrailsArray) {
 
     for ( let i = 1; i < runningTrailsArray.length; i++) {
-        console.log(runningTrailsArray[i]);
+        // console.log(runningTrailsArray[i]);
         let listResultsDiv = $('<div>').addClass('list_result');
-        let imageOfPlace = $('<img>').attr('src', runningTrailsArray[i].image);
-        let nameOfPlace = $('<h3>').text(runningTrailsArray[i].name);
-        let addressOfPlace = $('<p>').text(`${runningTrails[i].location.display_address[0]} ${runningTrails[i].location.display_address[1]}`);
+
+        let locationPictureDiv = $('<div>'); //check 
+        let imageOfPlace = $('<img>').attr('src', runningTrailsArray[i].image).addClass('locationPicture'); //check
+        locationPictureDiv.append(imageOfPlace); //check
+        let locationDescriptionDiv = $('<div>').addClass('locationDescription'); //check
+        let nameOfPlace = $('<p>').text(runningTrailsArray[i].name); //check
+        let addressOfPlace1 = `${runningTrails[i].location.display_address[0]}`; //check
+        let brl = $('<br>'); //check
+        let addressOfPlace2 = `${runningTrails[i].location.display_address[1]}`;
+        let addressOfPlace = $('<adress>').append(addressOfPlace1, brl, addressOfPlace2);
+        locationDescriptionDiv.append(nameOfPlace, addressOfPlace, moreInfoButton);
+        listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
+
         let moreInfoButton = $('<button>').addClass('btn btn-success').text('More Info');
         moreInfoButton.click(()=>{
             $('.single_location_detail').removeClass('hidden');
@@ -21,7 +31,6 @@ function renderInformationOnDom(runningTrailsArray) {
             $('.location_list').append(descriptionDiv);
             displayDirectionLineOnMap(pointBCoordinates);
         })
-        listResultsDiv.append(nameOfPlace, imageOfPlace, addressOfPlace, moreInfoButton);
         $('.location_list').append(listResultsDiv);
     }
 }
