@@ -57,6 +57,16 @@ body {
     width: 100vw;
 }
 
+.meetup{
+    background-color: white;
+    color: black;
+    padding: 0 5px 5px 5px;
+    height: 500px;
+}
+
+a{
+    font-size: 2rem;
+}
 
 .weather_list {
     list-style-type: none;
