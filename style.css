@@ -38,6 +38,7 @@ body {
 .glyphicon {
     height: 56px;
     font-size: 50px;
+    display: inline-block;
 }
 
 
