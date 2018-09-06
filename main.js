@@ -66,11 +66,13 @@ function displayMapOnDom() {
             animation: setTimeout(function(){google.maps.Animation.DROP},500),
             icon: "images/Winged_Shoe.png"
         });
+        let contentString = "<h3>" + runningTrails[trailIndex].name + "</h3>";
         let infoWindow = new google.maps.InfoWindow({
-            content: `<h3>${runningTrails[trailIndex].name}</h3>`
+            content: contentString
         })
 
         marker.addListener('click', function () {
+            infoWindow.open(map,marker);
             if (marker.getAnimation() !== null) {
                 marker.setAnimation(null);
             } else {
