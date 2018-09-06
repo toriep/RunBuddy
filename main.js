@@ -29,6 +29,12 @@ function initializeApp() {
 function addClickHandlersToElements() {
     $('#runButton').click(ajaxYelpCall);
     $('#runButton').click(getDataFromMeetUp);
+    let eventListener = $("#search_input");
+    eventListener.on("keyup", event => {
+      if (event.keyCode === 13) {//if enter key is released
+      $("#runButton").click();//runs the function attaches to click event off add button
+      }
+    });
     // $('#runButton').click(redirectRunButton);
 }
 
@@ -229,7 +235,8 @@ function getDataFromYelp(response) {
     displayMapOnDom();
 }
 
-function getDataFromMeetUp(zipCode) {
+function getDataFromMeetUp() {
+    let zipCode = $("#search_input").val();
     let meetup= {
         url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=${zipCode}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
         success: displayMeetUpSuccess,
@@ -240,9 +247,10 @@ function getDataFromMeetUp(zipCode) {
     $.ajax(meetup);
 }
 
-let filteredMeetUpResults = [];
+
 function displayMeetUpSuccess(response){
     let meetUpResponse = response.results;
+    let filteredMeetUpResults = [];
     for ( let m = 0; m < meetUpResponse.length; m++) {
         // let formattedMeetUp = {};
         // if(meetUpResponse[m].venue){
