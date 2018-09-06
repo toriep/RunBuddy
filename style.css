@@ -12,6 +12,7 @@ body {
    background: url("images/background_pic.jpg");
    background-position: center;
    background-size: cover;
+   position: relative;
    /* overflow: hidden; */
 }
 
@@ -160,4 +161,15 @@ a{
 
 .locationDescription p {
     font-size: 4rem;
+}
+
+.meerkat{
+    width: 20%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 99;
+    display: flex;
+    justify-content: center;
 }
