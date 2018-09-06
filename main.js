@@ -29,6 +29,12 @@ function initializeApp() {
 function addClickHandlersToElements() {
     $('#runButton').click(ajaxYelpCall);
     $('#runButton').click(getDataFromMeetUp);
+    let eventListener = $("#search_input");
+    eventListener.on("keyup", event => {
+      if (event.keyCode === 13) {//if enter key is released
+      $("#runButton").click();//runs the function attaches to click event off add button
+      }
+    });
     // $('#runButton').click(redirectRunButton);
 }
 
@@ -240,9 +246,10 @@ function getDataFromMeetUp(zipCode) {
     $.ajax(meetup);
 }
 
-let filteredMeetUpResults = [];
+
 function displayMeetUpSuccess(response){
     let meetUpResponse = response.results;
+    let filteredMeetUpResults = [];
     for ( let m = 0; m < meetUpResponse.length; m++) {
         // let formattedMeetUp = {};
         // if(meetUpResponse[m].venue){
