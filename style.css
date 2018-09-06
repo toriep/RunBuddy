@@ -14,6 +14,7 @@ body {
    background: url("images/background_pic.jpg");
    background-position: center;
    background-size: cover;
+   overflow: hidden;
 }
 
 .container {
@@ -24,13 +25,30 @@ body {
 .search_container {
     position: absolute;
     top: 35%;
-    left: 43%;
+    left: 35%;
+    width: 35%;
+}
+
+.search_container input {
+    height: 70px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.glyphicon {
+    height: 56px;
+    font-size: 50px;
 }
 
 
-#search_input {
-    display: inline-block;
-    text-align: center;
+.weather_container {
+    color: black; /*will be updated*/
+    font-weight: bolder;
+}
+
+
+#error_msg {
+    color: red;
 }
 
 #map_page{

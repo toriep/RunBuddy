@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="description" content="c718 hackathon 2, team 1">
     <meta name="author" content="Esther, Perry, Sarah, Torie, Mia">
@@ -8,21 +9,39 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo" async defer></script>
     <script type="text/javascript" src="main.js"></script>
+
   </head>
   <body>
       <div class="container">
           <div class="search_container">
               <div>
 
-                  <input type="text" class="form-control" id="search_input" placeholder="Current Location">
-                  <button id="runButton">Run</button>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
+                        <div class="input-group-btn">
+                          <button class="btn btn-default" id="runButton">
+                            <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                        </div>
+                 <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
+                        <span class="glyphicon glyphicon-exclamation-sign"></span>
+                        Invalid zip code. Please check again.
+                  </div>
+                </div>
               </div>
           </div>
-          <div class="weather_container">
-          <div id='condition'></div>
-          </div>
 
+                <div id="map_page">
+
+        </div>
+
+          <div class="weather_container">
+            <div id='condition'></div>
+          </div>
+       
+        
       </div>
       <div class="meetup">
         
@@ -31,3 +50,4 @@
   </body>
   
 </html>
+
