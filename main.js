@@ -258,7 +258,6 @@ function getDataFromGoogleMap() {
 
 function getDataFromYelp(response) {
     $('.meerkat').addClass('hidden');
-    debugger;
     const businessesIndex = response.businesses;
     // let center = response.region.center;
     let {
