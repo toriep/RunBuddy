@@ -151,22 +151,22 @@ function renderLocationPicturesOnDom ( runningTrailsArray ) {
 function renderWeatherOnDom ( weather ) {
     // let imgSrc = getImgForWeather (weather);
     // let weatherImage = $('<img>');
-    // $('.weather_tab #condition').append(weatherImage);
+    // $('.weather_display #condition').append(weatherImage);
     let today = new Date();
     let hrs = today.getHours();
-
     if (hrs > 19 || hrs < 6) //it's night time
-        $('.weather_tab').css("background-image", "url('images/nightTime.jpg')");
+        $('.weather_display').css({"background-image": "url('images/nightTime.jpg')", "color":"white"});
     else //it's day time
-    $('.weather_tab').css("background-image", "url('images/dayTime.jpg')");
+        $('.weather_display').css("background-image", "url('images/dayTime.jpg')");
 
     let tempInCity = `Current temperature in ${weather.cityName}: ${weather.currentTempInF} °F `;
     let line0 = $('<li>').append(weather.conditionDescription.toUpperCase());
     let line1 = $('<li>').append(today);
     let line2 = $('<li>').append(tempInCity);
+    let line3 = $('<li>').append(`Humidity ${weather.humidity}%`);
     let weatherList = $('<ul class="weather_list">')
-    weatherList.append(line0, line1, line2);
-    $('.weather_tab').append(weatherList);
+    weatherList.append(line0, line1, line2, line3);
+    $('.weather_display').append(weatherList);
 }
 
 function getImgForWeather (weather) {

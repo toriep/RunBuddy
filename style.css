@@ -23,22 +23,28 @@ body {
 .search_container {
     position: absolute;
     top: 35%;
-    left: 35%;
-    width: 35%;
+    left: 30%;
+    width: 30%;
 }
 
 .search_container input {
-    height: 70px;
-    font-size: 30px;
+    height: 15%;   /*no px to be responsive */
+    font-size: 5rem;  /*should use rem to be responsive*/
     text-align: center;
 }
 
 #runningMan {
-    height: 55px;
-    font-size: 30px;
+    height: 55px; /*depending on above, change to %? */
 }
 
-.glyphicon-search {
+.alert {
+    width: 75%;
+    text-align: center;
+    align-content: center;
+    border: 1px dotted orangered;
+}
+
+.glyphicon-search { /*we don't need this anymore right? */
     height: 56px;
     font-size: 50px;
 }
