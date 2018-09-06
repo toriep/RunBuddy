@@ -27,40 +27,12 @@ function initializeApp() {
  *     
  */
 function addClickHandlersToElements() {
-    $('#runButton').click(handleRunClicked);
-
-
-    // $("#runButton").click(handleRunClicked); 
     $('#runButton').click(ajaxYelpCall);
     // $('#runButton').click(redirectRunButton);
 
-
 }
 
-/***************************************************************************************************
-* handleRunClicked
-* @params none
-* @returns  {undefined}
-* @calls: all four functions we want to display on each tab     
-*/
-function handleRunClicked() {
-    $('#search_input').focus( function() {
-        $('#error_msg').addClass('hidden');
-    });     //////////////////////////////////////////////
 
-    var zipCode = $("#search_input").val();
-        
-    if (checkIfInputZipIsValid(zipCode)) {
-        getDataFromWeather(zipCode);
-        // renderAvailableLocationsForRunningOnDom();
-        //append your function calls here?????????????
-
-    } else {
-        $("#search_input").val('');
-        handleRunClicked();
-    } 
-    $('#error_msg').text('');
-}
 
 function checkIfInputZipIsValid (zip) {
     var valid = true;
@@ -125,8 +97,19 @@ function renderDirectionOnDom(pick) {
  */
 
 function ajaxYelpCall () {
+    let userLocation = $("#search_input").val();
+    $('#search_input').focus( function() {
+        $('#error_msg').addClass('hidden');
+    });    
 
-    let userLocation = $('#search_input').val();
+    if (checkIfInputZipIsValid(userLocation)) {
+        getDataFromWeather(userLocation);
+    } else {
+        $("#search_input").val('');
+        ajaxYelpCall();
+    } 
+    $('#error_msg').text('');
+
     const ajaxParameters = {
         dataType: 'JSON',
         url: "http://yelp.ongandy.com/businesses",
@@ -143,6 +126,7 @@ function ajaxYelpCall () {
     }
     $.ajax(ajaxParameters);
 }
+
 
 /***************************************************************************************************
  * renderLocationPicturesToDom - display pictures of the location
