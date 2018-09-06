@@ -31,21 +31,21 @@ function addClickHandlersToElements() {
     $('#runButton').click(getDataFromMeetUp);
     let eventListener = $("#search_input");
     eventListener.on("keyup", event => {
-      if (event.keyCode === 13) {//if enter key is released
-      $("#runButton").click();//runs the function attaches to click event off add button
-      }
+        if (event.keyCode === 13) { //if enter key is released
+            $("#runButton").click(); //runs the function attaches to click event off add button
+        }
     });
     // $('#runButton').click(redirectRunButton);
 }
 
 
-function checkIfInputZipIsValid (zip) {
+function checkIfInputZipIsValid(zip) {
     var valid = true;
-    if (zip.length!=5 || isNaN(zip)) {
+    if (zip.length != 5 || isNaN(zip)) {
         $('#error_msg').removeClass('hidden');
         valid = false;
-    }    
-    return valid; 
+    }
+    return valid;
 }
 /***************************************************************************************************
  * displayMapToDom - display map based on the the location (based on zip code or city user inputs)
@@ -58,7 +58,7 @@ function displayMapOnDom() {
     $(".map_page").removeClass("hidden");
     //Map options
     const options = {
-        zoom: 13,
+        zoom: 10,
         center: runningTrails[0],
     }
     //New map
@@ -66,25 +66,26 @@ function displayMapOnDom() {
     //Add marker
 
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
-        let marker = new google.maps.Marker({
-            position: runningTrails[trailIndex].coordinates,
-            map: map,
-            animation: setTimeout(function(){google.maps.Animation.DROP},500),
-            icon: "images/Winged_Shoe.png"
-        });
-        let contentString = "<h3>" + runningTrails[trailIndex].name + "</h3>";
-        let infoWindow = new google.maps.InfoWindow({
-            content: contentString
-        })
+            let marker = new google.maps.Marker({
+                position: runningTrails[trailIndex].coordinates,
+                map: map,
+                animation: google.maps.Animation.DROP,
+                icon: "images/Winged_Shoe.png",
 
-        marker.addListener('click', function () {
-            infoWindow.open(map,marker);
-            if (marker.getAnimation() !== null) {
-                marker.setAnimation(null);
-            } else {
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-            }
-        });
+            });
+            let contentString = "<h3>" + runningTrails[trailIndex].name + "</h3>";
+            let infoWindow = new google.maps.InfoWindow({
+                content: contentString
+            })
+
+            marker.addListener('click', function () {
+                infoWindow.open(map, marker);
+                if (marker.getAnimation() !== null) {
+                    marker.setAnimation(null);
+                } else {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                }
+            });
     }
     renderInformationOnDom(runningTrails);
 }
@@ -106,18 +107,18 @@ function renderDirectionOnDom(pick) {
  * @calls: none
  */
 
-function ajaxYelpCall () {
+function ajaxYelpCall() {
     let userLocation = $("#search_input").val();
-    $('#search_input').focus( function() {
+    $('#search_input').focus(function () {
         $('#error_msg').addClass('hidden');
-    });    
+    });
 
     if (checkIfInputZipIsValid(userLocation)) {
         getDataFromWeather(userLocation);
     } else {
         $("#search_input").val('');
         ajaxYelpCall();
-    } 
+    }
     $('#error_msg').text('');
 
     const ajaxParameters = {
@@ -144,7 +145,7 @@ function ajaxYelpCall () {
  * @calls: none
  */
 
-function renderLocationPicturesOnDom ( runningTrailsArray ) {
+function renderLocationPicturesOnDom(runningTrailsArray) {
 
 }
 
@@ -155,14 +156,17 @@ function renderLocationPicturesOnDom ( runningTrailsArray ) {
  * @calls: none
  */
 
-function renderWeatherOnDom ( weather ) {
+function renderWeatherOnDom(weather) {
     // let imgSrc = getImgForWeather (weather);
     // let weatherImage = $('<img>');
     // $('.weather_display #condition').append(weatherImage);
     let today = new Date();
     let hrs = today.getHours();
     if (hrs > 19 || hrs < 6) //it's night time
-        $('.weather_display').css({"background-image": "url('images/nightTime.jpg')", "color":"white"});
+        $('.weather_display').css({
+            "background-image": "url('images/nightTime.jpg')",
+            "color": "white"
+        });
     else //it's day time
         $('.weather_display').css("background-image", "url('images/dayTime.jpg')");
 
@@ -177,44 +181,47 @@ function renderWeatherOnDom ( weather ) {
     $('.location_list').append(weatherList);
 }
 
-function displayWeather(){
+function displayWeather() {
     $('.list_result').addClass('hidden');
     $('.events').addClass('hidden');
     $('.description').addClass('hidden');
     $('.weather_list').removeClass('hidden');
 }
 
-function displayDescription(){
+function displayDescription() {
     $('.list_result').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.description').removeClass('hidden');
 }
 
-function displayResult(){
+function displayResult() {
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.description').addClass('hidden');
     $('.list_result').removeClass('hidden');
+    $('#map_area').text();
+    $('.single_location_detail').addClass('hidden');
+    displayMapOnDom();
 }
 
-function displayMeetUp(){
+function displayMeetUp() {
     $('.description').addClass('hidden');
     $('.list_result').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').removeClass('hidden');
 }
 
-function displayDirection(){
+function displayDirection() {
     $('.description').addClass('hidden');
     $('.list_result').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').addClass('hidden');
 }
 
-function getImgForWeather (weather) {
+function getImgForWeather(weather) {
     var imgSrc;
-    switch (weather.condition)  {
+    switch (weather.condition) {
         case 'Haze':
             imgSrc = 'images/haze.img';
             break;
@@ -231,7 +238,7 @@ function getImgForWeather (weather) {
             imgSrc = '.images/sunny.img';
             break;
         default:
-            imgSrc = 'images/default.img';             
+            imgSrc = 'images/default.img';
     }
     return imgSrc;
 }
@@ -262,14 +269,17 @@ function getDataFromYelp(response) {
             longitude
         } = businessesIndex[i].coordinates;
         let coordinates = new google.maps.LatLng(latitude, longitude);
-        let {rating,distance} = businessesIndex[i];
+        let {
+            rating,
+            distance
+        } = businessesIndex[i];
         runningTrails.push({
             name: businessesIndex[i].name,
             location: businessesIndex[i].location,
             coordinates: coordinates,
             image: businessesIndex[i].image_url,
             rating: businessesIndex[i].rating,
-            distance: (businessesIndex[i].distance/1000).toFixed(1) + " miles"
+            distance: (businessesIndex[i].distance / 1000).toFixed(1) + " miles"
         })
     }
     // console.log(runningTrails);
@@ -278,7 +288,7 @@ function getDataFromYelp(response) {
 
 function getDataFromMeetUp() {
     let zipCode = $("#search_input").val();
-    let meetup= {
+    let meetup = {
         url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=${zipCode}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
         success: displayMeetUpSuccess,
         method: 'post',
@@ -289,19 +299,33 @@ function getDataFromMeetUp() {
 }
 
 
-function displayMeetUpSuccess(response){
+function displayMeetUpSuccess(response) {
     let meetUpResponse = response.results;
     let filteredMeetUpResults = [];
-    for ( let m = 0; m < meetUpResponse.length; m++) {
-        let {description,name,event_url, time,group,yes_rsvp_count} = meetUpResponse[m];
-        let formattedInfo = {description,eventName: name,link: event_url,time,group,yes_rsvp_count}
+    for (let m = 0; m < meetUpResponse.length; m++) {
+        let {
+            description,
+            name,
+            event_url,
+            time,
+            group,
+            yes_rsvp_count
+        } = meetUpResponse[m];
+        let formattedInfo = {
+            description,
+            eventName: name,
+            link: event_url,
+            time,
+            group,
+            yes_rsvp_count
+        }
         formattedInfo.time = Date(parseInt(formattedInfo.time))
         filteredMeetUpResults.push(formattedInfo);
     }
-       console.log(filteredMeetUpResults)
-       renderMeetUpOnDom(filteredMeetUpResults)
+    console.log(filteredMeetUpResults)
+    renderMeetUpOnDom(filteredMeetUpResults)
 }
-   
+
 
 function getDataFromWeather(zipCode) {
     const SGT_API = {
@@ -323,7 +347,7 @@ function displayWeatherSuccess(responseFromServer) {
     let weather = {};
     weather.cityName = responseFromServer.name;
     weather.condition = responseFromServer.weather[0]['main'];
-    weather.conditionDescription = responseFromServer.weather[0]['description']; 
+    weather.conditionDescription = responseFromServer.weather[0]['description'];
     weather.tempMinInF = (responseFromServer.main['temp_min'] * 9 / 5 - 459.67).toFixed(1);
     weather.tempMaxInF = (responseFromServer.main['temp_max'] * 9 / 5 - 459.67).toFixed(1);
     weather.currentTempInF = (responseFromServer.main['temp'] * 9 / 5 - 459.67).toFixed(1);

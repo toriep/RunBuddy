@@ -8,26 +8,26 @@ body {
    padding: 0;
    height: 100vh;
    width: 100vw;
-   background-repeat: no-repeat; 
-   background: url("images/background_pic.jpg");
-   background-position: center;
-   background-size: cover;
-   /* overflow: hidden; */
+   position: relative;
 }
 
 .container {
+   position: relative;
    height: 100%;
    width: 100%;
+   /* background-repeat: no-repeat;  */
+   background: url("images/background_pic.jpg");
+   background-position: center;
+   background-size: cover;
 }
 
 .search_container {
-    position: absolute;
-    top: 35%;
-    left: 30%;
-    width: 35%;
+    position: relative;
+    top: 30%;
+    width: 100%;
 }
 
-.search_container input {
+#search_input {
     height: 15%;   /*no px to be responsive */
     font-size: 5rem;  /*should use rem to be responsive*/
     text-align: center;
@@ -51,7 +51,6 @@ body {
 
 .weather_tab {
     color: black; /*will be updated*/
-    font-weight: bolder;
     font-size: 4rem;
 }
 
@@ -78,9 +77,9 @@ a{
     font-size: 2rem;
 }
 
-.weather_list {
+/* .weather_list {
     list-style-type: none;
-}
+} */
 
 .events{
     border: 1px solid black;
@@ -132,7 +131,7 @@ a{
 
 .tabLinks {
     display: inline-block;
-    width: 20%;
+    width: 19%;
     height: 40px;
     color: black;
     text-decoration: none;
@@ -166,3 +165,22 @@ a{
     font-size: 4rem;
 }
 
+.landing_page {
+    height: 100%;
+    left: 30%;
+    width: 60%;
+}
+
+.logo, .form-inline {
+    position: relative;
+    left: 30%;
+}
+
+.alert-warning {
+    width: 112%;
+}
+
+.tabLinks:hover {
+    background-color: lightgray;
+    font-weight: bold;
+}
