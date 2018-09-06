@@ -1,5 +1,5 @@
 function renderInformationOnDom(runningTrailsArray) {
-
+    
     for ( let i = 1; i < runningTrailsArray.length; i++) {
         // console.log(runningTrailsArray[i]);
         let listResultsDiv = $('<div>').addClass('list_result');
@@ -17,6 +17,7 @@ function renderInformationOnDom(runningTrailsArray) {
         let addressOfPlace = $('<address>').append(addressOfPlace1, brLine1, addressOfPlace2);
 
         moreInfoButton.click(()=>{
+            $('.description').addClass('hidden');
             $('.results').removeClass('hidden');
             $('.single_location_detail').removeClass('hidden');
             $('.list_result').addClass('hidden');
