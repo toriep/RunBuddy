@@ -12,39 +12,50 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo" async defer></script>
     <script type="text/javascript" src="main.js"></script>
 
-  </head>
-  <body>
-      <div class="container">
-          <div class="search_container">
-              <div>
+</head>
 
-                <div class="input-group">
-                    <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
+<body>
+    <div class="container">
+        <div class="landing_page">
+            <div class="search_container">
+                <div>
+
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
                         <div class="input-group-btn">
-                          <button class="btn btn-default" id="runButton">
-                            <span class="glyphicon glyphicon-search"></span>
-                          </button>
+                            <button class="btn btn-default" id="runButton">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
                         </div>
-                 <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
-                        <span class="glyphicon glyphicon-exclamation-sign"></span>
-                        Invalid zip code. Please check again.
-                  </div>
+                        <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                            Invalid zip code. Please check again.
+                        </div>
+                    </div>
                 </div>
-              </div>
-          </div>
-            <div id="map_page">
             </div>
+        </div>
+        <div class="map_page">
+            <div id="map_area">
+            </div>
+            <div class="group_tabs">
+                <div class="location_list">
 
-          <div class="weather_container">
-            <div id='condition'></div>
-          </div>
-       
-        
-      </div>
-      <div class="meetup">
-        
-      </div>
+                </div>
+                <div class="single_location">
+                    <h1></h1>
+                    <div class="description_tab"></div>
+                    <div class="direction_tab"></div>
+                    <div class="weather_container">
+                        <div id='condition'></div>
+                    </div>
+                    <div class="meetup">
+                    </div>
+                </div>
 
-  </body>
-  
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

@@ -55,7 +55,7 @@ function displayMapOnDom() {
         center: runningTrails[0],
     }
     //New map
-    let map = new google.maps.Map(document.getElementById("map_page"), options);
+    let map = new google.maps.Map(document.getElementById("map_area"), options);
     //Add marker
 
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
@@ -223,10 +223,12 @@ function displayMeetUpSuccess(response){
     let filteredMeetUpResults = [];
     for ( let m = 0; m < meetUpResponse.length; m++) {
         let formattedMeetUp = {};
-        let {address_1, city, state, zip, lat, lon} = meetUpResponse[m].venue;
-        let formattedAddress = {address: address_1,city,state,zip,lat,lon
-        } 
-        formattedMeetUp.address = formattedAddress;
+        if(meetUpResponse[m].venue){
+            let {address_1, city, state, zip, lat, lon} = meetUpResponse[m].venue;
+            let formattedAddress = {address: address_1,city,state,zip,lat,lon
+            } 
+            formattedMeetUp.address = formattedAddress;
+        }
         let {description,name,event_url, time,} = meetUpResponse[m];
         let formattedInfo = {description,eventName: name,link: event_url,time,}
         formattedInfo.time = Date(parseInt(formattedInfo.time))
