@@ -44,6 +44,7 @@
         <div id="map_area">
         </div>
         <div class="group_tabs">
+            <button class="resutls btn btn-success" onclick="displayResult()">Trails</button>
             <div class="location_list">
                 <!-- <div class="list_result">
                     <img src="https://picsum.photos/200" alt="">
@@ -58,8 +59,8 @@
 
                     <!-- navbar -->
                     <div class="nav_taps">
-                        <div class="description_tab tabLinks">Description</div>
-                        <div class="direction_tab tabLinks">Direction</div>
+                        <div class="description_tab tabLinks" onclick="displayDescription()">Description</div>
+                        <div class="direction_tab tabLinks" onclick="displayDirection()">Direction</div>
                         <div class="weather_tab tabLinks" onclick="displayWeather()">Weather
                             <div class="weather_display"></div>
                         </div>

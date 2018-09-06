@@ -171,16 +171,45 @@ function renderWeatherOnDom ( weather ) {
     let line1 = $('<li>').append(today);
     let line2 = $('<li>').append(tempInCity);
     let line3 = $('<li>').append(`Humidity ${weather.humidity}%`);
-    //let weatherList = $('<ul class="weather_list">')
-    //weatherList.append(line0, line1, line2, line3);
-    $('.weather_display').append(line0, line1, line2, line3);
-    //$('.weather_tab').append(weatherList);
+    let weatherList = $('<ul class="weather_list">')
+    weatherList.append(line0, line1, line2, line3);
+    // $('.weather_display').append(line0, line1, line2, line3);
+    $('.location_list').append(weatherList);
 }
 
 function displayWeather(){
     $('.list_result').addClass('hidden');
     $('.events').addClass('hidden');
+    $('.description').addClass('hidden');
     $('.weather_list').removeClass('hidden');
+}
+
+function displayDescription(){
+    $('.list_result').addClass('hidden');
+    $('.events').addClass('hidden');
+    $('.weather_list').addClass('hidden');
+    $('.description').removeClass('hidden');
+}
+
+function displayResult(){
+    $('.events').addClass('hidden');
+    $('.weather_list').addClass('hidden');
+    $('.description').addClass('hidden');
+    $('.list_result').removeClass('hidden');
+}
+
+function displayMeetUp(){
+    $('.description').addClass('hidden');
+    $('.list_result').addClass('hidden');
+    $('.weather_list').addClass('hidden');
+    $('.events').removeClass('hidden');
+}
+
+function displayDirection(){
+    $('.description').addClass('hidden');
+    $('.list_result').addClass('hidden');
+    $('.weather_list').addClass('hidden');
+    $('.events').addClass('hidden');
 }
 
 function getImgForWeather (weather) {
@@ -271,12 +300,6 @@ function displayMeetUpSuccess(response){
     }
        console.log(filteredMeetUpResults)
        renderMeetUpOnDom(filteredMeetUpResults)
-}
-
-function displayMeetUp(){
-    $('.list_result').addClass('hidden');
-    $('.weather_list').addClass('hidden');
-    $('.events').removeClass('hidden');
 }
    
 
