@@ -196,6 +196,7 @@ a{
 .tabLinks:hover {
     background-color: lightgray;
     font-weight: bold;
+}
 
 .meerkat{
     width: 20%;
