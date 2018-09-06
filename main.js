@@ -33,7 +33,6 @@ function addClickHandlersToElements() {
 }
 
 
-
 function checkIfInputZipIsValid (zip) {
     var valid = true;
     if (zip.length!=5 || isNaN(zip)) {
@@ -140,7 +139,6 @@ function ajaxYelpCall () {
 
 function renderLocationPicturesOnDom ( runningTrailsArray ) {
 
-
 }
 
 /***************************************************************************************************
@@ -156,10 +154,11 @@ function renderWeatherOnDom ( weather ) {
     // $('.weather_tab #condition').append(weatherImage);
     let today = new Date();
     let hrs = today.getHours();
-    if (hrs > 20 && hrs < 6) //it's night time
-        $('.weather_tab').style.backgroundImage = "url('images/nightTime.jpg')";
+
+    if (hrs > 19 || hrs < 6) //it's night time
+        $('.weather_tab').css("background-image", "url('images/nightTime.jpg')");
     else //it's day time
-        $('.weather_tab').style.backgroundImage = "url('images/dayTime.jpg')";
+    $('.weather_tab').css("background-image", "url('images/dayTime.jpg')");
 
     let tempInCity = `Current temperature in ${weather.cityName}: ${weather.currentTempInF} °F `;
     let line0 = $('<li>').append(weather.conditionDescription.toUpperCase());
@@ -167,30 +166,31 @@ function renderWeatherOnDom ( weather ) {
     let line2 = $('<li>').append(tempInCity);
     let weatherList = $('<ul class="weather_list">')
     weatherList.append(line0, line1, line2);
-    $('.weather_tab #condition').append(weatherList);
-
-
+    $('.weather_tab').append(weatherList);
 }
 
 function getImgForWeather (weather) {
     var imgSrc;
     switch (weather.condition)  {
         case 'Haze':
-            imgSrc = '.images/haze.img';
+            imgSrc = 'images/haze.img';
             break;
         case 'Clouds':
-            imgSrc = '.images/clouds.img';
+            imgSrc = 'images/clouds.img';
             break;
         case 'Sunny':
-            imgSrc = '.images/sunny.img';
+            imgSrc = 'images/sunny.img';
+            break;
+        case 'Clear':
+            imgSrc = 'images/sunny.img';
             break;
         case 'Clear':
             imgSrc = '.images/sunny.img';
             break;
         default:
-            imgSrc = '.images/default.img';             
+            imgSrc = 'images/default.img';             
     }
-
+    return imgSrc;
 }
 
 /***************************************************************************************************
@@ -244,23 +244,23 @@ function displayMeetUpSuccess(response){
     let meetUpResponse = response.results;
     let filteredMeetUpResults = [];
     for ( let m = 0; m < meetUpResponse.length; m++) {
-        let formattedMeetUp = {};
-        if(meetUpResponse[m].venue){
-            let {address_1, city, state, zip, lat, lon} = meetUpResponse[m].venue;
-            let formattedAddress = {address: address_1,city,state,zip,lat,lon
-            } 
-            formattedMeetUp.address = formattedAddress;
-        }
-        let {description,name,event_url, time,} = meetUpResponse[m];
-        let formattedInfo = {description,eventName: name,link: event_url,time,}
+        // let formattedMeetUp = {};
+        // if(meetUpResponse[m].venue){
+        //     let {address_1, city, state, zip, lat, lon} = meetUpResponse[m].venue;
+        //     let formattedAddress = {address: address_1,city,state,zip,lat,lon
+        //     } 
+        //     formattedMeetUp.address = formattedAddress;
+        // }
+        let {description,name,event_url, time,group,yes_rsvp_count} = meetUpResponse[m];
+        let formattedInfo = {description,eventName: name,link: event_url,time,group,yes_rsvp_count}
         formattedInfo.time = Date(parseInt(formattedInfo.time))
-        formattedMeetUp.info = formattedInfo;
-        filteredMeetUpResults.push(formattedMeetUp);
+        // formattedMeetUp.info = formattedInfo;
+        filteredMeetUpResults.push(formattedInfo);
     }
        console.log(filteredMeetUpResults)
-    }
+       renderMeetUpOnDom(filteredMeetUpResults)
+}
    
-
 
 function getDataFromWeather(zipCode) {
     const SGT_API = {

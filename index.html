@@ -24,16 +24,17 @@
         <div class="landing_page">
             <div class="search_container">
                 <div class="logo"></div>
-                <div>
-                    <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
-                    <div class="input-group-btn">
+                <div class="form-inline">
+                    <input type="text" class="form-control form-inline" id="search_input" placeholder="Enter zip code">
+                    <div class="input-group-btn form-group">
                         <button class="btn btn-default" id="runButton">
-                            <span class="glyphicon glyphicon-search"></span>
+                            <img id="runningMan" src="images/runningman.JPG">
                         </button>
                     </div>
                     <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
                         <span class="glyphicon glyphicon-exclamation-sign"></span>
-                        Invalid zip code. Please check again.
+                        Invalid zip code.<br>Please check again.
+
                     </div>
                 </div>
             </div>
@@ -55,14 +56,15 @@
 
                 <div class="single_location">
                     <h1></h1>
-                    <div class="description_tab"></div>
-                    <div class="direction_tab"></div>
-                    <div class="weather_tab">
-                    <div id='condition'></div>
+
+
+                    <!-- navbar -->
+                    <div class="nav_taps">
+                        <div class="description_tab tabLinks">Description</div>
+                        <div class="direction_tab tabLinks">Direction</div>
+                        <div class="weather_tab tabLinks">Weather</div>
+                        <div class="meetup tabLinks">Meet-Up</div>
                     </div>
-                    <div class="meetup">
-                    </div>
-                    <div class="meetup">
 
                 </div>
             </div>
@@ -73,3 +75,4 @@
 </body>
 
 </html>
+
