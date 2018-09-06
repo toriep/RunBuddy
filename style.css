@@ -1,9 +1,7 @@
-/* CSS goes here */
-
 * {
     box-sizing: border-box;
+    font-family: Sans-serif;
 }
-
 
 body {
    margin: 0;
@@ -35,21 +33,26 @@ body {
     text-align: center;
 }
 
-.glyphicon {
+#runningMan {
+    height: 55px;
+    font-size: 30px;
+}
+
+.glyphicon-search {
     height: 56px;
     font-size: 50px;
     display: inline-block;
 }
-
 
 .weather_tab {
     color: black; /*will be updated*/
     font-weight: bolder;
 }
 
-
 #error_msg {
-    color: red;
+    color: orangered;
+    text-align: center;
+    font-size: 2rem;
 }
 
 #map_area{
