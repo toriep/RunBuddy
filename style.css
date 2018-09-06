@@ -24,7 +24,7 @@ body {
 
 .search_container {
     position: absolute;
-    top: 35%;
+    top: 15%;
     left: 35%;
     width: 35%;
 }
@@ -57,3 +57,15 @@ body {
     width: 100vw;
 }
 
+/* Search List Result Box */
+.list_result {
+    border: 1px solid darkgreen;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    width: 90%;
+    padding: 2%;
+    margin: 4% auto;
+    font-size: 1.4rem;
+    opacity: 0.9;
+    box-shadow: 5px 10px 18px black;
+}
