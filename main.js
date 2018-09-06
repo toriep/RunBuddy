@@ -127,6 +127,7 @@ function ajaxYelpCall () {
     $.ajax(ajaxParameters);
 }
 
+
 /***************************************************************************************************
  * renderLocationPicturesToDom - display pictures of the location
  * @param: location
