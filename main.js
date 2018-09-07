@@ -153,6 +153,7 @@ function renderWeatherOnDom ( weather ) {
 }
 
 function displayWeather() {
+    $('#result').addClass('hidden');
     $('.list_result').addClass('hidden');
     $('.events').addClass('hidden');
     $('.description').addClass('hidden');
@@ -160,6 +161,7 @@ function displayWeather() {
 }
 
 function displayDescription() {
+    $('#result').addClass('hidden');
     $('.list_result').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
@@ -167,6 +169,7 @@ function displayDescription() {
 }
 
 function displayResult() {
+    $('#result').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.description').addClass('hidden');
@@ -181,6 +184,7 @@ function displayMeetUp() {
     $('.list_result').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').removeClass('hidden');
+    $('#result').addClass('hidden');
 }
 
 function displayDirection() {
@@ -188,6 +192,7 @@ function displayDirection() {
     $('.list_result').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').addClass('hidden');
+    $('#result').removeClass('hidden');
 }
 
 function getImgForWeather(weather) {
