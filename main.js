@@ -112,8 +112,6 @@ function renderDirectionOnDom(pick) {
 
 
 function ajaxYelpCall () {
-    $('.landing_page').addClass('hidden')
-    $('.meerkat').removeClass('hidden')
     let userLocation = $("#search_input").val();
     $('#search_input').focus(function () {
         $('#error_msg').addClass('hidden');
@@ -126,7 +124,8 @@ function ajaxYelpCall () {
         ajaxYelpCall();
     }
     $('#error_msg').text('');
-
+    $('.landing_page').addClass('hidden')
+    $('.meerkat').removeClass('hidden')
     const ajaxParameters = {
         dataType: 'JSON',
         url: "http://yelp.ongandy.com/businesses",
