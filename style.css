@@ -53,6 +53,7 @@ body {
     font-size: 4rem;
 }
 
+
 #error_msg {
     color: orangered;
     text-align: center;
@@ -89,18 +90,22 @@ a{
     width: 10%;
 }
 .events{
-    border: 1px solid black;
+    border: 1px solid darkgreen;
     background-color: whitesmoke;
     border-radius: 10px;
-    width: 80%;
+    width: 90vw;
     padding: 2%;
-    margin: 1% auto;
+    margin: 4% auto;
     font-size: 1.4rem;
+    opacity: 0.9;
+    box-shadow: 5px 10px 18px black;
 }
+
 
 /* Search List Result Box */
 .list_result {
     display: -webkit-box;
+    width: 90vw;
     border: 1px solid darkgreen;
     background-color: whitesmoke;
     border-radius: 10px;
@@ -194,6 +199,7 @@ a{
     background-color: lightgray;
     font-weight: bold;
 }
+
 
 .meerkat{
     width: 20%;
