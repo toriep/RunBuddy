@@ -9,7 +9,8 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo&libraries=places&callback=activatePlacesSearch" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo&libraries=places&callback=activatePlacesSearch"
+        async defer></script>
     <script type="text/javascript" src="main.js"></script>
 </head>
 
@@ -53,7 +54,10 @@
                             <div class="results description_tab tabLinks hidden" onclick="displayResult()">
                                 Trail List</div>
                             <div class="description_tab tabLinks" onclick="displayDescription()">Description</div>
-                            <!-- <div class="direction_tab tabLinks" onclick="displayDirection()">Direction</div> -->
+                            <div class="direction_tab tabLinks" onclick="displayDirection()">Direction
+                                <div id="result"></div>
+                            </div>
+
                             <div class="weather_tab tabLinks" onclick="displayWeather()">Weather
                                 <div class="weather_display"></div>
                             </div>

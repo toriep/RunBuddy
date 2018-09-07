@@ -402,6 +402,11 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
             // if (status == google.maps.DirectionsStatus.OK) {
             if (status == "OK") { //success function
                 directionsDisplay.setDirections(response);
+                var result = document.getElementById('result');
+                result.innerHTML= "";
+                for (var i =0; i < response.routes[0].legs[0].steps.length; i++){
+                    result.innerHTML+=response.routes[0].legs[0].steps[i].instructions+"<br>"
+                }
             } else { //error function
                 console.log('Directions request failed due to ' + status);
             }
