@@ -159,13 +159,16 @@ function ajaxYelpCall () {
 function renderWeatherOnDom ( weather ) {
     let imgSrc = getImgForWeather (weather);
     let weatherImage = $('<img class="weather_icon">').attr({"src":imgSrc, "alt":imgSrc});
-    // $('.location_list').append(weatherImage);
     let today = new Date();
     let hrs = today.getHours();
-    if (hrs > 19 || hrs < 6) //it's night time
-        $('.location_list').css({"background-image": "url('images/nightTime.jpg')", "color":"white"});
-    else //it's day time
-        $('.location_list').css("background-image", "url('images/dayTime.jpg')");
+    let dayOrNight;
+    if (hrs > 19 || hrs < 6) {//it's night time
+        dayOrNight = 'images/nightTime.jpg';
+        dayOrNightColor = 'white';
+    } else {//it's day time
+        dayOrNight = 'images/dayTime.jpg';
+        dayOrNightColor = 'black';
+    }    
     let headline = $('<p>').append(`${weather.cityName}`);
     let line0 = $('<li>').append(weather.conditionDescription.toUpperCase());
     let line1 = $('<li>').append(today);
@@ -174,7 +177,7 @@ function renderWeatherOnDom ( weather ) {
     let line4 = $('<li>').append(`Humidity: ${weather.humidity} %`);
     let line5 = $('<li>').append(`Wind: ${weather.wind} m/s`);
 
-    let weatherList = $('<ul class="weather_list hidden">')
+    let weatherList = $('<ul class="weather_list hidden">').css({"background-image": dayOrNight, "color":dayOrNightColor});
     weatherList.append(weatherImage, headline, line0, line1, line2, line3, line4, line5);
     // $('.weather_display').append(line0, line1, line2, line3);
     $('.location_list').append(weatherList);
@@ -236,6 +239,9 @@ function getImgForWeather(weather) {
         case 'Clear':
             imgSrc = 'images/clear.png';
             break;
+        case 'Rain':
+            imgSrc = 'images/rain.png';
+            break;    
         default:
             imgSrc = 'images/default.png';             
     }
