@@ -18,7 +18,6 @@ function renderInformationOnDom(runningTrailsArray) {
 
         moreInfoButton.click(()=>{
             $('.descriptionTab').empty();
-            // $('.description').addClass('hidden');
             $('.results').removeClass('hidden');
             $('.single_location_detail').removeClass('hidden');
             $('.list_result').addClass('hidden');
