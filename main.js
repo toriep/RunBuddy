@@ -133,10 +133,10 @@ function renderWeatherOnDom ( weather ) {
     let dayOrNight;
     if (hrs > 19 || hrs < 6) {//it's night time
         dayOrNight = 'images/nightTime.jpg';
-        dayOrNightColor = 'white';
+        dayOrNightColor = 'black';
     } else {//it's day time
         dayOrNight = 'images/dayTime.jpg';
-        dayOrNightColor = 'white';
+        dayOrNightColor = 'black';
     }    
     let headline = $('<p>').append(`${weather.cityName}`);
     let line0 = $('<li>').append(weather.conditionDescription.toUpperCase());
