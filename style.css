@@ -80,6 +80,7 @@ a{
     list-style-type: none;
     font-weight: bolder;
     font-size: 2.5rem;
+    padding: 5% 0 0 10%;
 }
 
 .weather_list>p {
