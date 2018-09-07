@@ -48,3 +48,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
 }
 
 //to call function, add a click handler to the location box .click(displayDirectionLineOnMap);
+
+function activatePlacesSearch() {
+    let input = document.getElementById('search_input');
+    let autocomplete = new google.maps.places.Autocomplete(input);
+}
