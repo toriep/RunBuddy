@@ -211,3 +211,16 @@ a{
     display: flex;
     justify-content: center;
 }
+
+#result{
+    background-color: whitesmoke;
+    border-radius: 10px;
+    width: 89vw;
+    left: 4vw;
+    padding: 2%;
+    position: relative;
+    font-size: 1.4rem;
+    opacity: 0.9;
+    box-shadow: 5px 10px 18px black;
+    border: 1px solid darkgreen;
+}
