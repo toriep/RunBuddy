@@ -35,10 +35,6 @@ function addClickHandlersToElements() {
             $("#runButton").click(); //runs the function attaches to click event off add button
         }
     });
-    // $('#runButton').click(redirectRunButton);
-    // $('#runButton').click(()=>{
-    //     setTimeout(ajaxYelpCall, 500);
-    // });
 }
 
 
@@ -150,9 +146,9 @@ function ajaxYelpCall () {
  * @calls: none
  */
 
-function renderLocationPicturesOnDom(runningTrailsArray) {
+// function renderLocationPicturesOnDom(runningTrailsArray) {
 
-}
+// }
 
 /***************************************************************************************************
  * renderyWeatherToDom - display weather based on the location
@@ -258,8 +254,7 @@ function getDataFromGoogleMap() {
 function getDataFromYelp(response) {
     $('.meerkat').addClass('hidden');
     const businessesIndex = response.businesses;
-    // let center = response.region.center;
-    let {
+        let {
         latitude,
         longitude
     } = response.region.center;
@@ -286,7 +281,6 @@ function getDataFromYelp(response) {
             distance: (businessesIndex[i].distance / 1000).toFixed(1) + " miles"
         })
     }
-    // console.log(runningTrails);
     displayMapOnDom();
 }
 
@@ -326,7 +320,6 @@ function displayMeetUpSuccess(response) {
         formattedInfo.time = Date(parseInt(formattedInfo.time))
         filteredMeetUpResults.push(formattedInfo);
     }
-    console.log(filteredMeetUpResults)
     renderMeetUpOnDom(filteredMeetUpResults)
 }
 
@@ -363,8 +356,3 @@ function displayWeatherSuccess(responseFromServer) {
 function displayError() {
     console.log("AJAX call failed :(")
 }
-
-// function redirectRunButton() {
-//     window.location.href = 'location_list.html';
-//     return false;
-// }
