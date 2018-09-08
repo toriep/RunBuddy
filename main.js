@@ -57,26 +57,26 @@ function displayMapOnDom() {
     //Add marker
 
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
-            let marker = new google.maps.Marker({
-                position: runningTrails[trailIndex].coordinates,
-                map: map,
-                animation: google.maps.Animation.DROP,
-                icon: "images/Winged_Shoe.png",
+        let marker = new google.maps.Marker({
+            position: runningTrails[trailIndex].coordinates,
+            map: map,
+            animation: google.maps.Animation.DROP,
+            icon: "images/Winged_Shoe.png",
 
-            });
-            let contentString = "<h3>" + runningTrails[trailIndex].name + "</h3>";
-            let infoWindow = new google.maps.InfoWindow({
-                content: contentString
-            })
+        });
+        let contentString = "<h3>" + runningTrails[trailIndex].name + "</h3>";
+        let infoWindow = new google.maps.InfoWindow({
+            content: contentString
+        })
 
-            marker.addListener('click', function () {
-                infoWindow.open(map, marker);
-                if (marker.getAnimation() !== null) {
-                    marker.setAnimation(null);
-                } else {
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                }
-            });
+        marker.addListener('click', function () {
+            infoWindow.open(map, marker);
+            if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+            } else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+        });
     }
     renderInformationOnDom(runningTrails);
 }
@@ -87,7 +87,7 @@ function displayMapOnDom() {
  * @returns: none
  * @calls: none
  */
-function ajaxYelpCall () {
+function ajaxYelpCall() {
     let userLocation = $("#search_input").val();
     $('#search_input').focus(function () {
         $('#error_msg').addClass('hidden');
@@ -125,19 +125,22 @@ function ajaxYelpCall () {
  * @returns: none
  * @calls: none
  */
-function renderWeatherOnDom ( weather ) {
-    let imgSrc = getImgForWeather (weather);
-    let weatherImage = $('<img class="weather_icon">').attr({"src":imgSrc, "alt":imgSrc});
+function renderWeatherOnDom(weather) {
+    let imgSrc = getImgForWeather(weather);
+    let weatherImage = $('<img class="weather_icon">').attr({
+        "src": imgSrc,
+        "alt": imgSrc
+    });
     let today = new Date();
     let hrs = today.getHours();
     let dayOrNight;
-    if (hrs > 19 || hrs < 6) {//it's night time
+    if (hrs > 19 || hrs < 6) { //it's night time
         dayOrNight = 'images/nightTime.jpg';
         dayOrNightColor = 'black';
-    } else {//it's day time
+    } else { //it's day time
         dayOrNight = 'images/dayTime.jpg';
         dayOrNightColor = 'black';
-    }    
+    }
     let headline = $('<p>').append(`${weather.cityName}`);
     let line0 = $('<li>').append(weather.conditionDescription.toUpperCase());
     let line1 = $('<li>').append(today);
@@ -146,7 +149,10 @@ function renderWeatherOnDom ( weather ) {
     let line4 = $('<li>').append(`Humidity: ${weather.humidity} %`);
     let line5 = $('<li>').append(`Wind: ${weather.wind} m/s`);
 
-    let weatherList = $('<ul class="weather_list hidden">').css({"background-image": dayOrNight, "color":dayOrNightColor});
+    let weatherList = $('<ul class="weather_list hidden">').css({
+        "background-image": dayOrNight,
+        "color": dayOrNightColor
+    });
     weatherList.append(weatherImage, headline, line0, line1, line2, line3, line4, line5);
     // $('.weather_display').append(line0, line1, line2, line3);
     $('.location_list').append(weatherList);
@@ -206,7 +212,7 @@ function getImgForWeather(weather) {
             break;
         case 'few clouds':
             imgSrc = 'images/clouds.png';
-            break;    
+            break;
         case 'Sunny':
             imgSrc = 'images/sunny.png';
             break;
@@ -215,9 +221,9 @@ function getImgForWeather(weather) {
             break;
         case 'Rain':
             imgSrc = 'images/rain.png';
-            break;    
+            break;
         default:
-            imgSrc = 'images/default.png';             
+            imgSrc = 'images/default.png';
     }
     return imgSrc;
 }
@@ -225,7 +231,7 @@ function getImgForWeather(weather) {
 function getDataFromYelp(response) {
     $('.meerkat').addClass('hidden');
     const businessesIndex = response.businesses;
-        let {
+    let {
         latitude,
         longitude
     } = response.region.center;
@@ -309,7 +315,7 @@ function displayWeatherSuccess(responseFromServer) {
     let weather = {};
     weather.condition = responseFromServer.weather[0]['main'];
     weather.cityName = responseFromServer.name;
-    weather.conditionDescription = responseFromServer.weather[0]['description']; 
+    weather.conditionDescription = responseFromServer.weather[0]['description'];
     weather.tempMinInF = (responseFromServer.main['temp_min'] * 9 / 5 - 459.67).toFixed(1);
     weather.tempMaxInF = (responseFromServer.main['temp_max'] * 9 / 5 - 459.67).toFixed(1);
     weather.currentTempInF = (responseFromServer.main['temp'] * 9 / 5 - 459.67).toFixed(1);
@@ -323,22 +329,22 @@ function displayError() {
 }
 
 function renderInformationOnDom(runningTrailsArray) {
-    
-    for ( let i = 1; i < runningTrailsArray.length; i++) {
+
+    for (let i = 1; i < runningTrailsArray.length; i++) {
         let listResultsDiv = $('<div>').addClass('list_result');
-        let locationPictureDiv = $('<div>'); 
-        let imageOfPlace = $('<img>').attr('src', runningTrailsArray[i].image).addClass('locationPicture'); 
-        locationPictureDiv.append(imageOfPlace); 
-        let locationDescriptionDiv = $('<div>').addClass('locationDescription'); 
+        let locationPictureDiv = $('<div>');
+        let imageOfPlace = $('<img>').attr('src', runningTrailsArray[i].image).addClass('locationPicture');
+        locationPictureDiv.append(imageOfPlace);
+        let locationDescriptionDiv = $('<div>').addClass('locationDescription');
         let nameOfPlace = $('<p>').text(runningTrailsArray[i].name);
-        let addressOfPlace1 = `${runningTrails[i].location.display_address[0]}`; 
-        let brLine1 = $('<br>'); 
-        let brLine2 = $('<br>'); 
+        let addressOfPlace1 = `${runningTrails[i].location.display_address[0]}`;
+        let brLine1 = $('<br>');
+        let brLine2 = $('<br>');
         let addressOfPlace2 = `${runningTrails[i].location.display_address[1]}`;
         let moreInfoButton = $('<button>').addClass('btn btn-success').text('More Info');
         let addressOfPlace = $('<address>').append(addressOfPlace1, brLine1, addressOfPlace2);
 
-        moreInfoButton.click(()=>{
+        moreInfoButton.click(() => {
             $('.descriptionTab').empty();
             $('.results').removeClass('hidden');
             $('.single_location_detail').removeClass('hidden');
@@ -350,9 +356,12 @@ function renderInformationOnDom(runningTrailsArray) {
             let distance = $('<div>').text(`Distance: ${runningTrails[i].distance}`)
             let rating = $('<div>').text('Rating: ' + runningTrails[i].rating)
             let pointBCoordinates = runningTrails[i].coordinates
-            descriptionDiv.append(nameOfPlace,imageOfPlace,addressOfPlace,distance,rating);
+            descriptionDiv.append(nameOfPlace, imageOfPlace, addressOfPlace, distance, rating);
             $('.descriptionTab').append(descriptionDiv);
             displayDirectionLineOnMap(pointBCoordinates);
+            $("html, body").animate({
+                scrollTop: 0
+            }, "slow"); //scroll window to the top
         })
         locationDescriptionDiv.append(nameOfPlace, addressOfPlace, brLine2, moreInfoButton);
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
@@ -363,7 +372,7 @@ function renderInformationOnDom(runningTrailsArray) {
 function displayDirectionLineOnMap(pointBCoordinates) {
     $("#map_area").text();
     var pointA = runningTrails[0],
-        pointB = pointBCoordinates, 
+        pointB = pointBCoordinates,
         myOptions = {
             zoom: 7,
             center: pointA
@@ -403,15 +412,37 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
             // if (status == google.maps.DirectionsStatus.OK) {
             if (status == "OK") { //success function
                 directionsDisplay.setDirections(response);
+                
                 var result = document.getElementById('result');
-                result.innerHTML= "";
-                for (var i =0; i < response.routes[0].legs[0].steps.length; i++){
-                    result.innerHTML+=response.routes[0].legs[0].steps[i].instructions+"<br>"
-                }
+                result.innerHTML = "";
+                let newTr1 = document.createElement("tr");
+                newTr1.innerHTML = `<b>Start location:</b> ${response.routes[0].legs[0].start_address}<br>`;
+                let newTr2 = document.createElement("tr");
+                newTr2.innerHTML = `<b>Distance:</b> ${response.routes[0].legs[0].distance.text}. <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br>`;
+                result.appendChild(newTr1);
+                result.appendChild(newTr2);
+                for (var i = 0; i < response.routes[0].legs[0].steps.length; i++) {
+                    let newTr3 = document.createElement("tr"); //new table row
+                    //let td1 = document.createElement("td");
+                    //td1.innerHTML = response.routes[0].legs[0].steps[i].maneuver;
+                    let td2 = document.createElement("td");
+                    td2.innerHTML = `${i+1}. ${response.routes[0].legs[0].steps[i].instructions}.`;
+                    let td3 = document.createElement("td");
+                    td3.innerHTML = `  ${response.routes[0].legs[0].steps[i].distance.text}`;
+                    //newTr3.appendChild(td1);
+                    newTr3.appendChild(td2);
+                    newTr3.appendChild(td3);
+                    result.appendChild(newTr3);
+                } 
+                let newTr4 = document.createElement("tr");
+                newTr4.innerHTML = `<b>End location:</b> ${response.routes[0].legs[0].end_address}`;
+                result.appendChild(newTr4);
+
             } else { //error function
                 console.log('Directions request failed due to ' + status);
             }
-        });
+        }
+    );
 }
 
 function activatePlacesSearch() {
@@ -419,21 +450,24 @@ function activatePlacesSearch() {
     let autocomplete = new google.maps.places.Autocomplete(input);
 }
 
-function renderMeetUpOnDom(meetup){
-    for(let m=0; m<meetup.length;m++){
-        let groupName = $('<h4>',{
+function renderMeetUpOnDom(meetup) {
+    for (let m = 0; m < meetup.length; m++) {
+        let groupName = $('<h4>', {
             class: 'groupName',
-            text: meetup[m].group.name.toUpperCase()})
-        let members = $('<div>',{
+            text: meetup[m].group.name.toUpperCase()
+        })
+        let members = $('<div>', {
             class: 'rsvp',
-            text: `${meetup[m].yes_rsvp_count} ${meetup[m].group.who} going`})
-        let eventName = $('<a>',{
+            text: `${meetup[m].yes_rsvp_count} ${meetup[m].group.who} going`
+        })
+        let eventName = $('<a>', {
             class: 'rsvp',
             text: meetup[m].eventName,
-            href: meetup[m].link})
+            href: meetup[m].link
+        })
         let meetUp = $('.location_list');
         let meetupDiv = $('<div>').addClass(`meetUp+${m} events hidden`);
-        meetupDiv = $(meetupDiv).append(groupName,eventName,members)
+        meetupDiv = $(meetupDiv).append(groupName, eventName, members)
         $(meetUp).append(meetupDiv)
     }
 }
