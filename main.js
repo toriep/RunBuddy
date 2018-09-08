@@ -426,7 +426,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                     //let td1 = document.createElement("td");
                     //td1.innerHTML = response.routes[0].legs[0].steps[i].maneuver;
                     let td2 = document.createElement("td");
-                    td2.innerHTML = `${i+1}. ${response.routes[0].legs[0].steps[i].instructions}.`;
+                    td2.innerHTML = `${i+1}. ${response.routes[0].legs[0].steps[i].instructions}`;
                     let td3 = document.createElement("td");
                     td3.innerHTML = `  ${response.routes[0].legs[0].steps[i].distance.text}`;
                     //newTr3.appendChild(td1);
