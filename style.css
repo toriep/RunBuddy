@@ -29,12 +29,12 @@ body {
 
 #search_input {
     height: 15%;   /*no px to be responsive */
-    font-size: 5rem;  /*should use rem to be responsive*/
+    font-size: 4rem;  /*should use rem to be responsive*/
     text-align: center;
 }
 
 #runningMan {
-    height: 55px; /*depending on above, change to %? */
+    height: 50px; /*depending on above, change to %? */
 }
 
 .alert {
