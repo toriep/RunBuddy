@@ -294,20 +294,16 @@ function displayMeetUpSuccess(response) {
 }
 
 function getDataFromWeather(zipCode) {
-    const SGT_API = {
+    const weather = {
         url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
         method: 'post',
         dataType: 'json',
         success: displayWeatherSuccess,
         error: displayError,
     }
-    $.ajax(SGT_API);
+    $.ajax(weather);
 }
 
-function displaySuccess(response) {
-    response = response;
-    return response;
-}
 
 function displayWeatherSuccess(responseFromServer) {
     let weather = {};
