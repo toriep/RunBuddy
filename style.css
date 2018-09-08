@@ -12,6 +12,7 @@ body {
    background-repeat: repeat-y; 
    background-position: center;
    background-size: cover;
+   background-attachment: fixed
 }
 
 .container {
@@ -212,7 +213,7 @@ a{
     justify-content: center;
 }
 
-#result{
+#result,.weather_list{
     background-color: whitesmoke;
     border-radius: 10px;
     width: 89vw;
