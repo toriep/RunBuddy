@@ -64,7 +64,11 @@ body {
 #map_area{
     height: 500px;
     left: 4vw;
+    border: 1px solid darkgreen;
+    border-radius: 10px;
+    margin-top: 3%;
     width: 90vw;
+    box-shadow: 5px 10px 18px black;
 }
 
 .meetup{
