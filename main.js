@@ -104,7 +104,7 @@ function ajaxYelpCall () {
     $('.meerkat').removeClass('hidden')
     const ajaxParameters = {
         dataType: 'JSON',
-        url: "http://yelp.ongandy.com/businesses",
+        url: "https://yelp.ongandy.com/businesses",
         method: 'POST',
         data: {
             api_key: 'u7VrqD4pyVGW_uBAod5CCKlJiM4pTyFGYzKyYWXV8YHidu5BsdPN20PhYEJflT-vOhZ7mFXHpHCIeyKTA-0xZ9LJcCg_jDK-B3WvRCmYvU1DdCXioFo8mTSIhRmPW3Yx',
@@ -295,7 +295,7 @@ function displayMeetUpSuccess(response) {
 
 function getDataFromWeather(zipCode) {
     const SGT_API = {
-        url: `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
+        url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
         method: 'post',
         dataType: 'json',
         success: displayWeatherSuccess,
