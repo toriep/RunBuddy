@@ -21,11 +21,6 @@ body {
    width: 100%;
 }
 
-/* .search_container {
-    position: relative;
-    top: 30%;
-    width: 100%;
-} */
 .form-inline {
     position: absolute;
     top: 50%;
@@ -81,17 +76,6 @@ body {
     transform: translate(-50%, 0);
 }
 
-
-/* #search_input {
-    height: 15%;   /*no px to be responsive */
-    /* font-size: 4rem;  /*should use rem to be responsive*/
-    /* text-align: center;
-}
-
-#runningMan {
-    height: 50px; /*depending on above, change to %? */
-/* } */ 
-
 .alert {
     width: 75%;
     text-align: center;
@@ -99,13 +83,8 @@ body {
     border: 1px dotted orangered;
 }
 
-.glyphicon-search { /*we don't need this anymore right? */
-    height: 56px;
-    font-size: 50px;
-}
 
 .weather_tab {
-    color: black; /*will be updated*/
     font-size: 4rem;
 }
 
@@ -194,7 +173,7 @@ a{
     position: relative;
     left: 4vw;
     height: 20%;
-    width: 93%;
+    width: 90%;
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #fff;
@@ -235,31 +214,6 @@ a{
 .locationDescription p {
     font-size: 4rem;
 }
-
-
-/* .landing_page {
-    height: 100%;
-    left: 30%;
-    width: 60%;
-} */
-
-/* .logo {
-    position: relative;
-    left: 30%;
-}
-
-.form-inline {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    height: 4rem;
-    width: 100%;
-    text-align: center;
-    font-size: 2.5rem;
-    color: rgba(255, 255, 255, 0);
-} */
-
 
 .alert-warning {
     width: 112%;
