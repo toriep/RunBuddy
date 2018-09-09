@@ -374,7 +374,7 @@ function displayDirectionLineOnMap(pointBCoordinates) {
     var pointA = runningTrails[0],
         pointB = pointBCoordinates,
         myOptions = {
-            zoom: 7,
+            zoom: 14,
             center: pointA
         },
         map = new google.maps.Map(document.getElementById('map_area'), myOptions),
