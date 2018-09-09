@@ -21,21 +21,76 @@ body {
    width: 100%;
 }
 
-.search_container {
+/* .search_container {
     position: relative;
     top: 30%;
     width: 100%;
+} */
+.form-inline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 4rem;
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 #search_input {
-    height: 15%;   /*no px to be responsive */
-    font-size: 4rem;  /*should use rem to be responsive*/
+    display: inline-block;
+    font-family: 'Cabin', sans-serif;
+    width: 55%;
+    height: 115%;
     text-align: center;
+    border: 0;
+    font-size: 2.5rem;
+    color: black;
+    background-color: rgba(120, 120, 120, 0.25);
+    box-shadow: inset 0 2px 2px black;
+    outline: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#runButton {
+    outline: none;
+    border: none;
+    background-color: rgba(120, 120, 120, 0.25);
+    box-shadow: inset 0 2px 2px black;
+    color: whitesmoke;
+    font-size: 1.7rem;
+    height: 100%;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    vertical-align: top;
+    display: inline-block;
+}
+
+ .input-group-btn {
+    display: inline-block;
+    vertical-align: top;
+ }
+
+.logo {
+    position: absolute;
+    top: 20%;
+    left: 53%;
+    transform: translate(-50%, 0);
+}
+
+
+/* #search_input {
+    height: 15%;   /*no px to be responsive */
+    /* font-size: 4rem;  /*should use rem to be responsive*/
+    /* text-align: center;
 }
 
 #runningMan {
     height: 50px; /*depending on above, change to %? */
-}
+/* } */ 
 
 .alert {
     width: 75%;
@@ -182,16 +237,29 @@ a{
 }
 
 
-.landing_page {
+/* .landing_page {
     height: 100%;
     left: 30%;
     width: 60%;
-}
+} */
 
-.logo, .form-inline {
+/* .logo {
     position: relative;
     left: 30%;
 }
+
+.form-inline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 4rem;
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0);
+} */
+
 
 .alert-warning {
     width: 112%;
