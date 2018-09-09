@@ -6,48 +6,72 @@
     <meta name="description" content="c718 hackathon 2, team 1">
     <meta name="author" content="Esther, Perry, Sarah, Torie, Mia">
     <title>7.18 Hackathon 2 (Team 1)</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo&libraries=places&callback=activatePlacesSearch"
+        async defer></script>
     <script type="text/javascript" src="main.js"></script>
+</head>
 
-  </head>
-  <body>
-      <div class="container">
-          <div class="search_container">
-              <div>
+<body>
+    <div class="meerkat hidden">
+            <img id="meerkat" src="./images/meerkat.gif">
+    </div>
+    <div class="container-fluid">
 
-                <div class="input-group">
-                    <input type="text" class="form-control" id="search_input" placeholder="Enter zip code">
-                        <div class="input-group-btn">
-                          <button class="btn btn-default" id="runButton">
-                            <span class="glyphicon glyphicon-search"></span>
-                          </button>
-                        </div>
-                 <div class="alert alert-warning hidden" id="error_msg" role="alert" style="padding: 5px">
+        <div class="landing_page">
+
+            <!-- <div class="search_container"> -->
+
+                <div class="logo">
+                    <img class="responsive" src="./images/RunBuddyLogo.png">
+                </div>
+                <div class="form-inline">
+                    <input type="text" class="form-control" id="search_input" placeholder="Current Location">
+                    <div class="input-group-btn form-group">
+                        <button class="btn btn-default" id="runButton">
+                            <img id="runningMan" src="images/letsrun.png">
+                        </button>
+
+                    </div>
+                    <div class="alert alert-warning hidden" id="error_msg">
                         <span class="glyphicon glyphicon-exclamation-sign"></span>
                         Invalid zip code. Please check again.
-                  </div>
+                    </div>
                 </div>
-              </div>
-          </div>
-
-                <div id="map_page">
-
+            </div>
         </div>
 
-          <div class="weather_container">
-            <div id='condition'></div>
-          </div>
-       
-        
-      </div>
-      <div class="meetup">
-        
-      </div>
+        <div class="map_page hidden">
+            <div id="map_area">
+            </div>
+            <div class="group_tabs">
+                <div class="location_list">
+                    <div class="single_location_detail hidden">
+                        <h1></h1>
+                        <div class="nav_taps">
+                            <div class="results description_tab tabLinks hidden" onclick="displayResult()">
+                                Trail List</div>
+                            <div class="description_tab tabLinks" onclick="displayDescription()">Description</div>
+                            <div class="direction_tab tabLinks" onclick="displayDirection()">Direction
+                                
+                            </div>
 
-  </body>
-  
+                            <div class="weather_tab tabLinks" onclick="displayWeather()">Weather
+                                <div class="weather_display"></div>
+                            </div>
+                            <div class="meetup tabLinks" onclick="displayMeetUp()">MeetUp</div>
+                        </div>
+                        <div class="descriptionTab">
+                        </div>
+                        <div id="result" class="direction hidden" onclick="displayDirection()"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>
-
