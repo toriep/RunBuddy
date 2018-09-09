@@ -3,6 +3,7 @@
  */
 $(document).ready(initializeApp);
 const runningTrails = [];
+let zipCode = null;
 /***************************************************************************************************
  * initializeApp 
  * @params {undefined} none
@@ -20,8 +21,7 @@ function initializeApp() {
  *     
  */
 function addClickHandlersToElements() {
-    $('#runButton').click(ajaxYelpCall);
-    $('#runButton').click(getDataFromMeetUp);
+    $('#runButton').click(callGoogleOrYelp);
     let eventListener = $("#search_input");
     eventListener.on("keyup", event => {
         if (event.keyCode === 13) { //if enter key is released
@@ -30,14 +30,59 @@ function addClickHandlersToElements() {
     });
 }
 
-function checkIfInputZipIsValid(zip) {
-    var valid = true;
-    if (zip.length != 5 || isNaN(zip)) {
-        $('#error_msg').removeClass('hidden');
-        valid = false;
+function callGoogleOrYelp(){
+    let userLocation = $("#search_input").val();
+    if (userLocation.length===0) {//if the search bar is empty, get current location
+        getDataFromGeolocation();
+    } else {//if user typed in a location, make a Yelp AJAX call with the input
+        ajaxYelpCall(userLocation);//Yelps work with zip code or city
+        getDataFromMeetUp();
+        getDataFromWeather(userLocation);
     }
-    return valid;
 }
+
+function getDataFromGeolocation(){
+    const location = {
+        url: `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo`,
+        method: 'post',
+        dataType: 'json',
+        success: reverseGeolocation,
+        error: displayError,
+    }
+    $.ajax(location);
+}
+
+function reverseGeolocation(response){
+    let lat = response.location.lat;
+    let lng = response.location.lng;
+    const location = {
+        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo`,
+        method: 'post',
+        dataType: 'json',
+        success: getCurrentLocation,
+        error: displayError,
+    }
+    $.ajax(location);
+}
+
+function getCurrentLocation(response){
+    let currentAddress = response.results[0].formatted_address;
+    let indexOfZipCode = currentAddress.lastIndexOf(',');
+    zipCode = currentAddress.slice(indexOfZipCode-5, indexOfZipCode);
+    ajaxYelpCall(zipCode);
+    debugger;
+    getDataFromMeetUp(zipCode);
+    getDataFromWeather(zipCode);
+}
+
+// function checkIfInputZipIsValid(zip) {
+//     var valid = true;
+//     if (zip.length != 5 || isNaN(zip)) {
+//         $('#error_msg').removeClass('hidden');
+//         valid = false;
+//     }
+//     return valid;
+// }
 /***************************************************************************************************
  * displayMapToDom - display map based on the the location (based on zip code or city user inputs)
  * @param: location //an array of objects
@@ -87,18 +132,18 @@ function displayMapOnDom() {
  * @returns: none
  * @calls: none
  */
-function ajaxYelpCall() {
-    let userLocation = $("#search_input").val();
+function ajaxYelpCall(location) {
+    let userLocation = location;
     $('#search_input').focus(function () {
         $('#error_msg').addClass('hidden');
     });
 
-    if (checkIfInputZipIsValid(userLocation)) {
-        getDataFromWeather(userLocation);
-    } else {
-        $("#search_input").val('');
-        ajaxYelpCall();
-    }
+    // if (checkIfInputZipIsValid(userLocation)) {
+    //     getDataFromWeather(userLocation);
+    // } else {
+    //     $("#search_input").val('');
+    //     ajaxYelpCall();
+    // }
     $('#error_msg').text('');
     $('.landing_page').addClass('hidden')
     $('.meerkat').removeClass('hidden')
