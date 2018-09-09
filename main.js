@@ -86,7 +86,7 @@ function displayMapOnDom() {
     $(".map_page").removeClass("hidden");
     //Map options
     const options = {
-        zoom: 10,
+        zoom: 12.5,
         center: runningTrails[0],
     }
     //New map
