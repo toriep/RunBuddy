@@ -75,14 +75,6 @@ function extractZipCode(response){
     zipCode = currentAddress.slice(indexOfZipCode-5, indexOfZipCode);
 }
 
-// function checkIfInputZipIsValid(zip) {
-//     var valid = true;
-//     if (zip.length != 5 || isNaN(zip)) {
-//         $('#error_msg').removeClass('hidden');
-//         valid = false;
-//     }
-//     return valid;
-// }
 /***************************************************************************************************
  * displayMapToDom - display map based on the the location (based on zip code or city user inputs)
  * @param: location //an array of objects
@@ -137,13 +129,7 @@ function ajaxYelpCall(location) {
     $('#search_input').focus(function () {
         $('#error_msg').addClass('hidden');
     });
-
-    // if (checkIfInputZipIsValid(userLocation)) {
-    //     getDataFromWeather(userLocation);
-    // } else {
-    //     $("#search_input").val('');
-    //     ajaxYelpCall();
-    // }
+    
     $('#error_msg').text('');
     $('.landing_page').addClass('hidden')
     $('.meerkat').removeClass('hidden')
@@ -273,7 +259,6 @@ function getImgForWeather(weather) {
 }
 
 function getDataFromYelp(response) {
-    $('.meerkat').addClass('hidden');
     const businessesIndex = response.businesses;
     let {
         latitude,
@@ -413,6 +398,7 @@ function renderInformationOnDom(runningTrailsArray) {
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.location_list').append(listResultsDiv);
     }
+    $('.meerkat').addClass('hidden');
 }
 
 function displayDirectionLineOnMap(pointBCoordinates) {
