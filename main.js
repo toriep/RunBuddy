@@ -4,6 +4,7 @@
 $(document).ready(initializeApp);
 const runningTrails = [];
 let zipCode = null;
+
 /***************************************************************************************************
  * initializeApp 
  * @params {undefined} none
@@ -35,9 +36,7 @@ function callGoogleOrYelp(){
     if (userLocation.length===0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
     } else {//if user typed in a location, make a Yelp AJAX call with the input
-        ajaxYelpCall(userLocation);//Yelps work with zip code or city
-        getDataFromMeetUp();
-        getDataFromWeather(userLocation);
+        ajaxYelpCall(userLocation);
     }
 }
 
@@ -66,13 +65,14 @@ function reverseGeolocation(response){
 }
 
 function getCurrentLocation(response){
+    extractZipCode(response);
+    ajaxYelpCall(zipCode);
+}
+
+function extractZipCode(response){
     let currentAddress = response.results[0].formatted_address;
     let indexOfZipCode = currentAddress.lastIndexOf(',');
     zipCode = currentAddress.slice(indexOfZipCode-5, indexOfZipCode);
-    ajaxYelpCall(zipCode);
-    debugger;
-    getDataFromMeetUp(zipCode);
-    getDataFromWeather(zipCode);
 }
 
 // function checkIfInputZipIsValid(zip) {
@@ -199,7 +199,6 @@ function renderWeatherOnDom(weather) {
         "color": dayOrNightColor
     });
     weatherList.append(weatherImage, headline, line0, line1, line2, line3, line4, line5);
-    // $('.weather_display').append(line0, line1, line2, line3);
     $('.location_list').append(weatherList);
 }
 
@@ -303,12 +302,14 @@ function getDataFromYelp(response) {
         })
     }
     displayMapOnDom();
+    getDataFromWeather(runningTrails[1].location.zip_code)
+    getDataFromMeetUp(runningTrails[1].location.zip_code)
 }
 
-function getDataFromMeetUp() {
-    let zipCode = $("#search_input").val();
+function getDataFromMeetUp(zipCode) {
+    let MeetUpZipCode = zipCode;
     let meetup = {
-        url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=${zipCode}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
+        url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=${MeetUpZipCode}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
         success: displayMeetUpSuccess,
         method: 'post',
         dataType: 'jsonp',
@@ -344,9 +345,9 @@ function displayMeetUpSuccess(response) {
     renderMeetUpOnDom(filteredMeetUpResults)
 }
 
-function getDataFromWeather(zipCode) {
+function getDataFromWeather(WeatherZipCode) {
     const weather = {
-        url: `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
+        url: `https://api.openweathermap.org/data/2.5/weather?zip=${WeatherZipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
         method: 'post',
         dataType: 'json',
         success: displayWeatherSuccess,
