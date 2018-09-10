@@ -297,7 +297,7 @@ function displayWeatherSuccess(responseFromServer) {
         cityName: responseFromServer.name,
         conditionDescription: responseFromServer.weather[0]['description'],
         iconId: responseFromServer.weather[0]['icon'],
-        //convert Kelvin to Fahrenheit
+        //convert temperature in Kelvin to Fahrenheit
         tempMinInF: (responseFromServer.main['temp_min'] * 9 / 5 - 459.67).toFixed(1),
         tempMaxInF: (responseFromServer.main['temp_max'] * 9 / 5 - 459.67).toFixed(1),
         currentTempInF: (responseFromServer.main['temp'] * 9 / 5 - 459.67).toFixed(1),
