@@ -127,7 +127,7 @@ function displayMapOnDom() {
     $(".map_page").removeClass("hidden");
     //Map options
     const options = {
-        zoom: 12.5,
+        zoom: 12,
         center: runningTrails[0],
     }
     //New map
@@ -178,10 +178,9 @@ function renderTrainInfoOnDom(runningTrailsArray) {
             $('.results').removeClass('hidden');
             $('.single_location_detail').removeClass('hidden');
             $('.list_result').addClass('hidden');
-            $('.weather_list').removeClass('hidden');
             let descriptionDiv = $('<div>').addClass('description');
             let imageOfPlace = $('<img>').attr('src', runningTrailsArray[i].image);
-            let nameOfPlace = $('<h3>').text(runningTrailsArray[i].name);
+            let nameOfPlace = $('<h1>').addClass('trailName').text(runningTrailsArray[i].name);
             let addressOfPlace = $('<p>').text(`Address: ${runningTrails[i].location.display_address[0]} ${runningTrails[i].location.display_address[1]}`);
             let distance = $('<div>').text(`Distance: ${runningTrails[i].distance}`)
             let rating = $('<div>').text('Rating: ' + runningTrails[i].rating)
@@ -334,7 +333,7 @@ function renderWeatherOnDom(weather) {
     let line5 = $('<li>').append(`Humidity: ${weather.humidity} %`);
     let line6 = $('<li>').append(`Wind: ${weather.wind} m/s`);
 
-    let weatherList = $('<ul class=weather_list hidden>');
+    let weatherList =  $('<ul>').addClass('weather_list hidden');
     weatherList.append(headline, line0, line1, line2, line3, line4, line5, line6);
     $('.location_list').append(weatherList);
 }

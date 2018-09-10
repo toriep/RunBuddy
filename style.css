@@ -15,6 +15,10 @@ body {
    background-attachment: fixed
 }
 
+.trailName{
+    border-bottom: 1px black solid;
+}
+
 .container {
    position: relative;
    height: 100%;
@@ -268,3 +272,7 @@ a{
     opacity: 1;
     box-shadow: 7px 12px 20px black;
 }
+/* 
+.groupName{
+    border-bottom: 1px black solid;
+} */
