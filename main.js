@@ -246,10 +246,14 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 result.innerHTML = "";
                 let newTr1 = document.createElement("tr");
                 newTr1.innerHTML = `<b>Start location:</b> ${response.routes[0].legs[0].start_address}<br>`;
+                let newTr4 = document.createElement("tr");
+                newTr4.innerHTML = `<b>Destination:</b> ${response.routes[0].legs[0].end_address}`;
+
                 let newTr2 = document.createElement("tr");
-                newTr2.innerHTML = `<b>Distance:</b> ${response.routes[0].legs[0].distance.text}. <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
+                newTr2.innerHTML = `<b>Distance:</b> ${response.routes[0].legs[0].distance.text}.  <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
                 result.appendChild(newTr1);
                 result.appendChild(newTr2);
+                result.appendChild(newTr4);
                 for (var i = 0; i < response.routes[0].legs[0].steps.length; i++) {
                     let newTr3 = document.createElement("tr"); //new table row
                     //let td1 = document.createElement("td");
@@ -263,9 +267,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                     newTr3.appendChild(td3);
                     result.appendChild(newTr3);
                 } 
-                let newTr4 = document.createElement("tr");
-                newTr4.innerHTML = `<b>Destination:</b> ${response.routes[0].legs[0].end_address}`;
-                result.appendChild(newTr4);
+                
 
             } else { //error function
                 console.log('Directions request failed due to ' + status);
