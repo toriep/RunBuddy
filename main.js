@@ -247,7 +247,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 let newTr1 = document.createElement("tr");
                 newTr1.innerHTML = `<b>Start location:</b> ${response.routes[0].legs[0].start_address}<br>`;
                 let newTr4 = document.createElement("tr");
-                newTr4.innerHTML = `<b>Destination:</b> ${response.routes[0].legs[0].end_address}`;
+                newTr4.innerHTML = `<b>Destination:</b> ${response.routes[0].legs[0].end_address}<br>`;
 
                 let newTr2 = document.createElement("tr");
                 newTr2.innerHTML = `<b>Distance:</b> ${response.routes[0].legs[0].distance.text}.  <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
@@ -382,7 +382,7 @@ function displayError( sub ) {
 
 function renderMeetUpOnDom(meetup) {
     for (let m = 0; m < meetup.length; m++) {
-        let groupName = $('<h4>', {
+        let groupName = $('<p>', {
             class: 'groupName',
             text: meetup[m].group.name.toUpperCase()
         })
