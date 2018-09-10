@@ -155,10 +155,10 @@ function displayMapOnDom() {
             }
         });
     }
-    renderTrainInfoOnDom(runningTrails);
+    renderTrailInfoOnDom(runningTrails);
 }
 
-function renderTrainInfoOnDom(runningTrailsArray) {
+function renderTrailInfoOnDom(runningTrailsArray) {
     for (let i = 1; i < runningTrailsArray.length; i++) {
         let listResultsDiv = $('<div>').addClass('list_result');
         let locationPictureDiv = $('<div>');
@@ -246,11 +246,10 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 result.innerHTML = "";
                 let newTr1 = document.createElement("tr");
                 newTr1.innerHTML = `<b>Start location:</b> ${response.routes[0].legs[0].start_address}<br>`;
-                let newTr4 = document.createElement("tr");
-                newTr4.innerHTML = `<b>Destination:</b> ${response.routes[0].legs[0].end_address}`;
-
                 let newTr2 = document.createElement("tr");
                 newTr2.innerHTML = `<b>Distance:</b> ${response.routes[0].legs[0].distance.text}.  <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
+                let newTr4 = document.createElement("tr");
+                newTr4.innerHTML = `<b>Destination:</b> ${response.routes[0].legs[0].end_address}<br><br>`;
                 result.appendChild(newTr1);
                 result.appendChild(newTr2);
                 result.appendChild(newTr4);
@@ -293,19 +292,20 @@ function getDataFromWeather(lat, lon) {
 }
 
 function displayWeatherSuccess(responseFromServer) {
-    let weather = {};
-    weather.condition = responseFromServer.weather[0]['main'];
-    weather.cityName = responseFromServer.name;
-    weather.conditionDescription = responseFromServer.weather[0]['description'];
-    weather.iconId = responseFromServer.weather[0]['icon'];
-    //convert Kelvin to Fahrenheit
-    weather.tempMinInF = (responseFromServer.main['temp_min'] * 9 / 5 - 459.67).toFixed(1);
-    weather.tempMaxInF = (responseFromServer.main['temp_max'] * 9 / 5 - 459.67).toFixed(1);
-    weather.currentTempInF = (responseFromServer.main['temp'] * 9 / 5 - 459.67).toFixed(1);
-    weather.sunriseTime = (responseFromServer.sys['sunrise']);
-    weather.sunsetTime = (responseFromServer.sys['sunset']);
-    weather.humidity = responseFromServer.main['humidity'];
-    weather.wind = responseFromServer.wind['speed'];
+    var weather = {
+        condition: responseFromServer.weather[0]['main'],
+        cityName: responseFromServer.name,
+        conditionDescription: responseFromServer.weather[0]['description'],
+        iconId: responseFromServer.weather[0]['icon'],
+        //convert temperature in Kelvin to Fahrenheit
+        tempMinInF: (responseFromServer.main['temp_min'] * 9 / 5 - 459.67).toFixed(1),
+        tempMaxInF: (responseFromServer.main['temp_max'] * 9 / 5 - 459.67).toFixed(1),
+        currentTempInF: (responseFromServer.main['temp'] * 9 / 5 - 459.67).toFixed(1),
+        sunriseTime: (responseFromServer.sys['sunrise']),
+        sunsetTime: (responseFromServer.sys['sunset']),
+        humidity: responseFromServer.main['humidity'],
+        wind: responseFromServer.wind['speed']
+    };
     renderWeatherOnDom(weather);
 }
 
@@ -382,7 +382,7 @@ function displayError( sub ) {
 
 function renderMeetUpOnDom(meetup) {
     for (let m = 0; m < meetup.length; m++) {
-        let groupName = $('<h4>', {
+        let groupName = $('<p>', {
             class: 'groupName',
             text: meetup[m].group.name.toUpperCase()
         })
