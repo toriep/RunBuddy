@@ -154,9 +154,10 @@ a{
 .events{
     background-color: whitesmoke;
     border-radius: 10px;
+    border: 5px dashed lightgray;
     width: 90vw;
     padding: 2%;
-    margin: 4% auto;
+    margin: auto;
     font-size: 2.4rem;
     opacity: 0.95;
     box-shadow: 5px 10px 18px black;
@@ -164,7 +165,6 @@ a{
 
 .events>p {
     font-size: 3.5rem;
-    border-bottom: 1px black solid;
 }
 
 .group_tabs{
