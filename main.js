@@ -292,19 +292,20 @@ function getDataFromWeather(lat, lon) {
 }
 
 function displayWeatherSuccess(responseFromServer) {
-    let weather = {};
-    weather.condition = responseFromServer.weather[0]['main'];
-    weather.cityName = responseFromServer.name;
-    weather.conditionDescription = responseFromServer.weather[0]['description'];
-    weather.iconId = responseFromServer.weather[0]['icon'];
-    //convert Kelvin to Fahrenheit
-    weather.tempMinInF = (responseFromServer.main['temp_min'] * 9 / 5 - 459.67).toFixed(1);
-    weather.tempMaxInF = (responseFromServer.main['temp_max'] * 9 / 5 - 459.67).toFixed(1);
-    weather.currentTempInF = (responseFromServer.main['temp'] * 9 / 5 - 459.67).toFixed(1);
-    weather.sunriseTime = (responseFromServer.sys['sunrise']);
-    weather.sunsetTime = (responseFromServer.sys['sunset']);
-    weather.humidity = responseFromServer.main['humidity'];
-    weather.wind = responseFromServer.wind['speed'];
+    var weather = {
+        condition: responseFromServer.weather[0]['main'],
+        cityName: responseFromServer.name,
+        conditionDescription: responseFromServer.weather[0]['description'],
+        iconId: responseFromServer.weather[0]['icon'],
+        //convert Kelvin to Fahrenheit
+        tempMinInF: (responseFromServer.main['temp_min'] * 9 / 5 - 459.67).toFixed(1),
+        tempMaxInF: (responseFromServer.main['temp_max'] * 9 / 5 - 459.67).toFixed(1),
+        currentTempInF: (responseFromServer.main['temp'] * 9 / 5 - 459.67).toFixed(1),
+        sunriseTime: (responseFromServer.sys['sunrise']),
+        sunsetTime: (responseFromServer.sys['sunset']),
+        humidity: responseFromServer.main['humidity'],
+        wind: responseFromServer.wind['speed']
+    };
     renderWeatherOnDom(weather);
 }
 
