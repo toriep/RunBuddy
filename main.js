@@ -1,29 +1,21 @@
-/**
- * Listen for the document to load and initialize the application
- */
 $(document).ready(initializeApp);
 const runningTrails = [];
 let zipCode = null;
 
-/***************************************************************************************************
- * initializeApp 
- * @params {undefined} none
- * @returns: {undefined} none
- * initializes the application
- */
 function initializeApp() {
     addClickHandlersToElements();
 }
-/***************************************************************************************************
 
- * addClickHandlerstoElements
- * @params {undefined} 
- * @returns  {undefined}
- *     
- */
 function addClickHandlersToElements() {
     $('#runButton').click(callGoogleOrYelp);
     let eventListener = $("#search_input");
+
+    //alert info with what to input in the field
+    $('#search_input').focus(function () {
+        $('#info_msg').removeClass('hidden');});
+    $('#search_input').focusout(function () {
+        $('#info_msg').addClass('hidden');});
+
     eventListener.on("keyup", event => {
         if (event.keyCode === 13) { //if enter key is released
             $("#runButton").click(); //runs the function attaches to click event off add button
@@ -46,7 +38,7 @@ function getDataFromGeolocation(){
         method: 'post',
         dataType: 'json',
         success: reverseGeolocation,
-        error: displayError,
+        error: displayError ('GetDataFromGeoLoaction'),
     }
     $.ajax(location);
 }
@@ -59,7 +51,7 @@ function reverseGeolocation(response){
         method: 'post',
         dataType: 'json',
         success: getCurrentLocation,
-        error: displayError,
+        error: displayError('reverseGeolocation'),
     }
     $.ajax(location);
 }
@@ -75,21 +67,11 @@ function extractZipCode(response){
     zipCode = currentAddress.slice(indexOfZipCode-5, indexOfZipCode);
 }
 
-/***************************************************************************************************
- * ajaxYelpCall - display available locations for running based on yelp database
- * @param: location
- * @returns: none
- * @calls: none
- */
 function ajaxYelpCall(location) {
     let userLocation = location;
-    $('#search_input').focus(function () {
-        $('#error_msg').addClass('hidden');
-    });
-    
-    $('#error_msg').text('');
-    $('.landing_page').addClass('hidden')
-    $('.meerkat').removeClass('hidden')
+
+    $('.landing_page').addClass('hidden');
+    $('.meerkat').removeClass('hidden');
     const ajaxParameters = {
         dataType: 'JSON',
         url: "https://yelp.ongandy.com/businesses",
@@ -100,9 +82,7 @@ function ajaxYelpCall(location) {
             location: userLocation,
         },
         success: getDataFromYelp,
-        error: function (response) {
-            console.log('error');
-        }
+        error: displayError('ajaxYelpCall')
     }
     $.ajax(ajaxParameters);
 }
@@ -136,16 +116,12 @@ function getDataFromYelp(response) {
         })
     }
     displayMapOnDom();
-    getDataFromWeather(runningTrails[1].location.zip_code)
-    getDataFromMeetUp(runningTrails[1].location.zip_code)
+    getDataFromWeather(latitude, longitude);
+    getDataFromMeetUp(runningTrails[1].location.zip_code);
+    $(".weather_list").addClass("hidden");
 }
 
-/***************************************************************************************************
- * displayMapToDom - display map based on the the location (based on zip code or city user inputs)
- * @param: location //an array of objects
- * @returns: none
- * @calls: none
- */
+
 function displayMapOnDom() {
     $(".landing_page").addClass("hidden");
     $(".map_page").removeClass("hidden");
@@ -163,8 +139,7 @@ function displayMapOnDom() {
             position: runningTrails[trailIndex].coordinates,
             map: map,
             animation: google.maps.Animation.DROP,
-            icon: "images/Winged_Shoe.png",
-
+            icon: "images/Winged_Shoe.png"
         });
         let contentString = "<h3>" + runningTrails[trailIndex].name + "</h3>";
         let infoWindow = new google.maps.InfoWindow({
@@ -180,11 +155,10 @@ function displayMapOnDom() {
             }
         });
     }
-    renderInformationOnDom(runningTrails);
+    renderTrainInfoOnDom(runningTrails);
 }
 
-function renderInformationOnDom(runningTrailsArray) {
-
+function renderTrainInfoOnDom(runningTrailsArray) {
     for (let i = 1; i < runningTrailsArray.length; i++) {
         let listResultsDiv = $('<div>').addClass('list_result');
         let locationPictureDiv = $('<div>');
@@ -204,6 +178,7 @@ function renderInformationOnDom(runningTrailsArray) {
             $('.results').removeClass('hidden');
             $('.single_location_detail').removeClass('hidden');
             $('.list_result').addClass('hidden');
+            $('.weather_list').removeClass('hidden');
             let descriptionDiv = $('<div>').addClass('description');
             let imageOfPlace = $('<img>').attr('src', runningTrailsArray[i].image);
             let nameOfPlace = $('<h3>').text(runningTrailsArray[i].name);
@@ -273,7 +248,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 let newTr1 = document.createElement("tr");
                 newTr1.innerHTML = `<b>Start location:</b> ${response.routes[0].legs[0].start_address}<br>`;
                 let newTr2 = document.createElement("tr");
-                newTr2.innerHTML = `<b>Distance:</b> ${response.routes[0].legs[0].distance.text}. <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br>`;
+                newTr2.innerHTML = `<b>Distance:</b> ${response.routes[0].legs[0].distance.text}. <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
                 result.appendChild(newTr1);
                 result.appendChild(newTr2);
                 for (var i = 0; i < response.routes[0].legs[0].steps.length; i++) {
@@ -290,7 +265,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                     result.appendChild(newTr3);
                 } 
                 let newTr4 = document.createElement("tr");
-                newTr4.innerHTML = `<b>End location:</b> ${response.routes[0].legs[0].end_address}`;
+                newTr4.innerHTML = `<b>Destination:</b> ${response.routes[0].legs[0].end_address}`;
                 result.appendChild(newTr4);
 
             } else { //error function
@@ -305,13 +280,13 @@ function activatePlacesSearch() {
     let autocomplete = new google.maps.places.Autocomplete(input);
 }
 
-function getDataFromWeather(WeatherZipCode) {
+function getDataFromWeather(lat, lon) {
     const weather = {
-        url: `https://api.openweathermap.org/data/2.5/weather?zip=${WeatherZipCode},us&APPID=9538ca63e1e6a5306d06af4048ad137f`,
+        url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=9538ca63e1e6a5306d06af4048ad137f`,
         method: 'post',
         dataType: 'json',
         success: displayWeatherSuccess,
-        error: displayError,
+        error: displayError('getDataFromWeather'),
     }
     $.ajax(weather);
 }
@@ -321,81 +296,48 @@ function displayWeatherSuccess(responseFromServer) {
     weather.condition = responseFromServer.weather[0]['main'];
     weather.cityName = responseFromServer.name;
     weather.conditionDescription = responseFromServer.weather[0]['description'];
+    weather.iconId = responseFromServer.weather[0]['icon'];
+    //convert Kelvin to Fahrenheit
     weather.tempMinInF = (responseFromServer.main['temp_min'] * 9 / 5 - 459.67).toFixed(1);
     weather.tempMaxInF = (responseFromServer.main['temp_max'] * 9 / 5 - 459.67).toFixed(1);
     weather.currentTempInF = (responseFromServer.main['temp'] * 9 / 5 - 459.67).toFixed(1);
+    weather.sunriseTime = (responseFromServer.sys['sunrise']);
+    weather.sunsetTime = (responseFromServer.sys['sunset']);
     weather.humidity = responseFromServer.main['humidity'];
     weather.wind = responseFromServer.wind['speed'];
     renderWeatherOnDom(weather);
 }
 
-/***************************************************************************************************
- * renderWeatherToDom - display weather based on the location
- * @param: location
- * @returns: none
- * @calls: none
- */
 function renderWeatherOnDom(weather) {
-    let imgSrc = getImgForWeather(weather);
+    let imgSrc =   `http://openweathermap.org/img/w/${weather.iconId}.png`;
     let weatherImage = $('<img class="weather_icon">').attr({
         "src": imgSrc,
-        "alt": imgSrc
+        "alt": weather.condition
     });
     let today = new Date();
-    let hrs = today.getHours();
-    let dayOrNight;
-    if (hrs > 19 || hrs < 6) { //it's night time
-        dayOrNight = 'images/nightTime.jpg';
-        dayOrNightColor = 'black';
-    } else { //it's day time
-        dayOrNight = 'images/dayTime.jpg';
-        dayOrNightColor = 'black';
-    }
+    let dateToday = today.toDateString();
+    let timeNow = today.toLocaleTimeString();
+    let milisec = new Date(weather.sunriseTime);
+    let toDate = milisec.toISOString();
+    let sunriseTime = toDate.substr(11, 5);
+
+    milisec = new Date(weather.sunsetTime);
+    toDate = milisec.toISOString();
+    let sunsetTime = toDate.substr(11, 5);
+
     let headline = $('<p>').append(`${weather.cityName}`);
-    let line0 = $('<li>').append(weather.conditionDescription.toUpperCase());
-    let line1 = $('<li>').append(today);
+    let line0 = $('<li>').append(weatherImage, (weather.conditionDescription).toUpperCase());
+    let line1 = $('<li>').append(`${dateToday} ${timeNow}`);
     let line2 = $('<li>').append(`Current temperature: ${weather.currentTempInF} °F `);
     let line3 = $('<li>').append(`High: ${weather.tempMaxInF} °F / Low: ${weather.tempMinInF} °F `);
-    let line4 = $('<li>').append(`Humidity: ${weather.humidity} %`);
-    let line5 = $('<li>').append(`Wind: ${weather.wind} m/s`);
+    let line4 = $('<li>').append(`Sunrise: ${sunriseTime} am / Sunset: ${sunsetTime} pm`);
+    let line5 = $('<li>').append(`Humidity: ${weather.humidity} %`);
+    let line6 = $('<li>').append(`Wind: ${weather.wind} m/s`);
 
-    let weatherList = $('<ul class="weather_list hidden">').css({
-        "background-image": dayOrNight,
-        "color": dayOrNightColor
-    });
-    weatherList.append(weatherImage, headline, line0, line1, line2, line3, line4, line5);
+    let weatherList = $('<ul class=weather_list hidden>');
+    weatherList.append(headline, line0, line1, line2, line3, line4, line5, line6);
     $('.location_list').append(weatherList);
 }
-
-
-
-function getImgForWeather(weather) {
-    var imgSrc;
-    switch (weather.condition) {
-        case 'Haze':
-            imgSrc = 'images/haze.png';
-            break;
-        case 'Clouds':
-            imgSrc = 'images/clouds.png';
-            break;
-        case 'few clouds':
-            imgSrc = 'images/clouds.png';
-            break;
-        case 'Sunny':
-            imgSrc = 'images/sunny.png';
-            break;
-        case 'Clear':
-            imgSrc = 'images/clear.png';
-            break;
-        case 'Rain':
-            imgSrc = 'images/rain.png';
-            break;
-        default:
-            imgSrc = 'images/default.png';
-    }
-    return imgSrc;
-}
-
 
 function getDataFromMeetUp(zipCode) {
     let MeetUpZipCode = zipCode;
@@ -404,7 +346,7 @@ function getDataFromMeetUp(zipCode) {
         success: displayMeetUpSuccess,
         method: 'post',
         dataType: 'jsonp',
-        error: displayError,
+        error: displayError ('getDataFromMeetUp'),
     }
     $.ajax(meetup);
 }
@@ -442,9 +384,8 @@ function displayMeetUpSuccess(response) {
     renderMeetUpOnDom(filteredMeetUpResults)
 }
 
-
-function displayError() {
-    console.log("AJAX call failed :(")
+function displayError( sub ) {
+    console.log(`${sub} AJAX call failed.`);
 }
 
 function renderMeetUpOnDom(meetup) {
@@ -511,4 +452,3 @@ function displayDirection() {
     $('.events').addClass('hidden');
     $('#result').removeClass('hidden');
 }
-
