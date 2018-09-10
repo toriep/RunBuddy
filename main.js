@@ -155,10 +155,10 @@ function displayMapOnDom() {
             }
         });
     }
-    renderTrainInfoOnDom(runningTrails);
+    renderTrailInfoOnDom(runningTrails);
 }
 
-function renderTrainInfoOnDom(runningTrailsArray) {
+function renderTrailInfoOnDom(runningTrailsArray) {
     for (let i = 1; i < runningTrailsArray.length; i++) {
         let listResultsDiv = $('<div>').addClass('list_result');
         let locationPictureDiv = $('<div>');
@@ -246,11 +246,10 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 result.innerHTML = "";
                 let newTr1 = document.createElement("tr");
                 newTr1.innerHTML = `<b>Start location:</b> ${response.routes[0].legs[0].start_address}<br>`;
-                let newTr4 = document.createElement("tr");
-                newTr4.innerHTML = `<b>Destination:</b> ${response.routes[0].legs[0].end_address}<br>`;
-
                 let newTr2 = document.createElement("tr");
                 newTr2.innerHTML = `<b>Distance:</b> ${response.routes[0].legs[0].distance.text}.  <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
+                let newTr4 = document.createElement("tr");
+                newTr4.innerHTML = `<b>Destination:</b> ${response.routes[0].legs[0].end_address}<br><br>`;
                 result.appendChild(newTr1);
                 result.appendChild(newTr2);
                 result.appendChild(newTr4);
