@@ -318,25 +318,16 @@ function renderWeatherOnDom(weather) {
     let today = new Date();
     let dateToday = today.toDateString();
     let timeNow = today.toLocaleTimeString();
-    let milisec = new Date(weather.sunriseTime);
-    let toDate = milisec.toISOString();
-    let sunriseTime = toDate.substr(11, 5);
-
-    milisec = new Date(weather.sunsetTime);
-    toDate = milisec.toISOString();
-    let sunsetTime = toDate.substr(11, 5);
-
     let headline = $('<p>').append(`${weather.cityName}`);
     let line0 = $('<li>').append(weatherImage, (weather.conditionDescription).toUpperCase());
     let line1 = $('<li>').append(`${dateToday} ${timeNow}`);
     let line2 = $('<li>').append(`Current temperature: ${weather.currentTempInF} °F `);
     let line3 = $('<li>').append(`High: ${weather.tempMaxInF} °F / Low: ${weather.tempMinInF} °F `);
-    let line4 = $('<li>').append(`Sunrise: ${sunriseTime} am / Sunset: ${sunsetTime} pm`);
-    let line5 = $('<li>').append(`Humidity: ${weather.humidity} %`);
-    let line6 = $('<li>').append(`Wind: ${weather.wind} m/s`);
+    let line4 = $('<li>').append(`Humidity: ${weather.humidity} %`);
+    let line5 = $('<li>').append(`Wind: ${weather.wind} m/s`);
 
     let weatherList =  $('<ul>').addClass('weather_list hidden');
-    weatherList.append(headline, line0, line1, line2, line3, line4, line5, line6);
+    weatherList.append(headline, line0, line1, line2, line3, line4, line5);
     $('.location_list').append(weatherList);
 }
 
