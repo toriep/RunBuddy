@@ -175,7 +175,7 @@ function renderTrailInfoOnDom(runningTrailsArray) {
 
         moreInfoButton.click(() => {
             $('.descriptionTab').empty();
-            $('.results').removeClass('hidden');
+            $('.trails_tab').removeClass('hidden');
             $('.single_location_detail').removeClass('hidden');
             $('.list_result').addClass('hidden');
             let descriptionDiv = $('<div>').addClass('description');
@@ -408,6 +408,11 @@ function displayWeather() {
     $('.events').addClass('hidden');
     $('.description').addClass('hidden');
     $('.weather_list').removeClass('hidden');
+    $('.description_tab').removeClass('currentTab');
+    $('.meetup_tab').removeClass('currentTab');
+    $('.direction_tab').removeClass('currentTab');
+    $('.results').removeClass('currentTab');
+    $('.weather_tab').addClass('currentTab');
 }
 
 function displayDescription() {
@@ -416,6 +421,11 @@ function displayDescription() {
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.description').removeClass('hidden');
+    $('.weather_tab').removeClass('currentTab');
+    $('.meetup_tab').removeClass('currentTab');
+    $('.direction_tab').removeClass('currentTab');
+    $('.trails_tab').removeClass('currentTab');
+    $('.description_tab').addClass('currentTab');
 }
 
 function displayResult() {
@@ -435,6 +445,11 @@ function displayMeetUp() {
     $('.weather_list').addClass('hidden');
     $('.events').removeClass('hidden');
     $('#result').addClass('hidden');
+    $('.description_tab').removeClass('currentTab');
+    $('.weather_tab').removeClass('currentTab');
+    $('.direction_tab').removeClass('currentTab');
+    $('.trails_tab').removeClass('currentTab');
+    $('.meetup_tab').addClass('currentTab');
 }
 
 function displayDirection() {
@@ -443,4 +458,9 @@ function displayDirection() {
     $('.weather_list').addClass('hidden');
     $('.events').addClass('hidden');
     $('#result').removeClass('hidden');
+    $('.description_tab').removeClass('currentTab');
+    $('.meetup_tab').removeClass('currentTab');
+    $('.weather_tab').removeClass('currentTab');
+    $('.trails_tab').removeClass('currentTab');
+    $('.direction_tab').addClass('currentTab');
 }
