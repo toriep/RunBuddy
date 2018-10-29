@@ -377,7 +377,7 @@ function displayMeetUpSuccess(response) {
 }
 
 function displayError( sub ) {
-    console.log(`${sub} AJAX call failed.`);
+    // console.log(`${sub} AJAX call failed.`);
 }
 
 function renderMeetUpOnDom(meetup) {
