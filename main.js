@@ -1,4 +1,6 @@
 $(document).ready(initializeApp);
+
+const runningTrailsURL = 'https://www.trailrunproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200354719-4f64b16db640b15c131f04f75804eacd'
 const runningTrails = [];
 let zipCode = null;
 
@@ -377,7 +379,7 @@ function displayMeetUpSuccess(response) {
 }
 
 function displayError( sub ) {
-    // console.log(`${sub} AJAX call failed.`);
+    console.log(`${sub} AJAX call failed.`);
 }
 
 function renderMeetUpOnDom(meetup) {
@@ -464,3 +466,16 @@ function displayDirection() {
     $('.trails_tab').removeClass('currentTab');
     $('.direction_tab').addClass('currentTab');
 }
+
+function getRunningTrailsList(lat, long) {
+    const runningTrails = {
+        dataType: 'JSON',
+        url: runningTrailsURL,
+        success: response => {
+            console.log("Success:", response);
+        }
+    }
+    $.ajax(runningTrails);
+}
+
+getRunningTrailsList();
