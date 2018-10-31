@@ -280,3 +280,82 @@ a{
     opacity: 1;
     box-shadow: 7px 12px 20px black;
 }
+
+
+/*************************
+Media Query
+**************************/
+@media (min-width: 1281px) {
+    .responsive {
+        width: 60%;
+        margin-top: -3%;
+    }
+
+    #search_input {
+        height: 85%;
+        font-size: 1.4rem;
+        width: 26%;
+    }
+
+    #runButton {
+        font-size: 1.3rem;
+        margin-top: 10%;
+        padding: 10px;
+    }
+
+    #info_msg {
+        margin-left: -3%;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .responsive {
+        width: 60%;
+        margin-top: -2%;
+    }
+
+    #search_input {
+        height: 80%;
+        font-size: 1.3rem;
+        width: 27%;
+    }
+
+    #runButton {
+        font-size: 1.3rem;
+        margin-top: 9%;
+        padding: 8px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .responsive {
+        width: 60%;
+        margin-top: 4%
+    }
+
+    #search_input {
+        height: 80%;
+        font-size: 1.3rem;
+        width: 27%;
+    }
+
+    #runButton {
+        font-size: 1.3rem;
+        margin-top: 9%;
+        padding: 8px;
+    }
+}
+
+
+/*THESE TWO SIZES ARE NOT TAKING MEDIA QUERY*/
+/*@media (min-width: 481px) and (max-width: 767px) {
+    .responsive {
+        width: 110%;
+        margin-top: 22%;
+        }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+}
+*/
