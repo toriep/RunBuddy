@@ -30,13 +30,14 @@ function callGoogleOrYelp(){
     if (userLocation.length===0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
     } else {//if user typed in a location, make a Yelp AJAX call with the input
-        ajaxYelpCall(userLocation);
+        // ajaxYelpCall(userLocation);
+        convertInputAddressToLatAndLongUsingGeoCoding(userLocation);
     }
 }
 
 function getDataFromGeolocation(){
     const location = {
-        url: `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo`,
+        url: `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw`,
         method: 'post',
         dataType: 'json',
         success: reverseGeolocation,
@@ -45,11 +46,12 @@ function getDataFromGeolocation(){
     $.ajax(location);
 }
 
+//this function converts lat and long to an address
 function reverseGeolocation(response){
     let lat = response.location.lat;
     let lng = response.location.lng;
     const location = {
-        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyD6lZ-Mm6dYYqLMRQQN4vnODlQ5kRUdnJo`,
+        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw`,
         method: 'post',
         dataType: 'json',
         success: getCurrentLocation,
@@ -67,6 +69,28 @@ function extractZipCode(response){
     let currentAddress = response.results[0].formatted_address;
     let indexOfZipCode = currentAddress.lastIndexOf(',');
     zipCode = currentAddress.slice(indexOfZipCode-5, indexOfZipCode);
+}
+
+//this function converts a given address, city, or zip code to lat and long
+function convertInputAddressToLatAndLongUsingGeoCoding(inputAddress){
+    console.log(inputAddress.split(" ").join("+"))
+
+    const location = {
+        url: `https://maps.googleapis.com/maps/api/geocode/json`,
+        method: 'get',
+        dataType: 'json',
+        data: {
+            key: 'AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw',
+            address: inputAddress.split(" ").join("+"),
+        },
+        success: geocodingResponse,
+        error: displayError ('GetDataFromGeoLoaction'),
+    }
+    $.ajax(location);
+}
+
+function geocodingResponse(response){
+    console.log(response)
 }
 
 function ajaxYelpCall(location) {
