@@ -112,7 +112,7 @@ function ajaxYelpCall(location) {
     let userLocation = location;
 
     $('.landing_page').addClass('hidden');
-    $('.meerkat').removeClass('hidden');
+    $('.loadingImg').removeClass('hidden');
     const ajaxParameters = {
         dataType: 'JSON',
         url: "https://yelp.ongandy.com/businesses",
@@ -220,7 +220,7 @@ function renderTrailInfoOnDom(runningTrailsArray) {
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.location_list').append(listResultsDiv);
     }
-    $('.meerkat').addClass('hidden');
+    $('.loadingImg').addClass('hidden');
 }
 
 function displayTrailDescription(trail){

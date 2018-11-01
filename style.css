@@ -254,13 +254,18 @@ a{
     background-color: whitesmoke;
 }
 
-.meerkat{
+.loadingImg{
     width: 20%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     z-index: 99;
+}
+
+#runningMan, #runningWoman{
+    display: inline-block;
+    width: 40%;
 }
 
 #result,.weather_list{
