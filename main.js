@@ -1,7 +1,7 @@
 $(document).ready(initializeApp);
 
 const runningTrailsURL = 'https://www.trailrunproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200354719-4f64b16db640b15c131f04f75804eacd'
-const runningTrails = [];
+let runningTrails = [];
 let zipCode = null;
 
 function initializeApp() {
@@ -9,7 +9,7 @@ function initializeApp() {
 }
 
 function addClickHandlersToElements() {
-    $('#runButton').click(callGoogleOrYelp);
+    $('#runButton').click(callGoogleAPI);
     let eventListener = $("#search_input");
 
     //alert info with what to input in the field
@@ -25,19 +25,19 @@ function addClickHandlersToElements() {
     });
 }
 
-function callGoogleOrYelp(){
+function callGoogleAPI(){
     let userLocation = $("#search_input").val();
     if (userLocation.length===0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
-    } else {//if user typed in a location, make a Yelp AJAX call with the input
+    } else {//if user typed in a location, make a Geocoding AJAX call
         // ajaxYelpCall(userLocation);
-        convertInputAddressToLatAndLongUsingGeoCoding(userLocation);
+        getLatLongFromGeocoding(userLocation);
     }
 }
 
 function getDataFromGeolocation(){
     const location = {
-        url: `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw`,
+        url: `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw`,
         method: 'post',
         dataType: 'json',
         success: reverseGeolocation,
@@ -60,26 +60,27 @@ function reverseGeolocation(response){
     $.ajax(location);
 }
 
-function getCurrentLocation(response){
-    extractZipCode(response);
-    ajaxYelpCall(zipCode);
-}
-
 function extractZipCode(response){
     let currentAddress = response.results[0].formatted_address;
     let indexOfZipCode = currentAddress.lastIndexOf(',');
     zipCode = currentAddress.slice(indexOfZipCode-5, indexOfZipCode);
 }
 
+function getCurrentLocation(response){
+    extractZipCode(response);
+    ajaxYelpCall(zipCode);
+}
+
 //this function converts a given address, city, or zip code to lat and long
-function convertInputAddressToLatAndLongUsingGeoCoding(inputAddress){
+function getLatLongFromGeocoding(inputAddress){
+    const formattedAddress = inputAddress.split(" ").join("+");
     const location = {
         url: `https://maps.googleapis.com/maps/api/geocode/json`,
         method: 'get',
         dataType: 'json',
         data: {
             key: 'AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw',
-            address: inputAddress.split(" ").join("+"),
+            address: formattedAddress
         },
         success: geocodingResponse,
         error: displayError ('GetDataFromGeocoding'),
@@ -90,7 +91,19 @@ function convertInputAddressToLatAndLongUsingGeoCoding(inputAddress){
 //use the lat and long from this function to call trail API
 function geocodingResponse(response){
     const latLong = response.results[0].geometry.location;
+    console.log(latLong);
     return latLong;
+}
+
+function getRunningTrailsList(lat, long) {
+    const runningTrails = {
+        dataType: 'JSON',
+        url: runningTrailsURL,
+        success: response => {
+            console.log("Success:", response);
+        }
+    }
+    $.ajax(runningTrails);
 }
 
 function ajaxYelpCall(location) {
@@ -403,7 +416,7 @@ function displayMeetUpSuccess(response) {
 }
 
 function displayError( sub ) {
-    console.log(`${sub} AJAX call failed.`);
+    // console.log(`${sub} AJAX call failed.`);
 }
 
 function renderMeetUpOnDom(meetup) {
@@ -490,16 +503,3 @@ function displayDirection() {
     $('.trails_tab').removeClass('currentTab');
     $('.direction_tab').addClass('currentTab');
 }
-
-function getRunningTrailsList(lat, long) {
-    const runningTrails = {
-        dataType: 'JSON',
-        url: runningTrailsURL,
-        success: response => {
-            console.log("Success:", response);
-        }
-    }
-    $.ajax(runningTrails);
-}
-
-getRunningTrailsList();
