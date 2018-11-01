@@ -9,8 +9,6 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:800i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto:300" rel="stylesheet">
-    <!--     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- -->
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw&libraries=places&callback=activatePlacesSearch"
@@ -47,21 +45,33 @@
     </div>
 
     <div class="map_page hidden">
-        <div id="map_area">
+        <div class="search_and_logo">
+            <img class="map_page_logo" src="./images/RunBuddyLogo.png">
+            <div class="search_bar">
+                <input type="text" class="search_field" placeholder="Enter ZIP Code or City">
+                <div class="input-group-btn form-group">
+                    <button class="search_button">
+                        LET'S RUN
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="group_tabs">
-            <div class="location_list">
-                <div class="single_location_detail hidden">
-                    <div class="nav_taps">
-                        <div class="trails_tab tabLinks hidden" onclick="displayResult()">
-                            Trail List</div>
-                        <div class="description_tab tabLinks" onclick="displayDescription()">Description</div>
-                        <div class="direction_tab tabLinks" onclick="displayDirection()">Direction</div>
-                        <div class="weather_tab tabLinks" onclick="displayWeather()">Weather</div>
-                        <div class="meetup_tab tabLinks" onclick="displayMeetUp()">MeetUp</div>
+        <div class="map_and_trail_list">
+            <div id="map_area"></div>
+            <div class="group_tabs">
+                <div class="location_list">
+                    <div class="single_location_detail hidden">
+                        <div class="nav_taps">
+                            <div class="trails_tab tabLinks hidden" onclick="displayResult()">
+                                < Trails List</div>
+                            <div class="description_tab tabLinks" onclick="displayDescription()">Trail Details</div>
+                            <div class="direction_tab tabLinks" onclick="displayDirection()">Direction</div>
+                            <div class="weather_tab tabLinks" onclick="displayWeather()">Weather</div>
+                            <div class="meetup_tab tabLinks" onclick="displayMeetUp()">MeetUp</div>
+                        </div>
+                        <div class="descriptionTab"></div>
+                        <div id="result" class="direction hidden" onclick="displayDirection()"></div>
                     </div>
-                    <div class="descriptionTab"></div>
-                    <div id="result" class="direction hidden" onclick="displayDirection()"></div>
                 </div>
             </div>
         </div>
