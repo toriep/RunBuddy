@@ -15,7 +15,7 @@ function addClickHandlersToElements() {
     //alert info with what to input in the field
     $('#search_input').focus(function () {
         $('#info_msg').removeClass('hidden');});
-    $('#search_input').focusout(function () {
+    $('#search_input').keypress(function () {
         $('#info_msg').addClass('hidden');});
 
     eventListener.on("keyup", event => {
