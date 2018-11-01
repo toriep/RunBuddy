@@ -1,5 +1,6 @@
 $(document).ready(initializeApp);
 
+const runningTrailsURL = 'https://www.trailrunproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200354719-4f64b16db640b15c131f04f75804eacd'
 let runningTrails = [];
 let zipCode = null;
 
@@ -29,7 +30,7 @@ function callGoogleAPI(){
     if (userLocation.length===0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
     } else {//if user typed in a location, make a Geocoding AJAX call
-        // ajaxYelpCall(userLocation);
+        ajaxYelpCall(userLocation);//remove this YELP call and replace it with geocoding
         getLatLongFromGeocoding(userLocation);
     }
 }
@@ -92,15 +93,16 @@ function geocodingResponse(response){
     const latLong = response.results[0].geometry.location;
     const lat = latLong.lat.toFixed(4);
     const lng = latLong.lng.toFixed(4);
-    getRunningTrailsList(lat,lng);
+    console.log(latLong);
+    //call Trail API AJAX here with lat and lng as parameters
 }
 
 function getRunningTrailsList(lat, long) {
     const runningTrails = {
         dataType: 'JSON',
-        url: `https://www.trailrunproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=10&key=200354719-4f64b16db640b15c131f04f75804eacd`,
+        url: runningTrailsURL,
         success: response => {
-            console.log("Trail Success:", response);
+            console.log("Success:", response);
         }
     }
     $.ajax(runningTrails);
