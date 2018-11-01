@@ -1,6 +1,5 @@
 $(document).ready(initializeApp);
 
-const runningTrailsURL = 'https://www.trailrunproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200354719-4f64b16db640b15c131f04f75804eacd'
 let runningTrails = [];
 let zipCode = null;
 
@@ -91,16 +90,17 @@ function getLatLongFromGeocoding(inputAddress){
 //use the lat and long from this function to call trail API
 function geocodingResponse(response){
     const latLong = response.results[0].geometry.location;
-    console.log(latLong);
-    return latLong;
+    const lat = latLong.lat.toFixed(4);
+    const lng = latLong.lng.toFixed(4);
+    getRunningTrailsList(lat,lng);
 }
 
 function getRunningTrailsList(lat, long) {
     const runningTrails = {
         dataType: 'JSON',
-        url: runningTrailsURL,
+        url: `https://www.trailrunproject.com/data/get-trails?lat=${lat}&lon=${long}&maxDistance=10&key=200354719-4f64b16db640b15c131f04f75804eacd`,
         success: response => {
-            console.log("Success:", response);
+            console.log("Trail Success:", response);
         }
     }
     $.ajax(runningTrails);
@@ -212,30 +212,33 @@ function renderTrailInfoOnDom(runningTrailsArray) {
         let moreInfoButton = $('<button>').addClass('btn btn-success').text('More Info');
         let addressOfPlace = $('<address>').append(addressOfPlace1, brLine1, addressOfPlace2);
 
-        moreInfoButton.click(() => {
-            $('.descriptionTab').empty();
-            $('.trails_tab').removeClass('hidden');
-            $('.single_location_detail').removeClass('hidden');
-            $('.list_result').addClass('hidden');
-            let descriptionDiv = $('<div>').addClass('description');
-            let imageOfPlace = $('<img>').attr('src', runningTrailsArray[i].image);
-            let nameOfPlace = $('<h1>').addClass('trailName').text(runningTrailsArray[i].name);
-            let addressOfPlace = $('<p>').text(`Address: ${runningTrails[i].location.display_address[0]} ${runningTrails[i].location.display_address[1]}`);
-            let distance = $('<div>').text(`Distance: ${runningTrails[i].distance}`)
-            let rating = $('<div>').text('Rating: ' + runningTrails[i].rating)
-            let pointBCoordinates = runningTrails[i].coordinates
-            descriptionDiv.append(nameOfPlace, imageOfPlace, addressOfPlace, distance, rating);
-            $('.descriptionTab').append(descriptionDiv);
-            displayDirectionLineOnMap(pointBCoordinates);
-            $("html, body").animate({
-                scrollTop: 0
-            }, "slow"); //scroll window to the top
-        })
+        moreInfoButton.click(() => displayTrailDescription(runningTrailsArray[i]));
+
         locationDescriptionDiv.append(nameOfPlace, addressOfPlace, brLine2, moreInfoButton);
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.location_list').append(listResultsDiv);
     }
     $('.meerkat').addClass('hidden');
+}
+
+function displayTrailDescription(trail){
+    $('.descriptionTab').empty();
+    $('.trails_tab').removeClass('hidden');
+    $('.single_location_detail').removeClass('hidden');
+    $('.list_result').addClass('hidden');
+    let descriptionDiv = $('<div>').addClass('description');
+    let imageOfPlace = $('<img>').attr('src', trail.image);
+    let nameOfPlace = $('<h1>').addClass('trailName').text(trail.name);
+    let addressOfPlace = $('<p>').text(`Address: ${trail.location.display_address[0]} ${trail.location.display_address[1]}`);
+    let distance = $('<div>').text(`Distance: ${trail.distance}`)
+    let rating = $('<div>').text('Rating: ' + trail.rating)
+    let pointBCoordinates = trail.coordinates
+    descriptionDiv.append(nameOfPlace, imageOfPlace, addressOfPlace, distance, rating);
+    $('.descriptionTab').append(descriptionDiv);
+    displayDirectionLineOnMap(pointBCoordinates);
+    $("html, body").animate({
+        scrollTop: 0
+    }, "slow"); //scroll window to the top
 }
 
 function displayDirectionLineOnMap(pointBCoordinates) {
