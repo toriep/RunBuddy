@@ -73,8 +73,6 @@ function extractZipCode(response){
 
 //this function converts a given address, city, or zip code to lat and long
 function convertInputAddressToLatAndLongUsingGeoCoding(inputAddress){
-    console.log(inputAddress.split(" ").join("+"))
-
     const location = {
         url: `https://maps.googleapis.com/maps/api/geocode/json`,
         method: 'get',
@@ -84,13 +82,15 @@ function convertInputAddressToLatAndLongUsingGeoCoding(inputAddress){
             address: inputAddress.split(" ").join("+"),
         },
         success: geocodingResponse,
-        error: displayError ('GetDataFromGeoLoaction'),
+        error: displayError ('GetDataFromGeocoding'),
     }
     $.ajax(location);
 }
 
+//use the lat and long from this function to call trail API
 function geocodingResponse(response){
-    console.log(response)
+    const latLong = response.results[0].geometry.location;
+    return latLong;
 }
 
 function ajaxYelpCall(location) {
