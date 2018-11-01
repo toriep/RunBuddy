@@ -14,11 +14,9 @@ function addClickHandlersToElements() {
 
     //alert info with what to input in the field
     $('#search_input').focus(function () {
-        $('#info_msg').removeClass('hidden');
-    });
-    $('#search_input').focusout(function () {
-        $('#info_msg').addClass('hidden');
-    });
+        $('#info_msg').removeClass('hidden');});
+    $('#search_input').keypress(function () {
+        $('#info_msg').addClass('hidden');});
 
     eventListener.on("keyup", event => {
         if (event.keyCode === 13) { //if enter key is released
@@ -114,7 +112,7 @@ function ajaxYelpCall(location) {
     let userLocation = location;
 
     $('.landing_page').addClass('hidden');
-    $('.meerkat').removeClass('hidden');
+    $('.loadingImg').removeClass('hidden');
     const ajaxParameters = {
         dataType: 'JSON',
         url: "https://yelp.ongandy.com/businesses",
@@ -234,7 +232,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.location_list').append(listResultsDiv);
     }
-    $('.meerkat').addClass('hidden');
+    $('.loadingImg').addClass('hidden');
 }
 
 function displayTrailDescription(trail) {
