@@ -95,13 +95,6 @@ function responseFromTrailsList(response) {
     displayMapOnDom();
 }
 
-function activatePlacesSearch() {
-    let input = document.getElementById('search_input');
-    let input2 = document.getElementById('search_field');
-    let autocomplete = new google.maps.places.Autocomplete(input);
-    let autocomplete2 = new google.maps.places.Autocomplete(input2);
-}
-
 function displayError(sub) {
     // console.log(`${sub} AJAX call failed.`);
 }

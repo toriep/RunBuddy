@@ -26,6 +26,13 @@ function getLatLongFromGeocoding(inputAddress) {
     $.ajax(location);
 }
 
+function activatePlacesSearch() {
+    const input = document.getElementById('search_input');
+    const input2 = document.getElementById('search_field');
+    const autocomplete = new google.maps.places.Autocomplete(input);
+    const autocomplete2 = new google.maps.places.Autocomplete(input2);
+}
+
 function getresponseFromTrailsList(latitude, longitude) {
     $('.landing_page').addClass('hidden');
     $('.loadingImg').removeClass('hidden');
