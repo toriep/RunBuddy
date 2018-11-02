@@ -8,45 +8,58 @@ function initializeApp() {
 }
 
 function addClickHandlersToElements() {
-    $('#runButton').click(callGoogleAPI);
-    let eventListener = $("#search_input");
+    $('#runButton, .search_button').click(callGoogleAPI);
 
     //alert info with what to input in the field
     $('#search_input').focus(function () {
-        $('#info_msg').removeClass('hidden');});
-    $('#search_input').focusout(function () {
-        $('#info_msg').addClass('hidden');});
+        $('#info_msg').removeClass('hidden');
+    });
+    $('#search_input').keypress(function () {
+        $('#info_msg').addClass('hidden');
+    });
 
-    eventListener.on("keyup", event => {
+    $("#search_input, #search_field").on("keyup", event => {
         if (event.keyCode === 13) { //if enter key is released
-            $("#runButton").click(); //runs the function attaches to click event off add button
+            $("#runButton, .search_button").click(); //runs the function attaches to click event off add button
         }
     });
+    /** displaying tabs */
+    $('.trails_tab').click(displayResult);
+    $('.description_tab').click(displayDescription);
+    $('.direction_tab').click(displayDirection);
+    $('.weather_tab').click(displayWeather);
+    $('.meetup_tab').click(displayMeetUp);
+    // $('._tab').click(display);
 }
 
-function callGoogleAPI(){
-    let userLocation = $("#search_input").val();
-    if (userLocation.length===0) {//if the search bar is empty, get current location
+function callGoogleAPI() {
+    // debugger;
+
+    let userLocation = $("#search_input").val() || $("#search_field").val();
+    $("#search_input").val("");
+    $("#search_field").val("");
+    if (userLocation.length === 0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
     } else {//if user typed in a location, make a Geocoding AJAX call
+
         //remove this YELP call and replace it with geocoding
         getLatLongFromGeocoding(userLocation);
     }
 }
 
-function getDataFromGeolocation(){
+function getDataFromGeolocation() {
     const location = {
         url: `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw`,
         method: 'post',
         dataType: 'json',
         success: reverseGeolocation,
-        error: displayError ('GetDataFromGeoLoaction'),
+        error: displayError('GetDataFromGeoLoaction'),
     }
     $.ajax(location);
 }
 
 //this function converts lat and long to an address
-function reverseGeolocation(response){
+function reverseGeolocation(response) {
     let lat = response.location.lat;
     let lng = response.location.lng;
     const location = {
@@ -59,14 +72,14 @@ function reverseGeolocation(response){
     $.ajax(location);
 }
 
-function extractZipCode(response){
+function extractZipCode(response) {
     let currentAddress = response.results[0].formatted_address;
     console.log(currentAddress);
     let indexOfZipCode = currentAddress.lastIndexOf(',');
-    zipCode = currentAddress.slice(indexOfZipCode-5, indexOfZipCode);
+    zipCode = currentAddress.slice(indexOfZipCode - 5, indexOfZipCode);
 }
 
-function getCurrentLocation(response){
+function getCurrentLocation(response) {
     extractZipCode(response);
     ajaxYelpCall(zipCode);
 }
@@ -83,21 +96,23 @@ function getLatLongFromGeocoding(inputAddress) {
             address: formattedAddress
         },
         success: geocodingResponse,
-        error: displayError ('GetDataFromGeocoding'),
+        error: displayError('GetDataFromGeocoding'),
     }
     $.ajax(location);
 }
 
 //use the lat and long from this function to call trail API
-function geocodingResponse(response){
+function geocodingResponse(response) {
     const latLong = response.results[0].geometry.location;
     const lat = latLong.lat.toFixed(4);
     const lng = latLong.lng.toFixed(4);
+
 
     let center = new google.maps.LatLng(lat, lng);
     runningTrails.push(center);
     getRunningTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
+
 }
 
 function getRunningTrailsList(latitude, longitude) {
@@ -109,6 +124,7 @@ function getRunningTrailsList(latitude, longitude) {
     }
     $.ajax(runningTrails);
 }
+
 
 function runningTrailsList(response) {
     const { trails } = response;
@@ -132,6 +148,8 @@ function runningTrailsList(response) {
 }
 
 function getDataFromYelp(response) {
+    // debugger;
+    runningTrails = [];
     const businessesIndex = response.businesses;
     let { latitude, longitude } = response.region.center;
     let center = new google.maps.LatLng(latitude, longitude);
@@ -184,11 +202,16 @@ function displayMapOnDom() {
     const options = {
         zoom: 12,
         center: runningTrails[0],
+        // mapTypeControlOptions: {
+        //     mapTypeIds: ['Styled']
+        // },
+        // mapTypeId: 'Styled'
     }
     //New map
     let map = new google.maps.Map(document.getElementById("map_area"), options);
+    // const styledMapType = new google.maps.StyledMapType(styles, { name: 'Styled' })
+    // map.mapTypes.set('Styled', styledMapType);
     //Add marker
-
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
         let marker = new google.maps.Marker({
             position: runningTrails[trailIndex].coordinates,
@@ -203,41 +226,62 @@ function displayMapOnDom() {
 
         marker.addListener('click', function () {
             infoWindow.open(map, marker);
+            for (let i = 1; i < runningTrails.length; i++) {
+                if (runningTrails[i].coordinates.lat === marker.position.lat && runningTrails[i].coordinates.lng === marker.position.lng) {
+                    trailToReplaceAtIndexOne = runningTrails[i];
+                    runningTrails.splice(i, 1);
+                    runningTrails.splice(1, 0, trailToReplaceAtIndexOne);
+                    $(".list_result").remove();
+                    renderTrailInfoOnDom(true);
+                }
+            }
             if (marker.getAnimation() !== null) {
                 marker.setAnimation(null);
             } else {
                 marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function () { marker.setAnimation(null); }, 1000);
+                setTimeout(function () { infoWindow.close(); }, 1000);
             }
         });
     }
-    renderTrailInfoOnDom(runningTrails);
+    renderTrailInfoOnDom();
 }
 
-function renderTrailInfoOnDom(runningTrailsArray) {
-    for (let i = 1; i < runningTrailsArray.length; i++) {
+function renderTrailInfoOnDom(markerIsClicked = false) {
+    if ($('.list_result').length > 0) {
+        $(".list_result").remove();
+    }
+    for (let i = 1; i < runningTrails.length; i++) {
         let listResultsDiv = $('<div>').addClass('list_result');
+        if (markerIsClicked && i === 1) {
+            listResultsDiv.addClass('selected')
+        }
         let locationPictureDiv = $('<div>');
-        let imageOfPlace = $('<img>').attr('src', runningTrailsArray[i].image).addClass('locationPicture');
+        let imageOfPlace = $('<img>').attr('src', runningTrails[i].image).addClass('locationPicture');
         locationPictureDiv.append(imageOfPlace);
         let locationDescriptionDiv = $('<div>').addClass('locationDescription');
+
         let nameOfPlace = $('<p>').text(runningTrailsArray[i].name);
         // let addressOfPlace1 = `${runningTrails[i].location.display_address[0]}`;
+
         let brLine1 = $('<br>');
         let brLine2 = $('<br>');
         // let addressOfPlace2 = `${runningTrails[i].location.display_address[1]}`;
         let moreInfoButton = $('<button>').addClass('btn btn-success').text('More Info');
+
         // let addressOfPlace = $('<address>').append(addressOfPlace1, brLine1, addressOfPlace2);
 
         moreInfoButton.click(() => displayTrailDescription(runningTrailsArray[i]));
 
         locationDescriptionDiv.append(nameOfPlace, brLine2, moreInfoButton);
+
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.location_list').append(listResultsDiv);
     }
-    $('.meerkat').addClass('hidden');
+    $('.loadingImg').addClass('hidden');
 }
 
-function displayTrailDescription(trail){
+function displayTrailDescription(trail) {
     $('.descriptionTab').empty();
     $('.trails_tab').removeClass('hidden');
     $('.single_location_detail').removeClass('hidden');
@@ -290,16 +334,16 @@ function displayDirectionLineOnMap(pointBCoordinates) {
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
     directionsService.route({
-            origin: pointA,
-            destination: pointB,
-            //travelMode: google.maps.TravelMode.DRIVING
-            travelMode: 'DRIVING'
-        },
+        origin: pointA,
+        destination: pointB,
+        //travelMode: google.maps.TravelMode.DRIVING
+        travelMode: 'DRIVING'
+    },
         function (response, status) {
             // if (status == google.maps.DirectionsStatus.OK) {
             if (status == "OK") { //success function
                 directionsDisplay.setDirections(response);
-                
+
                 var result = document.getElementById('result');
                 result.innerHTML = "";
                 let newTr1 = document.createElement("tr");
@@ -316,15 +360,15 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                     //let td1 = document.createElement("td");
                     //td1.innerHTML = response.routes[0].legs[0].steps[i].maneuver;
                     let td2 = document.createElement("td");
-                    td2.innerHTML = `${i+1}. ${response.routes[0].legs[0].steps[i].instructions}`;
+                    td2.innerHTML = `${i + 1}. ${response.routes[0].legs[0].steps[i].instructions}`;
                     let td3 = document.createElement("td");
                     td3.innerHTML = `  ${response.routes[0].legs[0].steps[i].distance.text}`;
                     //newTr3.appendChild(td1);
                     newTr3.appendChild(td2);
                     newTr3.appendChild(td3);
                     result.appendChild(newTr3);
-                } 
-                
+                }
+
 
             } else { //error function
                 console.log('Directions request failed due to ' + status);
@@ -335,7 +379,9 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
 
 function activatePlacesSearch() {
     let input = document.getElementById('search_input');
+    let input2 = document.getElementById('search_field');
     let autocomplete = new google.maps.places.Autocomplete(input);
+    let autocomplete2 = new google.maps.places.Autocomplete(input2);
 }
 
 function getDataFromWeather(lat, lon) {
@@ -368,7 +414,10 @@ function displayWeatherSuccess(responseFromServer) {
 }
 
 function renderWeatherOnDom(weather) {
-    let imgSrc =   `http://openweathermap.org/img/w/${weather.iconId}.png`;
+    if ($('.weather_list').length > 0) {
+        $(".weather_list").remove();
+    }
+    let imgSrc = `http://openweathermap.org/img/w/${weather.iconId}.png`;
     let weatherImage = $('<img class="weather_icon">').attr({
         "src": imgSrc,
         "alt": weather.condition
@@ -384,7 +433,7 @@ function renderWeatherOnDom(weather) {
     let line4 = $('<li>').append(`Humidity: ${weather.humidity} %`);
     let line5 = $('<li>').append(`Wind: ${weather.wind} m/s`);
 
-    let weatherList =  $('<ul>').addClass('weather_list hidden');
+    let weatherList = $('<ul>').addClass('weather_list hidden');
     weatherList.append(headline, line0, line1, line2, line3, line4, line5);
     $('.location_list').append(weatherList);
 }
@@ -396,15 +445,18 @@ function getDataFromMeetUp(zipCode) {
         success: displayMeetUpSuccess,
         method: 'post',
         dataType: 'jsonp',
-        error: displayError ('getDataFromMeetUp'),
+        error: displayError('getDataFromMeetUp'),
     }
     $.ajax(meetup);
 }
 
 function displayMeetUpSuccess(response) {
-    if(response.meta.count===0){
-        let meetupDiv = $('<div>',{
-            class:`events hidden`,
+    if ($('.events').length > 0) {
+        $(".events").remove();
+    }
+    if (response.meta.count === 0) {
+        let meetupDiv = $('<div>', {
+            class: `events hidden`,
             html: '<h2>Currently, there are no upcoming meetups near your area.'
         });
         $('.location_list').append(meetupDiv);
@@ -434,7 +486,7 @@ function displayMeetUpSuccess(response) {
     renderMeetUpOnDom(filteredMeetUpResults)
 }
 
-function displayError( sub ) {
+function displayError(sub) {
     // console.log(`${sub} AJAX call failed.`);
 }
 
@@ -522,3 +574,4 @@ function displayDirection() {
     $('.trails_tab').removeClass('currentTab');
     $('.direction_tab').addClass('currentTab');
 }
+
