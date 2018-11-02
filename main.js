@@ -9,29 +9,38 @@ function initializeApp() {
 }
 
 function addClickHandlersToElements() {
-    $('#runButton').click(callGoogleAPI);
-    let eventListener = $("#search_input");
+    $('#runButton, .search_button').click(callGoogleAPI);
 
     //alert info with what to input in the field
     $('#search_input').focus(function () {
-        $('#info_msg').removeClass('hidden');});
+        $('#info_msg').removeClass('hidden');
+    });
     $('#search_input').keypress(function () {
-        $('#info_msg').addClass('hidden');});
+        $('#info_msg').addClass('hidden');
+    });
 
-    eventListener.on("keyup", event => {
+    $("#search_input, #search_field").on("keyup", event => {
         if (event.keyCode === 13) { //if enter key is released
-            $("#runButton").click(); //runs the function attaches to click event off add button
+            $("#runButton, .search_button").click(); //runs the function attaches to click event off add button
         }
     });
+
+
 }
 
 function callGoogleAPI() {
-    let userLocation = $("#search_input").val();
+    // debugger;
+
+    let userLocation = $("#search_input").val() || $("#search_field").val();
+    $("#search_input").val("");
+    $("#search_field").val("");
     if (userLocation.length === 0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
     } else {//if user typed in a location, make a Geocoding AJAX call
+        console.log("userLocation:", userLocation)
+        // debugger;
         ajaxYelpCall(userLocation);//remove this YELP call and replace it with geocoding
-        getLatLongFromGeocoding(userLocation);
+        // getLatLongFromGeocoding(userLocation);
     }
 }
 
@@ -110,7 +119,6 @@ function getRunningTrailsList(lat, long) {
 
 function ajaxYelpCall(location) {
     let userLocation = location;
-
     $('.landing_page').addClass('hidden');
     $('.loadingImg').removeClass('hidden');
     const ajaxParameters = {
@@ -129,6 +137,8 @@ function ajaxYelpCall(location) {
 }
 
 function getDataFromYelp(response) {
+    // debugger;
+    runningTrails = [];
     const businessesIndex = response.businesses;
     let {
         latitude,
@@ -170,11 +180,16 @@ function displayMapOnDom() {
     const options = {
         zoom: 12,
         center: runningTrails[0],
+        // mapTypeControlOptions: {
+        //     mapTypeIds: ['Styled']
+        // },
+        // mapTypeId: 'Styled'
     }
     //New map
     let map = new google.maps.Map(document.getElementById("map_area"), options);
+    // const styledMapType = new google.maps.StyledMapType(styles, { name: 'Styled' })
+    // map.mapTypes.set('Styled', styledMapType);
     //Add marker
-
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
         let marker = new google.maps.Marker({
             position: runningTrails[trailIndex].coordinates,
@@ -211,6 +226,9 @@ function displayMapOnDom() {
 }
 
 function renderTrailInfoOnDom(markerIsClicked = false) {
+    if ($('.list_result').length > 0) {
+        $(".list_result").remove();
+    }
     for (let i = 1; i < runningTrails.length; i++) {
         let listResultsDiv = $('<div>').addClass('list_result');
         if (markerIsClicked && i === 1) {
@@ -333,7 +351,9 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
 
 function activatePlacesSearch() {
     let input = document.getElementById('search_input');
+    let input2 = document.getElementById('search_field');
     let autocomplete = new google.maps.places.Autocomplete(input);
+    let autocomplete2 = new google.maps.places.Autocomplete(input2);
 }
 
 function getDataFromWeather(lat, lon) {
@@ -366,6 +386,9 @@ function displayWeatherSuccess(responseFromServer) {
 }
 
 function renderWeatherOnDom(weather) {
+    if ($('.weather_list').length > 0) {
+        $(".weather_list").remove();
+    }
     let imgSrc = `http://openweathermap.org/img/w/${weather.iconId}.png`;
     let weatherImage = $('<img class="weather_icon">').attr({
         "src": imgSrc,
@@ -400,6 +423,9 @@ function getDataFromMeetUp(zipCode) {
 }
 
 function displayMeetUpSuccess(response) {
+    if ($('.events').length > 0) {
+        $(".events").remove();
+    }
     if (response.meta.count === 0) {
         let meetupDiv = $('<div>', {
             class: `events hidden`,
@@ -520,3 +546,4 @@ function displayDirection() {
     $('.trails_tab').removeClass('currentTab');
     $('.direction_tab').addClass('currentTab');
 }
+
