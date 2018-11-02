@@ -87,7 +87,7 @@ body {
     justify-content: space-around;
 }
 
-.search_field{
+#search_field{
     width: 70vw;
     height: 70%;
     font-family: 'Poppins', sans-serif;

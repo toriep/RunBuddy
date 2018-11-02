@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="description" content="c718 hackathon 2, team 1">
     <meta name="author" content="Esther, Perry, Sarah, Torie, Mia">
-    <title>7.18 Hackathon 2 (Team 1)</title>
+    <title>Run Buddy</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:800i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto:300" rel="stylesheet">
@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw&libraries=places&callback=activatePlacesSearch"
         async defer></script>
+    <script type="text/javascript" src="styled_map_type.js"></script>
     <script type="text/javascript" src="main.js"></script>
 </head>
 
@@ -23,32 +24,32 @@
     </div>
     <div class="container-fluid">
         <div class="landing_page">
-                <div class="logo">
-                    <img class="responsive" src="./images/RunBuddyLogo.png">
-                </div>
-                <div class="form-inline">
-                    <input type="text" class="form-control" id="search_input" placeholder="Enter ZIP Code or City">
-                    <div class="input-group-btn form-group">
-                        <button class="btn btn-default" id="runButton">
-                            LET'S RUN
-                        </button>
+            <div class="logo">
+                <img class="responsive" src="./images/RunBuddyLogo.png">
+            </div>
+            <div class="form-inline">
+                <input type="text" class="form-control" id="search_input" placeholder="Enter ZIP Code or City">
+                <div class="input-group-btn form-group">
+                    <button class="btn btn-default" id="runButton">
+                        LET'S RUN
+                    </button>
 
-                    </div>
-                    <div class="alert information hidden" id="info_msg">
-                        <span class="glyphicon glyphicon-info-sign"></span>
-                        Enter a location to look for a place to run<br>OR
-                        <br>Just click the button to look in the current location 
-                    </div>
+                </div>
+                <div class="alert information hidden" id="info_msg">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                    Enter a location to look for a place to run<br>OR
+                    <br>Just click the button to look in the current location
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="map_page hidden">
         <div class="search_and_logo">
             <img class="map_page_logo" src="./images/RunBuddyLogo.png">
             <div class="search_bar">
-                <input type="text" class="search_field" placeholder="Enter ZIP Code or City">
+                <input type="text" id="search_field" placeholder="Enter ZIP Code or City">
                 <div class="input-group-btn form-group">
                     <button class="search_button">
                         LET'S RUN
@@ -69,7 +70,7 @@
                             <div class="meetup_tab tabLinks" >Events</div>
                         </div>
                         <div class="descriptionTab"></div>
-                        <!-- <div id="result" class="direction hidden" onclick="displayDirection()"></div> -->
+                        <div id="result" class="direction hidden" onclick="displayDirection()"></div>
                     </div>
                 </div>
             </div>
