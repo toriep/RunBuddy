@@ -1,6 +1,5 @@
 $(document).ready(initializeApp);
 
-const runningTrailsURL = 'https://www.trailrunproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200354719-4f64b16db640b15c131f04f75804eacd'
 let runningTrails = [];
 let zipCode = null;
 
@@ -9,28 +8,41 @@ function initializeApp() {
 }
 
 function addClickHandlersToElements() {
-    $('#runButton').click(callGoogleAPI);
-    let eventListener = $("#search_input");
-    
-    //display how/what to do on the loading page
-    $('#search_input').focus(function () {
-        $('#info_msg').removeClass('hidden');});
-    $('#search_input').keypress(function () {
-        $('#info_msg').addClass('hidden');});
+    $('#runButton, .search_button').click(callGoogleAPI);
 
-    eventListener.on("keyup", event => {
+    //alert info with what to input in the field
+    $('#search_input').focus(function () {
+        $('#info_msg').removeClass('hidden');
+    });
+    $('#search_input').keypress(function () {
+        $('#info_msg').addClass('hidden');
+    });
+
+    $("#search_input, #search_field").on("keyup", event => {
         if (event.keyCode === 13) { //if enter key is released
-            $("#runButton").click(); //runs the function attaches to click event off add button
+            $("#runButton, .search_button").click(); //runs the function attaches to click event off add button
         }
     });
+    /** displaying tabs */
+    $('.trails_tab').click(displayResult);
+    $('.description_tab').click(displayDescription);
+    $('.direction_tab').click(displayDirection);
+    $('.weather_tab').click(displayWeather);
+    $('.meetup_tab').click(displayMeetUp);
+    // $('._tab').click(display);
 }
 
 function callGoogleAPI() {
-    let userLocation = $("#search_input").val();
+    // debugger;
+
+    let userLocation = $("#search_input").val() || $("#search_field").val();
+    $("#search_input").val("");
+    $("#search_field").val("");
     if (userLocation.length === 0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
     } else {//if user typed in a location, make a Geocoding AJAX call
-        ajaxYelpCall(userLocation);//remove this YELP call and replace it with geocoding
+
+        //remove this YELP call and replace it with geocoding
         getLatLongFromGeocoding(userLocation);
     }
 }
@@ -48,8 +60,12 @@ function getDataFromGeolocation() {
 
 //this function converts lat and long to an address
 function reverseGeolocation(response) {
+    runningTrails = [];
     let lat = response.location.lat;
     let lng = response.location.lng;
+    let center = new google.maps.LatLng(lat, lng);
+    runningTrails.push(center);
+    getRunningTrailsList(lat, lng);
     const location = {
         url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw`,
         method: 'post',
@@ -62,13 +78,14 @@ function reverseGeolocation(response) {
 
 function extractZipCode(response) {
     let currentAddress = response.results[0].formatted_address;
+    console.log(currentAddress);
     let indexOfZipCode = currentAddress.lastIndexOf(',');
     zipCode = currentAddress.slice(indexOfZipCode - 5, indexOfZipCode);
 }
 
 function getCurrentLocation(response) {
     extractZipCode(response);
-    ajaxYelpCall(zipCode);
+    // ajaxYelpCall(zipCode);
 }
 
 //this function converts a given address, city, or zip code to lat and long
@@ -101,64 +118,62 @@ function geocodingResponse(response) {
     if(response.status === "ZERO_RESULTS") {
         alertMsgAndRefresh();
     }
+  
+    runningTrails = [];
 
     const latLong = response.results[0].geometry.location;
     const lat = latLong.lat.toFixed(4);
     const lng = latLong.lng.toFixed(4);
-    // console.log(latLong);
-    //call Trail API AJAX here with lat and lng as parameters
+    let center = new google.maps.LatLng(lat, lng);
+    runningTrails.push(center);
+    getRunningTrailsList(lat, lng);
+    getDataFromWeather(lat, lng);
+
 }
 
-function getRunningTrailsList(lat, long) {
+function getRunningTrailsList(latitude, longitude) {
     const runningTrails = {
         dataType: 'JSON',
-        url: runningTrailsURL,
-        success: response => {
-            // console.log("Success:", response);
-        }
+        method: 'GET',
+        url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=10&key=200354719-4f64b16db640b15c131f04f75804eacd`,
+        success: runningTrailsList,
     }
     $.ajax(runningTrails);
 }
 
-function ajaxYelpCall(location) {
-    let userLocation = location;
 
-    $('.landing_page').addClass('hidden');
-    $('.loadingImg').removeClass('hidden');
-    const ajaxParameters = {
-        dataType: 'JSON',
-        url: "https://yelp.ongandy.com/businesses",
-        method: 'POST',
-        data: {
-            api_key: 'u7VrqD4pyVGW_uBAod5CCKlJiM4pTyFGYzKyYWXV8YHidu5BsdPN20PhYEJflT-vOhZ7mFXHpHCIeyKTA-0xZ9LJcCg_jDK-B3WvRCmYvU1DdCXioFo8mTSIhRmPW3Yx',
-            term: 'running trail park',
-            location: userLocation,
-        },
-        success: getDataFromYelp,
-        error: displayError('ajaxYelpCall')
-    }
-    $.ajax(ajaxParameters);
+function runningTrailsList(response) {
+    const { trails } = response;
+    console.log("===TRAILS===:", trails);
+    trails.map((trail) => {
+        const { latitude, longitude } = trail;
+        let coordinates = new google.maps.LatLng(latitude, longitude);
+        runningTrails.push({
+            // name: trail.name,
+            // location: trail.location,
+            // coordinates: coordinates,
+            image: trail.imgMedium,
+            // summary: trail.summary,
+            distance: `${trail.length} miles`,
+            // rating: trail.stars,
+            // url: trail.url,
+            ...trail,
+            coordinates: coordinates
+        });
+    });
+    displayMapOnDom();
 }
 
 function getDataFromYelp(response) {
+    // debugger;
+    runningTrails = [];
     const businessesIndex = response.businesses;
-    let {
-        latitude,
-        longitude
-    } = response.region.center;
+    let { latitude, longitude } = response.region.center;
     let center = new google.maps.LatLng(latitude, longitude);
     runningTrails.push(center);
-    for (let i = 1; i < businessesIndex.length; i++) {
-        let yelpObject = {};
-        let {
-            latitude,
-            longitude
-        } = businessesIndex[i].coordinates;
+    for (let i = 0; i < businessesIndex.length; i++) {
+        let { latitude, longitude } = businessesIndex[i].coordinates;
         let coordinates = new google.maps.LatLng(latitude, longitude);
-        let {
-            rating,
-            distance
-        } = businessesIndex[i];
         runningTrails.push({
             name: businessesIndex[i].name,
             location: businessesIndex[i].location,
@@ -166,13 +181,35 @@ function getDataFromYelp(response) {
             image: businessesIndex[i].image_url,
             rating: businessesIndex[i].rating,
             distance: (businessesIndex[i].distance / 1000).toFixed(1) + " miles"
-        })
+        });
     }
     displayMapOnDom();
     getDataFromWeather(latitude, longitude);
     getDataFromMeetUp(runningTrails[1].location.zip_code);
     $(".weather_list").addClass("hidden");
 }
+
+// function ajaxYelpCall(location) {
+//     let userLocation = location;
+
+//     $('.landing_page').addClass('hidden');
+//     $('.meerkat').removeClass('hidden');
+//     const ajaxParameters = {
+//         dataType: 'JSON',
+//         url: "https://yelp.ongandy.com/businesses",
+//         method: 'POST',
+//         data: {
+//             api_key: 'u7VrqD4pyVGW_uBAod5CCKlJiM4pTyFGYzKyYWXV8YHidu5BsdPN20PhYEJflT-vOhZ7mFXHpHCIeyKTA-0xZ9LJcCg_jDK-B3WvRCmYvU1DdCXioFo8mTSIhRmPW3Yx',
+//             term: 'running trail park',
+//             location: userLocation,
+//         },
+//         success: getDataFromYelp,
+//         error: displayError('ajaxYelpCall')
+//     }
+//     $.ajax(ajaxParameters);
+// }
+
+
 
 
 function displayMapOnDom() {
@@ -182,11 +219,16 @@ function displayMapOnDom() {
     const options = {
         zoom: 12,
         center: runningTrails[0],
+        // mapTypeControlOptions: {
+        //     mapTypeIds: ['Styled']
+        // },
+        // mapTypeId: 'Styled'
     }
     //New map
     let map = new google.maps.Map(document.getElementById("map_area"), options);
+    // const styledMapType = new google.maps.StyledMapType(styles, { name: 'Styled' })
+    // map.mapTypes.set('Styled', styledMapType);
     //Add marker
-
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
         let marker = new google.maps.Marker({
             position: runningTrails[trailIndex].coordinates,
@@ -223,6 +265,9 @@ function displayMapOnDom() {
 }
 
 function renderTrailInfoOnDom(markerIsClicked = false) {
+    if ($('.list_result').length > 0) {
+        $(".list_result").remove();
+    }
     for (let i = 1; i < runningTrails.length; i++) {
         let listResultsDiv = $('<div>').addClass('list_result');
         if (markerIsClicked && i === 1) {
@@ -232,15 +277,21 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         let imageOfPlace = $('<img>').attr('src', runningTrails[i].image).addClass('locationPicture');
         locationPictureDiv.append(imageOfPlace);
         let locationDescriptionDiv = $('<div>').addClass('locationDescription');
+
         let nameOfPlace = $('<p>').text(runningTrails[i].name);
-        let addressOfPlace1 = `${runningTrails[i].location.display_address[0]}`;
+        // let addressOfPlace1 = `${runningTrails[i].location.display_address[0]}`;
+
         let brLine1 = $('<br>');
         let brLine2 = $('<br>');
-        let addressOfPlace2 = `${runningTrails[i].location.display_address[1]}`;
+        // let addressOfPlace2 = `${runningTrails[i].location.display_address[1]}`;
         let moreInfoButton = $('<button>').addClass('btn btn-success').text('More Info');
-        let addressOfPlace = $('<address>').append(addressOfPlace1, brLine1, addressOfPlace2);
+
+        // let addressOfPlace = $('<address>').append(addressOfPlace1, brLine1, addressOfPlace2);
+
         moreInfoButton.click(() => displayTrailDescription(runningTrails[i]));
-        locationDescriptionDiv.append(nameOfPlace, addressOfPlace, brLine2, moreInfoButton);
+
+        locationDescriptionDiv.append(nameOfPlace, brLine2, moreInfoButton);
+
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.location_list').append(listResultsDiv);
     }
@@ -345,7 +396,9 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
 
 function activatePlacesSearch() {
     let input = document.getElementById('search_input');
+    let input2 = document.getElementById('search_field');
     let autocomplete = new google.maps.places.Autocomplete(input);
+    let autocomplete2 = new google.maps.places.Autocomplete(input2);
 }
 
 function getDataFromWeather(lat, lon) {
@@ -378,6 +431,9 @@ function displayWeatherSuccess(responseFromServer) {
 }
 
 function renderWeatherOnDom(weather) {
+    if ($('.weather_list').length > 0) {
+        $(".weather_list").remove();
+    }
     let imgSrc = `http://openweathermap.org/img/w/${weather.iconId}.png`;
     let weatherImage = $('<img class="weather_icon">').attr({
         "src": imgSrc,
@@ -412,6 +468,9 @@ function getDataFromMeetUp(zipCode) {
 }
 
 function displayMeetUpSuccess(response) {
+    if ($('.events').length > 0) {
+        $(".events").remove();
+    }
     if (response.meta.count === 0) {
         let meetupDiv = $('<div>', {
             class: `events hidden`,
@@ -532,3 +591,4 @@ function displayDirection() {
     $('.trails_tab').removeClass('currentTab');
     $('.direction_tab').addClass('currentTab');
 }
+
