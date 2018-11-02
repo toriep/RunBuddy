@@ -28,7 +28,6 @@ function addClickHandlersToElements() {
     $('.direction_tab').click(displayDirection);
     $('.weather_tab').click(displayWeather);
     $('.meetup_tab').click(displayMeetUp);
-    // $('._tab').click(display);
 }
 
 function callGoogleAPI() {
@@ -38,8 +37,6 @@ function callGoogleAPI() {
     if (userLocation.length === 0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
     } else {//if user typed in a location, make a Geocoding AJAX call
-
-        //remove this YELP call and replace it with geocoding
         getLatLongFromGeocoding(userLocation);
     }
 }
@@ -76,13 +73,12 @@ function reverseGeolocation(response) {
     getDataFromMeetUp(lat,lng);
 }
 
-function returnCurrentAddressFromGeolocation(response) {
-    console.log(response);
-}
+// function returnCurrentAddressFromGeolocation(response) {
+//     console.log(response);
+// }
 
 //this function converts a given address, city, or zip code to lat and long
 function getLatLongFromGeocoding(inputAddress) {
-
     const formattedAddress = inputAddress.split(" ").join("+");
     const location = {
         url: `https://maps.googleapis.com/maps/api/geocode/json`,
@@ -136,7 +132,7 @@ function getRunningTrailsList(latitude, longitude) {
     const runningTrails = {
         dataType: 'JSON',
         method: 'GET',
-        url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxResults=50&key=200354719-4f64b16db640b15c131f04f75804eacd`,
+        url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxResults=30&key=200354719-4f64b16db640b15c131f04f75804eacd`,
         success: runningTrailsList,
     }
     $.ajax(runningTrails);
@@ -150,7 +146,7 @@ function runningTrailsList(response) {
     trails.map((trail) => {
         const { latitude, longitude } = trail;
         let coordinates = new google.maps.LatLng(latitude, longitude);
-        if(trail.imgSmall){//only include results with an image since not all results have one
+        if(trail.imgSqSmall){//only include results with an image since not all results have one
             runningTrails.push({
                 image: trail.imgMedium,
                 distance: `${trail.length} miles`,
@@ -214,7 +210,7 @@ function displayMapOnDom() {
 
     //Map options
     const options = {
-        zoom: 12,
+        zoom: 11,
         center: runningTrails[0],
         // mapTypeControlOptions: {
         //     mapTypeIds: ['Styled']
@@ -313,7 +309,7 @@ function displayTrailDescription(trail) {
     const descent = $('<div>').addClass('descent').html(`<b>Descent:</b> ${trail.descent} inches`);
     const pointBCoordinates = trail.coordinates
     const descriptionDiv = $('<div>').addClass('description');
-    const moreInfo = $('<div>').html(`<a href="${trail.url}">More info on this trails</a>`);
+    const moreInfo = $('<div>').html(`<a href="${trail.url}">More info on ${trail.name}</a>`);
     descriptionDiv.append(nameOfPlace, imageOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary, moreInfo);
     $('.descriptionTab').append(descriptionDiv);
     displayDirectionLineOnMap(pointBCoordinates);
