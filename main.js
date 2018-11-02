@@ -159,7 +159,7 @@ function runningTrailsList(response) {
     trails.map((trail) => {
         const { latitude, longitude } = trail;
         let coordinates = new google.maps.LatLng(latitude, longitude);
-        if(trail.imgMedium){//only include results with an image since not all results have one
+        if(trail.imgSmall){//only include results with an image since not all results have one
             runningTrails.push({
                 // name: trail.name,
                 // location: trail.location,
@@ -297,7 +297,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         let brLine1 = $('<br>');
         let brLine2 = $('<br>');
         // let addressOfPlace2 = `${runningTrails[i].location.display_address[1]}`;
-        let moreInfoButton = $('<button>').addClass('btn btn-success').text('More Info');
+        let moreInfoButton = $('<button>').addClass('btn btn-green').text('Trail Info');
 
         // let addressOfPlace = $('<address>').append(addressOfPlace1, brLine1, addressOfPlace2);
 
@@ -312,20 +312,27 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
 }
 
 function displayTrailDescription(trail) {
+    debugger;
     $('.descriptionTab').empty();
     $('.trails_tab').removeClass('hidden');
     $('.single_location_detail').removeClass('hidden');
     $('.list_result').addClass('hidden');
-    let descriptionDiv = $('<div>').addClass('description');
-    let imageOfPlace = $('<img>').attr('src', trail.image);
-    let nameOfPlace = $('<h1>').addClass('trailName').text(trail.name);
-    let addressOfPlace = $('<p>').text(`Address: ${trail.location.display_address[0]} ${trail.location.display_address[1]}`);
-    let distance = $('<div>').text(`Distance: ${trail.distance}`)
-    let rating = $('<div>').text('Rating: ' + trail.rating)
-    let pointBCoordinates = trail.coordinates
-    descriptionDiv.append(nameOfPlace, imageOfPlace, addressOfPlace, distance, rating);
+    const imageOfPlace = $('<img>').attr('src', trail.imgMedium);
+    const nameOfPlace = $('<h1>').addClass('trailName').text(trail.name);
+    const location = $('<p>').text(`Location: ${trail.location}`);
+    const distance = $('<div>').text(`Length: ${trail.distance}`);
+    const rating = $('<div>').text('Rating: ' + trail.stars + " out of 5 stars");
+    const summary = $('<div>').addClass('trail_summary').text('Overview: ' + trail.summary);
+    const conditionStatus = $('<div>').addClass('condition_status').text('Status: ' + trail.conditionStatus);
+    const conditionDetails = $('<div>').addClass('condition_details').text(`Condition: ${trail.conditionDetails || 'Currently, there is no condtition information for this trail.'}`);
+    const ascent = $('<div>').addClass('ascent').text(`Ascent: ${trail.ascent} inches`);
+    const descent = $('<div>').addClass('descent').text(`Descent: ${trail.descent} inches`);
+    const pointBCoordinates = trail.coordinates
+    const descriptionDiv = $('<div>').addClass('description');
+    descriptionDiv.append(nameOfPlace, imageOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary);
     $('.descriptionTab').append(descriptionDiv);
     displayDirectionLineOnMap(pointBCoordinates);
+    debugger;
     $("html, body").animate({
         scrollTop: 0
     }, "slow"); //scroll window to the top
@@ -374,7 +381,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
             if (status == "OK") { //success function
                 directionsDisplay.setDirections(response);
 
-                var result = document.getElementById('result');
+                var result = document.getElementById('direction_tab');
+                debugger;
                 result.innerHTML = "";
                 let newTr1 = document.createElement("tr");
                 newTr1.innerHTML = `<b>Start location:</b> ${response.routes[0].legs[0].start_address}<br>`;
@@ -543,7 +551,7 @@ function renderMeetUpOnDom(meetup) {
 }
 
 function displayWeather() {
-    $('#result').addClass('hidden');
+    $('#direction_tab').addClass('hidden');
     $('.list_result').addClass('hidden');
     $('.events').addClass('hidden');
     $('.description').addClass('hidden');
@@ -556,7 +564,7 @@ function displayWeather() {
 }
 
 function displayDescription() {
-    $('#result').addClass('hidden');
+    $('#direction_tab').addClass('hidden');
     $('.list_result').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
@@ -569,7 +577,7 @@ function displayDescription() {
 }
 
 function displayResult() {
-    $('#result').addClass('hidden');
+    $('#direction_tab').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.description').addClass('hidden');
@@ -584,7 +592,7 @@ function displayMeetUp() {
     $('.list_result').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').removeClass('hidden');
-    $('#result').addClass('hidden');
+    $('#direction_tab').addClass('hidden');
     $('.description_tab').removeClass('currentTab');
     $('.weather_tab').removeClass('currentTab');
     $('.direction_tab').removeClass('currentTab');
@@ -593,11 +601,12 @@ function displayMeetUp() {
 }
 
 function displayDirection() {
+    debugger;
     $('.description').addClass('hidden');
     $('.list_result').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').addClass('hidden');
-    $('#result').removeClass('hidden');
+    $('#direction_tab').removeClass('hidden');
     $('.description_tab').removeClass('currentTab');
     $('.meetup_tab').removeClass('currentTab');
     $('.weather_tab').removeClass('currentTab');

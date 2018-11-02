@@ -70,7 +70,6 @@ body {
     text-shadow: 2px 2px rgb(87, 100, 104);
 }
 
-
 .search_and_logo{
     display: flex;
     justify-content: space-around;
@@ -204,7 +203,7 @@ body {
 }
 
 a{
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 .weather_list {
@@ -225,17 +224,17 @@ a{
 .events{
     background-color: whitesmoke;
     border-radius: 10px;
-    border: 5px dashed lightgray;
-    width: 90vw;
+    /* border: 5px dashed lightgray; */
+    width: 100%;
     padding: 2%;
-    margin: auto;
-    font-size: 2.4rem;
+    margin-bottom: 4%;
+    font-size: 1rem;
     opacity: 0.95;
-    box-shadow: 5px 10px 18px black;
+    box-shadow: 5px 5px 9px black;
 }
 
 .events>p {
-    font-size: 3.5rem;
+    font-size: 1.5rem;
 }
 
 /* Search List Result Box */
@@ -253,15 +252,14 @@ a{
 .description {
     background-color: whitesmoke;
     border-radius: 10px;
-    /* width: 90vw; */
     padding: 2%;
     margin: auto;
-    font-size: 2.4rem;
+    font-size: 1.4rem;
     box-shadow: 5px 10px 18px black;
 }
 
 .description img{
-    width: 50%;
+    width: 100%;
 }
 
 /* Nav Bar */
@@ -308,7 +306,7 @@ a{
 }
 
 .locationDescription p {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     white-space: nowrap;
 }
 
@@ -335,22 +333,70 @@ a{
     width: 40%;
 }
 
-#result,.weather_list{
+.weather_list{
     background-color: whitesmoke;
     border-radius: 10px;
-    width: 90vw;
+    width: 100%;
+    height: 75vh;
     padding: 2%;
     margin: auto;
     position: relative;
-    font-size: 2.4rem;
+    font-size: 2rem;
     box-shadow: 5px 10px 18px black;
     opacity: 0.95;
 }
+
+#direction_tab{
+    background-color: whitesmoke;
+    border-radius: 10px;
+    width: 100%;
+    height: 75vh;
+    padding: 2%;
+    margin: auto;
+    position: relative;
+    font-size: 1rem;
+    box-shadow: 5px 10px 18px black;
+    opacity: 0.95;
+}
+
 
 .list_result:hover {
     display: -webkit-box;
     opacity: 1;
     box-shadow: 7px 12px 20px black;
+}
+
+.btn {
+    text-decoration: none;
+    color: #F2F2F2;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: none;
+    border-radius: 2px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-blue {
+    background-color: #1976d2;
+    color: #F2F2F2;
+}
+
+.btn-blue:hover {
+    background-color: #13599e;
+}
+
+.btn-green {
+    background-color: #26a69a;
+    color: #F2F2F2;
+}
+
+.btn-green:hover {
+    background-color: #1c776e;
 }
 
 
