@@ -60,8 +60,12 @@ function getDataFromGeolocation() {
 
 //this function converts lat and long to an address
 function reverseGeolocation(response) {
+    runningTrails = [];
     let lat = response.location.lat;
     let lng = response.location.lng;
+    let center = new google.maps.LatLng(lat, lng);
+    runningTrails.push(center);
+    getRunningTrailsList(lat, lng);
     const location = {
         url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw`,
         method: 'post',
@@ -81,7 +85,7 @@ function extractZipCode(response) {
 
 function getCurrentLocation(response) {
     extractZipCode(response);
-    ajaxYelpCall(zipCode);
+    // ajaxYelpCall(zipCode);
 }
 
 //this function converts a given address, city, or zip code to lat and long
@@ -103,11 +107,10 @@ function getLatLongFromGeocoding(inputAddress) {
 
 //use the lat and long from this function to call trail API
 function geocodingResponse(response) {
+    runningTrails = [];
     const latLong = response.results[0].geometry.location;
     const lat = latLong.lat.toFixed(4);
     const lng = latLong.lng.toFixed(4);
-
-
     let center = new google.maps.LatLng(lat, lng);
     runningTrails.push(center);
     getRunningTrailsList(lat, lng);
@@ -128,20 +131,21 @@ function getRunningTrailsList(latitude, longitude) {
 
 function runningTrailsList(response) {
     const { trails } = response;
-    console.log("TRAILS:", trails);
-    
-    trails.map ( (trail) => {
+    console.log("===TRAILS===:", trails);
+    trails.map((trail) => {
         const { latitude, longitude } = trail;
         let coordinates = new google.maps.LatLng(latitude, longitude);
         runningTrails.push({
-            name: trail.name,
-            location: trail.location,
-            coordinates : coordinates,
+            // name: trail.name,
+            // location: trail.location,
+            // coordinates: coordinates,
             image: trail.imgMedium,
-            summary: trail.summary,
+            // summary: trail.summary,
             distance: `${trail.length} miles`,
-            rating: trail.stars,
-            url: trail.url,
+            // rating: trail.stars,
+            // url: trail.url,
+            ...trail,
+            coordinates: coordinates
         });
     });
     displayMapOnDom();
@@ -261,7 +265,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         locationPictureDiv.append(imageOfPlace);
         let locationDescriptionDiv = $('<div>').addClass('locationDescription');
 
-        let nameOfPlace = $('<p>').text(runningTrailsArray[i].name);
+        let nameOfPlace = $('<p>').text(runningTrails[i].name);
         // let addressOfPlace1 = `${runningTrails[i].location.display_address[0]}`;
 
         let brLine1 = $('<br>');
@@ -271,7 +275,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
 
         // let addressOfPlace = $('<address>').append(addressOfPlace1, brLine1, addressOfPlace2);
 
-        moreInfoButton.click(() => displayTrailDescription(runningTrailsArray[i]));
+        moreInfoButton.click(() => displayTrailDescription(runningTrails[i]));
 
         locationDescriptionDiv.append(nameOfPlace, brLine2, moreInfoButton);
 
