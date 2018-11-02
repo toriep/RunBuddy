@@ -287,7 +287,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         let brLine1 = $('<br>');
         let brLine2 = $('<br>');
         // let addressOfPlace2 = `${runningTrails[i].location.display_address[1]}`;
-        let moreInfoButton = $('<button>').addClass('btn btn-green').text('Trail Info');
+        let moreInfoButton = $('<button>').addClass('btn btn-blue').text('Trail Info');
 
         // let addressOfPlace = $('<address>').append(addressOfPlace1, brLine1, addressOfPlace2);
 
