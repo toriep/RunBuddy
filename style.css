@@ -48,7 +48,7 @@ body {
     border: 0;
     color: black;
     background-color: rgba(255, 255, 255, 0.7);
-    box-shadow: inset 1px 2px 2px 1px rgb(90, 89, 89);
+    box-shadow: inset 1px 1px 10px rgb(90, 89, 89);
     outline: none;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -59,15 +59,15 @@ body {
     outline: none;
     border: 1px solid #1dc9a4;
     background-image: linear-gradient(to right,rgb(160, 221, 90), #09b5db);
-    box-shadow: 0 5px 2px #30A3C5;
+    box-shadow: 0 3px 2px #30A3C5;
     color: white;
     font-size: 1.7rem;
     height: 100%;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
     vertical-align: top;
     display: inline-block;
-    text-shadow: 2px 3px rgb(87, 100, 104);
+    text-shadow: 2px 2px rgb(87, 100, 104);
 }
 
 
