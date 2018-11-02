@@ -306,6 +306,7 @@ function displayTrailDescription(trail) {
     $('.trails_tab').removeClass('hidden');
     $('.single_location_detail').removeClass('hidden');
     $('.list_result').addClass('hidden');
+    displayDescription();
     const imageOfPlace = $('<img>').attr('src', trail.imgMedium);
     const nameOfPlace = $('<h1>').addClass('trailName').text(trail.name);
     const location = $('<div>').html(`<b>Location:</b>   ${trail.location}`);

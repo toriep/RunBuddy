@@ -42,6 +42,7 @@ body {
 }
 
 #search_input {
+    width: 80vw;
     display: inline-block;
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -118,7 +119,7 @@ body {
 }
 
 ::placeholder { 
-    color: black; /* Firefox */
+    color: gray; /* Firefox */
     opacity: 1;
 }
 
