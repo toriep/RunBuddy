@@ -44,11 +44,8 @@ body {
 #search_input {
     display: inline-block;
     font-family: 'Poppins', sans-serif;
-    width: 40%;
-    height: 115%;
     text-align: center;
     border: 0;
-    font-size: 2.0rem;
     color: black;
     background-color: rgba(255, 255, 255, 0.7);
     box-shadow: inset 1px 2px 2px 1px rgb(90, 89, 89);
@@ -144,18 +141,19 @@ body {
 }
 
 #info_msg {
-    font-size: 0.7em;
+    font-size: 0.5em;
     font-weight: bold;
     font-style: italic;
     color: #404040;
     text-align: center;
+    width: 60%;
+    position: relative;
+    left: -21%;
 }
 
 .information {
     margin-top: 1%;
     padding: 1%;
-    width: 50%;
-    height: 12rem;
     background-color: white;
     opacity: 0.7;
     align-content: center;
@@ -410,7 +408,6 @@ Media Query
     #search_input {
         height: 80%;
         font-size: 1.3rem;
-        width: 27%;
     }
 
     #runButton {

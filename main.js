@@ -105,9 +105,22 @@ function getLatLongFromGeocoding(inputAddress) {
     $.ajax(location);
 }
 
+function alertMsgAndRefresh() {
+    alert('Location Invalid. Please try again.');
+    setTimeout(() => {
+        window.history.back();
+        location.reload(); 
+    }, 300);
+}
+
 //use the lat and long from this function to call trail API
 function geocodingResponse(response) {
+    if(response.status === "ZERO_RESULTS") {
+        alertMsgAndRefresh();
+    }
+  
     runningTrails = [];
+
     const latLong = response.results[0].geometry.location;
     const lat = latLong.lat.toFixed(4);
     const lng = latLong.lng.toFixed(4);
