@@ -1,7 +1,6 @@
 $(document).ready(initializeApp);
 
 let runningTrails = [];
-let zipCode = null;
 
 function initializeApp() {
     addClickHandlersToElements();
@@ -29,20 +28,15 @@ function addClickHandlersToElements() {
     $('.direction_tab').click(displayDirection);
     $('.weather_tab').click(displayWeather);
     $('.meetup_tab').click(displayMeetUp);
-    // $('._tab').click(display);
 }
 
 function callGoogleAPI() {
-    // debugger;
-
     let userLocation = $("#search_input").val() || $("#search_field").val();
     $("#search_input").val("");
-    $("#search_field").val("");
+    // $("#search_field").val("");
     if (userLocation.length === 0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
     } else {//if user typed in a location, make a Geocoding AJAX call
-
-        //remove this YELP call and replace it with geocoding
         getLatLongFromGeocoding(userLocation);
     }
 }
@@ -59,6 +53,7 @@ function getDataFromGeolocation() {
 }
 
 //this function converts lat and long to an address
+//UPDATE: there might be no need for geolocation now that all the API calls utilize lat and long
 function reverseGeolocation(response) {
     runningTrails = [];
     let lat = response.location.lat;
@@ -66,31 +61,24 @@ function reverseGeolocation(response) {
     let center = new google.maps.LatLng(lat, lng);
     runningTrails.push(center);
     getRunningTrailsList(lat, lng);
-    const location = {
-        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw`,
-        method: 'post',
-        dataType: 'json',
-        success: getCurrentLocation,
-        error: displayError('reverseGeolocation'),
-    }
-    $.ajax(location);
+    // const location = {
+    //     url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw`,
+    //     method: 'post',
+    //     dataType: 'json',
+    //     success: getCurrentLocation,
+    //     error: displayError('reverseGeolocation'),
+    // }
+    // $.ajax(location);
+    getDataFromWeather(lat,lng);
+    getDataFromMeetUp(lat,lng);
 }
 
-function extractZipCode(response) {
-    let currentAddress = response.results[0].formatted_address;
-    console.log(currentAddress);
-    let indexOfZipCode = currentAddress.lastIndexOf(',');
-    zipCode = currentAddress.slice(indexOfZipCode - 5, indexOfZipCode);
-}
-
-function getCurrentLocation(response) {
-    extractZipCode(response);
-    // ajaxYelpCall(zipCode);
-}
+// function returnCurrentAddressFromGeolocation(response) {
+//     console.log(response);
+// }
 
 //this function converts a given address, city, or zip code to lat and long
 function getLatLongFromGeocoding(inputAddress) {
-
     const formattedAddress = inputAddress.split(" ").join("+");
     const location = {
         url: `https://maps.googleapis.com/maps/api/geocode/json`,
@@ -134,7 +122,7 @@ function geocodingResponse(response) {
     runningTrails.push(center);
     getRunningTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
-
+    getDataFromMeetUp(lat,lng);
 }
 
 function getRunningTrailsList(latitude, longitude) {
@@ -144,7 +132,7 @@ function getRunningTrailsList(latitude, longitude) {
     const runningTrails = {
         dataType: 'JSON',
         method: 'GET',
-        url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxResults=50&key=200354719-4f64b16db640b15c131f04f75804eacd`,
+        url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxResults=30&key=200354719-4f64b16db640b15c131f04f75804eacd`,
         success: runningTrailsList,
     }
     $.ajax(runningTrails);
@@ -158,16 +146,10 @@ function runningTrailsList(response) {
     trails.map((trail) => {
         const { latitude, longitude } = trail;
         let coordinates = new google.maps.LatLng(latitude, longitude);
-        if(trail.imgMedium){//only include results with an image since not all results have one
+        if(trail.imgSqSmall){//only include results with an image since not all results have one
             runningTrails.push({
-                // name: trail.name,
-                // location: trail.location,
-                // coordinates: coordinates,
                 image: trail.imgMedium,
-                // summary: trail.summary,
                 distance: `${trail.length} miles`,
-                // rating: trail.stars,
-                // url: trail.url,
                 ...trail,
                 coordinates: coordinates
             });
@@ -177,7 +159,6 @@ function runningTrailsList(response) {
 }
 
 function getDataFromYelp(response) {
-    // debugger;
     runningTrails = [];
     const businessesIndex = response.businesses;
     let { latitude, longitude } = response.region.center;
@@ -196,8 +177,7 @@ function getDataFromYelp(response) {
         });
     }
     displayMapOnDom();
-    getDataFromWeather(latitude, longitude);
-    getDataFromMeetUp(runningTrails[1].location.zip_code);
+    // getDataFromWeather(latitude, longitude);
     $(".weather_list").addClass("hidden");
 }
 
@@ -230,7 +210,7 @@ function displayMapOnDom() {
 
     //Map options
     const options = {
-        zoom: 12,
+        zoom: 11,
         center: runningTrails[0],
         // mapTypeControlOptions: {
         //     mapTypeIds: ['Styled']
@@ -292,18 +272,18 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         let locationDescriptionDiv = $('<div>').addClass('locationDescription');
 
         let nameOfPlace = $('<p>').text(runningTrails[i].name);
-        // let addressOfPlace1 = `${runningTrails[i].location.display_address[0]}`;
-
+        const location = $('<div>').addClass('address').text(`${runningTrails[i].location}`);
+        const rating = $('<div>').text(`${runningTrails[i].stars} out of 5 stars`);
         let brLine1 = $('<br>');
         let brLine2 = $('<br>');
         // let addressOfPlace2 = `${runningTrails[i].location.display_address[1]}`;
-        let moreInfoButton = $('<button>').addClass('btn btn-success').text('More Info');
+        let moreInfoButton = $('<button>').addClass('btn btn-blue').text('Trail Info');
 
         // let addressOfPlace = $('<address>').append(addressOfPlace1, brLine1, addressOfPlace2);
 
         moreInfoButton.click(() => displayTrailDescription(runningTrails[i]));
 
-        locationDescriptionDiv.append(nameOfPlace, brLine2, moreInfoButton);
+        locationDescriptionDiv.append(nameOfPlace, location, rating, brLine2, moreInfoButton);
 
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.location_list').append(listResultsDiv);
@@ -316,14 +296,21 @@ function displayTrailDescription(trail) {
     $('.trails_tab').removeClass('hidden');
     $('.single_location_detail').removeClass('hidden');
     $('.list_result').addClass('hidden');
-    let descriptionDiv = $('<div>').addClass('description');
-    let imageOfPlace = $('<img>').attr('src', trail.image);
-    let nameOfPlace = $('<h1>').addClass('trailName').text(trail.name);
-    let addressOfPlace = $('<p>').text(`Address: ${trail.location.display_address[0]} ${trail.location.display_address[1]}`);
-    let distance = $('<div>').text(`Distance: ${trail.distance}`)
-    let rating = $('<div>').text('Rating: ' + trail.rating)
-    let pointBCoordinates = trail.coordinates
-    descriptionDiv.append(nameOfPlace, imageOfPlace, addressOfPlace, distance, rating);
+    displayDescription();
+    const imageOfPlace = $('<img>').attr('src', trail.imgMedium);
+    const nameOfPlace = $('<h1>').addClass('trailName').text(trail.name);
+    const location = $('<div>').html(`<b>Location:</b> ${trail.location}`);
+    const distance = $('<div>').html(`<b>Length:</b> ${trail.distance}`);
+    const rating = $('<div>').html(`<b>Rating:</b> ${trail.stars} out of 5 stars from ${trail.starVotes} reviews`);
+    const summary = $('<div>').addClass('trail_summary').html(`<b>Overview:</b> ${trail.summary}`);
+    const conditionStatus = $('<div>').addClass('condition_status').html(`<b>Status:</b> ${trail.conditionStatus}`);
+    const conditionDetails = $('<div>').addClass('condition_details').html(`<b>Condition:</b> ${trail.conditionDetails || 'Currently, there is no condtition information for this trail.'}`);
+    const ascent = $('<div>').addClass('ascent').html(`<b>Ascent:</b> ${trail.ascent} inches`);
+    const descent = $('<div>').addClass('descent').html(`<b>Descent:</b> ${trail.descent} inches`);
+    const pointBCoordinates = trail.coordinates
+    const descriptionDiv = $('<div>').addClass('description');
+    const moreInfo = $('<div>').html(`<a href="${trail.url}">More info on ${trail.name}</a>`);
+    descriptionDiv.append(nameOfPlace, imageOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary, moreInfo);
     $('.descriptionTab').append(descriptionDiv);
     displayDirectionLineOnMap(pointBCoordinates);
     $("html, body").animate({
@@ -374,7 +361,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
             if (status == "OK") { //success function
                 directionsDisplay.setDirections(response);
 
-                var result = document.getElementById('result');
+                var result = document.getElementById('direction_tab');
                 result.innerHTML = "";
                 let newTr1 = document.createElement("tr");
                 newTr1.innerHTML = `<b>Start location:</b> ${response.routes[0].legs[0].start_address}<br>`;
@@ -468,10 +455,9 @@ function renderWeatherOnDom(weather) {
     $('.location_list').append(weatherList);
 }
 
-function getDataFromMeetUp(zipCode) {
-    let MeetUpZipCode = zipCode;
-    let meetup = {
-        url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=${MeetUpZipCode}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
+function getDataFromMeetUp(lat,long) {
+    const meetup = {
+        url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&lat=${lat}&lon=${long}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
         success: displayMeetUpSuccess,
         method: 'post',
         dataType: 'jsonp',
@@ -485,14 +471,14 @@ function displayMeetUpSuccess(response) {
         $(".events").remove();
     }
     if (response.meta.count === 0) {
-        let meetupDiv = $('<div>', {
+        const meetupDiv = $('<div>', {
             class: `events hidden`,
             html: '<h2>Currently, there are no upcoming meetups near your area.'
         });
         $('.location_list').append(meetupDiv);
     }
-    let meetUpResponse = response.results;
-    let filteredMeetUpResults = [];
+    const meetUpResponse = response.results;
+    const filteredMeetUpResults = [];
     for (let m = 0; m < meetUpResponse.length; m++) {
         let {
             description,
@@ -502,7 +488,7 @@ function displayMeetUpSuccess(response) {
             group,
             yes_rsvp_count
         } = meetUpResponse[m];
-        let formattedInfo = {
+        const formattedInfo = {
             description,
             eventName: name,
             link: event_url,
@@ -522,28 +508,28 @@ function displayError(sub) {
 
 function renderMeetUpOnDom(meetup) {
     for (let m = 0; m < meetup.length; m++) {
-        let groupName = $('<p>', {
+        const groupName = $('<p>', {
             class: 'groupName',
             text: meetup[m].group.name.toUpperCase()
         })
-        let members = $('<div>', {
+        const members = $('<div>', {
             class: 'rsvp',
             text: `${meetup[m].yes_rsvp_count} ${meetup[m].group.who} going`
         })
-        let eventName = $('<a>', {
+        const eventName = $('<a>', {
             class: 'rsvp',
             text: meetup[m].eventName,
             href: meetup[m].link
         })
-        let meetUp = $('.location_list');
-        let meetupDiv = $('<div>').addClass(`meetUp+${m} events hidden`);
+        const meetUp = $('.location_list');
+        let meetupDiv = $('<div>').addClass(`meetUp events hidden`);
         meetupDiv = $(meetupDiv).append(groupName, eventName, members)
         $(meetUp).append(meetupDiv)
     }
 }
 
 function displayWeather() {
-    $('#result').addClass('hidden');
+    $('#direction_tab').addClass('hidden');
     $('.list_result').addClass('hidden');
     $('.events').addClass('hidden');
     $('.description').addClass('hidden');
@@ -556,8 +542,7 @@ function displayWeather() {
 }
 
 function displayDescription() {
-    $('#result').addClass('hidden');
-    $('.list_result').addClass('hidden');
+    $('#direction_tab').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.description').removeClass('hidden');
@@ -569,7 +554,7 @@ function displayDescription() {
 }
 
 function displayResult() {
-    $('#result').addClass('hidden');
+    $('#direction_tab').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.description').addClass('hidden');
@@ -584,7 +569,7 @@ function displayMeetUp() {
     $('.list_result').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').removeClass('hidden');
-    $('#result').addClass('hidden');
+    $('#direction_tab').addClass('hidden');
     $('.description_tab').removeClass('currentTab');
     $('.weather_tab').removeClass('currentTab');
     $('.direction_tab').removeClass('currentTab');
@@ -597,7 +582,7 @@ function displayDirection() {
     $('.list_result').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').addClass('hidden');
-    $('#result').removeClass('hidden');
+    $('#direction_tab').removeClass('hidden');
     $('.description_tab').removeClass('currentTab');
     $('.meetup_tab').removeClass('currentTab');
     $('.weather_tab').removeClass('currentTab');

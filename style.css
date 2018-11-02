@@ -42,6 +42,7 @@ body {
 }
 
 #search_input {
+    width: 80vw;
     display: inline-block;
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -70,18 +71,16 @@ body {
     text-shadow: 2px 2px rgb(87, 100, 104);
 }
 
-
 .search_and_logo{
     display: flex;
     justify-content: space-around;
-    background-color: #15868e;
+    background-color: steelblue;
 }
 
 .search_bar{
     width: 80vw;
     display: flex;
     align-items: center;
-    justify-content: space-around;
 }
 
 #search_field{
@@ -92,7 +91,7 @@ body {
     border: 0;
     font-size: 1.0rem;
     color: black;
-    background-color: rgba(255, 255, 255, 0.7);
+    /* background-color: rgba(255, 255, 255, 0.7); */
     box-shadow: inset 1px 2px 2px 1px rgb(90, 89, 89);
     outline: none;
     border-top-left-radius: 5px;
@@ -100,24 +99,13 @@ body {
 }
 
 .search_button{
-    font-family: 'Raleway', sans-serif;
-    outline: none;
-    padding: 7%;
-    border: 1px solid #1dc9a4;
-    background-image: linear-gradient(to right,rgb(160, 221, 90), #09b5db);
-    box-shadow: 0 5px 2px #30A3C5;
-    color: white;
-    font-size: rem;
-    height: 100%;
-    width: 5vw;
-    border-radius: 30px;
+    height: 4vh;
     cursor: pointer;
-    vertical-align: top;
-    display: inline-block;
+    margin-left: 1vw;
 }
 
 ::placeholder { 
-    color: black; /* Firefox */
+    color: gray; /* Firefox */
     opacity: 1;
 }
 
@@ -174,26 +162,26 @@ body {
 
 #map_area{
     height: 80vh;
+    left: 2.5vw;
     border: 1px solid black;
     border-radius: 10px;
     margin-top: 3%;
-    width: 50vw;
+    width: 55vw;
     box-shadow: 5px 10px 18px black;
     display: inline-block;
 }
 
 .map_and_trail_list{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .group_tabs{
     position: relative;
     width: 40vw;
     display: inline-block;
-    height: 80vh;
-    overflow-y: scroll;
-    margin-top: 3%;
+    height: 93vh;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
@@ -204,7 +192,7 @@ body {
 }
 
 a{
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 .weather_list {
@@ -225,22 +213,23 @@ a{
 .events{
     background-color: whitesmoke;
     border-radius: 10px;
-    border: 5px dashed lightgray;
-    width: 90vw;
-    padding: 2%;
-    margin: auto;
-    font-size: 2.4rem;
+    width: 100%;
+    padding: 4%;
+    margin-bottom: 3%;
+    font-size: 1rem;
     opacity: 0.95;
-    box-shadow: 5px 10px 18px black;
+    box-shadow: 5px 5px 9px black;
 }
 
-.events>p {
-    font-size: 3.5rem;
+.groupName{
+    margin-top: 0;
+    font-size: 1.15rem;
+    white-space: nowrap;
 }
 
 /* Search List Result Box */
 .list_result {
-    display: -webkit-box;
+    display: flex;
     background-color: whitesmoke;
     border-radius: 10px;
     padding: 2%;
@@ -250,18 +239,25 @@ a{
     box-shadow: 5px 10px 18px black;
 }
 
+.address{
+    white-space: nowrap;
+}
+
 .description {
     background-color: whitesmoke;
-    border-radius: 10px;
-    /* width: 90vw; */
     padding: 2%;
     margin: auto;
-    font-size: 2.4rem;
+    font-size: 1.2rem;
     box-shadow: 5px 10px 18px black;
 }
 
 .description img{
-    width: 50%;
+    width: 100%;
+    margin-bottom: 7%;
+}
+
+.trailName{
+    font-family: 'Quicksand';
 }
 
 /* Nav Bar */
@@ -279,17 +275,33 @@ a{
 .tabLinks {
     display: inline-block;
     width: 19.5%;
-    color: black;
-    background-color: #53b5a1;
+    color: white;
+    background-color: #1976d2;
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.7rem;
     line-height: 40px;
     vertical-align: top;
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
+
+.tabLinks:hover {
+    background-color: #13599e;
+    font-weight: bold;
+}
+
+.currentTab{
+    background-color:#13599e;
+}
+
+.selected {
+    background-color: #C5ECB5;
+    }
 
 .hidden{
     display: none;
@@ -302,23 +314,15 @@ a{
 }
 
 .locationDescription {
-    display: inline-block;
     padding: 0 3%;
     font-size: 1rem;
 }
 
 .locationDescription p {
-    font-size: 1.5rem;
-    white-space: nowrap;
-}
-
-.tabLinks:hover {
-    background-color: lightgray;
-    font-weight: bold;
-}
-
-.currentTab{
-    background-color: whitesmoke;
+    font-size: 1.25rem;
+    margin-top: 0;
+    font-weight: bolder;
+    /* white-space: nowrap; */
 }
 
 .loadingImg{
@@ -335,22 +339,65 @@ a{
     width: 40%;
 }
 
-#result,.weather_list{
+.weather_list{
     background-color: whitesmoke;
-    border-radius: 10px;
-    width: 90vw;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    height: 81vh;
     padding: 2%;
     margin: auto;
     position: relative;
-    font-size: 2.4rem;
+    font-size: 1.5rem;
     box-shadow: 5px 10px 18px black;
     opacity: 0.95;
 }
 
+.weather_list p{
+    margin-top: 0;
+}
+
+#direction_tab{
+    background-color: whitesmoke;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    min-height: 81vh;
+    padding: 2%;
+    margin: auto;
+    position: relative;
+    font-size: 1rem;
+    box-shadow: 5px 10px 18px black;
+    opacity: 0.95;
+}
+
+
 .list_result:hover {
-    display: -webkit-box;
     opacity: 1;
     box-shadow: 7px 12px 20px black;
+}
+
+.btn {
+    cursor: pointer;
+    text-decoration: none;
+    color: #F2F2F2;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 2px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-blue {
+    background-color: #1976d2;
+    color: #F2F2F2;
+}
+
+.btn-blue:hover {
+    background-color: #13599e;
 }
 
 
@@ -431,6 +478,3 @@ Media Query
 }
 */
 
-.selected {
-background-color: #C5ECB5;
-}
