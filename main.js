@@ -144,7 +144,7 @@ function getRunningTrailsList(latitude, longitude) {
     const runningTrails = {
         dataType: 'JSON',
         method: 'GET',
-        url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=10&key=200354719-4f64b16db640b15c131f04f75804eacd`,
+        url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxResults=50&key=200354719-4f64b16db640b15c131f04f75804eacd`,
         success: runningTrailsList,
     }
     $.ajax(runningTrails);
@@ -158,18 +158,20 @@ function runningTrailsList(response) {
     trails.map((trail) => {
         const { latitude, longitude } = trail;
         let coordinates = new google.maps.LatLng(latitude, longitude);
-        runningTrails.push({
-            // name: trail.name,
-            // location: trail.location,
-            // coordinates: coordinates,
-            // image: trail.imgMedium,
-            // summary: trail.summary,
-            distance: `${trail.length} miles`,
-            // rating: trail.stars,
-            // url: trail.url,
-            ...trail,
-            coordinates: coordinates
-        });
+        if(trail.imgMedium){//only include results with an image since not all results have one
+            runningTrails.push({
+                // name: trail.name,
+                // location: trail.location,
+                // coordinates: coordinates,
+                image: trail.imgMedium,
+                // summary: trail.summary,
+                distance: `${trail.length} miles`,
+                // rating: trail.stars,
+                // url: trail.url,
+                ...trail,
+                coordinates: coordinates
+            });
+        }
     });
     displayMapOnDom();
 }
