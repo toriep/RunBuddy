@@ -33,8 +33,6 @@ function addClickHandlersToElements() {
 }
 
 function callGoogleAPI() {
-    // debugger;
-
     let userLocation = $("#search_input").val() || $("#search_field").val();
     $("#search_input").val("");
     $("#search_field").val("");
@@ -77,10 +75,13 @@ function reverseGeolocation(response) {
 }
 
 function extractZipCode(response) {
+    //first result is the best match from reverse geocding according to google, there's no center
     let currentAddress = response.results[0].formatted_address;
-    console.log(currentAddress);
     let indexOfZipCode = currentAddress.lastIndexOf(',');
     zipCode = currentAddress.slice(indexOfZipCode - 5, indexOfZipCode);
+    if(zipCode){
+        getDataFromMeetUp(zipCode)
+    }
 }
 
 function getCurrentLocation(response) {
@@ -134,7 +135,6 @@ function geocodingResponse(response) {
     runningTrails.push(center);
     getRunningTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
-
 }
 
 function getRunningTrailsList(latitude, longitude) {
@@ -177,7 +177,6 @@ function runningTrailsList(response) {
 }
 
 function getDataFromYelp(response) {
-    // debugger;
     runningTrails = [];
     const businessesIndex = response.businesses;
     let { latitude, longitude } = response.region.center;
@@ -197,7 +196,7 @@ function getDataFromYelp(response) {
     }
     displayMapOnDom();
     getDataFromWeather(latitude, longitude);
-    getDataFromMeetUp(runningTrails[1].location.zip_code);
+    // getDataFromMeetUp(runningTrails[1].location.zip_code);
     $(".weather_list").addClass("hidden");
 }
 
