@@ -162,6 +162,7 @@ body {
 
 #map_area{
     height: 80vh;
+    left: 2.5vw;
     border: 1px solid black;
     border-radius: 10px;
     margin-top: 3%;
@@ -172,7 +173,7 @@ body {
 
 .map_and_trail_list{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .group_tabs{
@@ -180,7 +181,7 @@ body {
     width: 40vw;
     display: inline-block;
     height: 93vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
@@ -214,7 +215,7 @@ a{
     border-radius: 10px;
     width: 100%;
     padding: 4%;
-    margin-bottom: 4%;
+    margin-bottom: 3%;
     font-size: 1rem;
     opacity: 0.95;
     box-shadow: 5px 5px 9px black;
