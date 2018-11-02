@@ -80,7 +80,6 @@ body {
     width: 80vw;
     display: flex;
     align-items: center;
-    justify-content: space-around;
 }
 
 #search_field{
@@ -91,7 +90,7 @@ body {
     border: 0;
     font-size: 1.0rem;
     color: black;
-    background-color: rgba(255, 255, 255, 0.7);
+    /* background-color: rgba(255, 255, 255, 0.7); */
     box-shadow: inset 1px 2px 2px 1px rgb(90, 89, 89);
     outline: none;
     border-top-left-radius: 5px;
@@ -99,7 +98,7 @@ body {
 }
 
 .search_button{
-    font-family: 'Raleway', sans-serif;
+    /* font-family: 'Raleway', sans-serif;
     outline: none;
     padding: 7%;
     border: 1px solid #1dc9a4;
@@ -112,7 +111,10 @@ body {
     border-radius: 30px;
     cursor: pointer;
     vertical-align: top;
-    display: inline-block;
+    display: inline-block; */
+    height: 4vh;
+    cursor: pointer;
+    margin-left: 2vw;
 }
 
 ::placeholder { 
@@ -176,7 +178,7 @@ body {
     border: 1px solid black;
     border-radius: 10px;
     margin-top: 3%;
-    width: 50vw;
+    width: 55vw;
     box-shadow: 5px 10px 18px black;
     display: inline-block;
 }
@@ -237,6 +239,10 @@ a{
     font-size: 1.5rem;
 }
 
+.groupName{
+    margin-top: 0;
+}
+
 /* Search List Result Box */
 .list_result {
     display: -webkit-box;
@@ -247,10 +253,6 @@ a{
     font-size: 2.4rem;
     opacity: 0.93;
     box-shadow: 5px 10px 18px black;
-}
-
-.place_name{
-    margin-top: 0;
 }
 
 .address{
@@ -322,7 +324,9 @@ a{
 
 .locationDescription p {
     font-size: 1.25rem;
-    white-space: nowrap;
+    margin-top: 0;
+    font-weight: bolder;
+    /* white-space: nowrap; */
 }
 
 .tabLinks:hover {
@@ -361,11 +365,15 @@ a{
     opacity: 0.95;
 }
 
+.weather_list p{
+    margin-top: 0;
+}
+
 #direction_tab{
     background-color: whitesmoke;
     border-radius: 10px;
     width: 100%;
-    height: 75vh;
+    min-height: 75vh;
     padding: 2%;
     margin: auto;
     position: relative;
@@ -386,6 +394,7 @@ b{
 }
 
 .btn {
+    cursor: pointer;
     text-decoration: none;
     color: #F2F2F2;
     text-align: center;
@@ -407,6 +416,15 @@ b{
 
 .btn-green:hover {
     background-color: #1c776e;
+}
+
+.btn-orange {
+    background-color: #ffab00;
+    color: #F2F2F2;
+}
+
+.btn-orange:hover {
+    background-color: #da9100;
 }
 
 

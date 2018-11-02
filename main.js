@@ -281,7 +281,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         locationPictureDiv.append(imageOfPlace);
         let locationDescriptionDiv = $('<div>').addClass('locationDescription');
 
-        let nameOfPlace = $('<p>').addClass('place_name').text(runningTrails[i].name);
+        let nameOfPlace = $('<p>').text(runningTrails[i].name);
         const location = $('<div>').addClass('address').text(`${runningTrails[i].location}`);
         const rating = $('<div>').text(`${runningTrails[i].stars} out of 5 stars`);
         let brLine1 = $('<br>');
@@ -306,7 +306,7 @@ function displayTrailDescription(trail) {
     $('.trails_tab').removeClass('hidden');
     $('.single_location_detail').removeClass('hidden');
     $('.list_result').addClass('hidden');
-    const imageOfPlace = $('<img>').addClass('description_image').attr('src', trail.imgMedium);
+    const imageOfPlace = $('<img>').attr('src', trail.imgMedium);
     const nameOfPlace = $('<h1>').addClass('trailName').text(trail.name);
     const location = $('<div>').html(`<b>Location:</b>   ${trail.location}`);
     const distance = $('<div>').html(`<b>Length:</b>   ${trail.distance}`);
@@ -370,7 +370,6 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 directionsDisplay.setDirections(response);
 
                 var result = document.getElementById('direction_tab');
-                debugger;
                 result.innerHTML = "";
                 let newTr1 = document.createElement("tr");
                 newTr1.innerHTML = `<b>Start location:</b> ${response.routes[0].legs[0].start_address}<br>`;
