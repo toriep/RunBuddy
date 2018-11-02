@@ -3,9 +3,6 @@ $(document).ready(initializeApp);
 const runningTrailsURL = 'https://www.trailrunproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200354719-4f64b16db640b15c131f04f75804eacd'
 let runningTrails = [];
 let zipCode = null;
-let errorModal = document.getElementById('err');
-// let modalBtn = document.getElementById('runButton');
-
 
 function initializeApp() {
     addClickHandlersToElements();
