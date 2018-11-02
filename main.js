@@ -92,11 +92,11 @@ function getLatLongFromGeocoding(inputAddress) {
 }
 
 function alertMsgAndRefresh() {
-    alert('Your input location has returned zero result. Please try again.');
+    alert('Location Invalid. Please try again.');
     setTimeout(() => {
         window.history.back();
         location.reload(); 
-    }, 500);
+    }, 300);
 }
 
 //use the lat and long from this function to call trail API
