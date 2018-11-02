@@ -3,6 +3,9 @@ $(document).ready(initializeApp);
 const runningTrailsURL = 'https://www.trailrunproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200354719-4f64b16db640b15c131f04f75804eacd'
 let runningTrails = [];
 let zipCode = null;
+let errorModal = document.getElementById('errorModal');
+let modalBtn = document.getElementById('runButton');
+
 
 function initializeApp() {
     addClickHandlersToElements();
@@ -12,7 +15,7 @@ function addClickHandlersToElements() {
     $('#runButton').click(callGoogleAPI);
     let eventListener = $("#search_input");
 
-    //alert info with what to input in the field
+    //display how/what to do on the loading page
     $('#search_input').focus(function () {
         $('#info_msg').removeClass('hidden');});
     $('#search_input').keypress(function () {
@@ -88,8 +91,26 @@ function getLatLongFromGeocoding(inputAddress) {
     $.ajax(location);
 }
 
+function alertMsgAndRefresh() {
+    console.log('nothing found, try again');
+    modalBtn.onclick = function() {
+        errorModal.style.display = "block";
+    }
+
+    window.onclick = function (event) {
+        errorModal.style.display = "none";
+    }
+
+    addClickHandlersToElements();
+}
+
 //use the lat and long from this function to call trail API
 function geocodingResponse(response) {
+    if(response.status === "ZERO_RESULTS") {
+        setTimeout(function(){ 
+            alertMsgAndRefresh();
+        }, 500);
+    }
     const latLong = response.results[0].geometry.location;
     const lat = latLong.lat.toFixed(4);
     const lng = latLong.lng.toFixed(4);
