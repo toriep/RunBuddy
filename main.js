@@ -90,6 +90,7 @@ function getCurrentLocation(response) {
 
 //this function converts a given address, city, or zip code to lat and long
 function getLatLongFromGeocoding(inputAddress) {
+
     const formattedAddress = inputAddress.split(" ").join("+");
     const location = {
         url: `https://maps.googleapis.com/maps/api/geocode/json`,
@@ -106,11 +107,16 @@ function getLatLongFromGeocoding(inputAddress) {
 }
 
 function alertMsgAndRefresh() {
-    alert('Location Invalid. Please try again.');
+    $('.landing_page').addClass('hidden');
+    $('.loadingImg').removeClass('hidden');
+    setTimeout(() => {
+        alert('Invalid Location. Please try again.');
+    }, 200);
+    
     setTimeout(() => {
         window.history.back();
         location.reload(); 
-    }, 300);
+    }, 200);
 }
 
 //use the lat and long from this function to call trail API
@@ -132,6 +138,9 @@ function geocodingResponse(response) {
 }
 
 function getRunningTrailsList(latitude, longitude) {
+    $('.landing_page').addClass('hidden');
+    $('.loadingImg').removeClass('hidden');
+
     const runningTrails = {
         dataType: 'JSON',
         method: 'GET',
@@ -143,6 +152,7 @@ function getRunningTrailsList(latitude, longitude) {
 
 
 function runningTrailsList(response) {
+
     const { trails } = response;
     console.log("===TRAILS===:", trails);
     trails.map((trail) => {
@@ -152,7 +162,7 @@ function runningTrailsList(response) {
             // name: trail.name,
             // location: trail.location,
             // coordinates: coordinates,
-            image: trail.imgMedium,
+            // image: trail.imgMedium,
             // summary: trail.summary,
             distance: `${trail.length} miles`,
             // rating: trail.stars,
@@ -215,6 +225,7 @@ function getDataFromYelp(response) {
 function displayMapOnDom() {
     $(".landing_page").addClass("hidden");
     $(".map_page").removeClass("hidden");
+
     //Map options
     const options = {
         zoom: 12,
