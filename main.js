@@ -72,6 +72,7 @@ function reverseGeolocation(response) {
         error: displayError('reverseGeolocation'),
     }
     $.ajax(location);
+    getDataFromWeather(lat,lng);
 }
 
 function extractZipCode(response) {
@@ -80,7 +81,7 @@ function extractZipCode(response) {
     let indexOfZipCode = currentAddress.lastIndexOf(',');
     zipCode = currentAddress.slice(indexOfZipCode - 5, indexOfZipCode);
     if(zipCode){
-        getDataFromMeetUp(zipCode)
+        getDataFromMeetUp(zipCode);
     }
 }
 
@@ -195,7 +196,7 @@ function getDataFromYelp(response) {
         });
     }
     displayMapOnDom();
-    getDataFromWeather(latitude, longitude);
+    // getDataFromWeather(latitude, longitude);
     // getDataFromMeetUp(runningTrails[1].location.zip_code);
     $(".weather_list").addClass("hidden");
 }
