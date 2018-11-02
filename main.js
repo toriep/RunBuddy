@@ -1,7 +1,6 @@
 $(document).ready(initializeApp);
 
 let runningTrails = [];
-let zipCode = null;
 
 function initializeApp() {
     addClickHandlersToElements();
@@ -57,6 +56,7 @@ function getDataFromGeolocation() {
 }
 
 //this function converts lat and long to an address
+//UPDATE: there might be no need for geolocation now that all the API calls utilize lat and long
 function reverseGeolocation(response) {
     runningTrails = [];
     let lat = response.location.lat;
@@ -64,30 +64,20 @@ function reverseGeolocation(response) {
     let center = new google.maps.LatLng(lat, lng);
     runningTrails.push(center);
     getRunningTrailsList(lat, lng);
-    const location = {
-        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw`,
-        method: 'post',
-        dataType: 'json',
-        success: getCurrentLocation,
-        error: displayError('reverseGeolocation'),
-    }
-    $.ajax(location);
+    // const location = {
+    //     url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDKqdQXJuUA7X296IGSb3enjdybpgnwfMw`,
+    //     method: 'post',
+    //     dataType: 'json',
+    //     success: getCurrentLocation,
+    //     error: displayError('reverseGeolocation'),
+    // }
+    // $.ajax(location);
     getDataFromWeather(lat,lng);
+    getDataFromMeetUp(lat,lng);
 }
 
-function extractZipCode(response) {
-    //first result is the best match from reverse geocding according to google, there's no center
-    let currentAddress = response.results[0].formatted_address;
-    let indexOfZipCode = currentAddress.lastIndexOf(',');
-    zipCode = currentAddress.slice(indexOfZipCode - 5, indexOfZipCode);
-    if(zipCode){
-        getDataFromMeetUp(zipCode);
-    }
-}
-
-function getCurrentLocation(response) {
-    extractZipCode(response);
-    // ajaxYelpCall(zipCode);
+function returnCurrentAddressFromGeolocation(response) {
+    console.log(response);
 }
 
 //this function converts a given address, city, or zip code to lat and long
@@ -136,6 +126,7 @@ function geocodingResponse(response) {
     runningTrails.push(center);
     getRunningTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
+    getDataFromMeetUp(lat,lng);
 }
 
 function getRunningTrailsList(latitude, longitude) {
@@ -197,7 +188,6 @@ function getDataFromYelp(response) {
     }
     displayMapOnDom();
     // getDataFromWeather(latitude, longitude);
-    // getDataFromMeetUp(runningTrails[1].location.zip_code);
     $(".weather_list").addClass("hidden");
 }
 
@@ -476,10 +466,9 @@ function renderWeatherOnDom(weather) {
     $('.location_list').append(weatherList);
 }
 
-function getDataFromMeetUp(zipCode) {
-    let MeetUpZipCode = zipCode;
-    let meetup = {
-        url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=${MeetUpZipCode}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
+function getDataFromMeetUp(lat,long) {
+    const meetup = {
+        url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&lat=${lat}&lon=${long}&topic=running&page=20&key=647a3e362fa1b49424a3566149136e`,
         success: displayMeetUpSuccess,
         method: 'post',
         dataType: 'jsonp',
@@ -493,14 +482,14 @@ function displayMeetUpSuccess(response) {
         $(".events").remove();
     }
     if (response.meta.count === 0) {
-        let meetupDiv = $('<div>', {
+        const meetupDiv = $('<div>', {
             class: `events hidden`,
             html: '<h2>Currently, there are no upcoming meetups near your area.'
         });
         $('.location_list').append(meetupDiv);
     }
-    let meetUpResponse = response.results;
-    let filteredMeetUpResults = [];
+    const meetUpResponse = response.results;
+    const filteredMeetUpResults = [];
     for (let m = 0; m < meetUpResponse.length; m++) {
         let {
             description,
@@ -510,7 +499,7 @@ function displayMeetUpSuccess(response) {
             group,
             yes_rsvp_count
         } = meetUpResponse[m];
-        let formattedInfo = {
+        const formattedInfo = {
             description,
             eventName: name,
             link: event_url,
@@ -530,21 +519,21 @@ function displayError(sub) {
 
 function renderMeetUpOnDom(meetup) {
     for (let m = 0; m < meetup.length; m++) {
-        let groupName = $('<p>', {
+        const groupName = $('<p>', {
             class: 'groupName',
             text: meetup[m].group.name.toUpperCase()
         })
-        let members = $('<div>', {
+        const members = $('<div>', {
             class: 'rsvp',
             text: `${meetup[m].yes_rsvp_count} ${meetup[m].group.who} going`
         })
-        let eventName = $('<a>', {
+        const eventName = $('<a>', {
             class: 'rsvp',
             text: meetup[m].eventName,
             href: meetup[m].link
         })
-        let meetUp = $('.location_list');
-        let meetupDiv = $('<div>').addClass(`meetUp+${m} events hidden`);
+        const meetUp = $('.location_list');
+        let meetupDiv = $('<div>').addClass(`meetUp events hidden`);
         meetupDiv = $(meetupDiv).append(groupName, eventName, members)
         $(meetUp).append(meetupDiv)
     }
