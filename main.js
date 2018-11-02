@@ -281,9 +281,9 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         locationPictureDiv.append(imageOfPlace);
         let locationDescriptionDiv = $('<div>').addClass('locationDescription');
 
-        let nameOfPlace = $('<p>').text(runningTrails[i].name);
-        // let addressOfPlace1 = `${runningTrails[i].location.display_address[0]}`;
-
+        let nameOfPlace = $('<p>').addClass('place_name').text(runningTrails[i].name);
+        const location = $('<div>').addClass('address').text(`${runningTrails[i].location}`);
+        const rating = $('<div>').text(`${runningTrails[i].stars} out of 5 stars`);
         let brLine1 = $('<br>');
         let brLine2 = $('<br>');
         // let addressOfPlace2 = `${runningTrails[i].location.display_address[1]}`;
@@ -293,7 +293,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
 
         moreInfoButton.click(() => displayTrailDescription(runningTrails[i]));
 
-        locationDescriptionDiv.append(nameOfPlace, brLine2, moreInfoButton);
+        locationDescriptionDiv.append(nameOfPlace, location, rating, brLine2, moreInfoButton);
 
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.location_list').append(listResultsDiv);
@@ -302,27 +302,25 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
 }
 
 function displayTrailDescription(trail) {
-    debugger;
     $('.descriptionTab').empty();
     $('.trails_tab').removeClass('hidden');
     $('.single_location_detail').removeClass('hidden');
     $('.list_result').addClass('hidden');
-    const imageOfPlace = $('<img>').attr('src', trail.imgMedium);
+    const imageOfPlace = $('<img>').addClass('description_image').attr('src', trail.imgMedium);
     const nameOfPlace = $('<h1>').addClass('trailName').text(trail.name);
-    const location = $('<p>').text(`Location: ${trail.location}`);
-    const distance = $('<div>').text(`Length: ${trail.distance}`);
-    const rating = $('<div>').text('Rating: ' + trail.stars + " out of 5 stars");
-    const summary = $('<div>').addClass('trail_summary').text('Overview: ' + trail.summary);
-    const conditionStatus = $('<div>').addClass('condition_status').text('Status: ' + trail.conditionStatus);
-    const conditionDetails = $('<div>').addClass('condition_details').text(`Condition: ${trail.conditionDetails || 'Currently, there is no condtition information for this trail.'}`);
-    const ascent = $('<div>').addClass('ascent').text(`Ascent: ${trail.ascent} inches`);
-    const descent = $('<div>').addClass('descent').text(`Descent: ${trail.descent} inches`);
+    const location = $('<div>').html(`<b>Location:</b>   ${trail.location}`);
+    const distance = $('<div>').html(`<b>Length:</b>   ${trail.distance}`);
+    const rating = $('<div>').html(`<b>Rating:</b>   ${trail.stars} out of 5 stars`);
+    const summary = $('<div>').addClass('trail_summary').html(`<b>Overview:</b>   ${trail.summary}`);
+    const conditionStatus = $('<div>').addClass('condition_status').html(`<b>Status:</b>   ${trail.conditionStatus}`);
+    const conditionDetails = $('<div>').addClass('condition_details').html(`<b>Condition:</b>   ${trail.conditionDetails || 'Currently, there is no condtition information for this trail.'}`);
+    const ascent = $('<div>').addClass('ascent').html(`<b>Ascent:</b>   ${trail.ascent} inches`);
+    const descent = $('<div>').addClass('descent').html(`<b>Descent:</b>   ${trail.descent} inches`);
     const pointBCoordinates = trail.coordinates
     const descriptionDiv = $('<div>').addClass('description');
     descriptionDiv.append(nameOfPlace, imageOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary);
     $('.descriptionTab').append(descriptionDiv);
     displayDirectionLineOnMap(pointBCoordinates);
-    debugger;
     $("html, body").animate({
         scrollTop: 0
     }, "slow"); //scroll window to the top
@@ -590,7 +588,6 @@ function displayMeetUp() {
 }
 
 function displayDirection() {
-    debugger;
     $('.description').addClass('hidden');
     $('.list_result').addClass('hidden');
     $('.weather_list').addClass('hidden');
