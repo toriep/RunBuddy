@@ -61,17 +61,18 @@ function reverseGeolocation(response){
 
 function extractZipCode(response){
     let currentAddress = response.results[0].formatted_address;
+    console.log(currentAddress);
     let indexOfZipCode = currentAddress.lastIndexOf(',');
     zipCode = currentAddress.slice(indexOfZipCode-5, indexOfZipCode);
 }
 
-// function getCurrentLocation(response){
-//     extractZipCode(response);
-//     ajaxYelpCall(zipCode);
-// }
+function getCurrentLocation(response){
+    extractZipCode(response);
+    ajaxYelpCall(zipCode);
+}
 
 //this function converts a given address, city, or zip code to lat and long
-function getLatLongFromGeocoding(inputAddress){
+function getLatLongFromGeocoding(inputAddress) {
     const formattedAddress = inputAddress.split(" ").join("+");
     const location = {
         url: `https://maps.googleapis.com/maps/api/geocode/json`,
@@ -111,6 +112,7 @@ function getRunningTrailsList(latitude, longitude) {
 
 function runningTrailsList(response) {
     const { trails } = response;
+    console.log("TRAILS:", trails);
     
     trails.map ( (trail) => {
         const { latitude, longitude } = trail;
@@ -127,7 +129,6 @@ function runningTrailsList(response) {
         });
     });
     displayMapOnDom();
-    console.log("RUNNING TRAILS:", runningTrails);
 }
 
 function getDataFromYelp(response) {
