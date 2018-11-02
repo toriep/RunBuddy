@@ -24,8 +24,13 @@ function addClickHandlersToElements() {
             $("#runButton, .search_button").click(); //runs the function attaches to click event off add button
         }
     });
-
-
+    /** displaying tabs */
+    $('.trails_tab').click(displayResult);
+    $('.description_tab').click(displayDescription);
+    $('.direction_tab').click(displayDirection);
+    $('.weather_tab').click(displayWeather);
+    $('.meetup_tab').click(displayMeetUp);
+    // $('._tab').click(display);
 }
 
 function callGoogleAPI() {
