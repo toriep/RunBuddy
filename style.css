@@ -160,6 +160,11 @@ body {
     justify-content: space-around;
 }
 
+.search_result_message {
+    margin-left: 2.5vw;
+    font-size: 1.25rem;
+}
+
 #map_area{
     height: 80vh;
     left: 2.5vw;

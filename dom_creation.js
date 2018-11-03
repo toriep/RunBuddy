@@ -100,7 +100,7 @@ function displayTrailDescription(trail) {
 
 function displayDirectionLineOnMap(pointBCoordinates) {
     $("#map_area").text();
-    var pointA = runningTrails[0],
+    var pointA = currentLocation,
         pointB = pointBCoordinates,
         myOptions = {
             zoom: 14,
@@ -251,5 +251,13 @@ function renderMeetUpOnDom(meetup) {
         let meetupDiv = $('<div>').addClass(`meetUp events hidden`);
         meetupDiv = $(meetupDiv).append(groupName, eventName, members)
         $(meetUp).append(meetupDiv)
+    }
+}
+
+function displaySearchResultMessage() {
+    if (inputFromUser === "") {
+        $(".search_result_message").text('Search result for your current location:');
+    } else {
+        $(".search_result_message").text(`Search result for ${inputFromUser}`);
     }
 }

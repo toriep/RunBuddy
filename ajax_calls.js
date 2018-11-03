@@ -9,6 +9,23 @@ function getDataFromGeolocation() {
     $.ajax(location);
 }
 
+function getCurrentLocationForDirection() {
+    const location = {
+        url: `https://www.googleapis.com/geolocation/v1/geolocate?key=${GOOGLE_API_KEY}`,
+        method: 'post',
+        dataType: 'json',
+        success: responseFromGetCurrentLocationForDirection,
+        error: displayError('GetDataFromGeoLoaction'),
+    }
+    $.ajax(location);
+}
+
+function responseFromGetCurrentLocationForDirection(response) {
+    let lat = response.location.lat;
+    let lng = response.location.lng;
+    currentLocation = new google.maps.LatLng(lat, lng);
+}
+
 //this function converts a given address, city, or zip code to lat and long
 function getLatLongFromGeocoding(inputAddress) {
     const formattedAddress = inputAddress.split(" ").join("+");
@@ -57,7 +74,7 @@ function getDataFromWeather(lat, lon) {
     $.ajax(weather);
 }
 
-function getDataFromMeetUp(lat,long) {
+function getDataFromMeetUp(lat, long) {
     const meetup = {
         url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&lat=${lat}&lon=${long}&topic=running&page=20&key=${MEETUP_API_KEY}`,
         success: displayMeetUpSuccess,
