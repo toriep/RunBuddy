@@ -68,6 +68,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         $('.location_list').append(listResultsDiv);
     }
     $('.loadingImg').addClass('hidden');
+    $('.group_tabs').animate({ scrollTop: 0 }, 1500)
 }
 
 function displayTrailDescription(trail) {
