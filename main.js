@@ -1,7 +1,8 @@
 $(document).ready(initializeApp);
 
 let runningTrails = [];
-
+let currentLocation = null;
+let inputFromUser = null;
 function initializeApp() {
     addClickHandlersToElements();
 }
@@ -29,12 +30,14 @@ function addClickHandlersToElements() {
 }
 
 function callGoogleAPI() {
-    let userLocation = $("#search_input").val() || $("#search_field").val();
+    inputFromUser = $("#search_input").val() || $("#search_field").val();
     $("#search_input").val("");
-    if (userLocation.length === 0) {//if the search bar is empty, get current location
+    if (inputFromUser.length === 0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
     } else {//if user typed in a location, make a Geocoding AJAX call
-        getLatLongFromGeocoding(userLocation);
+
+        getLatLongFromGeocoding(inputFromUser);
+        getCurrentLocationForDirection();
     }
 }
 
@@ -45,8 +48,8 @@ function responseFromGeolocation(response) {
     let center = new google.maps.LatLng(lat, lng);
     runningTrails.push(center);
     getresponseFromTrailsList(lat, lng);
-    getDataFromWeather(lat,lng);
-    getDataFromMeetUp(lat,lng);
+    getDataFromWeather(lat, lng);
+    getDataFromMeetUp(lat, lng);
 }
 
 function alertMsgAndRefresh() {
@@ -55,16 +58,16 @@ function alertMsgAndRefresh() {
     setTimeout(() => {
         alert('Invalid Location. Please try again.');
     }, 200);
-    
+
     setTimeout(() => {
         window.history.back();
-        location.reload(); 
+        location.reload();
     }, 200);
 }
 
 //use the lat and long from this function to call trail API
 function geocodingResponse(response) {
-    if(response.status === "ZERO_RESULTS") {
+    if (response.status === "ZERO_RESULTS") {
         alertMsgAndRefresh();
     }
     runningTrails = [];
@@ -75,7 +78,7 @@ function geocodingResponse(response) {
     runningTrails.push(center);
     getresponseFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
-    getDataFromMeetUp(lat,lng);
+    getDataFromMeetUp(lat, lng);
 }
 
 function responseFromTrailsList(response) {
@@ -83,7 +86,7 @@ function responseFromTrailsList(response) {
     trails.map((trail) => {
         const { latitude, longitude } = trail;
         let coordinates = new google.maps.LatLng(latitude, longitude);
-        if(trail.imgSqSmall){//only include results with an image since not all results have one
+        if (trail.imgSqSmall) {//only include results with an image since not all results have one
             runningTrails.push({
                 image: trail.imgMedium,
                 distance: `${trail.length} miles`,
@@ -93,6 +96,7 @@ function responseFromTrailsList(response) {
         }
     });
     displayMapOnDom();
+    displaySearchResultMessage();
 }
 
 function displayError(sub) {
