@@ -96,7 +96,7 @@ function responseFromTrailsList(response) {
         }
     });
     displayMapOnDom();
-    displaySearchResultMessage();
+    // displaySearchResultMessage();
 }
 
 function displayError(sub) {

@@ -15,10 +15,6 @@ body {
    background-attachment: fixed
 }
 
-.trailName{
-    border-bottom: 1px black solid;
-}
-
 .container {
    position: relative;
    height: 100%;
@@ -27,8 +23,8 @@ body {
 
 .form-inline {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 47%;
+    left: 53%;
     transform: translate(-50%,-50%);
     height: 4rem;
     width: 100%;
@@ -39,10 +35,12 @@ body {
 
 .map_page_logo{
     height: 7vh;
+    padding: 8px 0;
 }
 
 #search_input {
-    width: 80vw;
+    width: 35vw;
+    font-size: 1.7rem;
     display: inline-block;
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -58,48 +56,51 @@ body {
 #runButton {
     font-family: 'Raleway', sans-serif;
     outline: none;
+    padding: 5%;
+    height: 100%;
+    width: 115%;
     border: 1px solid #1dc9a4;
     background-image: linear-gradient(to right,rgb(160, 221, 90), #09b5db);
     box-shadow: 0 3px 2px #30A3C5;
     color: white;
-    font-size: 1.7rem;
-    height: 100%;
+    font-size: 1.6rem;
     border-radius: 10px;
     cursor: pointer;
     vertical-align: top;
     display: inline-block;
     text-shadow: 2px 2px rgb(87, 100, 104);
+    white-space: nowrap;
+    vertical-align: middle;
 }
 
 .search_and_logo{
     display: flex;
     justify-content: space-around;
-    background-color: steelblue;
+    background-color: #1976d2b7;
+    opacity: 1;
 }
 
 .search_bar{
-    width: 80vw;
+    width: 76vw;
     display: flex;
     align-items: center;
 }
 
 #search_field{
-    width: 70vw;
+    width: 60vw;
     height: 70%;
     font-family: 'Poppins', sans-serif;
     text-align: center;
     border: 0;
-    font-size: 1.0rem;
+    font-size: 1.3rem;
     color: black;
-    /* background-color: rgba(255, 255, 255, 0.7); */
     box-shadow: inset 1px 2px 2px 1px rgb(90, 89, 89);
     outline: none;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-radius: 3px;
 }
 
 .search_button{
-    height: 4vh;
+    height: 3.5vh;
     cursor: pointer;
     margin-left: 1vw;
 }
@@ -112,11 +113,12 @@ body {
  .input-group-btn {
     display: inline-block;
     vertical-align: top;
+    padding-left: 1%;
  }
 
 .logo {
     position: absolute;
-    top: 20%;
+    top: 25%;
     left: 52%;
     transform: translate(-50%,-50%);
     height: 4rem;
@@ -132,21 +134,21 @@ body {
     font-size: 0.5em;
     font-weight: bold;
     font-style: italic;
-    color: #404040;
+    color: #351706fa;
     text-align: center;
-    width: 60%;
+    width: 40%;
     position: relative;
-    left: -21%;
+    left: 25%;
 }
 
 .information {
     margin-top: 1%;
-    padding: 1%;
+    padding: 1% 3%;
     background-color: white;
     opacity: 0.7;
     align-content: center;
     border: 1px dotted black;
-    transform: translate(55%, 1%);
+    font-family: 'Poppins', sans-serif;
 }
 
 .weather_tab {
@@ -166,12 +168,12 @@ body {
 }
 
 #map_area{
-    height: 80vh;
-    left: 2.5vw;
+    height: 90vh;
+    left: 1vw;
     border: 1px solid black;
     border-radius: 10px;
-    margin-top: 3%;
-    width: 55vw;
+    margin-top: 1vh;
+    width: 50vw;
     box-shadow: 5px 10px 18px black;
     display: inline-block;
 }
@@ -183,31 +185,59 @@ body {
 
 .group_tabs{
     position: relative;
-    width: 40vw;
+    width: 47vw;
+    right: 1vw;
     display: inline-block;
-    height: 93vh;
+    height: 90vh;
+    margin-top: 1vh;
+    margin-right: 2px;
     overflow-y: auto;
     overflow-x: hidden;
+    /* box-shadow: 5px 10px 18px black; */
+    border-radius: 10px;
 }
 
+.location_list {
+    margin-right: 0.1vw;
+}
 
 .meetup_tab{
     background-color: white;
     color: black;
 }
 
+/* .single_location_detail + .meetUp {
+    box-shadow: 5px 10px 18px black; 
+}  */
+
 a{
     font-size: 1rem;
 }
 
-.weather_list {
+.weather_list{
+    background-color: whitesmoke;
+    width: 100%;
+    right: 1vw;
+    margin: auto;
+    position: relative;
+    font-size: 1.5rem;
+    box-shadow: 5px 5px 18px black;
+    opacity: 0.95;
+    padding: 2% 4% 8%;
     list-style-type: none;
-    padding: 5% 0 3% 20%;
+    border-radius: 10px;
 }
 
 .weather_list>p {
-    font-size: 3.5rem;
     border-bottom: 1px black solid;
+    font-family: 'Quicksand';
+    margin-top: 1%;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+.weather_list>li {
+    font-size: 0.9em;
 }
 
 .weather_icon {
@@ -215,12 +245,12 @@ a{
     /* background-color: white; */
     margin-right: 2%;
 }
+
 .events{
     background-color: whitesmoke;
-    border-radius: 10px;
     width: 100%;
-    padding: 4%;
-    margin-bottom: 3%;
+    padding: 3%;
+    margin-bottom: 2%;
     font-size: 1rem;
     opacity: 0.95;
     box-shadow: 5px 5px 9px black;
@@ -228,21 +258,31 @@ a{
 
 .groupName{
     margin-top: 0;
-    font-size: 1.15rem;
-    white-space: nowrap;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 /* Search List Result Box */
 .list_result {
     display: flex;
-    background-color: whitesmoke;
+    background-color: white;
     border-radius: 10px;
     padding: 2%;
-    margin-bottom: 4%;
+    margin-bottom: 2%;
     font-size: 2.4rem;
-    opacity: 0.93;
+    opacity: 0.97;
     box-shadow: 5px 10px 18px black;
 }
+
+.list_result:hover {
+    opacity: 1;
+    box-shadow: 7px 12px 20px black;
+}
+
+
+.selected {
+    background-color: #faf5da;
+    }
 
 .address{
     white-space: nowrap;
@@ -250,7 +290,7 @@ a{
 
 .description {
     background-color: whitesmoke;
-    padding: 2%;
+    padding: 2% 2% 5%;
     margin: auto;
     font-size: 1.2rem;
     box-shadow: 5px 10px 18px black;
@@ -258,23 +298,31 @@ a{
 
 .description img{
     width: 100%;
-    margin-bottom: 7%;
+    margin-bottom:3%;
+}
+
+.description>div {
+    padding: 3px 2%;
 }
 
 .trailName{
     font-family: 'Quicksand';
+    margin-top: 1%;
+    font-weight: bold;
+    font-size: 1.6em;
 }
 
 /* Nav Bar */
 .nav_taps {
-    position: relative;
-    height: 20%;
+    position: fixed;
+    /* height: 20%; */
     overflow: hidden;
     text-align: center;
     display: flex;
     flex-wrap: nowrap;
-    width: 100%;
+    width: 46%;
     justify-content: space-around;
+    z-index: 1;
 }
 
 .tabLinks {
@@ -293,20 +341,16 @@ a{
     text-align: center;
     letter-spacing: 1px;
     text-transform: uppercase;
+    border: 0.5px solid #003cb3;
 }
 
 .tabLinks:hover {
-    background-color: #13599e;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 .currentTab{
-    background-color:#13599e;
+    background-color:#003cb3;
 }
-
-.selected {
-    background-color: #C5ECB5;
-    }
 
 .hidden{
     display: none;
@@ -321,10 +365,11 @@ a{
 .locationDescription {
     padding: 0 3%;
     font-size: 1rem;
+    position: relative;
 }
 
-.locationDescription p {
-    font-size: 1.25rem;
+.locationDescription>p {
+    font-size: 1.5rem;
     margin-top: 0;
     font-weight: bolder;
     /* white-space: nowrap; */
@@ -334,7 +379,7 @@ a{
     width: 20%;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 45%;
     transform: translate(-50%,-50%);
     z-index: 99;
 }
@@ -344,28 +389,12 @@ a{
     width: 40%;
 }
 
-.weather_list{
-    background-color: whitesmoke;
-    border-radius: 0 0 10px 10px;
-    width: 100%;
-    height: 81vh;
-    padding: 2%;
-    margin: auto;
-    position: relative;
-    font-size: 1.5rem;
-    box-shadow: 5px 10px 18px black;
-    opacity: 0.95;
-}
-
-.weather_list p{
-    margin-top: 0;
-}
 
 #direction_tab{
     background-color: whitesmoke;
     border-radius: 0 0 10px 10px;
     width: 100%;
-    min-height: 81vh;
+    min-height: 90vh;
     padding: 2%;
     margin: auto;
     position: relative;
@@ -374,10 +403,9 @@ a{
     opacity: 0.95;
 }
 
-
-.list_result:hover {
-    opacity: 1;
-    box-shadow: 7px 12px 20px black;
+#direction_tab>tr>td:nth-child(2) {
+    white-space: nowrap;
+    text-align: right;
 }
 
 .btn {
@@ -397,62 +425,38 @@ a{
 }
 
 .btn-blue {
-    background-color: #1976d2;
-    color: #F2F2F2;
+    background-color: #051d49;
+    color: white;
+    border-radius: 5px;
+    margin-top: 28%;
+    position: absolute;
+    bottom: 20px;
 }
 
 .btn-blue:hover {
-    background-color: #13599e;
+    background-color: #003cb3;
 }
+
+
 
 
 /*************************
 Media Query
 **************************/
-@media (min-width: 1281px) {
-    .responsive {
-        width: 60%;
-        margin-top: -3%;
-    }
 
-    #search_input {
-        height: 85%;
-        font-size: 1.4rem;
-        width: 26%;
-    }
-
-    #runButton {
-        font-size: 1.3rem;
-        margin-top: 10%;
-        padding: 10px;
-    }
-
-    #info_msg {
-        margin-left: -3%;
-    }
+/* --- most Smartphones (portrait)  --- */
+@media (min-width: 320px) and (max-width: 480px) {
+  
 }
 
-@media (min-width: 1025px) and (max-width: 1280px) {
-    .responsive {
-        width: 60%;
-        margin-top: -2%;
-    }
+/* --- Low res Tablets and Smartphones Mobiles (landscape)  --- */
+@media (min-width: 481px) and (max-width: 767px) {
 
-    #search_input {
-        height: 80%;
-        font-size: 1.3rem;
-        width: 27%;
-    }
-
-    #runButton {
-        font-size: 1.3rem;
-        margin-top: 9%;
-        padding: 8px;
-    }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    .responsive {
+/* --- iPads and Tablets (landscrape)  --- */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    /* .responsive {
         width: 60%;
         margin-top: 4%
     }
@@ -466,20 +470,21 @@ Media Query
         font-size: 1.3rem;
         margin-top: 9%;
         padding: 8px;
-    }
+    } */
 }
 
-
-/*THESE TWO SIZES ARE NOT TAKING MEDIA QUERY*/
-/*@media (min-width: 481px) and (max-width: 767px) {
-    .responsive {
-        width: 110%;
-        margin-top: 22%;
-        }
-}
-
-@media (min-width: 320px) and (max-width: 480px) {
+/* --- iPads and Tablets (portrait)  --- */
+@media (min-width: 768px) and (max-width: 1024px) {
 
 }
-*/
 
+/* --- Laptops and Desktops --- */
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+}
+
+/* --- Desktops 1281px to higher --- */
+@media (min-width: 1281px) {
+
+    
+}

@@ -78,18 +78,18 @@ function displayTrailDescription(trail) {
     $('.list_result').addClass('hidden');
     displayDescription();
     const imageOfPlace = $('<img>').attr('src', trail.imgMedium);
-    const nameOfPlace = $('<h1>').addClass('trailName').text(trail.name);
-    const location = $('<div>').html(`<b>Location:</b> ${trail.location}`);
-    const distance = $('<div>').html(`<b>Length:</b> ${trail.distance}`);
-    const rating = $('<div>').html(`<b>Rating:</b> ${trail.stars} out of 5 stars from ${trail.starVotes} reviews`);
-    const summary = $('<div>').addClass('trail_summary').html(`<b>Overview:</b> ${trail.summary}`);
-    const conditionStatus = $('<div>').addClass('condition_status').html(`<b>Status:</b> ${trail.conditionStatus}`);
-    const conditionDetails = $('<div>').addClass('condition_details').html(`<b>Condition:</b> ${trail.conditionDetails || 'Currently, there is no condtition information for this trail.'}`);
-    const ascent = $('<div>').addClass('ascent').html(`<b>Ascent:</b> ${trail.ascent} inches`);
-    const descent = $('<div>').addClass('descent').html(`<b>Descent:</b> ${trail.descent} inches`);
+    const nameOfPlace = $('<p>').addClass('trailName').text(trail.name);
+    const location = $('<div>').html(`<b>Location :</b> ${trail.location}`);
+    const distance = $('<div>').html(`<b>Length :</b> ${trail.distance}`);
+    const rating = $('<div>').html(`<b>Rating :</b> ${trail.stars} out of 5 stars from ${trail.starVotes} reviews`);
+    const summary = $('<div>').addClass('trail_summary').html(`<b>Overview :</b> ${trail.summary}`);
+    const conditionStatus = $('<div>').addClass('condition_status').html(`<b>Status :</b> ${trail.conditionStatus}`);
+    const conditionDetails = $('<div>').addClass('condition_details').html(`<b>Condition :</b> ${trail.conditionDetails || 'Currently, there is no condtition information for this trail.'}`);
+    const ascent = $('<div>').addClass('ascent').html(`<b>Ascent :</b> ${trail.ascent} inches`);
+    const descent = $('<div>').addClass('descent').html(`<b>Descent :</b> ${trail.descent} inches`);
     const pointBCoordinates = trail.coordinates
     const descriptionDiv = $('<div>').addClass('description');
-    const moreInfo = $('<div>').html(`<a href="${trail.url}">More info on ${trail.name}</a>`);
+    const moreInfo = $('<div>').html(`<br><a target="_blank" href="${trail.url}">More info on ${trail.name}</a>`);
     descriptionDiv.append(nameOfPlace, imageOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary, moreInfo);
     $('.descriptionTab').append(descriptionDiv);
     displayDirectionLineOnMap(pointBCoordinates);
@@ -142,11 +142,11 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 var result = document.getElementById('direction_tab');
                 result.innerHTML = "";
                 let newTr1 = document.createElement("tr");
-                newTr1.innerHTML = `<b>Start location:</b> ${response.routes[0].legs[0].start_address}<br>`;
+                newTr1.innerHTML = `<b>Start location :</b> ${response.routes[0].legs[0].start_address}<br>`;
                 let newTr2 = document.createElement("tr");
-                newTr2.innerHTML = `<b>Distance:</b> ${response.routes[0].legs[0].distance.text}.  <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
+                newTr2.innerHTML = `<b>Distance :</b> ${response.routes[0].legs[0].distance.text}.  <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
                 let newTr4 = document.createElement("tr");
-                newTr4.innerHTML = `<b>Destination:</b> ${response.routes[0].legs[0].end_address}<br><br>`;
+                newTr4.innerHTML = `<b>Destination :</b> ${response.routes[0].legs[0].end_address}<br><br>`;
                 result.appendChild(newTr1);
                 result.appendChild(newTr2);
                 result.appendChild(newTr4);
@@ -199,11 +199,11 @@ function renderWeatherOnDom(weather) {
     let timeNow = today.toLocaleTimeString();
     let headline = $('<p>').append(`${weather.cityName}`);
     let line0 = $('<li>').append(weatherImage, (weather.conditionDescription).toUpperCase());
-    let line1 = $('<li>').append(`${dateToday} ${timeNow}`);
-    let line2 = $('<li>').append(`Current temperature: ${weather.currentTempInF} °F `);
-    let line3 = $('<li>').append(`High: ${weather.tempMaxInF} °F / Low: ${weather.tempMinInF} °F `);
-    let line4 = $('<li>').append(`Humidity: ${weather.humidity} %`);
-    let line5 = $('<li>').append(`Wind: ${weather.wind} m/s`);
+    let line1 = $('<li>').append(`<br>${dateToday} ${timeNow}`);
+    let line2 = $('<li>').append(`<b>Current temperature :</b> ${weather.currentTempInF} °F `);
+    let line3 = $('<li>').append(`<b>High :</b> ${weather.tempMaxInF} °F / Low: ${weather.tempMinInF} °F `);
+    let line4 = $('<li>').append(`<b>Humidity :</b> ${weather.humidity} %`);
+    let line5 = $('<li>').append(`<b>Wind :</b> ${weather.wind} m/s`);
 
     let weatherList = $('<ul>').addClass('weather_list hidden');
     weatherList.append(headline, line0, line1, line2, line3, line4, line5);
@@ -245,7 +245,9 @@ function renderMeetUpOnDom(meetup) {
         const eventName = $('<a>', {
             class: 'rsvp',
             text: meetup[m].eventName,
-            href: meetup[m].link
+            href: meetup[m].link,
+            title: 'Meetup.com Link',
+            target: '_blank'
         })
         const meetUp = $('.location_list');
         let meetupDiv = $('<div>').addClass(`meetUp events hidden`);
@@ -254,10 +256,10 @@ function renderMeetUpOnDom(meetup) {
     }
 }
 
-function displaySearchResultMessage() {
-    if (inputFromUser === "") {
-        $(".search_result_message").text('Search result for your current location:');
-    } else {
-        $(".search_result_message").text(`Search result for ${inputFromUser}`);
-    }
-}
+// function displaySearchResultMessage() {
+//     if (inputFromUser === "") {
+//         $(".search_result_message").text('Search result for your current location:');
+//     } else {
+//         $(".search_result_message").text(`Search result for ${inputFromUser}`);
+//     }
+// }
