@@ -52,6 +52,7 @@ function activatePlacesSearch() {
 
 function getresponseFromTrailsList(latitude, longitude) {
     $('.landing_page').addClass('hidden');
+    $("#search_field").val(userInput); 
     $('.loadingImg').removeClass('hidden');
 
     const runningTrails = {

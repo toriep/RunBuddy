@@ -3,6 +3,7 @@ $(document).ready(initializeApp);
 let runningTrails = [];
 let currentLocation = null;
 let inputFromUser = null;
+let userInput = null;
 function initializeApp() {
     addClickHandlersToElements();
 }
@@ -31,11 +32,11 @@ function addClickHandlersToElements() {
 
 function callGoogleAPI() {
     inputFromUser = $("#search_input").val() || $("#search_field").val();
+    userInput = $("#search_input").val() ;
     $("#search_input").val("");
     if (inputFromUser.length === 0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
     } else {//if user typed in a location, make a Geocoding AJAX call
-
         getLatLongFromGeocoding(inputFromUser);
         getCurrentLocationForDirection();
     }
@@ -131,6 +132,7 @@ function displayDescription() {
     $('#direction_tab, .events, .weather_list').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
+    $('.nav_tabs').removeClass('hidden');
     $('.description').removeClass('hidden');
     $('.weather_tab').removeClass('currentTab');
     $('.meetup_tab').removeClass('currentTab');
@@ -140,6 +142,7 @@ function displayDescription() {
 }
 
 function displayResult() {
+    $('.nav_tabs').addClass('hidden');
     $('#direction_tab').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
