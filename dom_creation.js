@@ -168,7 +168,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
 }
 
 function displayWeatherSuccess(responseFromServer) {
-    var weather = {
+    let weather = {
         condition: responseFromServer.weather[0]['main'],
         cityName: responseFromServer.name,
         conditionDescription: responseFromServer.weather[0]['description'],
@@ -182,6 +182,7 @@ function displayWeatherSuccess(responseFromServer) {
         humidity: responseFromServer.main['humidity'],
         wind: responseFromServer.wind['speed']
     };
+    console.log(weather);
     renderWeatherOnDom(weather);
 }
 
@@ -197,13 +198,13 @@ function renderWeatherOnDom(weather) {
     let today = new Date();
     let dateToday = today.toDateString();
     let timeNow = today.toLocaleTimeString();
-    let headline = $('<p>').append(`${weather.cityName}`);
-    let line0 = $('<li>').append(weatherImage, (weather.conditionDescription).toUpperCase());
-    let line1 = $('<li>').append(`<br>${dateToday} ${timeNow}`);
-    let line2 = $('<li>').append(`<b>Current temperature :</b> ${weather.currentTempInF} °F `);
-    let line3 = $('<li>').append(`<b>High :</b> ${weather.tempMaxInF} °F / Low: ${weather.tempMinInF} °F `);
-    let line4 = $('<li>').append(`<b>Humidity :</b> ${weather.humidity} %`);
-    let line5 = $('<li>').append(`<b>Wind :</b> ${weather.wind} m/s`);
+    let headline = $('<div>').append(`${weather.cityName}`);
+    let line0 = $('<li>').append(`<i>As of ${dateToday} ${timeNow}</i>`);
+    let line1 = $('<li>').append(weatherImage, (weather.conditionDescription).toUpperCase());
+    let line2 = $('<li>').append(`<b>Current Temperature :</b> ${weather.currentTempInF} <b>°F</b `);
+    let line3 = $('<li>').append(`<b>High :</b> ${weather.tempMaxInF} <b>°F</b> / <b>Low :</b> ${weather.tempMinInF} <b>°F</b>`);
+    let line4 = $('<li>').append(`<b>Humidity :</b> ${weather.humidity} <b>%</b>`);
+    let line5 = $('<li>').append(`<b>Wind :</b> ${weather.wind} <b>m/s</b>`);
 
     let weatherList = $('<ul>').addClass('weather_list hidden');
     weatherList.append(headline, line0, line1, line2, line3, line4, line5);
