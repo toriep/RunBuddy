@@ -1,6 +1,6 @@
 function displayMapOnDom() {
     $(".landing_page").addClass("hidden");
-    $(".map_page").removeClass("hidden");
+    $(".map_page, .map_area").removeClass("hidden");
     //Map options
     const options = {
         zoom: 11,
@@ -45,7 +45,7 @@ function displayMapOnDom() {
 }
 
 function renderTrailInfoOnDom(markerIsClicked = false) {
-    debugger;
+    $(".location_list").empty();
     if ($('.list_result').length > 0) {
         $(".list_result").remove();
     }

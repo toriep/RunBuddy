@@ -173,7 +173,7 @@ body {
     margin-top: 2vh;
     width: 50vw;
     box-shadow: 5px 10px 18px black;
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 .map_and_trail_list{
@@ -317,7 +317,7 @@ a{
 }
 
 .description img{
-    width: 100%;
+    max-height: 70vh;
     margin-bottom:3%;
 }
 

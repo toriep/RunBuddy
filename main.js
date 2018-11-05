@@ -85,7 +85,6 @@ function geocodingResponse(response) {
 }
 
 function responseFromTrailsList(response) {
-    debugger;
     if(response.trails.length === 0){
         $(".location_list").empty();
         $(".map_page").removeClass("hidden");

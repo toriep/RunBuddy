@@ -65,6 +65,7 @@ function activatePlacesSearch() {
 function getDataFromTrailsList(latitude, longitude) {
     $('.landing_page').addClass('hidden');
     if(userInput){
+        debugger;
         $("#search_field").val(userInput);
     }
     $('.loadingImg').removeClass('hidden');
