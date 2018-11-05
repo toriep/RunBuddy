@@ -99,7 +99,6 @@ function displayTrailDescription(trail) {
 }
 
 function displayDirectionLineOnMap(pointBCoordinates) {
-    debugger;
     $("#map_area").text();
     var pointA = currentLocation,
         pointB = pointBCoordinates,

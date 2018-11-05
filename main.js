@@ -42,17 +42,6 @@ function callGoogleAPI() {
     }
 }
 
-function responseFromGeolocation(response) {
-    runningTrails = [];
-    let lat = response.location.lat;
-    let lng = response.location.lng;
-    let center = new google.maps.LatLng(lat, lng);
-    runningTrails.push(center);
-    getresponseFromTrailsList(lat, lng);
-    getDataFromWeather(lat, lng);
-    getDataFromMeetUp(lat, lng);
-}
-
 function alertMsgAndRefresh() {
     $('.landing_page').addClass('hidden');
     $('.loadingImg').removeClass('hidden');
