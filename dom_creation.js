@@ -10,6 +10,7 @@ function displayMapOnDom() {
     map = new google.maps.Map(document.getElementById("map_area"), options);
     //Add marker
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
+        // debugger;
         let marker = new google.maps.Marker({
             position: runningTrails[trailIndex].coordinates,
             map: map,
@@ -121,22 +122,10 @@ function displayDirectionLineOnMap(pointBCoordinates) {
         },
         map = new google.maps.Map(document.getElementById('map_area'), myOptions),
         // Instantiate a directions service.
-        directionsService = new google.maps.DirectionsService, //I'm from pointA
+        directionsService = new google.maps.DirectionsService,
         directionsDisplay = new google.maps.DirectionsRenderer({ //find me a direction
             map: map
-        }),
-        markerA = new google.maps.Marker({
-            position: pointA,
-            title: "point A",
-            label: "A",
-            map: map
-        }),
-        markerB = new google.maps.Marker({
-            position: pointB,
-            title: "point B",
-            label: "B",
-            map: map
-        });
+        })
     // get route from A to B
     calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
 }
