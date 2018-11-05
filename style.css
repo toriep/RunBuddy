@@ -129,7 +129,7 @@ body {
 #info_msg {
     font-size: 0.5em;
     font-weight: bold;
-    /* font-style: italic; */
+    font-style: italic;
     color: #351706e5;
     text-align: center;
     width: 40%;

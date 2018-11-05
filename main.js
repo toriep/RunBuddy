@@ -50,6 +50,7 @@ function responseFromGeolocation(response) {
     runningTrails.push(center);
     getresponseFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
+    getWeatherForecast(lat, lng);
     getDataFromMeetUp(lat, lng);
 }
 
@@ -79,6 +80,7 @@ function geocodingResponse(response) {
     runningTrails.push(center);
     getresponseFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
+    getWeatherForecast(lat, lng);
     getDataFromMeetUp(lat, lng);
 }
 

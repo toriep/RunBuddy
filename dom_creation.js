@@ -183,13 +183,12 @@ function displayWeatherSuccess(responseFromServer) {
         wind: responseFromServer.wind['speed'],
         clouds: responseFromServer.clouds['all'],
     };
-    console.log(responseFromServer);
     renderWeatherOnDom(weather);
 }
 
 function renderWeatherOnDom(weather) {
     if ($('.weather_list').length > 0) {
-        $(".weather_list").remove();
+        $('.weather_list').remove();
     }
     let imgSrc = `http://openweathermap.org/img/w/${weather.iconId}.png`;
     let weatherImage = $('<img class="weather_icon">').attr({
@@ -199,14 +198,15 @@ function renderWeatherOnDom(weather) {
     let today = new Date();
     let dateToday = today.toDateString();
     let timeNow = today.toLocaleTimeString();
+    let currentInC = ((weather.currentTempInF -32) * 5/9).toFixed(1);
     let highInC = ((weather.tempMaxInF - 32) * 5/9).toFixed(1);
     let lowInC = ((weather.tempMinInF - 32) * 5/9).toFixed(1);
     let headline = $('<div>').append(`${weather.cityName}`);
     let line0 = $('<li>').append(`<i>As of ${dateToday} ${timeNow}</i>`);
     let line1 = $('<li>').append(weatherImage, (weather.conditionDescription).toUpperCase());
-    let line2 = $('<li>').append(`<b>Current Temperature :</b> ${weather.currentTempInF} <b>°F</b `);
-    let line3 = $('<li>').append(`<b>High :</b> ${weather.tempMaxInF} <b>°F</b>&nbsp; | &nbsp;${highInC} <b>°C</b>`);
-    let line4 = $('<li>').append(`<b>Low :</b> ${weather.tempMinInF} <b>°F</b>&nbsp; | &nbsp;${lowInC} <b>°C</b>`);
+    let line2 = $('<li>').append(`<b>Current Temperature :</b> ${weather.currentTempInF} <b>°F</b>&nbsp; (${currentInC} <b>°C</b>) `);
+    let line3 = $('<li>').append(`<b>High :</b> ${weather.tempMaxInF} <b>°F</b>&nbsp; (${highInC} <b>°C</b>)`);
+    let line4 = $('<li>').append(`<b>Low :</b> ${weather.tempMinInF} <b>°F</b>&nbsp; (${lowInC} <b>°C</b>)`);
     let line5 = $('<li>').append(`<b>Humidity :</b> ${weather.humidity} <b>%</b>`);
     let line6 = $('<li>').append(`<b>Wind :</b> ${weather.wind} <b>m/s</b>`);
     let line7 = $('<li>').append(`<b>Cloudiness :</b> ${weather.clouds} <b>%</b>`);
@@ -215,6 +215,81 @@ function renderWeatherOnDom(weather) {
     weatherList.append(headline, line0, line1, line2, line3, line4, line5, line6, line7);
     $('.location_list').append(weatherList);
 }
+
+function displayForecastSuccess(responseFromServer) {
+    console.log('forecast:', responseFromServer.list);
+    let forecast = {
+        // day1: responseFromServer.list[0].weather[0].description
+        day1: responseFromServer.list[0].dt_txt,
+        day1Cond: responseFromServer.list[0].weather[0].description,
+        day1High: (responseFromServer.list[0].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day1Low: (responseFromServer.list[0].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+        // day1Icon: responseFromServer.list[0].weather[0].icon,
+
+        day2: responseFromServer.list[8].dt_txt,
+        day2Cond: responseFromServer.list[8].weather[0].description,
+        day2High: (responseFromServer.list[8].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day2Low: (responseFromServer.list[8].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+
+        day3: responseFromServer.list[16].dt_txt,
+        day3Cond: responseFromServer.list[16].weather[0].description,
+        day3High: (responseFromServer.list[16].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day3Low: (responseFromServer.list[16].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+
+        day4: responseFromServer.list[24].dt_txt,
+        day4Cond: responseFromServer.list[24].weather[0].description,
+        day4High: (responseFromServer.list[24].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day4Low: (responseFromServer.list[24].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+
+        day5: responseFromServer.list[32].dt_txt,
+        day5Cond: responseFromServer.list[32].weather[0].description,
+        day5High: (responseFromServer.list[32].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day5Low: (responseFromServer.list[32].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+
+    };
+    renderForecastOnDom(forecast);
+}
+
+function renderForecastOnDom(forecast) {
+    //will clean up later~~~~~~~~~~~~~~~~~~~ just testing here for now
+    let monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    let monStr1 = monthList[((forecast.day1).slice(5,7))-1];
+    let dayStr1 = ((forecast.day1).slice(8,10));
+
+    let monStr2 = monthList[((forecast.day2).slice(5,7))-1];
+    let dayStr2 = ((forecast.day2).slice(8,10));
+
+    let monStr3 = monthList[((forecast.day3).slice(5,7))-1];
+    let dayStr3 = ((forecast.day3).slice(8,10));
+
+    let monStr4 = monthList[((forecast.day4).slice(5,7))-1];
+    let dayStr4 = ((forecast.day4).slice(8,10));
+
+    let monStr5 = monthList[((forecast.day5).slice(5,7))-1];
+    let dayStr5 = ((forecast.day5).slice(8,10));
+
+    let headline = `<b>5 Day Forecast :</b> (will fix the layout later)`;
+    let forecastTable1 = $('<tr>').append(`<td>${monStr1} ${dayStr1} : ${forecast.day1Cond} 
+        with High ${forecast.day1High}°F | Low ${forecast.day1Low}°F</td>`);
+
+    let forecastTable2 = $('<tr>').append(`<td>${monStr2} ${dayStr2} : ${forecast.day2Cond}
+        with High ${forecast.day2High}°F | Low ${forecast.day2Low}°F</td>`);
+
+    let forecastTable3 = $('<tr>').append(`<td>${monStr3} ${dayStr3} : ${forecast.day3Cond}        
+        with High ${forecast.day3High}°F | Low ${forecast.day3Low}°F</td>`);
+
+    let forecastTable4 = $('<tr>').append(`<td>${monStr4} ${dayStr4} : ${forecast.day4Cond}
+        with High ${forecast.day4High}°F | Low ${forecast.day4Low}°F</td>`);
+
+    let forecastTable5 = $('<tr>').append(`<td>${monStr5} ${dayStr5} : ${forecast.day5Cond}
+        with High ${forecast.day5High}°F | Low ${forecast.day5Low}°F</td>`);
+
+    let forecastList = $('<table>').addClass('weather_list hidden');
+    forecastList.append(headline, forecastTable1, forecastTable2, forecastTable3, forecastTable4, forecastTable5);
+    $('.location_list').append(forecastList);
+}
+
 
 function displayMeetUpSuccess(response) {
     if ($('.events').length > 0) {
