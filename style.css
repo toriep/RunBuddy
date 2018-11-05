@@ -12,7 +12,8 @@ body {
    background-repeat: repeat-y; 
    background-position: 0 40%;
    background-size: cover;
-   background-attachment: fixed
+   background-attachment: fixed;
+   overflow: hidden;
 }
 
 .container {
@@ -189,7 +190,7 @@ body {
     display: inline-block;
     height: 93vh;
     margin-right: 2px;
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
     /* box-shadow: 5px 10px 18px black; */
     border-radius: 10px;
@@ -568,4 +569,17 @@ Media Query
         cursor: pointer;
         margin-left: 10px;
     }
+}
+
+.group_tabs::-webkit-scrollbar {
+    background: rgba(220, 225, 228, 0.53);
+} 
+
+.group_tabs::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #6299d1f6; 
+}
+
+.group_tabs:hover, .group_tabs:active, .group_tabs:focus {
+    overflow-y: auto;
 }

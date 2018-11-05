@@ -32,7 +32,7 @@ function addClickHandlersToElements() {
 
 function callGoogleAPI() {
     inputFromUser = $("#search_input").val() || $("#search_field").val();
-    userInput = $("#search_input").val() ;
+    userInput = $("#search_input").val();
     $("#search_input").val("");
     if (inputFromUser.length === 0) {//if the search bar is empty, get current location
         getDataFromGeolocation();
@@ -85,8 +85,7 @@ function geocodingResponse(response) {
 }
 
 function responseFromTrailsList(response) {
-    debugger;
-    if(response.trails.length === 0){
+    if (response.trails.length === 0) {
         $(".location_list").empty();
         $(".map_page").removeClass("hidden");
         $(".landing_page, .map_area, .loadingImg").addClass('hidden');
