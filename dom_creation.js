@@ -180,9 +180,10 @@ function displayWeatherSuccess(responseFromServer) {
         sunriseTime: (responseFromServer.sys['sunrise']),
         sunsetTime: (responseFromServer.sys['sunset']),
         humidity: responseFromServer.main['humidity'],
-        wind: responseFromServer.wind['speed']
+        wind: responseFromServer.wind['speed'],
+        clouds: responseFromServer.clouds['all'],
     };
-    console.log(weather);
+    console.log(responseFromServer);
     renderWeatherOnDom(weather);
 }
 
@@ -198,17 +199,21 @@ function renderWeatherOnDom(weather) {
     let today = new Date();
     let dateToday = today.toDateString();
     let timeNow = today.toLocaleTimeString();
+    let highInC = ((weather.tempMaxInF - 32) * 5/9).toFixed(1);
+    let lowInC = ((weather.tempMinInF - 32) * 5/9).toFixed(1);
     let headline = $('<div>').append(`${weather.cityName}`);
     let line0 = $('<li>').append(`<i>As of ${dateToday} ${timeNow}</i>`);
     let line1 = $('<li>').append(weatherImage, (weather.conditionDescription).toUpperCase());
     let line2 = $('<li>').append(`<b>Current Temperature :</b> ${weather.currentTempInF} <b>°F</b `);
-    let line3 = $('<li>').append(`<b>High :</b> ${weather.tempMaxInF} <b>°F</b> / <b>Low :</b> ${weather.tempMinInF} <b>°F</b>`);
-    let line4 = $('<li>').append(`<b>Humidity :</b> ${weather.humidity} <b>%</b>`);
-    let line5 = $('<li>').append(`<b>Wind :</b> ${weather.wind} <b>m/s</b>`);
-
+    let line3 = $('<li>').append(`<b>High :</b> ${weather.tempMaxInF} <b>°F</b>&nbsp; | &nbsp;${highInC} <b>°C</b>`);
+    let line4 = $('<li>').append(`<b>Low :</b> ${weather.tempMinInF} <b>°F</b>&nbsp; | &nbsp;${lowInC} <b>°C</b>`);
+    let line5 = $('<li>').append(`<b>Humidity :</b> ${weather.humidity} <b>%</b>`);
+    let line6 = $('<li>').append(`<b>Wind :</b> ${weather.wind} <b>m/s</b>`);
+    let line7 = $('<li>').append(`<b>Cloudiness :</b> ${weather.clouds} <b>%</b>`);
+    
     let weatherList = $('<ul>').addClass('weather_list hidden');
-    weatherList.append(headline, line0, line1, line2, line3, line4, line5);
-    $('.single_location_detail').append(weatherList);
+    weatherList.append(headline, line0, line1, line2, line3, line4, line5, line6, line7);
+    $('.location_list').append(weatherList);
 }
 
 function displayMeetUpSuccess(response) {
