@@ -215,7 +215,7 @@ function renderWeatherOnDom(weather) {
     
     let weatherList = $('<ul>').addClass('weather_list hidden');
     weatherList.append(headline, line0, line1, line2, line3, line4, line5, line6, line7);
-    $('.location_list').append(weatherList);
+    $('.single_location_detail').append(weatherList);
 }
 
 function displayForecastSuccess(responseFromServer) {
@@ -337,11 +337,3 @@ function renderMeetUpOnDom(meetup) {
         $(meetUp).append(meetupDiv)
     }
 }
-
-// function displaySearchResultMessage() {
-//     if (inputFromUser === "") {
-//         $(".search_result_message").text('Search result for your current location:');
-//     } else {
-//         $(".search_result_message").text(`Search result for ${inputFromUser}`);
-//     }
-// }
