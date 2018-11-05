@@ -14,6 +14,7 @@ function responseFromGeolocation(response) {
     let lat = response.location.lat;
     let lng = response.location.lng;
     let center = new google.maps.LatLng(lat, lng);
+    currentLocation = new google.maps.LatLng(lat, lng);
     runningTrails.push(center);
     getresponseFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
