@@ -7,7 +7,7 @@ function displayMapOnDom() {
         center: runningTrails[0],
     }
     //New map
-    let map = new google.maps.Map(document.getElementById("map_area"), options);
+    map = new google.maps.Map(document.getElementById("map_area"), options);
     //Add marker
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
         let marker = new google.maps.Marker({
@@ -20,6 +20,8 @@ function displayMapOnDom() {
         let infoWindow = new google.maps.InfoWindow({
             content: contentString
         })
+
+        marker["infoWindow"] = infoWindow;
 
         marker.addListener('mouseover', () => {
             infoWindow.open(map, marker);

@@ -5,6 +5,7 @@ let currentLocation = null;
 let inputFromUser = null;
 let userInput = null;
 let markersOnMap = [];
+let map = {};
 
 function initializeApp() {
     addClickHandlersToElements();
@@ -21,7 +22,7 @@ function addClickHandlersToElements() {
     });
     $("#search_input, #search_field").on("keyup", event => {
         if (event.keyCode === 13) { //if enter key is released
-            $("#runButton, .search_button").click(); //runs the function attaches to click event off add button
+            $("#runButton, .search_button").click(callGoogleAPI()); //runs the function attaches to click event off add button
         }
     });
     $('.location_list').on('click', '.list_result', notifyTrailClicked);
@@ -200,6 +201,7 @@ function notifyTrailClicked(event) {
     const data = $(event.currentTarget).data('coordinates');
     for (let i = 0; i < markersOnMap.length; i++) {
         if (markersOnMap[i].position.lat === data.lat && markersOnMap[i].position.lng === data.lng) {
+            markersOnMap[i].infoWindow.open(map, markersOnMap[i]);
             markersOnMap[i].setAnimation(google.maps.Animation.BOUNCE);
         }
     }
@@ -209,6 +211,7 @@ function resetNotifyTrailClicked(event) {
     const data = $(event.currentTarget).data('coordinates');
     for (let i = 0; i < markersOnMap.length; i++) {
         if (markersOnMap[i].position.lat === data.lat && markersOnMap[i].position.lng === data.lng) {
+            markersOnMap[i].infoWindow.close(map, markersOnMap[i]);
             markersOnMap[i].setAnimation(null);
         }
     }
