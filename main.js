@@ -4,6 +4,9 @@ let runningTrails = [];
 let currentLocation = null;
 let inputFromUser = null;
 let userInput = null;
+let markersOnMap = [];
+let map = {};
+
 function initializeApp() {
     addClickHandlersToElements();
 }
@@ -19,9 +22,11 @@ function addClickHandlersToElements() {
     });
     $("#search_input, #search_field").on("keyup", event => {
         if (event.keyCode === 13) { //if enter key is released
-            $("#runButton, .search_button").click(); //runs the function attaches to click event off add button
+            $("#runButton, .search_button").click(callGoogleAPI()); //runs the function attaches to click event off add button
         }
     });
+    $('.location_list').on('click', '.list_result', notifyTrailClicked);
+    $('.location_list').on('mouseleave', '.list_result', resetNotifyTrailClicked);
     /** displaying tabs */
     $('.trails_tab').click(displayResult);
     $('.description_tab').click(displayDescription);
@@ -44,6 +49,7 @@ function callGoogleAPI() {
 
 function responseFromGeolocation(response) {
     runningTrails = [];
+    markersOnMap = [];
     let lat = response.location.lat;
     let lng = response.location.lng;
     let center = new google.maps.LatLng(lat, lng);
@@ -73,6 +79,7 @@ function geocodingResponse(response) {
         alertMsgAndRefresh();
     }
     runningTrails = [];
+    markersOnMap = [];
     const latLong = response.results[0].geometry.location;
     const lat = latLong.lat.toFixed(4);
     const lng = latLong.lng.toFixed(4);
@@ -190,3 +197,22 @@ function displayDirection() {
     $('.direction_tab').addClass('currentTab');
 }
 
+function notifyTrailClicked(event) {
+    const data = $(event.currentTarget).data('coordinates');
+    for (let i = 0; i < markersOnMap.length; i++) {
+        if (markersOnMap[i].position.lat === data.lat && markersOnMap[i].position.lng === data.lng) {
+            markersOnMap[i].infoWindow.open(map, markersOnMap[i]);
+            markersOnMap[i].setAnimation(google.maps.Animation.BOUNCE);
+        }
+    }
+}
+
+function resetNotifyTrailClicked(event) {
+    const data = $(event.currentTarget).data('coordinates');
+    for (let i = 0; i < markersOnMap.length; i++) {
+        if (markersOnMap[i].position.lat === data.lat && markersOnMap[i].position.lng === data.lng) {
+            markersOnMap[i].infoWindow.close(map, markersOnMap[i]);
+            markersOnMap[i].setAnimation(null);
+        }
+    }
+}
