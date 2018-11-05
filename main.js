@@ -86,11 +86,11 @@ function geocodingResponse(response) {
 
 function responseFromTrailsList(response) {
     if(response.trails.length === 0){
-        $(".location_list").empty();
+        $(".results_list").empty();
         $(".map_page").removeClass("hidden");
         $(".landing_page, .map_area, .loadingImg").addClass('hidden');
         let noResult = $('<div>').addClass('no-result').text(`Your search did not match any trail results. Please try a different location.`)
-        $('.location_list').append(noResult);
+        $('.results_list').append(noResult);
         return;
     }
     $('.nav_tabs').addClass('hidden');
@@ -115,7 +115,7 @@ function displayError(sub) {
     // console.log(`${sub} AJAX call failed.`);
 }
 
-// const direction_tab = $('#direction_tab');
+// const direction_tab = $('#direction_container');
 // const list_result = $('.list_result');
 // const events = $('.events');
 // const description = $('.description');
@@ -127,7 +127,7 @@ function displayError(sub) {
 // const trails_tab = $('.trails_tab');
 
 function displayWeather() {
-    $('#direction_tab').addClass('hidden');
+    $('#direction_container').addClass('hidden');
     $('.list_result').addClass('hidden');
     $('.events').addClass('hidden');
     $('.description').addClass('hidden');
@@ -140,7 +140,7 @@ function displayWeather() {
 }
 
 function displayDescription() {
-    $('#direction_tab, .events, .weather_list').addClass('hidden');
+    $('#direction_container, .events, .weather_list').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.nav_tabs').removeClass('hidden');
@@ -154,7 +154,7 @@ function displayDescription() {
 
 function displayResult() {
     $('.nav_tabs').addClass('hidden');
-    $('#direction_tab').addClass('hidden');
+    $('#direction_container').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.description').addClass('hidden');
@@ -169,7 +169,7 @@ function displayMeetUp() {
     $('.list_result').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').removeClass('hidden');
-    $('#direction_tab').addClass('hidden');
+    $('#direction_container').addClass('hidden');
     $('.description_tab').removeClass('currentTab');
     $('.weather_tab').removeClass('currentTab');
     $('.direction_tab').removeClass('currentTab');
@@ -182,7 +182,7 @@ function displayDirection() {
     $('.list_result').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').addClass('hidden');
-    $('#direction_tab').removeClass('hidden');
+    $('#direction_container').removeClass('hidden');
     $('.description_tab').removeClass('currentTab');
     $('.meetup_tab').removeClass('currentTab');
     $('.weather_tab').removeClass('currentTab');

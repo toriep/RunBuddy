@@ -182,7 +182,7 @@ body {
     min-height: 70vh;
 }
 
-.group_tabs{
+.container_tabs{
     position: relative;
     width: 47vw;
     right: 1vw;
@@ -195,7 +195,7 @@ body {
     border-radius: 10px;
 }
 
-.location_list {
+.results_list {
     margin-right: 0.1vw;
 }
 
@@ -419,7 +419,7 @@ a{
     width: 40%;
 }
 
-#direction_tab{
+#direction_container{
     background-color: whitesmoke;
     border-radius: 0 0 10px 10px;
     width: 100%;
@@ -432,17 +432,17 @@ a{
     opacity: 0.95;
 }
 
-#direction_tab>tr>td:nth-child(2) {
+#direction_container>tr>td:nth-child(2) {
     white-space: nowrap;
     text-align: right;
     padding-left: 70px;
 }
 
-#direction_tab>tr:nth-child(1n+4) {
+#direction_container>tr:nth-child(1n+4) {
     line-height: 2;
 }
 
-#direction_tab>tr>td>div {
+#direction_container>tr>td>div {
     padding-left: 20px;
     color: blue;
 }
