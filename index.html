@@ -13,7 +13,7 @@
         async defer></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="config/api.js"></script>
-    <script type="text/javascript" src="ajax_calls.js"></script>
+    <script type="text/javascript" src="ajax_calls.js"></script> 
     <script type="text/javascript" src="dom_creation.js"></script>
 </head>
 
@@ -44,26 +44,24 @@
     <div class="map_page hidden">
         <div class="search_and_logo">
             <img class="map_page_logo" src="./images/RunBuddyLogo.png">
-            <div class="search_bar">
+            <form class="search_bar">
                 <input type="text" id="search_field" placeholder="Enter ZIP Code or City">
-                <div class="input-group-btn form-group">
-                    <img class="search_button" src="./images/search-hover.png" alt="">
-                </div>
-            </div>
+                <img class="search_button" src="./images/search.png" alt="">
+            </form>
         </div>
         <div class="map_and_trail_list">
             <div class="map_and_search_result_message">
                 <div class="search_result_message"></div>
                 <div id="map_area"></div>
             </div>
+            <div class="nav_tabs hidden">
+                <div class="trails_tab tabLinks hidden">< BACK</div> 
+                <div class="description_tab tabLinks">Details</div>
+                <div class="direction_tab tabLinks">Direction</div>
+                <div class="weather_tab tabLinks">Weather</div>
+                <div class="meetup_tab tabLinks">Events</div>
+            </div>
             <div class="group_tabs">
-                <div class="nav_tabs hidden">
-                    <div class="trails_tab tabLinks hidden">< BACK</div> 
-                    <div class="description_tab tabLinks">Details</div>
-                    <div class="direction_tab tabLinks">Direction</div>
-                    <div class="weather_tab tabLinks">Weather</div>
-                    <div class="meetup_tab tabLinks">Events</div>
-                </div>
                 <div class="location_list">
                 </div>
                 <div class="single_location_detail hidden">
