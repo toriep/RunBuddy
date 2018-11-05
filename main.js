@@ -78,13 +78,23 @@ function geocodingResponse(response) {
     const lng = latLong.lng.toFixed(4);
     let center = new google.maps.LatLng(lat, lng);
     runningTrails.push(center);
-    getresponseFromTrailsList(lat, lng);
+    getDataFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
     getWeatherForecast(lat, lng);
     getDataFromMeetUp(lat, lng);
 }
 
 function responseFromTrailsList(response) {
+    debugger;
+    if(response.trails.length === 0){
+        $(".location_list").empty();
+        $(".map_page").removeClass("hidden");
+        $(".landing_page, .map_area, .loadingImg").addClass('hidden');
+        let noResult = $('<div>').addClass('no-result').text(`Your search did not match any trail results. Please try a different location.`)
+        $('.location_list').append(noResult);
+        return;
+    }
+    $('.nav_tabs').addClass('hidden');
     const { trails } = response;
     trails.map((trail) => {
         const { latitude, longitude } = trail;

@@ -45,6 +45,7 @@ function displayMapOnDom() {
 }
 
 function renderTrailInfoOnDom(markerIsClicked = false) {
+    debugger;
     if ($('.list_result').length > 0) {
         $(".list_result").remove();
     }
