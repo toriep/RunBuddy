@@ -131,6 +131,7 @@ function displayDescription() {
     $('#direction_tab, .events, .weather_list').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
+    $('.nav_tabs').removeClass('hidden');
     $('.description').removeClass('hidden');
     $('.weather_tab').removeClass('currentTab');
     $('.meetup_tab').removeClass('currentTab');
@@ -140,6 +141,7 @@ function displayDescription() {
 }
 
 function displayResult() {
+    $('.nav_tabs').addClass('hidden');
     $('#direction_tab').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');

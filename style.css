@@ -198,6 +198,12 @@ body {
     margin-right: 0.1vw;
 }
 
+.single_location_detail{
+    margin-right: 0.1vw;
+    position: relative;
+    top: 6vh;
+}
+
 .meetup_tab{
     background-color: white;
     color: black;
@@ -325,7 +331,7 @@ a{
 }
 
 /* Nav Bar */
-.nav_taps {
+.nav_tabs {
     position: fixed;
     overflow: hidden;
     text-align: center;
