@@ -22,9 +22,10 @@ body {
 }
 
 .form-inline {
-    position: relative;
-    top: 33vh;
-    left: 53%;
+    position: absolute;
+    top: 55vh;
+    left: 55vw;
+    width: 100%;
     transform: translate(-50%,-50%);
     text-align: center;
     font-size: 2.5rem;
@@ -39,6 +40,7 @@ body {
 #search_input {
     width: 35vw;
     font-size: 1.7rem;
+    padding: 5px 0;
     display: inline-block;
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -47,8 +49,7 @@ body {
     background-color: rgba(255, 255, 255, 0.7);
     box-shadow: inset 1px 1px 10px rgb(90, 89, 89);
     outline: none;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-radius: 5px;
 }
 
 #runButton {
@@ -115,7 +116,7 @@ body {
 
 .logo {
     position: relative;
-    top: 27vh;
+    top: 30vh;
     left: 52vw;
     transform: translate(-50%,-50%);
     text-align: center;
@@ -128,8 +129,8 @@ body {
 #info_msg {
     font-size: 0.5em;
     font-weight: bold;
-    font-style: italic;
-    color: #351706fa;
+    /* font-style: italic; */
+    color: #351706e5;
     text-align: center;
     width: 40%;
     position: relative;
@@ -142,8 +143,9 @@ body {
     background-color: white;
     opacity: 0.7;
     align-content: center;
-    border: 1px dotted black;
+    border-radius: 3px;
     font-family: 'Poppins', sans-serif;
+    box-shadow: 1px 1px 5px rgb(4, 109, 26);
 }
 
 .weather_tab {
@@ -232,7 +234,7 @@ a{
 }
 
 .weather_list>li {
-    font-size: 0.9em;
+    font-size: 0.8em;
 }
 
 .weather_icon {
@@ -310,7 +312,6 @@ a{
 /* Nav Bar */
 .nav_taps {
     position: fixed;
-    /* height: 20%; */
     overflow: hidden;
     text-align: center;
     display: flex;
@@ -384,7 +385,6 @@ a{
     width: 40%;
 }
 
-
 #direction_tab{
     background-color: whitesmoke;
     border-radius: 0 0 10px 10px;
@@ -401,6 +401,16 @@ a{
 #direction_tab>tr>td:nth-child(2) {
     white-space: nowrap;
     text-align: right;
+    padding-left: 70px;
+}
+
+#direction_tab>tr:nth-child(1n+4) {
+    line-height: 2;
+}
+
+#direction_tab>tr>td>div {
+    padding-left: 20px;
+    color: blue;
 }
 
 .btn {
@@ -466,6 +476,13 @@ Media Query
 
 /* --- Desktops 1281px to higher --- */
 @media (min-width: 1281px) {
+    @keyframes loadingPeople {
+        0% {left: 37%; top: 50%;}
+        30% {left: 42%; top: 48%;}
+        75% {left: 47%; top: 50%;}
+        100% {left: 55%; top: 48%;}
+    }
+
     .loadingImg{
         width: 22%;
         position: absolute;
@@ -475,16 +492,9 @@ Media Query
         z-index: 99;
         animation-name: loadingPeople;
         animation-duration: 1s;
-        animation-iteration-count: 3;
+        animation-iteration-count: infinite;
     }
     
-    @keyframes loadingPeople {
-        0% {left: 37%;}
-        30% {left: 42%;}
-        75% {left: 47%;}
-        100% {left: 55%;}
-    }
-
     .search_and_logo{
         display: flex;
         justify-content: space-around;
@@ -499,8 +509,8 @@ Media Query
     }
 
     .search_button {
-        height: 37px;
+        height: 35px;
         cursor: pointer;
-        margin-left: 1vw;
+        margin-left: 10px;
     }
 }
