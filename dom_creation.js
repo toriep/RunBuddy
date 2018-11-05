@@ -21,7 +21,17 @@ function displayMapOnDom() {
             content: contentString
         })
 
-        marker.addListener('click', function () {
+        marker.addListener('mouseover', () => {
+            infoWindow.open(map, marker);
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        })
+
+        marker.addListener('mouseout', () => {
+            infoWindow.close(map, marker);
+            marker.setAnimation(null);
+        })
+
+        marker.addListener('click', () => {
             infoWindow.open(map, marker);
             for (let i = 1; i < runningTrails.length; i++) {
                 if (runningTrails[i].coordinates.lat === marker.position.lat && runningTrails[i].coordinates.lng === marker.position.lng) {
@@ -40,6 +50,7 @@ function displayMapOnDom() {
                 setTimeout(function () { infoWindow.close(); }, 1000);
             }
         });
+        markersOnMap.push(marker);
     }
     renderTrailInfoOnDom();
 }
@@ -49,7 +60,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         $(".list_result").remove();
     }
     for (let i = 1; i < runningTrails.length; i++) {
-        let listResultsDiv = $('<div>').addClass('list_result');
+        let listResultsDiv = $('<div>').addClass('list_result').data('coordinates', runningTrails[i].coordinates);
         if (markerIsClicked && i === 1) {
             listResultsDiv.addClass('selected')
         }
@@ -219,7 +230,6 @@ function renderWeatherOnDom(weather) {
 }
 
 function displayForecastSuccess(responseFromServer) {
-    console.log('forecast:', responseFromServer.list);
     let forecast = {
         day1: responseFromServer.list[11].dt_txt,
         day1Cond: responseFromServer.list[0].weather[0].description,
