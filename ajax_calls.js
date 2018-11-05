@@ -77,8 +77,7 @@ function activatePlacesSearch() {
 
 function getDataFromTrailsList(latitude, longitude) {
     $('.landing_page').addClass('hidden');
-    if(userInput){
-        debugger;
+    if (userInput) {
         $("#search_field").val(userInput);
     }
     $('.loadingImg').removeClass('hidden');
@@ -86,7 +85,7 @@ function getDataFromTrailsList(latitude, longitude) {
     const runningTrails = {
         dataType: 'JSON',
         method: 'GET',
-        url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxResults=30&key=${TRAIL_API_KEY}`,
+        url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxResults=20&key=${TRAIL_API_KEY}`,
         success: responseFromTrailsList,
     }
     $.ajax(runningTrails);

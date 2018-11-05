@@ -7,21 +7,34 @@ function displayMapOnDom() {
         center: runningTrails[0],
     }
     //New map
-    let map = new google.maps.Map(document.getElementById("map_area"), options);
+    map = new google.maps.Map(document.getElementById("map_area"), options);
     //Add marker
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
+        // debugger;
         let marker = new google.maps.Marker({
             position: runningTrails[trailIndex].coordinates,
             map: map,
             animation: google.maps.Animation.DROP,
-            icon: "images/run_buddy_marker.png"
+            icon: "images/run_buddy_marker2.png"
         });
         let contentString = "<h3>" + runningTrails[trailIndex].name + "</h3>";
         let infoWindow = new google.maps.InfoWindow({
             content: contentString
         })
 
-        marker.addListener('click', function () {
+        marker["infoWindow"] = infoWindow;
+
+        marker.addListener('mouseover', () => {
+            infoWindow.open(map, marker);
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        })
+
+        marker.addListener('mouseout', () => {
+            infoWindow.close(map, marker);
+            marker.setAnimation(null);
+        })
+
+        marker.addListener('click', () => {
             infoWindow.open(map, marker);
             for (let i = 1; i < runningTrails.length; i++) {
                 if (runningTrails[i].coordinates.lat === marker.position.lat && runningTrails[i].coordinates.lng === marker.position.lng) {
@@ -40,6 +53,7 @@ function displayMapOnDom() {
                 setTimeout(function () { infoWindow.close(); }, 1000);
             }
         });
+        markersOnMap.push(marker);
     }
     renderTrailInfoOnDom();
 }
@@ -50,7 +64,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         $(".list_result").remove();
     }
     for (let i = 1; i < runningTrails.length; i++) {
-        let listResultsDiv = $('<div>').addClass('list_result');
+        let listResultsDiv = $('<div>').addClass('list_result').data('coordinates', runningTrails[i].coordinates);
         if (markerIsClicked && i === 1) {
             listResultsDiv.addClass('selected')
         }
@@ -109,22 +123,10 @@ function displayDirectionLineOnMap(pointBCoordinates) {
         },
         map = new google.maps.Map(document.getElementById('map_area'), myOptions),
         // Instantiate a directions service.
-        directionsService = new google.maps.DirectionsService, //I'm from pointA
+        directionsService = new google.maps.DirectionsService,
         directionsDisplay = new google.maps.DirectionsRenderer({ //find me a direction
             map: map
-        }),
-        markerA = new google.maps.Marker({
-            position: pointA,
-            title: "point A",
-            label: "A",
-            map: map
-        }),
-        markerB = new google.maps.Marker({
-            position: pointB,
-            title: "point B",
-            label: "B",
-            map: map
-        });
+        })
     // get route from A to B
     calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
 }
@@ -201,9 +203,9 @@ function renderWeatherOnDom(weather) {
     let today = new Date();
     let dateToday = today.toDateString();
     let timeNow = today.toLocaleTimeString();
-    let currentInC = ((weather.currentTempInF -32) * 5/9).toFixed(1);
-    let highInC = ((weather.tempMaxInF - 32) * 5/9).toFixed(1);
-    let lowInC = ((weather.tempMinInF - 32) * 5/9).toFixed(1);
+    let currentInC = ((weather.currentTempInF - 32) * 5 / 9).toFixed(1);
+    let highInC = ((weather.tempMaxInF - 32) * 5 / 9).toFixed(1);
+    let lowInC = ((weather.tempMinInF - 32) * 5 / 9).toFixed(1);
     let headline = $('<div>').append(`${weather.cityName}`);
     let line0 = $('<li>').append(`<i>As of ${dateToday} ${timeNow}</i>`);
     let line1 = $('<li>').append(weatherImage, (weather.conditionDescription).toUpperCase());
@@ -213,14 +215,13 @@ function renderWeatherOnDom(weather) {
     let line5 = $('<li>').append(`<b>Humidity :</b> ${weather.humidity} <b>%</b>`);
     let line6 = $('<li>').append(`<b>Wind :</b> ${weather.wind} <b>m/s</b>`);
     let line7 = $('<li>').append(`<b>Cloudiness :</b> ${weather.clouds} <b>%</b>`);
-    
+
     let weatherList = $('<ul>').addClass('weather_list hidden');
     weatherList.append(headline, line0, line1, line2, line3, line4, line5, line6, line7);
     $('.weather_container').append(weatherList);
 }
 
 function displayForecastSuccess(responseFromServer) {
-    console.log('forecast:', responseFromServer.list);
     let forecast = {
         day1: responseFromServer.list[11].dt_txt,
         day1Cond: responseFromServer.list[0].weather[0].description,
@@ -256,20 +257,20 @@ function renderForecastOnDom(forecast) {
     //will clean up later~~~~~~~~~~~~~~~~~~~ just testing here for now
     let monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    let monStr1 = monthList[((forecast.day1).slice(5,7))-1];
-    let dayStr1 = ((forecast.day1).slice(8,10));
+    let monStr1 = monthList[((forecast.day1).slice(5, 7)) - 1];
+    let dayStr1 = ((forecast.day1).slice(8, 10));
 
-    let monStr2 = monthList[((forecast.day2).slice(5,7))-1];
-    let dayStr2 = ((forecast.day2).slice(8,10));
+    let monStr2 = monthList[((forecast.day2).slice(5, 7)) - 1];
+    let dayStr2 = ((forecast.day2).slice(8, 10));
 
-    let monStr3 = monthList[((forecast.day3).slice(5,7))-1];
-    let dayStr3 = ((forecast.day3).slice(8,10));
+    let monStr3 = monthList[((forecast.day3).slice(5, 7)) - 1];
+    let dayStr3 = ((forecast.day3).slice(8, 10));
 
-    let monStr4 = monthList[((forecast.day4).slice(5,7))-1];
-    let dayStr4 = ((forecast.day4).slice(8,10));
+    let monStr4 = monthList[((forecast.day4).slice(5, 7)) - 1];
+    let dayStr4 = ((forecast.day4).slice(8, 10));
 
-    let monStr5 = monthList[((forecast.day5).slice(5,7))-1];
-    let dayStr5 = ((forecast.day5).slice(8,10));
+    let monStr5 = monthList[((forecast.day5).slice(5, 7)) - 1];
+    let dayStr5 = ((forecast.day5).slice(8, 10));
 
     let headline = `<b>5 Day Forecast :</b> (will fix the layout later)`;
     let forecastTable1 = $('<tr>').append(`<td>${monStr1} ${dayStr1} : ${forecast.day1Cond} 
@@ -336,6 +337,6 @@ function renderMeetUpOnDom(meetup) {
         const meetUp = $('.meetup_container');
         let meetupDiv = $('<div>').addClass(`meetUp events hidden`);
         meetupDiv = $(meetupDiv).append(groupName, eventName, members)
-        $(meetUp).append(meetupDiv)
+        $(meetUp).append(meetupDiv);
     }
 }
