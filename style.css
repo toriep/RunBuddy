@@ -76,7 +76,6 @@ body {
     justify-content: space-around;
     align-items: center;
     background-color: #6299d1f6;
-    border: 0.5px solid rgba(54, 49, 49, 0.486);
     height: 5vh;
 }
 
@@ -156,7 +155,7 @@ body {
     color: black;
 }
 
-map_and_search_result_message {
+.map_and_search_result_message {
     height: 90vh;
 }
 
@@ -471,6 +470,11 @@ a{
     background-color: #003cb3;
 }
 
+.no-result{
+    top: 2vh;
+    position: relative;
+    font-size: 1.5rem;
+}
 
 
 /*************************
@@ -522,7 +526,6 @@ Media Query
         display: flex;
         justify-content: space-around;
         background-color: #6299d1f6;
-        border: 0.5px solid rgba(54, 49, 49, 0.486);
         height: 63px;
     }
 
@@ -546,7 +549,6 @@ Media Query
         display: flex;
         justify-content: space-around;
         background-color: #6299d1f6;
-        border: 0.5px solid rgba(54, 49, 49, 0.486);
         height: 63px;
     }
 

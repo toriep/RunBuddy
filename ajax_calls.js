@@ -16,7 +16,7 @@ function responseFromGeolocation(response) {
     let center = new google.maps.LatLng(lat, lng);
     currentLocation = new google.maps.LatLng(lat, lng);
     runningTrails.push(center);
-    getresponseFromTrailsList(lat, lng);
+    getDataFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
     getDataFromMeetUp(lat, lng);
 }
@@ -62,9 +62,11 @@ function activatePlacesSearch() {
     const autocomplete2 = new google.maps.places.Autocomplete(input2);
 }
 
-function getresponseFromTrailsList(latitude, longitude) {
+function getDataFromTrailsList(latitude, longitude) {
     $('.landing_page').addClass('hidden');
-    $("#search_field").val(userInput); 
+    if(userInput){
+        $("#search_field").val(userInput);
+    }
     $('.loadingImg').removeClass('hidden');
 
     const runningTrails = {

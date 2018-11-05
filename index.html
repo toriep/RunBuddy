@@ -45,14 +45,14 @@
         <div class="search_and_logo">
             <img class="map_page_logo" src="./images/RunBuddyLogo.png">
             <form class="search_bar">
-                <input type="text" id="search_field" placeholder="Enter ZIP Code or City">
+                <input type="text" id="search_field" placeholder="Current Location">
                 <img class="search_button" src="./images/search.png" alt="">
             </form>
         </div>
         <div class="map_and_trail_list">
             <div class="map_and_search_result_message">
                 <div class="search_result_message"></div>
-                <div id="map_area"></div>
+                <div id="map_area" class="map_area"></div>
             </div>
             <div class="nav_tabs hidden">
                 <div class="trails_tab tabLinks hidden">< BACK</div> 
@@ -62,8 +62,7 @@
                 <div class="meetup_tab tabLinks">Events</div>
             </div>
             <div class="group_tabs">
-                <div class="location_list">
-                </div>
+                <div class="location_list"></div>
                 <div class="single_location_detail hidden">
                     <div class="descriptionTab"></div>
                     <div id="direction_tab" class="hidden"></div>
