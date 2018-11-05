@@ -132,7 +132,7 @@ body {
 #info_msg {
     font-size: 0.5em;
     font-weight: bold;
-    /* font-style: italic; */
+    font-style: italic;
     color: #351706e5;
     text-align: center;
     width: 40%;
@@ -208,7 +208,7 @@ map_and_search_result_message {
 .single_location_detail{
     margin-right: 0.1vw;
     position: relative;
-    top: 5vh;
+    top: 40px;
 }
 
 a{
@@ -227,6 +227,7 @@ a{
     padding: 2% 5% 8%;
     list-style-type: none;
     border-radius: 10px;
+    top: 40px;
 }
 
 .weather_list>div {
@@ -239,6 +240,10 @@ a{
 
 .weather_list>li {
     font-size: 0.8em;
+}
+
+.weather_list>li:nth-child(3)>img {
+    border: 1px solid silver;
 }
 
 .weather_list>div+li {
@@ -281,10 +286,11 @@ a{
 /* Search List Result Box */
 .list_result {
     display: flex;
-    background-color: white;
+    height: 215px;
+    background-color: whitesmoke;
     border-radius: 10px;
-    padding: 2%;
-    margin-bottom: 2%;
+    padding: 1.5%;
+    margin-bottom: 1.6%;
     font-size: 2.4rem;
     opacity: 0.97;
     box-shadow: 5px 10px 18px black;
@@ -373,8 +379,8 @@ a{
 
 .locationPicture {
     display: inline-block;
-    width: 15vw;
-    height: 15vw;
+    width: 12vw;
+    height: 12vw;
 }
 
 .locationDescription {
@@ -384,7 +390,7 @@ a{
 }
 
 .locationDescription>p {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin-top: 0;
     font-weight: bolder;
     /* white-space: nowrap; */
@@ -464,7 +470,7 @@ a{
     border-radius: 5px;
     margin-top: 28%;
     position: absolute;
-    bottom: 20px;
+    bottom: 5px;
 }
 
 .btn-blue:hover {

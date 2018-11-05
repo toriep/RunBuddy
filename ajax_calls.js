@@ -87,6 +87,17 @@ function getDataFromWeather(lat, lon) {
     $.ajax(weather);
 }
 
+function getWeatherForecast(lat, lon) {
+    const forecast = {
+        url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=${WEATHER_API_KEY}`,
+        method: 'post',
+        dataType: 'json',
+        success: displayForecastSuccess,
+        error: displayError('getWeatherForecast'),
+    }
+    $.ajax(forecast);
+}
+
 function getDataFromMeetUp(lat, long) {
     const meetup = {
         url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&lat=${lat}&lon=${long}&topic=running&page=20&key=${MEETUP_API_KEY}`,
