@@ -317,10 +317,13 @@ function displayMeetUpSuccess(response) {
     const meetUpResponse = response.results;
     const filteredMeetUpResults = [];
     let message = null;
+    if ($('.meetup_result_message').length) {
+        $('.meetup_result_message').remove()
+    }
     if (inputFromUser === "") {
-        message = $('<div>').text('Events near your current location:')
+        message = $('<div>').addClass('meetup_result_message').text('Events near your current location:')
     } else {
-        message = $('<div>').text(`Events near ${inputFromUser}`);
+        message = $('<div>').addClass('meetup_result_message').text(`Events near ${inputFromUser}`);
     }
     $('.meetup_container').append(message);
     for (let m = 0; m < meetUpResponse.length; m++) {
