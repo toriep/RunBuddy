@@ -55,6 +55,8 @@ body {
 }
 
 #runButton {
+    position: relative;
+    top: 16px;
     font-family: 'Raleway', sans-serif;
     outline: none;
     border: none;
@@ -67,7 +69,7 @@ body {
     vertical-align: top;
     display: inline-block;
     padding: 10px;
-    text-shadow: 2px 2px rgb(87, 100, 104);
+    text-shadow: 1.5px 1.5px rgb(87, 100, 104);
     white-space: nowrap;
 }
 
@@ -525,13 +527,11 @@ Media Query
     }
     
     #runButton {
-        width: 29%;
-        height: 94%;
         font-size: 1rem;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        top: 80px;
+        top: 70px;
     }
 
     
@@ -787,19 +787,20 @@ Media Query
 
 @media all and (min-width: 480px) and (max-width: 768px) {
     body{
-        background-position: 0 0;
+        background-position: 28% 0;
+    }
+    .logo{
+        width: 75vw;
     }
     #search_input{
-        width: 90vw;
+        width: 70vw;
     }
     #runButton{
-        width: 29%;
-        height: 109%;
         font-size: 1rem;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        top: 80px;
+        top: 70px;
     }
 }
 
