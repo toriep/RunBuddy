@@ -118,8 +118,8 @@ function responseFromTrailsList(response) {
     // displaySearchResultMessage();
 }
 
-function displayError(sub) {
-    // console.log(`${sub} AJAX call failed.`);
+function displayError(error) {
+    console.log("Error:", error);
 }
 
 // const direction_tab = $('#direction_container');
@@ -135,7 +135,7 @@ function displayError(sub) {
 
 function displayWeather() {
     $('#direction_container').addClass('hidden');
-    $('.list_result').addClass('hidden');
+    $('.results_list').addClass('hidden');
     $('.events').addClass('hidden');
     $('.description').addClass('hidden');
     $('.weather_list').removeClass('hidden');
@@ -160,12 +160,18 @@ function displayDescription() {
 }
 
 function displayResult() {
+    if ($('.container_tabs').hasClass('zIndex')) {
+        $('.container_tabs').removeClass('zIndex')
+    }
+    if (!$('.results_list').hasClass('zIndex')) {
+        $('.results_list').addClass('zIndex')
+    }
     $('.nav_tabs').addClass('hidden');
     $('#direction_container').addClass('hidden');
     $('.events').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.description').addClass('hidden');
-    $('.list_result').removeClass('hidden');
+    $('.results_list').removeClass('hidden');
     $('#map_area').text();
     $('.single_location_detail').addClass('hidden');
     displayMapOnDom();
@@ -173,7 +179,7 @@ function displayResult() {
 
 function displayMeetUp() {
     $('.description').addClass('hidden');
-    $('.list_result').addClass('hidden');
+    $('.results_list').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').removeClass('hidden');
     $('#direction_container').addClass('hidden');
@@ -186,7 +192,7 @@ function displayMeetUp() {
 
 function displayDirection() {
     $('.description').addClass('hidden');
-    $('.list_result').addClass('hidden');
+    $('.results_list').addClass('hidden');
     $('.weather_list').addClass('hidden');
     $('.events').addClass('hidden');
     $('#direction_container').removeClass('hidden');

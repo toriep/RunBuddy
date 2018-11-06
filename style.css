@@ -184,20 +184,26 @@ body {
 }
 
 .container_tabs{
-    position: relative;
+    top:10.5vh;
+    position: absolute;
     width: 46vw;
     right: 1vw;
-    display: inline-block;
     height: 93vh;
     margin-right: 2px;
     overflow-y: hidden;
     overflow-x: hidden;
-    /* box-shadow: 5px 10px 18px black; */
     border-radius: 10px;
 }
 
 .results_list {
-    margin-right: 0.1vw;
+    position: absolute;
+    width: 46vw;
+    right: 1vw;
+    height: 93vh;
+    margin-right: 2px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    border-radius: 10px;
 }
 
 .meetup_tab{
@@ -208,7 +214,6 @@ body {
 .single_location_detail{
     margin-right: 0.1vw;
     position: relative;
-    top: 40px;
 }
 
 a{
@@ -261,8 +266,6 @@ a{
 }
 
 .weather_icon {
-    /* width: 15%; */
-    /* background-color: white; */
     margin-right: 2%;
     vertical-align: middle;
 }
@@ -337,13 +340,9 @@ a{
 .nav_tabs {
     position: absolute;
     right: 1.2vw;
-    /* overflow: hidden; */
-    /* text-align: center; */
     display: flex;
     flex-wrap: nowrap;
     width: 46vw;
-    /* justify-content: space-around; */
-    z-index: 1;
 }
 
 .tabLinks {
@@ -355,14 +354,12 @@ a{
     white-space: nowrap;
     cursor: pointer;
     font-size: 0.7rem;
-    line-height: 40px;
+    line-height: 4vh;
     vertical-align: top;
     box-sizing: border-box;
-    /* border-radius: 5px 5px 0 0; */
     text-align: center;
     letter-spacing: 1px;
     text-transform: uppercase;
-    /* border: 0.5px solid #003cb3; */
 }
 
 .tabLinks:hover {
@@ -393,7 +390,6 @@ a{
     font-size: 1.3rem;
     margin-top: 0;
     font-weight: bolder;
-    /* white-space: nowrap; */
 }
 
 @keyframes loadingPeople {
@@ -576,11 +572,29 @@ Media Query
     background: none;
 } 
 
+.results_list::-webkit-scrollbar {
+    width: 10px;
+    background: none;
+}
+
 .container_tabs::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #6299d1f6; 
+}
+
+.results_list::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: #6299d1f6; 
 }
 
 .container_tabs:hover, .container_tabs:active, .container_tabs:focus {
     overflow-y: auto;
+}
+
+.results_list:hover, .results_list:active, .results_list:focus {
+    overflow-y: auto;
+}
+
+.zIndex {
+    z-index: 5;
 }
