@@ -181,7 +181,7 @@ body {
 }
 
 .container_tabs{
-    top:103px;
+    top:89px;
     position: absolute;
     width: 46vw;
     right: 1vw;
@@ -264,12 +264,11 @@ a{
 
 .events{
     background-color: whitesmoke;
-    width: 100%;
-    padding: 3%;
-    margin-bottom: 2%;
+    margin-bottom: 0;
     font-size: 1rem;
-    opacity: 0.95;
-    box-shadow: 5px 5px 9px black;
+    border: 1px solid;
+    opacity: 0.90;
+    padding: 2%;
 }
 
 .groupName{
@@ -329,7 +328,7 @@ a{
 
 /* Nav Bar */
 .nav_tabs {
-    position: absolute;
+    position: relative;
     right: 1.2vw;
     display: flex;
     flex-wrap: nowrap;
@@ -500,6 +499,11 @@ a{
     z-index: 5;
 }
 
+.meetup_result_message{
+    color: whitesmoke;
+    text-shadow: 2px 2px black;
+}
+
 /*************************
 Media Query
 **************************/
@@ -508,10 +512,6 @@ Media Query
 @media all and (max-width: 480px){
     body{
         background-position: -132px 40%;
-    }
-    
-    .form-inline {
-
     }
     
     .map_page_logo{
@@ -557,55 +557,48 @@ Media Query
     .logo {
         width: 90vw;
     }
-    
-    
-    #info_msg {
 
-    }
-    
-    .information {
-
-    }
-    
-    .weather_tab {
-        font-size: 4rem;
-        color: black;
-    }
-    
     .map_and_search_result_message {
         height: 90vh;
     }
     
-    .map_page{
-
-    }
-    
     #map_area{
-        width: 100vw;
-        height: 50vh;
-        left: 0;
+    margin: 0;
+    width: 100vw;
+    height: 37vh;
+    left: 0;
+    border-radius: 0;
+    border: 0;
     }
     
     .map_and_trail_list{
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
         min-height: 95vh;
     }
     
     .container_tabs{
-        top: 519px;
-        position: absolute;
-        width: 100vw;
-        right: 0;
-        margin-right: 0;
+        top: 0;
+    position: relative;
+    width: 100vw;
+    right: 0;
+    margin-right: 0;
     }
     
     .results_list {
-        top: 59vh;
+        position: relative;
+        top: 0;
         width: 100vw;
         min-height: 50vh;
         right: 0;
         margin-right: 0;
+    }
+
+    .detail_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     
     .meetup_tab{
@@ -614,20 +607,12 @@ Media Query
     }
     
     .single_location_detail{
-        margin-right: 0.1vw;
-        position: relative;
+        margin-right: 0;
+    position: relative;
     }
     
     a{
         font-size: 1rem;
-    }
-    
-    .weather_list{
-
-    }
-    
-    .weather_list>div {
-
     }
     
     .weather_list>li {
@@ -653,17 +638,11 @@ Media Query
         vertical-align: middle;
     }
     
-    .events{
-
-    }
-    
-    .groupName{
-
-    }
-    
     /* Search List Result Box */
     .list_result {
-
+margin:0;
+border: 1px solid;
+height: 202px;
     }
     
     .address{
@@ -671,11 +650,11 @@ Media Query
     }
     
     .description {
-
+        font-size: .8rem;
     }
     
     .description img{
-        max-height: 40vh;
+        max-height: 20vh;
         margin-bottom:3%;
     }
     
@@ -689,13 +668,14 @@ Media Query
     
     /* Nav Bar */
     .nav_tabs {
+        position: relative;
         right: 0;
         width: 100vw;
-        top: 59vh;
+        top: 0;
     }
     
     .tabLinks {
-
+    line-height: 35px;
     }
     
     .tabLinks:hover {
@@ -728,7 +708,7 @@ Media Query
     }
     
     #direction_container{
-
+        font-size: 0.85rem
     }
     
     #direction_container>tr>td:nth-child(2) {
