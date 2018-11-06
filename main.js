@@ -25,8 +25,8 @@ function addClickHandlersToElements() {
             $("#runButton, .search_button").click(callGoogleAPI()); //runs the function attaches to click event off add button
         }
     });
-    $('.location_list').on('click', '.list_result', notifyTrailClicked);
-    $('.location_list').on('mouseleave', '.list_result', resetNotifyTrailClicked);
+    $('.results_list').on('click', '.list_result', notifyTrailClicked);
+    $('.results_list').on('mouseleave', '.list_result', resetNotifyTrailClicked);
     /** displaying tabs */
     $('.trails_tab').click(displayResult);
     $('.description_tab').click(displayDescription);
@@ -92,7 +92,7 @@ function geocodingResponse(response) {
 }
 
 function responseFromTrailsList(response) {
-    if(response.trails.length === 0){
+    if (response.trails.length === 0) {
         $(".results_list").empty();
         $(".map_page").removeClass("hidden");
         $(".landing_page, .map_area, .loadingImg").addClass('hidden');

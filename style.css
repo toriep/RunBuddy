@@ -185,7 +185,7 @@ body {
 
 .container_tabs{
     position: relative;
-    width: 47vw;
+    width: 46vw;
     right: 1vw;
     display: inline-block;
     height: 93vh;
@@ -379,8 +379,8 @@ a{
 
 .locationPicture {
     display: inline-block;
-    width: 12vw;
-    height: 12vw;
+    width: 10vw;
+    height: 10vw;
 }
 
 .locationDescription {
@@ -571,15 +571,16 @@ Media Query
     }
 }
 
-.group_tabs::-webkit-scrollbar {
-    background: rgba(220, 225, 228, 0.53);
+.container_tabs::-webkit-scrollbar {
+    width: 10px;
+    background: none;
 } 
 
-.group_tabs::-webkit-scrollbar-thumb {
+.container_tabs::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: #6299d1f6; 
 }
 
-.group_tabs:hover, .group_tabs:active, .group_tabs:focus {
+.container_tabs:hover, .container_tabs:active, .container_tabs:focus {
     overflow-y: auto;
 }
