@@ -9,7 +9,7 @@ function getDataFromGeolocation() {
     $.ajax(location);
 }
 
-function reverseGeolocation(response){
+function reverseGeolocation(response) {
     let lat = response.location.lat;
     let lng = response.location.lng;
     const location = {
@@ -123,4 +123,3 @@ function getDataFromMeetUp(lat, long) {
     }
     $.ajax(meetup);
 }
-

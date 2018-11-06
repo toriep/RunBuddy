@@ -59,6 +59,9 @@ function displayMapOnDom() {
 }
 
 function renderTrailInfoOnDom(markerIsClicked = false) {
+    if (!$(".results_list").hasClass('zIndex')) {
+        $(".results_list").addClass('zIndex')
+    }
     $(".results_list").empty();
     if ($('.list_result').length > 0) {
         $(".list_result").remove();
@@ -77,20 +80,26 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         const rating = $('<div>').text(`${runningTrails[i].stars} out of 5 stars`);
         let brLine = $('<br>');
         let moreInfoButton = $('<button>').addClass('btn btn-blue').text('Trail Info');
-        moreInfoButton.click(() => displayTrailDescription(runningTrails[i]));
+        moreInfoButton.on('click', () => displayTrailDescription(runningTrails[i]));
         locationDescriptionDiv.append(nameOfPlace, location, rating, brLine, moreInfoButton);
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.results_list').append(listResultsDiv);
     }
     $('.loadingImg').addClass('hidden');
-    $('.container_tabs').animate({ scrollTop: 0 }, 1500)
+    $('.results_list').animate({ scrollTop: 0 }, 1500)
 }
 
 function displayTrailDescription(trail) {
+    if (!$('.container_tabs').hasClass('zIndex')) {
+        $('.container_tabs').addClass('zIndex')
+    }
     $('.description_container').empty();
     $('.trails_tab').removeClass('hidden');
     $('.single_location_detail').removeClass('hidden');
-    $('.list_result').addClass('hidden');
+    if ($('.results_list').hasClass('zIndex')) {
+        $('.results_list').removeClass('zIndex')
+    }
+    $('.results_list').addClass('hidden');
     displayDescription();
     const imageOfPlace = $('<img>').attr('src', trail.imgMedium);
     const nameOfPlace = $('<p>').addClass('trailName').text(trail.name);
@@ -227,7 +236,6 @@ function displayForecastSuccess(responseFromServer) {
         day1Cond: responseFromServer.list[0].weather[0].description,
         day1High: (responseFromServer.list[0].main.temp_max * 9 / 5 - 459.67).toFixed(1),
         day1Low: (responseFromServer.list[0].main.temp_min * 9 / 5 - 459.67).toFixed(1),
-        // day1Icon: responseFromServer.list[0].weather[0].icon,
 
         day2: responseFromServer.list[18].dt_txt,
         day2Cond: responseFromServer.list[8].weather[0].description,
@@ -291,7 +299,6 @@ function renderForecastOnDom(forecast) {
     let forecastList = $('<table>').addClass('weather_list hidden');
     forecastList.append(headline, forecastTable1, forecastTable2, forecastTable3, forecastTable4, forecastTable5);
     $('.results_list').append(forecastList);
-    debugger;
 }
 
 
@@ -299,12 +306,13 @@ function displayMeetUpSuccess(response) {
     if ($('.events').length > 0) {
         $(".events").remove();
     }
-    if (response.meta.count === 0) {
+    if (response.code === "blocked" || response.meta.count === 0) {
         const meetupDiv = $('<div>', {
             class: `events hidden`,
             html: '<h2>Currently, there are no upcoming meetups near your area.'
         });
         $('.meetup_container').append(meetupDiv);
+        return;
     }
     const meetUpResponse = response.results;
     const filteredMeetUpResults = [];
