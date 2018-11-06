@@ -81,7 +81,6 @@ body {
 }
 
 .search_bar{
-    border-radius: 3px;
     height: 60%;
     width: 55vw;
     display: flex;
@@ -125,9 +124,6 @@ body {
     text-align: center;
 }
 
-/* .responsive {
-    height: auto;
-} */
 
 #info_msg {
     font-size: 0.5em;
@@ -184,26 +180,24 @@ body {
 }
 
 .container_tabs{
-    top:10.5vh;
+    top:103px;
     position: absolute;
     width: 46vw;
     right: 1vw;
-    height: 93vh;
+    height: 88vh;
     margin-right: 2px;
     overflow-y: hidden;
     overflow-x: hidden;
-    border-radius: 10px;
 }
 
 .results_list {
     position: absolute;
     width: 46vw;
     right: 1vw;
-    height: 93vh;
+    height: 100vh;
     margin-right: 2px;
     overflow-y: hidden;
     overflow-x: hidden;
-    border-radius: 10px;
 }
 
 .meetup_tab{
@@ -222,17 +216,14 @@ a{
 
 .weather_list{
     background-color: whitesmoke;
-    width: 100%;
+    width: 100vw;
     right: 1vw;
     margin: auto;
-    position: relative;
     font-size: 1.5rem;
     box-shadow: 5px 5px 18px black;
     opacity: 0.95;
     padding: 2% 5% 8%;
     list-style-type: none;
-    border-radius: 10px;
-    top: 40px;
 }
 
 .weather_list>div {
@@ -291,7 +282,6 @@ a{
     display: flex;
     height: 215px;
     background-color: whitesmoke;
-    border-radius: 10px;
     padding: 1.5%;
     margin-bottom: 1.6%;
     font-size: 2.4rem;
@@ -321,7 +311,7 @@ a{
 }
 
 .description img{
-    max-height: 70vh;
+    max-height: 40vh;
     margin-bottom:3%;
 }
 
@@ -354,7 +344,7 @@ a{
     white-space: nowrap;
     cursor: pointer;
     font-size: 0.7rem;
-    line-height: 4vh;
+    line-height: 40px;
     vertical-align: top;
     box-sizing: border-box;
     text-align: center;
@@ -418,7 +408,6 @@ a{
 
 #direction_container{
     background-color: whitesmoke;
-    border-radius: 0 0 10px 10px;
     width: 100%;
     min-height: 90vh;
     padding: 2%;

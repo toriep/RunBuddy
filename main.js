@@ -20,9 +20,18 @@ function addClickHandlersToElements() {
     $('#search_input').keypress(function () {
         $('#info_msg').addClass('hidden');
     });
-    $("#search_input, #search_field").on("keyup", event => {
+    $("#search_input").on("keyup", event => {
         if (event.keyCode === 13) { //if enter key is released
-            $("#runButton, .search_button").click(callGoogleAPI()); //runs the function attaches to click event off add button
+            event.preventDefault();
+            debugger;
+            $("#runButton").click(callGoogleAPI()); //runs the function attaches to click event off add button
+        }
+    });
+    $("#search_field").on("keyup", event => {
+        if (event.keyCode === 13) { //if enter key is released
+            event.preventDefault();
+            debugger;
+            $(".search_button").click(callGoogleAPI()); //runs the function attaches to click event off add button
         }
     });
     $('.results_list').on('click', '.list_result', notifyTrailClicked);
@@ -45,6 +54,7 @@ function callGoogleAPI() {
         getLatLongFromGeocoding(inputFromUser);
         getCurrentLocationForDirection();
     }
+    displayResult();
 }
 
 function responseFromGeolocation(response) {

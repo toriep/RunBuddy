@@ -316,6 +316,13 @@ function displayMeetUpSuccess(response) {
     }
     const meetUpResponse = response.results;
     const filteredMeetUpResults = [];
+    let message = null;
+    if (inputFromUser === "") {
+        message = $('<div>').text('Events near your current location:')
+    } else {
+        message = $('<div>').text(`Events near ${inputFromUser}`);
+    }
+    $('.meetup_container').append(message);
     for (let m = 0; m < meetUpResponse.length; m++) {
         let { description, name, event_url, time, group, yes_rsvp_count } = meetUpResponse[m];
         const formattedInfo = { description, eventName: name, link: event_url, time, group, yes_rsvp_count }
