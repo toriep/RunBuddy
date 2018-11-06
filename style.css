@@ -511,14 +511,7 @@ Media Query
     }
     
     .form-inline {
-        position: absolute;
-        top: 55vh;
-        left: 50%;
-        width: 100%;
-        transform: translate(-50%,-50%);
-        text-align: center;
-        font-size: 2.5rem;
-        color: rgba(255, 255, 255, 0.8);
+
     }
     
     .map_page_logo{
@@ -547,22 +540,10 @@ Media Query
     .search_bar{ /* edited */
         height: 60%;
         width: 65vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 30px;
-        background-color: white;
     }
     
     #search_field{
-        width: 50vw;
-        height: 70%;
-        font-family: 'Poppins', sans-serif;
-        text-align: center;
-        border: 0;
-        font-size: 1rem;
-        color: black;
-        outline: none;
+        font-size: 0.85rem;
     }
     
     .search_button{
@@ -570,12 +551,7 @@ Media Query
         cursor: pointer;
         position: relative;
     }
-    
-    ::placeholder { 
-        color: gray; /* Firefox */
-        opacity: 1;
-    }
-    
+
      .input-group-btn {
         display: inline-block;
      }
@@ -586,25 +562,11 @@ Media Query
     
     
     #info_msg {
-        font-size: 0.5em;
-        font-weight: bold;
-        font-style: italic;
-        color: #351706e5;
-        text-align: center;
-        width: 40%;
-        position: relative;
-        left: 25%;
+
     }
     
     .information {
-        margin-top: 1%;
-        padding: 1% 3%;
-        background-color: white;
-        opacity: 0.7;
-        align-content: center;
-        border-radius: 3px;
-        font-family: 'Poppins', sans-serif;
-        box-shadow: 1px 1px 5px rgb(4, 109, 26);
+
     }
     
     .weather_tab {
@@ -634,10 +596,10 @@ Media Query
     
     .container_tabs{
         top: 519px;
-    position: absolute;
-    width: 100vw;
-    right: 0;
-    margin-right: 0;
+        position: absolute;
+        width: 100vw;
+        right: 0;
+        margin-right: 0;
     }
     
     .results_list {
@@ -663,23 +625,11 @@ Media Query
     }
     
     .weather_list{
-        background-color: whitesmoke;
-        width: 100vw;
-        right: 1vw;
-        margin: auto;
-        font-size: 1.5rem;
-        box-shadow: 5px 5px 18px black;
-        opacity: 0.95;
-        padding: 2% 5% 8%;
-        list-style-type: none;
+
     }
     
     .weather_list>div {
-        border-bottom: 1px black solid;
-        font-family: 'Quicksand';
-        margin-top: 1%;
-        font-weight: bold;
-        font-size: 1.4em;
+
     }
     
     .weather_list>li {
@@ -706,40 +656,16 @@ Media Query
     }
     
     .events{
-        background-color: whitesmoke;
-        width: 100%;
-        padding: 3%;
-        margin-bottom: 2%;
-        font-size: 1rem;
-        opacity: 0.95;
-        box-shadow: 5px 5px 9px black;
+
     }
     
     .groupName{
-        margin-top: 0;
-        font-size: 1.2rem;
-        font-weight: bold;
+
     }
     
     /* Search List Result Box */
     .list_result {
-        display: flex;
-        height: 215px;
-        background-color: whitesmoke;
-        padding: 1.5%;
-        margin-bottom: 1.6%;
-        font-size: 2.4rem;
-        opacity: 0.97;
-        box-shadow: 5px 10px 18px black;
-    }
-    
-    .list_result:hover {
-        opacity: 1;
-        box-shadow: 7px 12px 20px black;
-    }
-    
-    .selected {
-        background-color: #faf5da;
+
     }
     
     .address{
@@ -747,11 +673,7 @@ Media Query
     }
     
     .description {
-        background-color: whitesmoke;
-        padding: 2% 2% 5%;
-        margin: auto;
-        font-size: 1.2rem;
-        box-shadow: 5px 10px 18px black;
+
     }
     
     .description img{
@@ -764,10 +686,7 @@ Media Query
     }
     
     .trailName{
-        font-family: 'Quicksand';
-        margin-top: 1%;
-        font-weight: bold;
-        font-size: 1.6em;
+
     }
     
     /* Nav Bar */
@@ -778,20 +697,7 @@ Media Query
     }
     
     .tabLinks {
-        display: inline-block;
-        width: 20.2%;
-        color: white;
-        background-color: #1976d2;
-        text-decoration: none;
-        white-space: nowrap;
-        cursor: pointer;
-        font-size: 0.7rem;
-        line-height: 40px;
-        vertical-align: top;
-        box-sizing: border-box;
-        text-align: center;
-        letter-spacing: 1px;
-        text-transform: uppercase;
+
     }
     
     .tabLinks:hover {
@@ -808,44 +714,23 @@ Media Query
     }
     
     .locationDescription {
-        padding: 0 3%;
-        font-size: 1rem;
-        position: relative;
+
     }
     
     .locationDescription>p {
-        font-size: 1.3rem;
-        margin-top: 0;
-        font-weight: bolder;
+
     }
     
     .loadingImg{
-        width: 22%;
-        position: absolute;
-        top: 50%;
-        left: 40%;
-        transform: translate(-50%,-50%);
-        z-index: 99;
-        animation-name: loadingPeople;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
+
     }
     
     #runningMan, #runningWoman{
-        display: inline-block;
-        width: 40%;
+
     }
     
     #direction_container{
-        background-color: whitesmoke;
-        width: 100%;
-        min-height: 90vh;
-        padding: 2%;
-        margin: auto;
-        position: relative;
-        font-size: 1rem;
-        box-shadow: 5px 10px 18px black;
-        opacity: 0.95;
+
     }
     
     #direction_container>tr>td:nth-child(2) {
@@ -864,33 +749,8 @@ Media Query
     }
     
     .btn {
-        cursor: pointer;
-        text-decoration: none;
-        color: #F2F2F2;
-        text-align: center;
-        font-weight: 600;
-        letter-spacing: 1px;
-        border: none;
-        border-radius: 2px;
-        height: 36px;
-        line-height: 36px;
-        padding: 0 16px;
-        text-transform: uppercase;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     }
-    
-    .btn-blue {
-        background-color: #092a68;
-        color: white;
-        border-radius: 5px;
-        margin-top: 28%;
-        position: absolute;
-        bottom: 5px;
-    }
-    
-    .btn-blue:hover {
-        background-color: #003cb3;
-    }
+
     
     .no-result{
         top: 2vh;
@@ -925,25 +785,31 @@ Media Query
     .results_list:hover, .results_list:active, .results_list:focus {
         overflow-y: auto;
     }
-    
-    .zIndex {
-        z-index: 5;
+}
+
+@media all and (min-width: 480px) and (max-width: 768px) {
+    body{
+        background-position: 0 0;
+    }
+    #search_input{
+        width: 90vw;
+    }
+    #runButton{
+        width: 29%;
+        height: 109%;
+        font-size: 1rem;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 80px;
     }
 }
 
-/* --- Low res Tablets and Smartphones Mobiles (landscape)  --- */
-@media (min-width: 481px) and (max-width: 767px) {
 
-}
-
-/* --- iPads and Tablets (landscrape)  --- */
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-
-}
-
-/* --- iPads and Tablets (portrait)  --- */
-@media (min-width: 768px) and (max-width: 1024px) {
-
+@media all and (min-width: 768px) and (max-width: 1024px) {
+    .col-2 {
+        margin: 0 10%;
+    }
 }
 
 /* --- Laptops and Desktops --- */
