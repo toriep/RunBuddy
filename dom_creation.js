@@ -1,6 +1,6 @@
 function displayMapOnDom() {
     $(".landing_page").addClass("hidden");
-    $(".map_page").removeClass("hidden");
+    $(".map_page, .map_area").removeClass("hidden");
     //Map options
     const options = {
         zoom: 11,
@@ -59,6 +59,7 @@ function displayMapOnDom() {
 }
 
 function renderTrailInfoOnDom(markerIsClicked = false) {
+    $(".results_list").empty();
     if ($('.list_result').length > 0) {
         $(".list_result").remove();
     }
@@ -79,14 +80,14 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         moreInfoButton.click(() => displayTrailDescription(runningTrails[i]));
         locationDescriptionDiv.append(nameOfPlace, location, rating, brLine, moreInfoButton);
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
-        $('.location_list').append(listResultsDiv);
+        $('.results_list').append(listResultsDiv);
     }
     $('.loadingImg').addClass('hidden');
-    $('.group_tabs').animate({ scrollTop: 0 }, 1500)
+    $('.container_tabs').animate({ scrollTop: 0 }, 1500)
 }
 
 function displayTrailDescription(trail) {
-    $('.descriptionTab').empty();
+    $('.description_container').empty();
     $('.trails_tab').removeClass('hidden');
     $('.single_location_detail').removeClass('hidden');
     $('.list_result').addClass('hidden');
@@ -105,7 +106,7 @@ function displayTrailDescription(trail) {
     const descriptionDiv = $('<div>').addClass('description');
     const moreInfo = $('<div>').html(`<br><a target="_blank" href="${trail.url}">More info on ${trail.name}</a>`);
     descriptionDiv.append(nameOfPlace, imageOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary, moreInfo);
-    $('.descriptionTab').append(descriptionDiv);
+    $('.description_container').append(descriptionDiv);
     displayDirectionLineOnMap(pointBCoordinates);
     $("html, body").animate({
         scrollTop: 0
@@ -141,7 +142,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
             // if (status == google.maps.DirectionsStatus.OK) {
             if (status == "OK") { //success function
                 directionsDisplay.setDirections(response);
-                var result = document.getElementById('direction_tab');
+                var result = document.getElementById('direction_container');
                 result.innerHTML = "";
                 let newTr1 = document.createElement("tr");
                 newTr1.innerHTML = `<b>Distance :</b> ${response.routes[0].legs[0].distance.text}.  <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
@@ -217,7 +218,7 @@ function renderWeatherOnDom(weather) {
 
     let weatherList = $('<ul>').addClass('weather_list hidden');
     weatherList.append(headline, line0, line1, line2, line3, line4, line5, line6, line7);
-    $('.single_location_detail').append(weatherList);
+    $('.weather_container').append(weatherList);
 }
 
 function displayForecastSuccess(responseFromServer) {
@@ -289,7 +290,8 @@ function renderForecastOnDom(forecast) {
 
     let forecastList = $('<table>').addClass('weather_list hidden');
     forecastList.append(headline, forecastTable1, forecastTable2, forecastTable3, forecastTable4, forecastTable5);
-    $('.location_list').append(forecastList);
+    $('.results_list').append(forecastList);
+    debugger;
 }
 
 
@@ -302,7 +304,7 @@ function displayMeetUpSuccess(response) {
             class: `events hidden`,
             html: '<h2>Currently, there are no upcoming meetups near your area.'
         });
-        $('.single_location_detail').append(meetupDiv);
+        $('.meetup_container').append(meetupDiv);
     }
     const meetUpResponse = response.results;
     const filteredMeetUpResults = [];
@@ -332,7 +334,7 @@ function renderMeetUpOnDom(meetup) {
             title: 'Meetup.com Link',
             target: '_blank'
         })
-        const meetUp = $('.single_location_detail');
+        const meetUp = $('.meetup_container');
         let meetupDiv = $('<div>').addClass(`meetUp events hidden`);
         meetupDiv = $(meetupDiv).append(groupName, eventName, members)
         $(meetUp).append(meetupDiv);

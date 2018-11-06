@@ -9,6 +9,19 @@ function getDataFromGeolocation() {
     $.ajax(location);
 }
 
+function reverseGeolocation(response){
+    let lat = response.location.lat;
+    let lng = response.location.lng;
+    const location = {
+        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_API_KEY}`,
+        method: 'post',
+        dataType: 'json',
+        success: getCurrentLocation,
+        error: displayError('reverseGeolocation'),
+    }
+    $.ajax(location);
+}
+
 function responseFromGeolocation(response) {
     runningTrails = [];
     let lat = response.location.lat;
