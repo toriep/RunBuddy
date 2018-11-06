@@ -34,8 +34,7 @@ body {
 }
 
 .map_page_logo{
-    height: 7vh;
-    padding: 8px 0;
+    height: 4vh;
 }
 
 #search_input {
@@ -176,15 +175,13 @@ body {
 
 .map_and_trail_list{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     min-height: 70vh;
 }
 
 .container_tabs{
-    top:89px;
-    position: absolute;
+    position: relative;
     width: 46vw;
-    right: 1vw;
     height: 88vh;
     margin-right: 2px;
     overflow-y: hidden;
@@ -192,10 +189,10 @@ body {
 }
 
 .results_list {
-    position: absolute;
+    position: relative;
     width: 46vw;
     right: 0;
-    height: 100vh;
+    height: 95vh;
     margin-right: 2px;
     overflow-y: hidden;
     overflow-x: hidden;
@@ -300,13 +297,12 @@ a{
 .description {
     background-color: whitesmoke;
     padding: 2% 2% 5%;
-    margin: auto;
     font-size: 1.2rem;
-    box-shadow: 5px 10px 18px black;
 }
 
 .description img{
-    max-height: 40vh;
+    max-height: 37vh;
+    max-width: 44vw;
     margin-bottom:3%;
 }
 
@@ -324,7 +320,6 @@ a{
 /* Nav Bar */
 .nav_tabs {
     position: relative;
-    right: 1.2vw;
     display: flex;
     flex-wrap: nowrap;
     width: 46vw;
@@ -492,11 +487,6 @@ a{
 
 .zIndex {
     z-index: 5;
-}
-
-.meetup_result_message{
-    color: whitesmoke;
-    text-shadow: 2px 2px black;
 }
 
 /*************************
@@ -894,6 +884,10 @@ Media Query
         position: relative;
         font-size: 1.5rem;
     }
+
+    .meetup_container {
+        background: whitesmoke;
+    }
 }
 
 
@@ -901,7 +895,29 @@ Media Query
     .col-2 {
         margin: 0 10%;
     }
-    
+    .map_page_logo {
+        height: 4vh;
+        padding: 0px;
+    }
+    .search_bar {
+        width: 78vw;
+    }
+    #search_field {
+        width: 72vw;
+    }
+    .locationPicture {
+        width: 17vw;
+        height: 17vw;
+    }
+    .locationDescription{
+        height: 18.3vh;
+    }
+    .list_result {
+        height: 189px;
+    }
+    .meetup_container {
+        background: whitesmoke;
+    }
 }
 
 /* --- Laptops and Desktops --- */
