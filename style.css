@@ -163,14 +163,12 @@ body {
 }
 
 #map_area{
+    width: 66vw;
     height: 90vh;
     left: 1vw;
     border: 1px solid black;
-    border-radius: 10px;
     margin-top: 2vh;
-    width: 50vw;
     box-shadow: 5px 10px 18px black;
-    /* display: inline-block; */
 }
 
 .map_and_trail_list{
@@ -181,7 +179,7 @@ body {
 
 .container_tabs{
     position: relative;
-    width: 46vw;
+    width: 31vw;
     height: 88vh;
     margin-right: 2px;
     overflow-y: hidden;
@@ -190,7 +188,7 @@ body {
 
 .results_list {
     position: relative;
-    width: 46vw;
+    width: 31vw;
     right: 0;
     height: 95vh;
     margin-right: 2px;
@@ -322,7 +320,7 @@ a{
     position: relative;
     display: flex;
     flex-wrap: nowrap;
-    width: 46vw;
+    width: 31vw;
 }
 
 .tabLinks {
@@ -487,6 +485,10 @@ a{
 
 .zIndex {
     z-index: 5;
+}
+
+.list_and_details {
+    width: 30vw;
 }
 
 /*************************
@@ -918,6 +920,14 @@ Media Query
     .meetup_container {
         background: whitesmoke;
     }
+
+    .list_and_details {
+        width: 30vw;
+    }
+
+    .tabLinks {
+        font-size:0.5rem;
+    }
 }
 
 /* --- Laptops and Desktops --- */
@@ -978,7 +988,7 @@ Media Query
 
     .search_button {
         /* height: 35px; */
-        cursor: pointer;
+        /* cursor: pointer;
         margin-left: 10px;
-    } */
+    } */ 
 }
