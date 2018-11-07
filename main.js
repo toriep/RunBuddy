@@ -52,7 +52,6 @@ function callGoogleAPI() {
         getLatLongFromGeocoding(inputFromUser);
         getCurrentLocationForDirection();
     }
-    displayResult();
 }
 
 function responseFromGeolocation(response) {
@@ -122,8 +121,8 @@ function responseFromTrailsList(response) {
             });
         }
     });
-    displayMapOnDom();
-    // displaySearchResultMessage();
+    // displayMapOnDom();
+    displayResult();
 }
 
 function displayError(error) {
@@ -149,6 +148,7 @@ function displayWeather() {
 }
 
 function displayDescription() {
+    $('.detail_container').removeClass('hidden');
     $('#direction_container, .events, .weather_list, .message_container').addClass('hidden');
     $('.nav_tabs, .description').removeClass('hidden');
     $('.weather_tab, .meetup_tab, .direction_tab, .trails_tab').removeClass('currentTab');
@@ -162,9 +162,10 @@ function displayResult() {
     if (!$('.results_list').hasClass('zIndex')) {
         $('.results_list').addClass('zIndex')
     }
-    $('.nav_tabs, #direction_container, .events, .weather_list, .description, .single_location_detail').addClass('hidden');
+    $('.detail_container').addClass('hidden');
     $('.results_list').removeClass('hidden');
     $('#map_area').text();
+    displayMapOnDom();
 }
 
 function displayMeetUp() {

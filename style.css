@@ -167,7 +167,7 @@ body {
 }
 
 #map_area{
-    width: 66vw;
+    width: 64vw;
     height: 90vh;
     left: 1vw;
     border: 1px solid black;
@@ -177,13 +177,13 @@ body {
 
 .map_and_trail_list{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     min-height: 70vh;
 }
 
 .container_tabs{
     position: relative;
-    width: 31vw;
+    width: 34vw;
     height: 88vh;
     margin-right: 2px;
     overflow-y: hidden;
@@ -193,7 +193,7 @@ body {
 
 .results_list {
     position: relative;
-    width: 31vw;
+    width: 100%;
     right: 0;
     height: 93vh;
     margin-right: 2px;
@@ -212,7 +212,6 @@ a{
 
 .weather_list{
     background-color: whitesmoke;
-    width: 100vw;
     right: 1vw;
     margin: auto;
     font-size: 1.5rem;
@@ -331,7 +330,7 @@ a{
     position: relative;
     display: flex;
     flex-wrap: nowrap;
-    width: 31vw;
+    width: 34vw;
 }
 
 .tabLinks {
@@ -398,7 +397,7 @@ a{
 }
 
 .loadingImg{
-    width: 12%;
+    width: 17%;
     position: absolute;
     top: 50%;
     left: 40%;
@@ -518,11 +517,11 @@ a{
 }
 
 .list_and_details {
-    width: 30vw;
+    width: 34vw;
 }
 
 /*************************
-Media Query
+Media Queries
 **************************/
 
 /* --- most Smartphones (portrait)  --- */
@@ -600,11 +599,6 @@ Media Query
         background-image: url('./images/search.png')
     }
 
-
-     .input-group-btn {
-        display: inline-block;
-     }
-    
     .logo {
         width: 90vw;
     }
@@ -1026,16 +1020,16 @@ Media Query
         height: 189px;
     }
     .list_and_details {
-        width: 39vw;
+        width: 41vw;
     }
     .tabLinks {
         font-size:0.5rem;
     }
-    .results_list{
+    /* .results_list{
         width: 40vw;
-    }
+    } */
     .nav_tabs,.container_tabs{
-        width: 40.5vw;
+        width: 41vw;
     }
 }
 
@@ -1046,59 +1040,5 @@ Media Query
     }
     .map_page_logo{
     }
-    /* body {
-        background-position: 20% 40%;
-    }
 
-    .logo {
-        top: 32vh;
-        left: 56vw;
-        width: 35%;
-    }
-
-    #runButton {
-        font-size: 1.1rem;
-        padding: 2%;
-    }
-
-    .search_and_logo{
-        display: flex;
-        justify-content: space-around;
-        background-color: #6299d1f6;
-        height: 63px;
-    }
-
-    .map_page_logo{
-        height: 61px;
-        padding: 8px 0;
-    }
-
-    .search_button {
-        height: 35px;
-        cursor: pointer;
-        margin-left: 10px;
-    } */
-}
-
-/* --- Desktops 1281px to higher --- */
-@media (min-width: 1281px) {
-    
-    
-    /* .search_and_logo{
-        display: flex;
-        justify-content: space-around;
-        background-color: #6299d1f6;
-        height: 63px;
-    }
-
-    .map_page_logo{
-        height: 61px;
-        padding: 8px 0;
-    }
-
-    .search_button {
-        /* height: 35px; */
-        /* cursor: pointer;
-        margin-left: 10px;
-    } */ 
 }

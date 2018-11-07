@@ -9,7 +9,6 @@ function displayMapOnDom() {
     map = new google.maps.Map(document.getElementById("map_area"), options);
     //Add marker
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
-        // debugger;
         let marker = new google.maps.Marker({
             position: runningTrails[trailIndex].coordinates,
             map: map,
