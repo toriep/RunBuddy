@@ -36,7 +36,9 @@ body {
 .map_page_logo{
     height: 4vh;
 }
-
+#runButton {
+    display: none;
+}
 #search_input {
     width: 35vw;
     font-size: 1.2rem;
@@ -107,6 +109,9 @@ body {
     position: relative;
 }
 
+#glass_button{
+    display: none;
+}
 ::placeholder { 
     color: gray; /* Firefox */
     opacity: 1;
@@ -506,22 +511,50 @@ Media Query
         height: 3vh;
         padding: 0;
     }
-    
-    #search_input {
-        width: 88vw;
-        font-size: 1.2rem;
-        left: 1.75vw;
-        position: relative;
-    }
-    
-    #runButton {
-        font-size: 1rem;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 70px;
+    #glass_button{
+        display: initial;
+        position: static;
+        background-image: none;
+        box-shadow: none;
+        width: 50px;
+        height: 50px;
     }
 
+    .form-inline{
+        font-size: 1.2rem;
+        height: 7vh;
+        padding: 5px 0;
+        display: inline-block;
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        border: 0;
+        color: black;
+        background-color: white;
+        box-shadow: inset 1px 1px 10px rgb(90, 89, 89);
+        outline: none;
+        border-radius: 5px;
+        width: 80vw;
+    }
+    #runButton {
+        display: none;
+    }
+    #search_input{
+        height: 5.2vh;
+        box-shadow: none;
+        position: relative;
+        top: -3vh;
+        left: 1.5vw;;
+    }
+    #info_msg{
+        font-size: 0.7em;
+        width: 88%;
+        left: 5%;
+        top: -25%;
+    }
+    .map_page_logo{
+        height: 3vh;
+        padding: 0;
+    }
     .search_bar{
         height: 60%;
         width: 65vw;
@@ -535,7 +568,9 @@ Media Query
         height: 60%;
         cursor: pointer;
         position: relative;
+        background-image: url('./images/search.png')
     }
+
 
      .input-group-btn {
         display: inline-block;
@@ -621,7 +656,6 @@ Media Query
         vertical-align: middle;
     }
     
-    /* Search List Result Box */
     .list_result {
         margin:0;
         border: 1px solid;
@@ -645,7 +679,6 @@ Media Query
         padding: 3px 2%;
     }
     
-    /* Nav Bar */
     .nav_tabs {
         position: relative;
         right: 0;
@@ -704,14 +737,45 @@ Media Query
         width: 75vw;
     }
     #search_input{
-        width: 70vw;
+        width: 67vw;
     }
-    #runButton{
-        font-size: 1rem;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 70px;
+    #glass_button{
+        display: initial;
+        position: static;
+        background-image: none;
+        box-shadow: none;
+        width: 50px;
+        height: 50px;
+    }
+    #runButton {
+        display: none;
+    }
+    .form-inline{
+        font-size: 1.2rem;
+        height: 7vh;
+        padding: 5px 0;
+        display: inline-block;
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        border: 0;
+        color: black;
+        background-color: white;
+        box-shadow: inset 1px 1px 10px rgb(90, 89, 89);
+        outline: none;
+        border-radius: 5px;
+        width: 80vw;
+    }
+    #info_msg{
+        font-size: 0.7em;
+        width: 88%;
+        left: 5%;
+        top: -25%;
+    }
+    #search_input{
+        height: 5.2vh;
+        box-shadow: none;
+        top: -2.5vh;
+        position: relative;
     }
     .map_page_logo{
         height: 3vh;
@@ -730,6 +794,7 @@ Media Query
         height: 60%;
         cursor: pointer;
         position: relative;
+        background-image: url('./images/search.png')
     }
 
      .input-group-btn {
