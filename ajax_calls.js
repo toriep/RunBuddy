@@ -9,6 +9,31 @@ function getDataFromGeolocation() {
     $.ajax(location);
 }
 
+function reverseGeolocation(response) {
+    let lat = response.location.lat;
+    let lng = response.location.lng;
+    const location = {
+        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_API_KEY}`,
+        method: 'post',
+        dataType: 'json',
+        success: getCurrentLocation,
+        error: displayError('reverseGeolocation'),
+    }
+    $.ajax(location);
+}
+
+function responseFromGeolocation(response) {
+    runningTrails = [];
+    let lat = response.location.lat;
+    let lng = response.location.lng;
+    let center = new google.maps.LatLng(lat, lng);
+    currentLocation = new google.maps.LatLng(lat, lng);
+    runningTrails.push(center);
+    getDataFromTrailsList(lat, lng);
+    getDataFromWeather(lat, lng);
+    getDataFromMeetUp(lat, lng);
+}
+
 function getCurrentLocationForDirection() {
     const location = {
         url: `https://www.googleapis.com/geolocation/v1/geolocate?key=${GOOGLE_API_KEY}`,
@@ -50,15 +75,17 @@ function activatePlacesSearch() {
     const autocomplete2 = new google.maps.places.Autocomplete(input2);
 }
 
-function getresponseFromTrailsList(latitude, longitude) {
+function getDataFromTrailsList(latitude, longitude) {
     $('.landing_page').addClass('hidden');
-    $("#search_field").val(userInput); 
-    $('.loadingImg').removeClass('hidden');
+    if (userInput) {
+        $("#search_field").val(userInput);
+    }
+    $('.loading').removeClass('hidden');
 
     const runningTrails = {
         dataType: 'JSON',
         method: 'GET',
-        url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxResults=30&key=${TRAIL_API_KEY}`,
+        url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxResults=20&key=${TRAIL_API_KEY}`,
         success: responseFromTrailsList,
     }
     $.ajax(runningTrails);
@@ -75,6 +102,17 @@ function getDataFromWeather(lat, lon) {
     $.ajax(weather);
 }
 
+function getWeatherForecast(lat, lon) {
+    const forecast = {
+        url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=${WEATHER_API_KEY}`,
+        method: 'post',
+        dataType: 'json',
+        success: displayForecastSuccess,
+        error: displayError('getWeatherForecast'),
+    }
+    $.ajax(forecast);
+}
+
 function getDataFromMeetUp(lat, long) {
     const meetup = {
         url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&lat=${lat}&lon=${long}&topic=running&page=20&key=${MEETUP_API_KEY}`,
@@ -85,4 +123,3 @@ function getDataFromMeetUp(lat, long) {
     }
     $.ajax(meetup);
 }
-

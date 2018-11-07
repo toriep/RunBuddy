@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="c718 hackathon 2, team 1">
+    <meta name="description" content="Find Running Trails">
     <meta name="author" content="Esther, Perry, Sarah, Torie, Mia">
     <title>Run Buddy</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Raleway:800i|Quicksand|Poppins" rel="stylesheet">
@@ -18,61 +18,62 @@
 </head>
 
 <body>
-    <div class="loadingImg hidden">
-        <img id="runningMan" src="./images/running_man.gif" alt="running man">
-        <img id="runningWoman" src="./images/running_woman.gif" alt="running woman">
+    <div class="loading hidden">
+        <div class="loadingImg">
+            <img id="runningMan" src="./images/running_man.gif" alt="running man">
+            <img id="runningWoman" src="./images/running_woman.gif" alt="running woman">
+        </div>
     </div>
-    <div class="container-fluid">
-        <div class="landing_page">
-            <div>
-                <img class="logo" src="./images/RunBuddyLogo.png">
-            </div>
-            <div class="form-inline">
-                <input type="text" class="form-control" id="search_input" placeholder="Enter ZIP Code or City">
-                <div class="input-group-btn form-group">
-                    <button class="btn btn-default" id="runButton">LET'S RUN</button>
-                </div>
-                <div class="information hidden" id="info_msg">
-                    Enter a location to search for nearby trails<br>OR<br>Just click the button to use current location
-                </div>
+
+    <div class="landing_page">
+        <div>
+            <img class="logo" src="./images/RunBuddyLogo.png" alt="logo">
+        </div>
+        <div class="search_container">
+            <input type="text" class="form-control" id="search_input" placeholder="Current Location">
+            <button id="runButton">LET'S RUN</button>
+            <img id="glass_button" src="./images/glass.png" alt="glass_icon">
+            <div class="information hidden" id="info_msg">
+                Enter a location to search for nearby trails<br>OR<br>Just click the button to use current location
             </div>
         </div>
     </div>
-    </div>
-
 
     <div class="map_page hidden">
-        <div class="search_and_logo">
-            <img class="map_page_logo" src="./images/RunBuddyLogo.png">
-            <div class="search_bar">
-                <input type="text" id="search_field" placeholder="Enter ZIP Code or City">
-                <div class="input-group-btn form-group">
-                    <img class="search_button" src="./images/search-hover.png" alt="">
+        <div class="top_navigation">
+            <div class="search_and_logo">
+                <img class="map_page_logo" src="./images/RunBuddyLogo.png">
+                <div class="search_bar">
+                    <input type="text" id="search_field" placeholder="Current Location">
+                    <img class="search_button" src="./images/search.png" alt="search_button">
                 </div>
+            </div>
+            <div class="nav_tabs_top">
+                <div class="trails_tab tabLinks_top">< All Trails</div> 
+                <div class="weather_tab tabLinks_top">Weather</div>
+                <div class="meetup_tab tabLinks_top">Events</div>
             </div>
         </div>
         <div class="map_and_trail_list">
-            <div class="map_and_search_result_message">
-                <div class="search_result_message"></div>
-                <div id="map_area"></div>
-            </div>
-            <div class="group_tabs">
-                <div class="nav_tabs hidden">
-                    <div class="trails_tab tabLinks hidden">< BACK</div> 
-                    <div class="description_tab tabLinks">Details</div>
-                    <div class="direction_tab tabLinks">Direction</div>
-                    <div class="weather_tab tabLinks">Weather</div>
-                    <div class="meetup_tab tabLinks">Events</div>
-                </div>
-                <div class="location_list">
-                </div>
-                <div class="single_location_detail hidden">
-                    <div class="descriptionTab"></div>
-                    <div id="direction_tab" class="hidden"></div>
+            <div id="map_area" class="map_area hidden"></div>
+            <div class="list_and_details">
+                <div class="results_list"></div>
+                <div class="weather_container"></div>
+                <div class="meetup_container"></div>
+                <div class="detail_container">
+                    <div class="nav_tabs hidden">
+                        <div class="description_tab tabLinks">Trail Details</div>
+                        <div class="direction_tab tabLinks">Direction</div>
+                    </div>
+                    <div class="container_tabs">
+                        <div class="single_location_detail">
+                            <div class="description_container"></div>
+                            <div id="direction_container" class="hidden"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 

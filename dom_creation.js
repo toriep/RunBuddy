@@ -1,27 +1,38 @@
 function displayMapOnDom() {
     $(".landing_page").addClass("hidden");
-    $(".map_page").removeClass("hidden");
     //Map options
     const options = {
         zoom: 11,
         center: runningTrails[0],
     }
     //New map
-    let map = new google.maps.Map(document.getElementById("map_area"), options);
+    map = new google.maps.Map(document.getElementById("map_area"), options);
     //Add marker
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
         let marker = new google.maps.Marker({
             position: runningTrails[trailIndex].coordinates,
             map: map,
             animation: google.maps.Animation.DROP,
-            icon: "images/run_buddy_marker.png"
+            icon: "images/run_buddy_marker2.png"
         });
         let contentString = "<h3>" + runningTrails[trailIndex].name + "</h3>";
         let infoWindow = new google.maps.InfoWindow({
             content: contentString
         })
 
-        marker.addListener('click', function () {
+        marker["infoWindow"] = infoWindow;
+
+        marker.addListener('mouseover', () => {
+            infoWindow.open(map, marker);
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        })
+
+        marker.addListener('mouseout', () => {
+            infoWindow.close(map, marker);
+            marker.setAnimation(null);
+        })
+
+        marker.addListener('click', () => {
             infoWindow.open(map, marker);
             for (let i = 1; i < runningTrails.length; i++) {
                 if (runningTrails[i].coordinates.lat === marker.position.lat && runningTrails[i].coordinates.lng === marker.position.lng) {
@@ -40,16 +51,23 @@ function displayMapOnDom() {
                 setTimeout(function () { infoWindow.close(); }, 1000);
             }
         });
+        markersOnMap.push(marker);
     }
     renderTrailInfoOnDom();
 }
 
 function renderTrailInfoOnDom(markerIsClicked = false) {
+    $(".map_page, .map_area").removeClass("hidden");
+    $('.map_page_logo').click(goBackToLandingPage);
+    if (!$(".results_list").hasClass('zIndex')) {
+        $(".results_list").addClass('zIndex')
+    }
+    $(".results_list").empty();
     if ($('.list_result').length > 0) {
         $(".list_result").remove();
     }
     for (let i = 1; i < runningTrails.length; i++) {
-        let listResultsDiv = $('<div>').addClass('list_result');
+        let listResultsDiv = $('<div>').addClass('list_result').data('coordinates', runningTrails[i].coordinates);
         if (markerIsClicked && i === 1) {
             listResultsDiv.addClass('selected')
         }
@@ -60,38 +78,43 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         let nameOfPlace = $('<p>').text(runningTrails[i].name);
         const location = $('<div>').addClass('address').text(`${runningTrails[i].location}`);
         const rating = $('<div>').text(`${runningTrails[i].stars} out of 5 stars`);
-        let brLine = $('<br>');
         let moreInfoButton = $('<button>').addClass('btn btn-blue').text('Trail Info');
-        moreInfoButton.click(() => displayTrailDescription(runningTrails[i]));
-        locationDescriptionDiv.append(nameOfPlace, location, rating, brLine, moreInfoButton);
+        moreInfoButton.on('click', () => displayTrailDescription(runningTrails[i]));
+        locationDescriptionDiv.append(nameOfPlace, location, rating, moreInfoButton);
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
-        $('.location_list').append(listResultsDiv);
+        $('.results_list').append(listResultsDiv);
     }
-    $('.loadingImg').addClass('hidden');
-    $('.group_tabs').animate({ scrollTop: 0 }, 1500)
+    $('.results_list').animate({ scrollTop: 0 }, 1000);
+    $('.loading').addClass('hidden');
 }
 
 function displayTrailDescription(trail) {
-    $('.descriptionTab').empty();
+    if (!$('.container_tabs').hasClass('zIndex')) {
+        $('.container_tabs').addClass('zIndex')
+    }
+    $('.description_container').empty();
     $('.trails_tab').removeClass('hidden');
     $('.single_location_detail').removeClass('hidden');
-    $('.list_result').addClass('hidden');
+    if ($('.results_list').hasClass('zIndex')) {
+        $('.results_list').removeClass('zIndex')
+    }
+    $('.results_list').addClass('hidden');
     displayDescription();
     const imageOfPlace = $('<img>').attr('src', trail.imgMedium);
     const nameOfPlace = $('<p>').addClass('trailName').text(trail.name);
     const location = $('<div>').html(`<b>Location :</b> ${trail.location}`);
     const distance = $('<div>').html(`<b>Length :</b> ${trail.distance}`);
-    const rating = $('<div>').html(`<b>Rating :</b> ${trail.stars} out of 5 stars from ${trail.starVotes} reviews`);
+    const rating = $('<div>').html(`<b>Rating :</b> ${trail.stars} out of 5 stars from ${trail.starVotes} reviews<br><br>`);
     const summary = $('<div>').addClass('trail_summary').html(`<b>Overview :</b> ${trail.summary}`);
     const conditionStatus = $('<div>').addClass('condition_status').html(`<b>Status :</b> ${trail.conditionStatus}`);
     const conditionDetails = $('<div>').addClass('condition_details').html(`<b>Condition :</b> ${trail.conditionDetails || 'Currently, there is no condtition information for this trail.'}`);
-    const ascent = $('<div>').addClass('ascent').html(`<b>Ascent :</b> ${trail.ascent} inches`);
-    const descent = $('<div>').addClass('descent').html(`<b>Descent :</b> ${trail.descent} inches`);
+    const ascent = $('<div>').addClass('ascent').html(`<b>Ascent :</b> ${trail.ascent} feet`);
+    const descent = $('<div>').addClass('descent').html(`<b>Descent :</b> ${trail.descent} feet<br><br>`);
     const pointBCoordinates = trail.coordinates
     const descriptionDiv = $('<div>').addClass('description');
     const moreInfo = $('<div>').html(`<br><a target="_blank" href="${trail.url}">More info on ${trail.name}</a>`);
-    descriptionDiv.append(nameOfPlace, imageOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary, moreInfo);
-    $('.descriptionTab').append(descriptionDiv);
+    descriptionDiv.append(imageOfPlace, nameOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary, moreInfo);
+    $('.description_container').append(descriptionDiv);
     displayDirectionLineOnMap(pointBCoordinates);
     $("html, body").animate({
         scrollTop: 0
@@ -108,22 +131,10 @@ function displayDirectionLineOnMap(pointBCoordinates) {
         },
         map = new google.maps.Map(document.getElementById('map_area'), myOptions),
         // Instantiate a directions service.
-        directionsService = new google.maps.DirectionsService, //I'm from pointA
+        directionsService = new google.maps.DirectionsService,
         directionsDisplay = new google.maps.DirectionsRenderer({ //find me a direction
             map: map
-        }),
-        markerA = new google.maps.Marker({
-            position: pointA,
-            title: "point A",
-            label: "A",
-            map: map
-        }),
-        markerB = new google.maps.Marker({
-            position: pointB,
-            title: "point B",
-            label: "B",
-            map: map
-        });
+        })
     // get route from A to B
     calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
 }
@@ -139,12 +150,14 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
             // if (status == google.maps.DirectionsStatus.OK) {
             if (status == "OK") { //success function
                 directionsDisplay.setDirections(response);
-                var result = document.getElementById('direction_tab');
+                var result = document.getElementById('direction_container');
                 result.innerHTML = "";
                 let newTr1 = document.createElement("tr");
-                newTr1.innerHTML = `<b>Start location :</b> ${response.routes[0].legs[0].start_address}<br>`;
+                newTr1.innerHTML = `<b>Distance :</b> ${response.routes[0].legs[0].distance.text}.  <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
+
                 let newTr2 = document.createElement("tr");
-                newTr2.innerHTML = `<b>Distance :</b> ${response.routes[0].legs[0].distance.text}.  <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
+                newTr2.innerHTML = `<b>Start location :</b> ${response.routes[0].legs[0].start_address}<br>`;
+
                 let newTr4 = document.createElement("tr");
                 newTr4.innerHTML = `<b>Destination :</b> ${response.routes[0].legs[0].end_address}<br><br>`;
                 result.appendChild(newTr1);
@@ -162,6 +175,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 }
             } else { //error function
                 console.log('Directions request failed due to ' + status);
+                var result = document.getElementById('direction_container');
+                result.innerText = "Oops. We couldn't find a direction route to this trail from your location. Please try another trail.";
             }
         }
     );
@@ -180,15 +195,15 @@ function displayWeatherSuccess(responseFromServer) {
         sunriseTime: (responseFromServer.sys['sunrise']),
         sunsetTime: (responseFromServer.sys['sunset']),
         humidity: responseFromServer.main['humidity'],
-        wind: responseFromServer.wind['speed']
+        wind: responseFromServer.wind['speed'],
+        clouds: responseFromServer.clouds['all'],
     };
-    console.log(weather);
     renderWeatherOnDom(weather);
 }
 
 function renderWeatherOnDom(weather) {
     if ($('.weather_list').length > 0) {
-        $(".weather_list").remove();
+        $('.weather_list').remove();
     }
     let imgSrc = `http://openweathermap.org/img/w/${weather.iconId}.png`;
     let weatherImage = $('<img class="weather_icon">').attr({
@@ -198,32 +213,123 @@ function renderWeatherOnDom(weather) {
     let today = new Date();
     let dateToday = today.toDateString();
     let timeNow = today.toLocaleTimeString();
+    let currentInC = ((weather.currentTempInF - 32) * 5 / 9).toFixed(1);
+    let highInC = ((weather.tempMaxInF - 32) * 5 / 9).toFixed(1);
+    let lowInC = ((weather.tempMinInF - 32) * 5 / 9).toFixed(1);
     let headline = $('<div>').append(`${weather.cityName}`);
     let line0 = $('<li>').append(`<i>As of ${dateToday} ${timeNow}</i>`);
     let line1 = $('<li>').append(weatherImage, (weather.conditionDescription).toUpperCase());
-    let line2 = $('<li>').append(`<b>Current Temperature :</b> ${weather.currentTempInF} <b>°F</b `);
-    let line3 = $('<li>').append(`<b>High :</b> ${weather.tempMaxInF} <b>°F</b> / <b>Low :</b> ${weather.tempMinInF} <b>°F</b>`);
-    let line4 = $('<li>').append(`<b>Humidity :</b> ${weather.humidity} <b>%</b>`);
-    let line5 = $('<li>').append(`<b>Wind :</b> ${weather.wind} <b>m/s</b>`);
+    let line2 = $('<li>').append(`<b>Current Temperature :</b> ${weather.currentTempInF} <b>°F</b>&nbsp; (${currentInC} <b>°C</b>) `);
+    let line3 = $('<li>').append(`<b>High :</b> ${weather.tempMaxInF} <b>°F</b>&nbsp; (${highInC} <b>°C</b>)`);
+    let line4 = $('<li>').append(`<b>Low :</b> ${weather.tempMinInF} <b>°F</b>&nbsp; (${lowInC} <b>°C</b>)`);
+    let line5 = $('<li>').append(`<b>Humidity :</b> ${weather.humidity} <b>%</b>`);
+    let line6 = $('<li>').append(`<b>Wind :</b> ${weather.wind} <b>m/s</b>`);
+    let line7 = $('<li>').append(`<b>Cloudiness :</b> ${weather.clouds} <b>%</b>`);
 
     let weatherList = $('<ul>').addClass('weather_list hidden');
-    weatherList.append(headline, line0, line1, line2, line3, line4, line5);
-    $('.single_location_detail').append(weatherList);
+    weatherList.append(headline, line0, line1, line2, line3, line4, line5, line6, line7);
+    $('.weather_container').append(weatherList);
 }
 
+function displayForecastSuccess(responseFromServer) {
+    let forecast = {
+        day1: responseFromServer.list[11].dt_txt,
+        day1Cond: responseFromServer.list[0].weather[0].description,
+        day1High: (responseFromServer.list[0].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day1Low: (responseFromServer.list[0].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+
+        day2: responseFromServer.list[18].dt_txt,
+        day2Cond: responseFromServer.list[8].weather[0].description,
+        day2High: (responseFromServer.list[8].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day2Low: (responseFromServer.list[8].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+
+        day3: responseFromServer.list[25].dt_txt,
+        day3Cond: responseFromServer.list[16].weather[0].description,
+        day3High: (responseFromServer.list[16].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day3Low: (responseFromServer.list[16].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+
+        day4: responseFromServer.list[32].dt_txt,
+        day4Cond: responseFromServer.list[24].weather[0].description,
+        day4High: (responseFromServer.list[24].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day4Low: (responseFromServer.list[24].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+
+        day5: responseFromServer.list[39].dt_txt,
+        day5Cond: responseFromServer.list[32].weather[0].description,
+        day5High: (responseFromServer.list[32].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day5Low: (responseFromServer.list[32].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+
+    };
+    renderForecastOnDom(forecast);
+}
+
+function renderForecastOnDom(forecast) {
+    //will clean up later~~~~~~~~~~~~~~~~~~~ just testing here for now
+    let monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    let monStr1 = monthList[((forecast.day1).slice(5, 7)) - 1];
+    let dayStr1 = ((forecast.day1).slice(8, 10));
+
+    let monStr2 = monthList[((forecast.day2).slice(5, 7)) - 1];
+    let dayStr2 = ((forecast.day2).slice(8, 10));
+
+    let monStr3 = monthList[((forecast.day3).slice(5, 7)) - 1];
+    let dayStr3 = ((forecast.day3).slice(8, 10));
+
+    let monStr4 = monthList[((forecast.day4).slice(5, 7)) - 1];
+    let dayStr4 = ((forecast.day4).slice(8, 10));
+
+    let monStr5 = monthList[((forecast.day5).slice(5, 7)) - 1];
+    let dayStr5 = ((forecast.day5).slice(8, 10));
+
+    let headline = `<b>5 Day Forecast :</b> (will fix the layout later)`;
+    let forecastTable1 = $('<tr>').append(`<td>${monStr1} ${dayStr1} : ${forecast.day1Cond} 
+        with High ${forecast.day1High} <b>°F</b> | Low ${forecast.day1Low} <b>°F</b></td>`);
+
+    let forecastTable2 = $('<tr>').append(`<td>${monStr2} ${dayStr2} : ${forecast.day2Cond}
+        with High ${forecast.day2High} <b>°F</b> | Low ${forecast.day2Low} <b>°F</b></td>`);
+
+    let forecastTable3 = $('<tr>').append(`<td>${monStr3} ${dayStr3} : ${forecast.day3Cond}        
+        with High ${forecast.day3High} <b>°F</b> | Low ${forecast.day3Low} <b>°F</b></td>`);
+
+    let forecastTable4 = $('<tr>').append(`<td>${monStr4} ${dayStr4} : ${forecast.day4Cond}
+        with High ${forecast.day4High} <b>°F</b> | Low ${forecast.day4Low} <b>°F</b></td>`);
+
+    let forecastTable5 = $('<tr>').append(`<td>${monStr5} ${dayStr5} : ${forecast.day5Cond}
+        with High ${forecast.day5High} <b>°F</b> | Low ${forecast.day5Low} <b>°F</b></td>`);
+
+    let forecastList = $('<table>').addClass('weather_list hidden');
+    forecastList.append(headline, forecastTable1, forecastTable2, forecastTable3, forecastTable4, forecastTable5);
+    $('.results_list').append(forecastList);
+}
+
+
 function displayMeetUpSuccess(response) {
+    $('.meetup_container').empty();
     if ($('.events').length > 0) {
         $(".events").remove();
     }
-    if (response.meta.count === 0) {
+    if (response.code === "blocked" || response.meta.count === 0) {
         const meetupDiv = $('<div>', {
             class: `events hidden`,
             html: '<h2>Currently, there are no upcoming meetups near your area.'
         });
-        $('.single_location_detail').append(meetupDiv);
+        $('.meetup_container').append(meetupDiv);
+        return;
     }
     const meetUpResponse = response.results;
     const filteredMeetUpResults = [];
+    let message = null;
+    if ($('.meetup_result_message').length) {
+        $('.meetup_result_message').remove()
+    }
+    if (inputFromUser === "") {
+        message = $('<div>').addClass('meetup_result_message').text('Events near your current location:')
+    } else {
+        message = $('<div>').addClass('meetup_result_message').text(`Events near ${inputFromUser}`);
+    }
+    const message_container = $('<div>').addClass('message_container');
+    message_container.append(message)
+    $('.meetup_container').append(message_container);
     for (let m = 0; m < meetUpResponse.length; m++) {
         let { description, name, event_url, time, group, yes_rsvp_count } = meetUpResponse[m];
         const formattedInfo = { description, eventName: name, link: event_url, time, group, yes_rsvp_count }
@@ -250,17 +356,9 @@ function renderMeetUpOnDom(meetup) {
             title: 'Meetup.com Link',
             target: '_blank'
         })
-        const meetUp = $('.single_location_detail');
+        const meetUp = $('.meetup_container');
         let meetupDiv = $('<div>').addClass(`meetUp events hidden`);
         meetupDiv = $(meetupDiv).append(groupName, eventName, members)
-        $(meetUp).append(meetupDiv)
+        $(meetUp).append(meetupDiv);
     }
 }
-
-// function displaySearchResultMessage() {
-//     if (inputFromUser === "") {
-//         $(".search_result_message").text('Search result for your current location:');
-//     } else {
-//         $(".search_result_message").text(`Search result for ${inputFromUser}`);
-//     }
-// }
