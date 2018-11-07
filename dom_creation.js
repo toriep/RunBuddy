@@ -175,6 +175,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 }
             } else { //error function
                 console.log('Directions request failed due to ' + status);
+                var result = document.getElementById('direction_container');
+                result.innerText = "Oops. We couldn't find a direction route to this trail from your location. Please try another trail.";
             }
         }
     );
