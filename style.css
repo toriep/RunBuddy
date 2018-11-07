@@ -8,8 +8,7 @@ body {
    padding: 0;
    height: 100vh;
    width: 100vw;
-   background: url(./images/runningtrail.jpg);
-   background-repeat: repeat-y; 
+   background: url(./images/runningtrail.jpg); 
    background-position: 0 40%;
    background-size: cover;
    background-attachment: fixed;
@@ -30,7 +29,6 @@ body {
     transform: translate(-50%,-50%);
     text-align: center;
     font-size: 2.5rem;
-    color: rgba(255, 255, 255, 0.8);
 }
 
 .map_page_logo{
@@ -517,8 +515,8 @@ Media Query
         position: relative;
         background-image: none;
         box-shadow: none;
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         top: -0.4vh;
     }
 
@@ -531,22 +529,23 @@ Media Query
         text-align: center;
         border: 0;
         color: black;
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.85);
         box-shadow: inset 1px 1px 10px rgb(90, 89, 89);
         outline: none;
         border-radius: 5px;
-        width: 80vw;
+        width: 75vw;
     }
     #runButton {
         display: none;
     }
     #search_input{
-        height: 5.2vh;
+        height: 4.2vh;
         box-shadow: none;
         position: relative;
         top: -2.5vh;
         left: 1.5vw;;
-        width: 61vw;
+        width: 60vw;
+        background-color: rgba(255, 255, 255, 0);
     }
     #info_msg{
         font-size: 0.7em;
@@ -743,16 +742,12 @@ Media Query
     .logo{
         width: 75vw;
     }
-    #search_input{
-        width: 67vw;
-    }
     #glass_button{
         display: initial;
-        position: static;
-        background-image: none;
-        box-shadow: none;
-        width: 50px;
-        height: 50px;
+        position: relative;
+        width: 45px;
+        height: 45px;
+        bottom: 3px;
     }
     #runButton {
         display: none;
@@ -766,11 +761,11 @@ Media Query
         text-align: center;
         border: 0;
         color: black;
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.85);
         box-shadow: inset 1px 1px 10px rgb(90, 89, 89);
         outline: none;
         border-radius: 5px;
-        width: 80vw;
+        width: 75vw;
     }
     #info_msg{
         font-size: 0.7em;
@@ -779,10 +774,12 @@ Media Query
         top: -25%;
     }
     #search_input{
-        height: 5.2vh;
         box-shadow: none;
         top: -2.5vh;
         position: relative;
+        width: 61vw;
+        height: 2.2vh;
+        background-color: rgba(255, 255, 255, 0);
     }
     .map_page_logo{
         height: 3vh;
@@ -981,7 +978,7 @@ Media Query
         font-size: 0.8rem;
     }
     #map_area{
-        width: 57vw;
+        width: 40vw;
     }
     .map_page_logo {
         height: 4vh;
@@ -992,6 +989,9 @@ Media Query
     }
     #search_field {
         width: 72vw;
+    }
+    #search_input {
+        width: 40vw;
     }
     .locationPicture {
         width: 17vw;
@@ -1043,10 +1043,6 @@ Media Query
         top: 32vh;
         left: 56vw;
         width: 35%;
-    }
-
-    #search_input {
-        font-size: 1.3rem;
     }
 
     #runButton {
