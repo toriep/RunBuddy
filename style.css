@@ -22,7 +22,7 @@ body {
    width: 100%;
 }
 
-.form-inline {
+.search_container {
     position: absolute;
     top: 55vh;
     left: 50%;
@@ -520,7 +520,7 @@ Media Query
         height: 50px;
     }
 
-    .form-inline{
+    .search_container{
         font-size: 1.2rem;
         height: 7vh;
         padding: 5px 0;
@@ -750,7 +750,7 @@ Media Query
     #runButton {
         display: none;
     }
-    .form-inline{
+    .search_container{
         font-size: 1.2rem;
         height: 7vh;
         padding: 5px 0;
@@ -922,12 +922,12 @@ Media Query
     }
     
     .locationPicture {
-        width: 20vw;
-        height: 16vh;
+        width: 25vw;
+        height: 22vh;
     }
 
     .locationDescription {
-        height: 16.5vh;
+        height: 22.5vh;
     }
     
     #direction_container{
@@ -980,7 +980,11 @@ Media Query
         height: 17vw;
     }
     .locationDescription{
-        height: 18.3vh;
+        height: 25.3vh;
+        font-size: 0.85rem;
+    }
+    .locationDescription>p {
+        font-size: 1.1rem;
     }
     .list_result {
         height: 189px;
