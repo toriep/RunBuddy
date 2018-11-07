@@ -32,6 +32,7 @@ function responseFromGeolocation(response) {
     getDataFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
     getDataFromMeetUp(lat, lng);
+    getWeatherForecast(lat, lng);
 }
 
 function getCurrentLocationForDirection() {

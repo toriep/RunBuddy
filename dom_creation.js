@@ -233,10 +233,10 @@ function renderWeatherOnDom(weather) {
 
 function displayForecastSuccess(responseFromServer) {
     let forecast = {
-        day1: responseFromServer.list[11].dt_txt,
-        day1Cond: responseFromServer.list[0].weather[0].description,
-        day1High: (responseFromServer.list[0].main.temp_max * 9 / 5 - 459.67).toFixed(1),
-        day1Low: (responseFromServer.list[0].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+        day1: responseFromServer.list[10].dt_txt,
+        day1Cond: responseFromServer.list[10].weather[0].description,
+        day1High: (responseFromServer.list[10].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day1Low: (responseFromServer.list[10].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
         day2: responseFromServer.list[18].dt_txt,
         day2Cond: responseFromServer.list[8].weather[0].description,
@@ -281,7 +281,7 @@ function renderForecastOnDom(forecast) {
     let monStr5 = monthList[((forecast.day5).slice(5, 7)) - 1];
     let dayStr5 = ((forecast.day5).slice(8, 10));
 
-    let headline = `<b>5 Day Forecast :</b> (will fix the layout later)`;
+    let headline = `<b>5 Days Forecast :</b> (will fix the layout later)`;
     let forecastTable1 = $('<tr>').append(`<td>${monStr1} ${dayStr1} : ${forecast.day1Cond} 
         with High ${forecast.day1High} <b>°F</b> | Low ${forecast.day1Low} <b>°F</b></td>`);
 
@@ -299,7 +299,7 @@ function renderForecastOnDom(forecast) {
 
     let forecastList = $('<table>').addClass('weather_list hidden');
     forecastList.append(headline, forecastTable1, forecastTable2, forecastTable3, forecastTable4, forecastTable5);
-    $('.results_list').append(forecastList);
+    $('.weather_container').append(forecastList);
 }
 
 
