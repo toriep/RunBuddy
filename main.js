@@ -53,7 +53,6 @@ function callGoogleAPI(event) {
         getLatLongFromGeocoding(inputFromUser);
         getCurrentLocationForDirection();
     }
-    displayResult();
 }
 
 function responseFromGeolocation(response) {
@@ -201,4 +200,10 @@ function resetNotifyTrailClicked(event) {
             markersOnMap[i].setAnimation(null);
         }
     }
+}
+
+function goBackToLandingPage(){
+    $(".map_page, .map_area").addClass("hidden");
+    $(".landing_page").removeClass("hidden");
+    $('.meetup_container').empty();
 }

@@ -33,6 +33,7 @@ body {
 
 .map_page_logo{
     height: 4vh;
+    cursor: pointer;
 }
 #runButton {
     display: none;
@@ -122,14 +123,14 @@ body {
 .logo {
     position: relative;
     top: 30vh;
-    left: 52vw;
+    left: 50%;
     transform: translate(-50%,-50%);
     text-align: center;
 }
 
 
 #info_msg {
-    font-size: 0.5em;
+    font-size: 1rem;
     font-weight: bold;
     font-style: italic;
     color: #351706e5;
@@ -1036,8 +1037,6 @@ Media Query
         font-size: 0.65rem;
     }
     .map_page_logo{
-        left: 2vw;
-        position: absolute;
     }
     /* body {
         background-position: 20% 40%;

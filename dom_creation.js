@@ -59,6 +59,7 @@ function displayMapOnDom() {
 
 function renderTrailInfoOnDom(markerIsClicked = false) {
     $(".map_page, .map_area").removeClass("hidden");
+    $('.map_page_logo').click(goBackToLandingPage);
     if (!$(".results_list").hasClass('zIndex')) {
         $(".results_list").addClass('zIndex')
     }
