@@ -53,6 +53,7 @@ function callGoogleAPI(event) {
         getLatLongFromGeocoding(inputFromUser);
         getCurrentLocationForDirection();
     }
+    displayResult();
 }
 
 function responseFromGeolocation(response) {
@@ -165,7 +166,7 @@ function displayResult() {
     $('.nav_tabs, #direction_container, .events, .weather_list, .description, .single_location_detail').addClass('hidden');
     $('.results_list').removeClass('hidden');
     $('#map_area').text();
-    displayMapOnDom();
+    // displayMapOnDom();
 }
 
 function displayMeetUp() {
