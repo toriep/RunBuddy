@@ -270,7 +270,7 @@ a{
 /* Search List Result Box */
 .list_result {
     display: flex;
-    height: 215px;
+    height: 209px;
     background-color: whitesmoke;
     padding: 1.5%;
     margin-bottom: 1.6%;
@@ -360,7 +360,8 @@ a{
 
 .locationDescription {
     padding: 0 3%;
-    font-size: 1rem;
+    font-size: 0.7rem;
+    height: 20vh;
     position: relative;
 }
 
@@ -585,6 +586,7 @@ Media Query
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 100vw;
     }
     
     .single_location_detail{
@@ -775,6 +777,7 @@ Media Query
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 100vw;
     }
     
     .single_location_detail{
