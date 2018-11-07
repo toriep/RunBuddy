@@ -304,25 +304,29 @@ a{
 .description {
     background-color: whitesmoke;
     padding: 2% 2% 5%;
-    font-size: 1.2rem;
 }
 
 .description img{
-    max-height: 37vh;
-    max-width: 44vw;
+    width: 32vw;
     margin-bottom:3%;
+    margin-top: 1%;
 }
 
 .description>div {
-    padding: 3px 2%;
+    font-size: 1rem;
+    padding: 2px 2%;
 }
 
 .trailName{
     font-family: 'Quicksand';
     margin-top: 1%;
     font-weight: bold;
-    font-size: 1.6em;
+    font-size: 2rem;
     border-bottom: 1px black solid;
+}
+
+.description>div, .description img, .trailName {
+    padding: 3px 2%;
 }
 
 /* Nav Bar */
@@ -690,7 +694,8 @@ Media Queries
     }
     
     .description img{
-        max-height: 20vh;
+        width: 94vw;
+        height: auto;
         margin-bottom:3%;
     }
     
@@ -914,8 +919,11 @@ Media Queries
     }
     
     .description img{
-        max-height: 20vh;
-        margin-bottom:3%;
+        width: 70vw;
+        height: auto;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
     }
     
     .description>div {

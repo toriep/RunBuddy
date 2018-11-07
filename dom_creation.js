@@ -104,16 +104,16 @@ function displayTrailDescription(trail) {
     const nameOfPlace = $('<p>').addClass('trailName').text(trail.name);
     const location = $('<div>').html(`<b>Location :</b> ${trail.location}`);
     const distance = $('<div>').html(`<b>Length :</b> ${trail.distance}`);
-    const rating = $('<div>').html(`<b>Rating :</b> ${trail.stars} out of 5 stars from ${trail.starVotes} reviews`);
+    const rating = $('<div>').html(`<b>Rating :</b> ${trail.stars} out of 5 stars from ${trail.starVotes} reviews<br><br>`);
     const summary = $('<div>').addClass('trail_summary').html(`<b>Overview :</b> ${trail.summary}`);
     const conditionStatus = $('<div>').addClass('condition_status').html(`<b>Status :</b> ${trail.conditionStatus}`);
     const conditionDetails = $('<div>').addClass('condition_details').html(`<b>Condition :</b> ${trail.conditionDetails || 'Currently, there is no condtition information for this trail.'}`);
-    const ascent = $('<div>').addClass('ascent').html(`<b>Ascent :</b> ${trail.ascent} inches`);
-    const descent = $('<div>').addClass('descent').html(`<b>Descent :</b> ${trail.descent} inches`);
+    const ascent = $('<div>').addClass('ascent').html(`<b>Ascent :</b> ${trail.ascent} feet`);
+    const descent = $('<div>').addClass('descent').html(`<b>Descent :</b> ${trail.descent} feet<br><br>`);
     const pointBCoordinates = trail.coordinates
     const descriptionDiv = $('<div>').addClass('description');
     const moreInfo = $('<div>').html(`<br><a target="_blank" href="${trail.url}">More info on ${trail.name}</a>`);
-    descriptionDiv.append(nameOfPlace, imageOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary, moreInfo);
+    descriptionDiv.append(imageOfPlace, nameOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary, moreInfo);
     $('.description_container').append(descriptionDiv);
     displayDirectionLineOnMap(pointBCoordinates);
     $("html, body").animate({
