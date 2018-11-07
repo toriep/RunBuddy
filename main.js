@@ -42,8 +42,7 @@ function addClickHandlersToElements() {
     $('.meetup_tab').click(displayMeetUp);
 }
 
-function callGoogleAPI(event) {
-    event.preventDefault();
+function callGoogleAPI() {
     inputFromUser = $("#search_input").val() || $("#search_field").val();
     userInput = $("#search_input").val();
     $("#search_input").val("");
@@ -53,7 +52,6 @@ function callGoogleAPI(event) {
         getLatLongFromGeocoding(inputFromUser);
         getCurrentLocationForDirection();
     }
-    displayResult();
 }
 
 function responseFromGeolocation(response) {
@@ -71,7 +69,7 @@ function responseFromGeolocation(response) {
 
 function alertMsgAndRefresh() {
     $('.landing_page').addClass('hidden');
-    $('.loadingImg').removeClass('hidden');
+    $('.loading').removeClass('hidden');
     setTimeout(() => {
         alert('Invalid Location. Please try again.');
     }, 200);
@@ -104,7 +102,7 @@ function responseFromTrailsList(response) {
     if (response.trails.length === 0) {
         $(".results_list").empty();
         $(".map_page").removeClass("hidden");
-        $(".landing_page, .map_area, .loadingImg").addClass('hidden');
+        $(".landing_page, .map_area, .loading").addClass('hidden');
         let noResult = $('<div>').addClass('no-result').text(`Your search did not match any trail results. Please try a different location.`)
         $('.results_list').append(noResult);
         return;
@@ -123,8 +121,8 @@ function responseFromTrailsList(response) {
             });
         }
     });
-    displayMapOnDom();
-    // displaySearchResultMessage();
+    // displayMapOnDom();
+    displayResult();
 }
 
 function displayError(error) {
@@ -143,14 +141,15 @@ function displayError(error) {
 // const trails_tab = $('.trails_tab');
 
 function displayWeather() {
-    $('#direction_container, .results_list, .events, .description, .meetup_result_message').addClass('hidden');
+    $('#direction_container, .results_list, .events, .description, .message_container').addClass('hidden');
     $('.weather_list').removeClass('hidden');
     $('.description_tab, .meetup_tab, .direction_tab, .results').removeClass('currentTab');
     $('.weather_tab').addClass('currentTab');
 }
 
 function displayDescription() {
-    $('#direction_container, .events, .weather_list, .meetup_result_message').addClass('hidden');
+    $('.detail_container').removeClass('hidden');
+    $('#direction_container, .events, .weather_list, .message_container').addClass('hidden');
     $('.nav_tabs, .description').removeClass('hidden');
     $('.weather_tab, .meetup_tab, .direction_tab, .trails_tab').removeClass('currentTab');
     $('.description_tab').addClass('currentTab');
@@ -163,21 +162,21 @@ function displayResult() {
     if (!$('.results_list').hasClass('zIndex')) {
         $('.results_list').addClass('zIndex')
     }
-    $('.nav_tabs, #direction_container, .events, .weather_list, .description, .single_location_detail').addClass('hidden');
+    $('.detail_container').addClass('hidden');
     $('.results_list').removeClass('hidden');
     $('#map_area').text();
     displayMapOnDom();
 }
 
 function displayMeetUp() {
-    $('.events, .meetup_result_message').removeClass('hidden');
+    $('.events, .message_container').removeClass('hidden');
     $('.description, .results_list, .weather_list, #direction_container').addClass('hidden');
     $('.description_tab, .weather_tab, .direction_tab, .trails_tab').removeClass('currentTab');
     $('.meetup_tab').addClass('currentTab');
 }
 
 function displayDirection() {
-    $('.description, .results_list, .weather_list, .events, .meetup_result_message').addClass('hidden');
+    $('.description, .results_list, .weather_list, .events, .message_container').addClass('hidden');
     $('#direction_container').removeClass('hidden');
     $('.description_tab, .meetup_tab, .weather_tab, .trails_tab').removeClass('currentTab');
     $('.direction_tab').addClass('currentTab');
@@ -201,4 +200,10 @@ function resetNotifyTrailClicked(event) {
             markersOnMap[i].setAnimation(null);
         }
     }
+}
+
+function goBackToLandingPage(){
+    $(".map_page, .map_area").addClass("hidden");
+    $(".landing_page").removeClass("hidden");
+    $('.meetup_container').empty();
 }

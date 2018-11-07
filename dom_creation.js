@@ -9,7 +9,6 @@ function displayMapOnDom() {
     map = new google.maps.Map(document.getElementById("map_area"), options);
     //Add marker
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
-        // debugger;
         let marker = new google.maps.Marker({
             position: runningTrails[trailIndex].coordinates,
             map: map,
@@ -59,6 +58,7 @@ function displayMapOnDom() {
 
 function renderTrailInfoOnDom(markerIsClicked = false) {
     $(".map_page, .map_area").removeClass("hidden");
+    $('.map_page_logo').click(goBackToLandingPage);
     if (!$(".results_list").hasClass('zIndex')) {
         $(".results_list").addClass('zIndex')
     }
@@ -84,8 +84,8 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.results_list').append(listResultsDiv);
     }
-    $('.loadingImg').addClass('hidden');
-    $('.results_list').animate({ scrollTop: 0 }, 1500)
+    $('.results_list').animate({ scrollTop: 0 }, 1500);
+    $('.loading').addClass('hidden');
 }
 
 function displayTrailDescription(trail) {
@@ -104,16 +104,16 @@ function displayTrailDescription(trail) {
     const nameOfPlace = $('<p>').addClass('trailName').text(trail.name);
     const location = $('<div>').html(`<b>Location :</b> ${trail.location}`);
     const distance = $('<div>').html(`<b>Length :</b> ${trail.distance}`);
-    const rating = $('<div>').html(`<b>Rating :</b> ${trail.stars} out of 5 stars from ${trail.starVotes} reviews`);
+    const rating = $('<div>').html(`<b>Rating :</b> ${trail.stars} out of 5 stars from ${trail.starVotes} reviews<br><br>`);
     const summary = $('<div>').addClass('trail_summary').html(`<b>Overview :</b> ${trail.summary}`);
     const conditionStatus = $('<div>').addClass('condition_status').html(`<b>Status :</b> ${trail.conditionStatus}`);
     const conditionDetails = $('<div>').addClass('condition_details').html(`<b>Condition :</b> ${trail.conditionDetails || 'Currently, there is no condtition information for this trail.'}`);
-    const ascent = $('<div>').addClass('ascent').html(`<b>Ascent :</b> ${trail.ascent} inches`);
-    const descent = $('<div>').addClass('descent').html(`<b>Descent :</b> ${trail.descent} inches`);
+    const ascent = $('<div>').addClass('ascent').html(`<b>Ascent :</b> ${trail.ascent} feet`);
+    const descent = $('<div>').addClass('descent').html(`<b>Descent :</b> ${trail.descent} feet<br><br>`);
     const pointBCoordinates = trail.coordinates
     const descriptionDiv = $('<div>').addClass('description');
     const moreInfo = $('<div>').html(`<br><a target="_blank" href="${trail.url}">More info on ${trail.name}</a>`);
-    descriptionDiv.append(nameOfPlace, imageOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary, moreInfo);
+    descriptionDiv.append(imageOfPlace, nameOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary, moreInfo);
     $('.description_container').append(descriptionDiv);
     displayDirectionLineOnMap(pointBCoordinates);
     $("html, body").animate({
@@ -175,6 +175,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 }
             } else { //error function
                 console.log('Directions request failed due to ' + status);
+                var result = document.getElementById('direction_container');
+                result.innerText = "Oops. We couldn't find a direction route to this trail from your location. Please try another trail.";
             }
         }
     );
@@ -302,6 +304,7 @@ function renderForecastOnDom(forecast) {
 
 
 function displayMeetUpSuccess(response) {
+    $('.meetup_container').empty();
     if ($('.events').length > 0) {
         $(".events").remove();
     }
@@ -324,7 +327,9 @@ function displayMeetUpSuccess(response) {
     } else {
         message = $('<div>').addClass('meetup_result_message').text(`Events near ${inputFromUser}`);
     }
-    $('.meetup_container').append(message);
+    const message_container = $('<div>').addClass('message_container');
+    message_container.append(message)
+    $('.meetup_container').append(message_container);
     for (let m = 0; m < meetUpResponse.length; m++) {
         let { description, name, event_url, time, group, yes_rsvp_count } = meetUpResponse[m];
         const formattedInfo = { description, eventName: name, link: event_url, time, group, yes_rsvp_count }

@@ -8,8 +8,7 @@ body {
    padding: 0;
    height: 100vh;
    width: 100vw;
-   background: url(./images/runningtrail.jpg);
-   background-repeat: repeat-y; 
+   background: url(./images/runningtrail.jpg); 
    background-position: 0 40%;
    background-size: cover;
    background-attachment: fixed;
@@ -30,11 +29,11 @@ body {
     transform: translate(-50%,-50%);
     text-align: center;
     font-size: 2.5rem;
-    color: rgba(255, 255, 255, 0.8);
 }
 
 .map_page_logo{
     height: 4vh;
+    cursor: pointer;
 }
 #runButton {
     display: none;
@@ -124,20 +123,20 @@ body {
 .logo {
     position: relative;
     top: 30vh;
-    left: 52vw;
+    left: 50%;
     transform: translate(-50%,-50%);
     text-align: center;
 }
 
 
 #info_msg {
-    font-size: 0.5em;
+    font-size: 1rem;
     font-weight: bold;
     font-style: italic;
     color: #351706e5;
     text-align: center;
     width: 40%;
-    position: relative;
+    position: absolute;
     left: 25%;
 }
 
@@ -168,7 +167,7 @@ body {
 }
 
 #map_area{
-    width: 66vw;
+    width: 64vw;
     height: 90vh;
     left: 1vw;
     border: 1px solid black;
@@ -178,22 +177,23 @@ body {
 
 .map_and_trail_list{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     min-height: 70vh;
 }
 
 .container_tabs{
     position: relative;
-    width: 31vw;
+    width: 34vw;
     height: 88vh;
     margin-right: 2px;
     overflow-y: hidden;
     overflow-x: hidden;
+    background-color: whitesmoke;
 }
 
 .results_list {
     position: relative;
-    width: 31vw;
+    width: 100%;
     right: 0;
     height: 93vh;
     margin-right: 2px;
@@ -212,11 +212,10 @@ a{
 
 .weather_list{
     background-color: whitesmoke;
-    width: 100vw;
     right: 1vw;
     margin: auto;
     font-size: 1.5rem;
-    box-shadow: 5px 5px 18px black;
+    /* box-shadow: 5px 5px 18px black; */
     opacity: 0.95;
     padding: 2% 5% 8%;
     list-style-type: none;
@@ -261,7 +260,9 @@ a{
     background-color: whitesmoke;
     margin-bottom: 0;
     font-size: 1rem;
-    border: 1px solid;
+    border: 0.5px solid;
+    border-left: none;
+    border-right: none;
     opacity: 0.90;
     padding: 5%;
 }
@@ -281,12 +282,15 @@ a{
     font-size: 2.4rem;
     opacity: 0.97;
     box-shadow: 5px 10px 18px black;
+    border: 1px solid;
+    border-left: none;
+    border-right: none;  
 }
 
 .list_result:hover {
     /* opacity: 1;
     box-shadow: 7px 12px 20px black; */
-    background-color: #d5e0e8;
+    background-color: #e0f0fc;
 }
 
 .selected {
@@ -300,24 +304,29 @@ a{
 .description {
     background-color: whitesmoke;
     padding: 2% 2% 5%;
-    font-size: 1.2rem;
 }
 
 .description img{
-    max-height: 37vh;
-    max-width: 44vw;
+    width: 32vw;
     margin-bottom:3%;
+    margin-top: 1%;
 }
 
 .description>div {
-    padding: 3px 2%;
+    font-size: 1rem;
+    padding: 2px 2%;
 }
 
 .trailName{
     font-family: 'Quicksand';
     margin-top: 1%;
     font-weight: bold;
-    font-size: 1.6em;
+    font-size: 2rem;
+    border-bottom: 1px black solid;
+}
+
+.description>div, .description img, .trailName {
+    padding: 3px 2%;
 }
 
 /* Nav Bar */
@@ -325,7 +334,7 @@ a{
     position: relative;
     display: flex;
     flex-wrap: nowrap;
-    width: 31vw;
+    width: 34vw;
 }
 
 .tabLinks {
@@ -383,8 +392,16 @@ a{
     100% {left: 55%; top: 48%;}
 }
 
+.loading{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0,0.7);
+    position: absolute;
+    z-index: 10;
+}
+
 .loadingImg{
-    width: 22%;
+    width: 17%;
     position: absolute;
     top: 50%;
     left: 40%;
@@ -424,9 +441,20 @@ a{
 
 #direction_container>tr>td>div {
     padding-left: 20px;
-    color: blue;
+    color: green;
 }
-
+.meetup_container{
+    background-color: whitesmoke;
+}
+.message_container{
+    background-color: beige;
+    padding: 1% 0;
+    border-bottom: 1px solid black;
+}
+.meetup_result_message{
+    position: relative;
+    left: 5%;
+}
 .btn {
     cursor: pointer;
     text-decoration: none;
@@ -462,12 +490,12 @@ a{
 
 .container_tabs::-webkit-scrollbar {
     width: 10px;
-    background: none;
+    background: lightgray;
 } 
 
 .results_list::-webkit-scrollbar {
     width: 10px;
-    background: none;
+    background: lightgrey;
 }
 
 .container_tabs::-webkit-scrollbar-thumb {
@@ -493,11 +521,11 @@ a{
 }
 
 .list_and_details {
-    width: 30vw;
+    width: 34vw;
 }
 
 /*************************
-Media Query
+Media Queries
 **************************/
 
 /* --- most Smartphones (portrait)  --- */
@@ -517,9 +545,9 @@ Media Query
         position: relative;
         background-image: none;
         box-shadow: none;
-        width: 50px;
-        height: 50px;
-        top: -0.4vh;
+        width: 40px;
+        height: 40px;
+        top: -0.2vh;
     }
 
     .search_container{
@@ -531,28 +559,29 @@ Media Query
         text-align: center;
         border: 0;
         color: black;
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.85);
         box-shadow: inset 1px 1px 10px rgb(90, 89, 89);
         outline: none;
         border-radius: 5px;
-        width: 80vw;
+        width: 75vw;
     }
     #runButton {
         display: none;
     }
     #search_input{
-        height: 5.2vh;
+        height: 4.2vh;
         box-shadow: none;
         position: relative;
-        top: -2.5vh;
+        font-size: 1rem;
+        top: -2vh;
         left: 1.5vw;;
-        width: 61vw;
+        width: 60vw;
+        background-color: rgba(255, 255, 255, 0);
     }
     #info_msg{
         font-size: 0.7em;
-        width: 88%;
-        left: 5%;
-        top: -25%;
+        width: 95%;
+        left: 2%;
     }
     .map_page_logo{
         height: 3vh;
@@ -574,11 +603,6 @@ Media Query
         background-image: url('./images/search.png')
     }
 
-
-     .input-group-btn {
-        display: inline-block;
-     }
-    
     .logo {
         width: 90vw;
     }
@@ -658,7 +682,6 @@ Media Query
     
     .list_result {
         margin:0;
-        border: 1px solid;
         height: 202px;
     }
     
@@ -671,7 +694,8 @@ Media Query
     }
     
     .description img{
-        max-height: 20vh;
+        width: 94vw;
+        height: auto;
         margin-bottom:3%;
     }
     
@@ -728,9 +752,6 @@ Media Query
         position: relative;
         font-size: 1.5rem;
     }
-    .meetup_container{
-        background-color: whitesmoke;
-    }
 }
 
 @media all and (min-width: 480px) and (max-width: 768px) {
@@ -743,16 +764,12 @@ Media Query
     .logo{
         width: 75vw;
     }
-    #search_input{
-        width: 67vw;
-    }
     #glass_button{
         display: initial;
-        position: static;
-        background-image: none;
-        box-shadow: none;
-        width: 50px;
-        height: 50px;
+        position: relative;
+        width: 45px;
+        height: 45px;
+        bottom: 3px;
     }
     #runButton {
         display: none;
@@ -766,23 +783,25 @@ Media Query
         text-align: center;
         border: 0;
         color: black;
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.85);
         box-shadow: inset 1px 1px 10px rgb(90, 89, 89);
         outline: none;
         border-radius: 5px;
-        width: 80vw;
+        width: 75vw;
     }
     #info_msg{
         font-size: 0.7em;
         width: 88%;
         left: 5%;
-        top: -25%;
     }
     #search_input{
-        height: 5.2vh;
         box-shadow: none;
         top: -2.5vh;
         position: relative;
+        font-size: 1rem;
+        width: 61vw;
+        height: 2.2vh;
+        background-color: rgba(255, 255, 255, 0);
     }
     .map_page_logo{
         height: 3vh;
@@ -888,8 +907,7 @@ Media Query
     /* Search List Result Box */
     .list_result {
         margin:0;
-        border: 1px solid;
-        height: 183px;
+        height: 183px;  
     }
     
     .address{
@@ -901,8 +919,11 @@ Media Query
     }
     
     .description img{
-        max-height: 20vh;
-        margin-bottom:3%;
+        width: 70vw;
+        height: auto;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
     }
     
     .description>div {
@@ -963,10 +984,6 @@ Media Query
         position: relative;
         font-size: 1.5rem;
     }
-
-    .meetup_container {
-        background: whitesmoke;
-    }
 }
 
 
@@ -993,6 +1010,9 @@ Media Query
     #search_field {
         width: 72vw;
     }
+    #search_input {
+        width: 40vw;
+    }
     .locationPicture {
         width: 17vw;
         height: 17vw;
@@ -1007,22 +1027,17 @@ Media Query
     .list_result {
         height: 189px;
     }
-    .meetup_container {
-        background: whitesmoke;
-    }
-
     .list_and_details {
-        width: 39vw;
+        width: 41vw;
     }
-
     .tabLinks {
         font-size:0.5rem;
     }
-    .results_list{
+    /* .results_list{
         width: 40vw;
-    }
+    } */
     .nav_tabs,.container_tabs{
-        width: 40.5vw;
+        width: 41vw;
     }
 }
 
@@ -1032,66 +1047,6 @@ Media Query
         font-size: 0.65rem;
     }
     .map_page_logo{
-        left: 2vw;
-        position: absolute;
-    }
-    /* body {
-        background-position: 20% 40%;
     }
 
-    .logo {
-        top: 32vh;
-        left: 56vw;
-        width: 35%;
-    }
-
-    #search_input {
-        font-size: 1.3rem;
-    }
-
-    #runButton {
-        font-size: 1.1rem;
-        padding: 2%;
-    }
-
-    .search_and_logo{
-        display: flex;
-        justify-content: space-around;
-        background-color: #6299d1f6;
-        height: 63px;
-    }
-
-    .map_page_logo{
-        height: 61px;
-        padding: 8px 0;
-    }
-
-    .search_button {
-        height: 35px;
-        cursor: pointer;
-        margin-left: 10px;
-    } */
-}
-
-/* --- Desktops 1281px to higher --- */
-@media (min-width: 1281px) {
-    
-    
-    /* .search_and_logo{
-        display: flex;
-        justify-content: space-around;
-        background-color: #6299d1f6;
-        height: 63px;
-    }
-
-    .map_page_logo{
-        height: 61px;
-        padding: 8px 0;
-    }
-
-    .search_button {
-        /* height: 35px; */
-        /* cursor: pointer;
-        margin-left: 10px;
-    } */ 
 }
