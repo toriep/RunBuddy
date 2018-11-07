@@ -80,7 +80,8 @@ function getDataFromTrailsList(latitude, longitude) {
     if (userInput) {
         $("#search_field").val(userInput);
     }
-    $('.loadingImg').removeClass('hidden');
+    $('.loading').removeClass('hidden');
+    debugger;
 
     const runningTrails = {
         dataType: 'JSON',

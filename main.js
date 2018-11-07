@@ -42,8 +42,7 @@ function addClickHandlersToElements() {
     $('.meetup_tab').click(displayMeetUp);
 }
 
-function callGoogleAPI(event) {
-    event.preventDefault();
+function callGoogleAPI() {
     inputFromUser = $("#search_input").val() || $("#search_field").val();
     userInput = $("#search_input").val();
     $("#search_input").val("");
@@ -71,7 +70,7 @@ function responseFromGeolocation(response) {
 
 function alertMsgAndRefresh() {
     $('.landing_page').addClass('hidden');
-    $('.loadingImg').removeClass('hidden');
+    $('.loading').removeClass('hidden');
     setTimeout(() => {
         alert('Invalid Location. Please try again.');
     }, 200);
@@ -104,7 +103,7 @@ function responseFromTrailsList(response) {
     if (response.trails.length === 0) {
         $(".results_list").empty();
         $(".map_page").removeClass("hidden");
-        $(".landing_page, .map_area, .loadingImg").addClass('hidden');
+        $(".landing_page, .map_area, .loading").addClass('hidden');
         let noResult = $('<div>').addClass('no-result').text(`Your search did not match any trail results. Please try a different location.`)
         $('.results_list').append(noResult);
         return;
@@ -166,7 +165,6 @@ function displayResult() {
     $('.nav_tabs, #direction_container, .events, .weather_list, .description, .single_location_detail').addClass('hidden');
     $('.results_list').removeClass('hidden');
     $('#map_area').text();
-    // displayMapOnDom();
 }
 
 function displayMeetUp() {

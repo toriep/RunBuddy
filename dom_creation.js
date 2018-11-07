@@ -85,8 +85,8 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.results_list').append(listResultsDiv);
     }
-    $('.loadingImg').addClass('hidden');
-    $('.results_list').animate({ scrollTop: 0 }, 1500)
+    $('.results_list').animate({ scrollTop: 0 }, 1500);
+    $('.loading').addClass('hidden');
 }
 
 function displayTrailDescription(trail) {
@@ -303,6 +303,7 @@ function renderForecastOnDom(forecast) {
 
 
 function displayMeetUpSuccess(response) {
+    $('.meetup_container').empty();
     if ($('.events').length > 0) {
         $(".events").remove();
     }
