@@ -324,7 +324,9 @@ function displayMeetUpSuccess(response) {
     } else {
         message = $('<div>').addClass('meetup_result_message').text(`Events near ${inputFromUser}`);
     }
-    $('.meetup_container').append(message);
+    const message_container = $('<div>').addClass('message_container');
+    message_container.append(message)
+    $('.meetup_container').append(message_container);
     for (let m = 0; m < meetUpResponse.length; m++) {
         let { description, name, event_url, time, group, yes_rsvp_count } = meetUpResponse[m];
         const formattedInfo = { description, eventName: name, link: event_url, time, group, yes_rsvp_count }
