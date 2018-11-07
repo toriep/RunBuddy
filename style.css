@@ -219,6 +219,7 @@ a{
     opacity: 0.95;
     padding: 2% 5% 8%;
     list-style-type: none;
+    border-top: 1px solid black;
 }
 
 .weather_list>div {
@@ -229,8 +230,8 @@ a{
     font-size: 1.4em;
 }
 
-.weather_list>li {
-    font-size: 0.8em;
+.weather_list>li, .weather_list>tr {
+    font-size: 0.7em;
 }
 
 .weather_list>li:nth-child(3)>img {
