@@ -78,10 +78,9 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         let nameOfPlace = $('<p>').text(runningTrails[i].name);
         const location = $('<div>').addClass('address').text(`${runningTrails[i].location}`);
         const rating = $('<div>').text(`${runningTrails[i].stars} out of 5 stars`);
-        let brLine = $('<br>');
         let moreInfoButton = $('<button>').addClass('btn btn-blue').text('Trail Info');
         moreInfoButton.on('click', () => displayTrailDescription(runningTrails[i]));
-        locationDescriptionDiv.append(nameOfPlace, location, rating, brLine, moreInfoButton);
+        locationDescriptionDiv.append(nameOfPlace, location, rating, moreInfoButton);
         listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
         $('.results_list').append(listResultsDiv);
     }

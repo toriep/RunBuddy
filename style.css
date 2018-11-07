@@ -79,7 +79,7 @@ body {
     justify-content: space-around;
     align-items: center;
     background-color: #6299d1f6;
-    height: 5vh;
+    height: 7vh;
 }
 
 .search_bar{
@@ -195,7 +195,7 @@ body {
     position: relative;
     width: 31vw;
     right: 0;
-    height: 95vh;
+    height: 93vh;
     margin-right: 2px;
     overflow-y: hidden;
     overflow-x: hidden;
@@ -263,12 +263,11 @@ a{
     font-size: 1rem;
     border: 1px solid;
     opacity: 0.90;
-    padding: 2%;
+    padding: 5%;
 }
 
 .groupName{
     margin-top: 0;
-    font-size: 1.2rem;
     font-weight: bold;
 }
 
@@ -285,8 +284,9 @@ a{
 }
 
 .list_result:hover {
-    opacity: 1;
-    box-shadow: 7px 12px 20px black;
+    /* opacity: 1;
+    box-shadow: 7px 12px 20px black; */
+    background-color: #d5e0e8;
 }
 
 .selected {
@@ -365,7 +365,7 @@ a{
 
 .locationDescription {
     padding: 0 3%;
-    font-size: 0.7rem;
+    font-size: 1rem;
     height: 20vh;
     position: relative;
 }
@@ -446,9 +446,8 @@ a{
     background-color: #092a68;
     color: white;
     border-radius: 5px;
-    margin-top: 28%;
-    position: absolute;
-    bottom: 5px;
+    margin-top: 12%;
+    position: relative;
 }
 
 .btn-blue:hover {
@@ -504,20 +503,23 @@ Media Query
 /* --- most Smartphones (portrait)  --- */
 @media all and (max-width: 480px){
     body{
-        background-position: -132px 40%;
+        background-position: -223px 40%;
     }
-    
+    .btn-blue{
+        margin-top: 5%;
+    }
     .map_page_logo{
         height: 3vh;
         padding: 0;
     }
     #glass_button{
         display: initial;
-        position: static;
+        position: relative;
         background-image: none;
         box-shadow: none;
         width: 50px;
         height: 50px;
+        top: -0.4vh;
     }
 
     .search_container{
@@ -542,8 +544,9 @@ Media Query
         height: 5.2vh;
         box-shadow: none;
         position: relative;
-        top: -3vh;
+        top: -2.5vh;
         left: 1.5vw;;
+        width: 61vw;
     }
     #info_msg{
         font-size: 0.7em;
@@ -596,12 +599,13 @@ Media Query
     .map_and_trail_list{
         display: flex;
         flex-direction: column;
-        min-height: 95vh;
+        min-height: 93vh;
     }
     
     .container_tabs{
         top: 0;
         position: relative;
+        height: 51vh;
         width: 100vw;
         right: 0;
         margin-right: 0;
@@ -627,10 +631,6 @@ Media Query
     .single_location_detail{
         margin-right: 0;
         position: relative;
-    }
-    
-    a{
-        font-size: 1rem;
     }
     
     .weather_list>li {
@@ -667,7 +667,7 @@ Media Query
     }
     
     .description {
-        font-size: .8rem;
+        font-size: .95rem;
     }
     
     .description img{
@@ -688,6 +688,7 @@ Media Query
     
     .tabLinks {
         line-height: 35px;
+        font-size: 0.5rem;
     }
     
     .tabLinks:hover {
@@ -727,11 +728,17 @@ Media Query
         position: relative;
         font-size: 1.5rem;
     }
+    .meetup_container{
+        background-color: whitesmoke;
+    }
 }
 
 @media all and (min-width: 480px) and (max-width: 768px) {
     body{
         background-position: 28% 0;
+    }
+    .btn-blue{
+        margin-top: 4%;
     }
     .logo{
         width: 75vw;
@@ -817,13 +824,14 @@ Media Query
     .map_and_trail_list{
         display: flex;
         flex-direction: column;
-        min-height: 95vh;
+        min-height: 93vh;
     }
     
     .container_tabs{
         top: 0;
         position: relative;
         width: 100vw;
+        height: 51vh;
         right: 0;
         margin-right: 0;
     }
@@ -889,7 +897,7 @@ Media Query
     }
     
     .description {
-        font-size: .8rem;
+        font-size: .95rem;
     }
     
     .description img{
@@ -923,15 +931,16 @@ Media Query
     
     .locationPicture {
         width: 25vw;
-        height: 22vh;
+        height: 20vh;
     }
 
     .locationDescription {
         height: 22.5vh;
+        width: 100%;
     }
     
     #direction_container{
-        font-size: 1.2rem;
+        font-size: .85rem;
     }
     
     #direction_container>tr>td:nth-child(2) {
@@ -962,8 +971,17 @@ Media Query
 
 
 @media all and (min-width: 768px) and (max-width: 1024px) {
+    .btn-blue{
+        margin-top: 9%;
+    }
     .col-2 {
         margin: 0 10%;
+    }
+    .events{
+        font-size: 0.8rem;
+    }
+    #map_area{
+        width: 57vw;
     }
     .map_page_logo {
         height: 4vh;
@@ -994,16 +1012,29 @@ Media Query
     }
 
     .list_and_details {
-        width: 30vw;
+        width: 39vw;
     }
 
     .tabLinks {
         font-size:0.5rem;
     }
+    .results_list{
+        width: 40vw;
+    }
+    .nav_tabs,.container_tabs{
+        width: 40.5vw;
+    }
 }
 
 /* --- Laptops and Desktops --- */
 @media (min-width: 1025px) and (max-width: 1280px) {
+    .tabLinks{
+        font-size: 0.65rem;
+    }
+    .map_page_logo{
+        left: 2vw;
+        position: absolute;
+    }
     /* body {
         background-position: 20% 40%;
     }
