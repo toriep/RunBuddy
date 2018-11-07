@@ -12,7 +12,7 @@ function initializeApp() {
 }
 
 function addClickHandlersToElements() {
-    $('#runButton, .search_button').click(callGoogleAPI);
+    $('#runButton, #glass_button, .search_button').click(callGoogleAPI);
     //alert info with what to input in the field
     $('#search_input').focus(function () {
         $('#info_msg').removeClass('hidden');
@@ -21,16 +21,14 @@ function addClickHandlersToElements() {
         $('#info_msg').addClass('hidden');
     });
     $("#search_input").on("keyup", event => {
-        if (event.keyCode === 13) { //if enter key is released
+        if (event.keyCode === 13) {
             event.preventDefault();
-            debugger;
-            $("#runButton").click(callGoogleAPI()); //runs the function attaches to click event off add button
+            $("#runButton").click(callGoogleAPI());
         }
     });
     $("#search_field").on("keyup", event => {
         if (event.keyCode === 13) { //if enter key is released
             event.preventDefault();
-            debugger;
             $(".search_button").click(callGoogleAPI()); //runs the function attaches to click event off add button
         }
     });

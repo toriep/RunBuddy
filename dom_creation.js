@@ -1,6 +1,5 @@
 function displayMapOnDom() {
     $(".landing_page").addClass("hidden");
-    $(".map_page, .map_area").removeClass("hidden");
     //Map options
     const options = {
         zoom: 11,
@@ -59,6 +58,7 @@ function displayMapOnDom() {
 }
 
 function renderTrailInfoOnDom(markerIsClicked = false) {
+    $(".map_page, .map_area").removeClass("hidden");
     if (!$(".results_list").hasClass('zIndex')) {
         $(".results_list").addClass('zIndex')
     }
