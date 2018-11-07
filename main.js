@@ -29,7 +29,7 @@ function addClickHandlersToElements() {
     $("#search_field").on("keyup", event => {
         if (event.keyCode === 13) { //if enter key is released
             event.preventDefault();
-            $(".search_button").click(callGoogleAPI()); //runs the function attaches to click event off add button
+            $(".search_button").click(callGoogleAPI(event)); //runs the function attaches to click event off add button
         }
     });
     $('.results_list').on('click', '.list_result', notifyTrailClicked);
@@ -42,7 +42,8 @@ function addClickHandlersToElements() {
     $('.meetup_tab').click(displayMeetUp);
 }
 
-function callGoogleAPI() {
+function callGoogleAPI(event) {
+    event.preventDefault();
     inputFromUser = $("#search_input").val() || $("#search_field").val();
     userInput = $("#search_input").val();
     $("#search_input").val("");
