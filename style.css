@@ -72,18 +72,23 @@ body {
     text-shadow: 1.5px 1.5px rgb(87, 100, 104);
     white-space: nowrap;
 }
-
+.top_navigation{
+    display: flex;
+    width: 100vw;
+    background-color: steelblue;
+}
 .search_and_logo{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #6299d1f6;
+    background-color: #1976d2;
     height: 7vh;
+    width: 66vw;
 }
 
 .search_bar{
     height: 60%;
-    width: 55vw;
+    width: 41vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,7 +97,7 @@ body {
 }
 
 #search_field{
-    width: 50vw;
+    width: 37vw;
     height: 70%;
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -184,7 +189,7 @@ body {
 .container_tabs{
     position: relative;
     width: 34vw;
-    height: 88vh;
+    height: 92vh;
     margin-right: 2px;
     overflow-y: hidden;
     overflow-x: hidden;
@@ -212,6 +217,7 @@ a{
 
 .weather_list{
     background-color: whitesmoke;
+    height: 92vh;
     right: 1vw;
     margin: auto;
     font-size: 1.5rem;
@@ -330,6 +336,34 @@ a{
 }
 
 /* Nav Bar */
+.nav_tabs_top {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 34vw;
+}
+
+.tabLinks_top {
+    display: inline-block;
+    width: 33.333%;
+    color: white;
+    background-color: #1976d2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 0.7rem;
+    line-height: 45px;
+    vertical-align: top;
+    box-sizing: border-box;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.tabLinks_top:hover {
+    font-weight: bolder;
+}
+
 .nav_tabs {
     position: relative;
     display: flex;
@@ -339,9 +373,9 @@ a{
 
 .tabLinks {
     display: inline-block;
-    width: 20.2%;
+    width: 50%;
     color: white;
-    background-color: #1976d2;
+    background-color: #003cb3;
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
@@ -359,7 +393,7 @@ a{
 }
 
 .currentTab{
-    background-color:#003cb3;
+    background-color:goldenrod;
 }
 
 .hidden{
@@ -583,6 +617,16 @@ Media Queries
         width: 95%;
         left: 2%;
     }
+    .nav_tabs_top{
+        position: fixed;
+        width: 100vw;
+        right: 0;
+        bottom: 0;
+        z-index: 20;
+    }
+    .search_and_logo{
+        width: 100vw;
+    }
     .map_page_logo{
         height: 3vh;
         padding: 0;
@@ -617,7 +661,8 @@ Media Queries
         height: 37vh;
         left: 0;
         border-radius: 0;
-        border: 0;
+        border: 1px solid black;
+        box-shadow: none;
     }
     
     .map_and_trail_list{
@@ -719,9 +764,9 @@ Media Queries
         font-weight: bolder;
     }
     
-    .currentTab{
+    /* .currentTab{
         background-color:#003cb3;
-    }
+    } */
     
     .locationPicture {
         width: 38vw;
@@ -751,6 +796,12 @@ Media Queries
         top: 2vh;
         position: relative;
         font-size: 1.5rem;
+    }
+    .meetup_container{
+        width: 100vw;
+    }
+    .weather_container{
+        width: 100vw;
     }
 }
 
@@ -803,6 +854,9 @@ Media Queries
         height: 2.2vh;
         background-color: rgba(255, 255, 255, 0);
     }
+    .search_and_logo{
+        width: 100vw;
+    }
     .map_page_logo{
         height: 3vh;
         padding: 0;
@@ -837,7 +891,8 @@ Media Queries
         height: 37vh;
         left: 0;
         border-radius: 0;
-        border: 0;
+        border: 1px solid black;
+        box-shadow: none;
     }
     
     .map_and_trail_list{
@@ -880,7 +935,10 @@ Media Queries
     a{
         font-size: 1rem;
     }
-    
+    .weather_container{
+        width: 100vw;
+        margin-top: 1%;
+    }
     .weather_list>li {
         font-size: 0.8em;
     }
@@ -931,6 +989,13 @@ Media Queries
     }
     
     /* Nav Bar */
+    .nav_tabs_top{
+        position: fixed;
+        width: 100vw;
+        right: 0;
+        bottom: 0;
+        z-index: 20;
+    }
     .nav_tabs {
         position: relative;
         right: 0;
@@ -946,9 +1011,9 @@ Media Queries
         font-weight: bolder;
     }
     
-    .currentTab{
+    /* .currentTab{
         background-color:#003cb3;
-    }
+    } */
     
     .locationPicture {
         width: 25vw;
@@ -978,7 +1043,9 @@ Media Queries
         padding-left: 20px;
         color: blue;
     }
-    
+    .meetup_container{
+        width: 100vw;
+    }
     .no-result{
         top: 2vh;
         position: relative;
@@ -1000,15 +1067,18 @@ Media Queries
     #map_area{
         width: 57vw;
     }
+    .search_and_logo{
+        width: 59vw;
+    }
     .map_page_logo {
         height: 4vh;
         padding: 0px;
     }
     .search_bar {
-        width: 78vw;
+        width: 45vw;
     }
     #search_field {
-        width: 72vw;
+        width: 42vw;
     }
     #search_input {
         width: 40vw;
@@ -1028,6 +1098,9 @@ Media Queries
         height: 189px;
     }
     .list_and_details {
+        width: 41vw;
+    }
+    .nav_tabs_top{
         width: 41vw;
     }
     .tabLinks {
