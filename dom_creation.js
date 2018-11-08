@@ -226,7 +226,7 @@ function renderWeatherOnDom(weather) {
     let line6 = $('<li>').append(`<b>Wind :</b> ${weather.wind} <b>m/s</b>`);
     let line7 = $('<li>').append(`<b>Cloudiness :</b> ${weather.clouds} <b>%</b>`);
 
-    let weatherList = $('<ul>').addClass('weather_list hidden');
+    let weatherList = $('<ul>').addClass('weather_list');
     weatherList.append(headline, line0, line1, line2, line3, line4, line5, line6, line7);
     $('.weather_container').append(weatherList);
 }
@@ -297,7 +297,7 @@ function renderForecastOnDom(forecast) {
     let forecastTable5 = $('<tr>').append(`<td>${monStr5} ${dayStr5} : ${forecast.day5Cond}
         with High ${forecast.day5High} <b>°F</b> | Low ${forecast.day5Low} <b>°F</b></td>`);
 
-    let forecastList = $('<table>').addClass('weather_list hidden');
+    let forecastList = $('<table>').addClass('weather_list');
     forecastList.append(headline, forecastTable1, forecastTable2, forecastTable3, forecastTable4, forecastTable5);
     $('.weather_container').append(forecastList);
 }
