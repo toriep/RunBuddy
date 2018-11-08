@@ -38,7 +38,7 @@ body {
 #search_input {
     width: 35vw;
     font-size: 1.2rem;
-    height: 7vh;
+    height: 5.5vh;
     padding: 5px 0;
     display: inline-block;
     font-family: 'Poppins', sans-serif;
@@ -594,7 +594,7 @@ Media Queries
 
     .search_container{
         font-size: 1.2rem;
-        height: 7vh;
+        height: 6vh;
         padding: 5px 0;
         display: inline-block;
         font-family: 'Poppins', sans-serif;
@@ -836,7 +836,7 @@ Media Queries
     }
     .search_container{
         font-size: 1.2rem;
-        height: 7vh;
+        height: 6vh;
         padding: 5px 0;
         display: inline-block;
         font-family: 'Poppins', sans-serif;
