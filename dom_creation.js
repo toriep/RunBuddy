@@ -71,9 +71,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         if (markerIsClicked && i === 1) {
             listResultsDiv.addClass('selected')
         }
-        let locationPictureDiv = $('<div>');
         let imageOfPlace = $('<img>').attr('src', runningTrails[i].image).addClass('locationPicture');
-        locationPictureDiv.append(imageOfPlace);
         let locationDescriptionDiv = $('<div>').addClass('locationDescription');
         let nameOfPlace = $('<p>').text(runningTrails[i].name);
         const location = $('<div>').addClass('address').text(`${runningTrails[i].location}`);
@@ -81,7 +79,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         let moreInfoButton = $('<button>').addClass('btn btn-blue').text('Trail Info');
         moreInfoButton.on('click', () => displayTrailDescription(runningTrails[i]));
         locationDescriptionDiv.append(nameOfPlace, location, rating, moreInfoButton);
-        listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
+        listResultsDiv.append(imageOfPlace, locationDescriptionDiv);
         $('.results_list').append(listResultsDiv);
     }
     $('.results_list').animate({ scrollTop: 0 }, 1000);
