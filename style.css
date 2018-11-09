@@ -607,7 +607,7 @@ Media Queries
         box-shadow: inset 1px 1px 10px rgb(90, 89, 89);
         outline: none;
         border-radius: 5px;
-        width: 75vw;
+        width: 90vw;
     }
     #runButton {
         display: none;
@@ -619,7 +619,7 @@ Media Queries
         position: relative;
         top: -2vh;
         left: 1.5vw;;
-        width: 60vw;
+        width: 75vw;
         background-color: rgba(255, 255, 255, 0);
     }
     #info_msg{

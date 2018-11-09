@@ -15,7 +15,9 @@ function addClickHandlersToElements() {
     $('#runButton, #glass_button, .search_button').click(callGoogleAPI);
     //alert info with what to input in the field
     $('#search_input').focus(function () {
-        $('#info_msg').removeClass('hidden');
+        if(!$('#search_input').val()){
+            $('#info_msg').removeClass('hidden');
+        }
     });
     $('#search_input').keypress(function () {
         $('#info_msg').addClass('hidden');
