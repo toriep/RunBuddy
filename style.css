@@ -1,8 +1,3 @@
-* {
-    box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
-}
-
 body {
    margin: 0;
    padding: 0;
@@ -13,6 +8,8 @@ body {
    background-size: cover;
    background-attachment: fixed;
    overflow: hidden;
+   box-sizing: border-box;
+   font-family: 'Open Sans', sans-serif;
 }
 
 .container {
@@ -40,8 +37,8 @@ body {
 }
 #search_input {
     width: 35vw;
-    font-size: 1.2rem;
-    height: 7vh;
+    font-size: 1rem;
+    height: 5.5vh;
     padding: 5px 0;
     display: inline-block;
     font-family: 'Poppins', sans-serif;
@@ -97,7 +94,7 @@ body {
 }
 
 #search_field{
-    width: 37vw;
+    width: 38vw;
     height: 70%;
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -214,10 +211,13 @@ body {
 a{
     font-size: 1rem;
 }
-
+.weather_container{
+    height: 97vh;
+    background-color: whitesmoke;
+}
 .weather_list{
     background-color: whitesmoke;
-    height: 92vh;
+    /* height: 92vh; */
     right: 1vw;
     margin: auto;
     font-size: 1.5rem;
@@ -282,16 +282,16 @@ a{
 /* Search List Result Box */
 .list_result {
     display: flex;
-    height: 209px;
+    align-items: center;
+    height: 190px;
     background-color: whitesmoke;
-    padding: 1.5%;
-    margin-bottom: 1.6%;
+    padding: 3%;
+    padding-right: 0%;
+    /* margin-bottom: 1.6%; */
     font-size: 2.4rem;
     opacity: 0.97;
     box-shadow: 5px 10px 18px black;
-    border: 1px solid;
-    border-left: none;
-    border-right: none;  
+    border-bottom: 1px solid black;
 }
 
 .list_result:hover {
@@ -342,6 +342,12 @@ a{
     display: flex;
     flex-wrap: nowrap;
     width: 34vw;
+}
+
+.nav_tabs_top .currentTab{
+    background-color: #1976d2;
+    color: gold;
+    font-weight: bolder;
 }
 
 .tabLinks_top {
@@ -403,29 +409,32 @@ a{
 
 .locationPicture {
     display: inline-block;
-    width: 10vw;
-    height: 10vw;
+    width: 12vw;
+    height: 12vw;
 }
 
 .locationDescription {
     padding: 0 3%;
-    font-size: 1rem;
-    height: 20vh;
+    font-size: 1vw;
+    height: 12vw;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .locationDescription>p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-top: 0;
     font-weight: bolder;
 }
 
-@keyframes loadingPeople {
+/* @keyframes loadingPeople {
     0% {left: 37%; top: 50%;}
     30% {left: 42%; top: 48%;}
     75% {left: 47%; top: 50%;}
     100% {left: 55%; top: 48%;}
-}
+} */
 
 .loading{
     width: 100%;
@@ -439,12 +448,12 @@ a{
     width: 17%;
     position: absolute;
     top: 50%;
-    left: 40%;
+    left: 50%;
     transform: translate(-50%,-50%);
     z-index: 99;
-    animation-name: loadingPeople;
+    /* animation-name: loadingPeople;
     animation-duration: 1s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: infinite; */
 }
 
 #runningMan, #runningWoman{
@@ -454,13 +463,11 @@ a{
 
 #direction_container{
     background-color: whitesmoke;
-    width: 100%;
     min-height: 90vh;
     padding: 2%;
     margin: auto;
     position: relative;
     font-size: 1rem;
-    box-shadow: 5px 10px 18px black;
     opacity: 0.95;
 }
 
@@ -503,13 +510,15 @@ a{
     padding: 0 16px;
     text-transform: uppercase;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    width: 130px;
+    min-height: 37px;
 }
 
 .btn-blue {
     background-color: #092a68;
     color: white;
     border-radius: 5px;
-    margin-top: 12%;
+    margin-top: 7%;
     position: relative;
 }
 
@@ -587,7 +596,7 @@ Media Queries
 
     .search_container{
         font-size: 1.2rem;
-        height: 7vh;
+        height: 6vh;
         padding: 5px 0;
         display: inline-block;
         font-family: 'Poppins', sans-serif;
@@ -598,19 +607,19 @@ Media Queries
         box-shadow: inset 1px 1px 10px rgb(90, 89, 89);
         outline: none;
         border-radius: 5px;
-        width: 75vw;
+        width: 90vw;
     }
     #runButton {
         display: none;
     }
     #search_input{
         height: 4.2vh;
+        font-size: 0.85rem;
         box-shadow: none;
         position: relative;
-        font-size: 1rem;
         top: -2vh;
         left: 1.5vw;;
-        width: 60vw;
+        width: 75vw;
         background-color: rgba(255, 255, 255, 0);
     }
     #info_msg{
@@ -638,6 +647,7 @@ Media Queries
     }
     
     #search_field{
+        width: 55vw;
         font-size: 0.85rem;
     }
     
@@ -662,7 +672,8 @@ Media Queries
         height: 37vh;
         left: 0;
         border-radius: 0;
-        border: 1px solid black;
+        border: none;
+        border-bottom: 1px solid black;
         box-shadow: none;
     }
     
@@ -682,12 +693,8 @@ Media Queries
     }
     
     .results_list {
-        position: relative;
-        top: 0;
         width: 100vw;
-        min-height: 50vh;
-        right: 0;
-        margin-right: 0;
+        height: 50vh;
     }
 
     .detail_container {
@@ -728,7 +735,16 @@ Media Queries
     
     .list_result {
         margin:0;
-        height: 202px;
+        height: 25vh;
+    }
+
+    .locationDescription{
+        padding: inherit;
+        font-size: 0.85rem;
+        height: 38vw;
+    }
+    .locationDescription>p {
+        font-size: 1rem;
     }
     
     .address{
@@ -757,7 +773,7 @@ Media Queries
     }
     
     .tabLinks {
-        line-height: 35px;
+        /* line-height: 35px; */
         font-size: 0.5rem;
     }
     
@@ -828,7 +844,7 @@ Media Queries
     }
     .search_container{
         font-size: 1.2rem;
-        height: 7vh;
+        height: 6vh;
         padding: 5px 0;
         display: inline-block;
         font-family: 'Poppins', sans-serif;
@@ -869,6 +885,7 @@ Media Queries
     
     #search_field{
         font-size: 0.85rem;
+        width: 59vw;
     }
     
     .search_button{
@@ -891,8 +908,9 @@ Media Queries
         width: 100vw;
         height: 37vh;
         left: 0;
+        border: none;
+        border-bottom: 1px solid black;
         border-radius: 0;
-        border: 1px solid black;
         box-shadow: none;
     }
     
@@ -912,12 +930,8 @@ Media Queries
     }
     
     .results_list {
-        position: relative;
-        top: 0;
         width: 100vw;
-        min-height: 50vh;
-        right: 0;
-        margin-right: 0;
+        height: 50vh;
     }
 
     .detail_container {
@@ -938,7 +952,9 @@ Media Queries
     }
     .weather_container{
         width: 100vw;
-        margin-top: 1%;
+        height: 97vh;
+        margin-top: 1px;
+        background-color: whitesmoke;
     }
     .weather_list>li {
         font-size: 0.8em;
@@ -966,7 +982,7 @@ Media Queries
     /* Search List Result Box */
     .list_result {
         margin:0;
-        height: 183px;  
+        height: 27vh;  
     }
     
     .address{
@@ -1012,18 +1028,18 @@ Media Queries
         font-weight: bolder;
     }
     
-    /* .currentTab{
-        background-color:#003cb3;
-    } */
-    
     .locationPicture {
-        width: 25vw;
-        height: 20vh;
+        width: 30vw;
+        height: 25vh;
     }
 
     .locationDescription {
-        height: 22.5vh;
+        height: 25vh;
         width: 100%;
+        font-size: 0.85rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
     
     #direction_container{
@@ -1079,7 +1095,7 @@ Media Queries
         width: 45vw;
     }
     #search_field {
-        width: 42vw;
+        width: 40vw;
     }
     #search_input {
         width: 40vw;

@@ -15,7 +15,9 @@ function addClickHandlersToElements() {
     $('#runButton, #glass_button, .search_button').click(callGoogleAPI);
     //alert info with what to input in the field
     $('#search_input').focus(function () {
-        $('#info_msg').removeClass('hidden');
+        if(!$('#search_input').val()){
+            $('#info_msg').removeClass('hidden');
+        }
     });
     $('#search_input').keypress(function () {
         $('#info_msg').addClass('hidden');
@@ -145,14 +147,14 @@ function displayWeather() {
         displayMapOnDom()
     }
     $('#direction_container, .results_list, .events, .description, .message_container').addClass('hidden');
-    $('.weather_list').removeClass('hidden');
+    $('.weather_container').removeClass('hidden');
     $('.description_tab, .meetup_tab, .direction_tab, .trails_tab').removeClass('currentTab');
     $('.weather_tab').addClass('currentTab');
 }
 
 function displayDescription() {
     $('.detail_container').removeClass('hidden');
-    $('#direction_container, .events, .weather_list, .message_container').addClass('hidden');
+    $('#direction_container, .events, .weather_container, .message_container').addClass('hidden');
     $('.nav_tabs, .description').removeClass('hidden');
     $('.weather_tab, .meetup_tab, .direction_tab, .trails_tab').removeClass('currentTab');
     $('.description_tab').addClass('currentTab');
@@ -182,13 +184,13 @@ function displayMeetUp() {
         displayMapOnDom()
     }
     $('.events, .message_container').removeClass('hidden');
-    $('.description, .results_list, .weather_list, #direction_container').addClass('hidden');
+    $('.description, .results_list, .weather_container, #direction_container').addClass('hidden');
     $('.description_tab, .weather_tab, .direction_tab, .trails_tab').removeClass('currentTab');
     $('.meetup_tab').addClass('currentTab');
 }
 
 function displayDirection() {
-    $('.description, .results_list, .weather_list, .events, .message_container').addClass('hidden');
+    $('.description, .results_list, .weather_container, .events, .message_container').addClass('hidden');
     $('#direction_container').removeClass('hidden');
     $('.description_tab, .meetup_tab, .weather_tab, .trails_tab').removeClass('currentTab');
     $('.direction_tab').addClass('currentTab');

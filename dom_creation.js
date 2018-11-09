@@ -71,9 +71,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         if (markerIsClicked && i === 1) {
             listResultsDiv.addClass('selected')
         }
-        let locationPictureDiv = $('<div>');
         let imageOfPlace = $('<img>').attr('src', runningTrails[i].image).addClass('locationPicture');
-        locationPictureDiv.append(imageOfPlace);
         let locationDescriptionDiv = $('<div>').addClass('locationDescription');
         let nameOfPlace = $('<p>').text(runningTrails[i].name);
         const location = $('<div>').addClass('address').text(`${runningTrails[i].location}`);
@@ -81,7 +79,7 @@ function renderTrailInfoOnDom(markerIsClicked = false) {
         let moreInfoButton = $('<button>').addClass('btn btn-blue').text('Trail Info');
         moreInfoButton.on('click', () => displayTrailDescription(runningTrails[i]));
         locationDescriptionDiv.append(nameOfPlace, location, rating, moreInfoButton);
-        listResultsDiv.append(locationPictureDiv, locationDescriptionDiv);
+        listResultsDiv.append(imageOfPlace, locationDescriptionDiv);
         $('.results_list').append(listResultsDiv);
     }
     $('.results_list').animate({ scrollTop: 0 }, 1000);
@@ -226,37 +224,38 @@ function renderWeatherOnDom(weather) {
     let line6 = $('<li>').append(`<b>Wind :</b> ${weather.wind} <b>m/s</b>`);
     let line7 = $('<li>').append(`<b>Cloudiness :</b> ${weather.clouds} <b>%</b>`);
 
-    let weatherList = $('<ul>').addClass('weather_list hidden');
+    let weatherList = $('<ul>').addClass('weather_list');
     weatherList.append(headline, line0, line1, line2, line3, line4, line5, line6, line7);
     $('.weather_container').append(weatherList);
 }
 
 function displayForecastSuccess(responseFromServer) {
+    debugger;
     let forecast = {
-        day1: responseFromServer.list[10].dt_txt,
-        day1Cond: responseFromServer.list[10].weather[0].description,
-        day1High: (responseFromServer.list[10].main.temp_max * 9 / 5 - 459.67).toFixed(1),
-        day1Low: (responseFromServer.list[10].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+        day1: responseFromServer.list[0].dt_txt,
+        day1Cond: responseFromServer.list[0].weather[0].description,
+        day1High: (responseFromServer.list[0].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day1Low: (responseFromServer.list[0].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
-        day2: responseFromServer.list[18].dt_txt,
-        day2Cond: responseFromServer.list[8].weather[0].description,
-        day2High: (responseFromServer.list[8].main.temp_max * 9 / 5 - 459.67).toFixed(1),
-        day2Low: (responseFromServer.list[8].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+        day2: responseFromServer.list[10].dt_txt,
+        day2Cond: responseFromServer.list[10].weather[0].description,
+        day2High: (responseFromServer.list[10].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day2Low: (responseFromServer.list[10].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
-        day3: responseFromServer.list[25].dt_txt,
-        day3Cond: responseFromServer.list[16].weather[0].description,
-        day3High: (responseFromServer.list[16].main.temp_max * 9 / 5 - 459.67).toFixed(1),
-        day3Low: (responseFromServer.list[16].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+        day3: responseFromServer.list[18].dt_txt,
+        day3Cond: responseFromServer.list[18].weather[0].description,
+        day3High: (responseFromServer.list[18].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day3Low: (responseFromServer.list[18].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
-        day4: responseFromServer.list[32].dt_txt,
-        day4Cond: responseFromServer.list[24].weather[0].description,
-        day4High: (responseFromServer.list[24].main.temp_max * 9 / 5 - 459.67).toFixed(1),
-        day4Low: (responseFromServer.list[24].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+        day4: responseFromServer.list[28].dt_txt,
+        day4Cond: responseFromServer.list[28].weather[0].description,
+        day4High: (responseFromServer.list[28].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day4Low: (responseFromServer.list[28].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
-        day5: responseFromServer.list[39].dt_txt,
-        day5Cond: responseFromServer.list[32].weather[0].description,
-        day5High: (responseFromServer.list[32].main.temp_max * 9 / 5 - 459.67).toFixed(1),
-        day5Low: (responseFromServer.list[32].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+        day5: responseFromServer.list[37].dt_txt,
+        day5Cond: responseFromServer.list[37].weather[0].description,
+        day5High: (responseFromServer.list[37].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+        day5Low: (responseFromServer.list[37].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
     };
     renderForecastOnDom(forecast);
@@ -281,7 +280,7 @@ function renderForecastOnDom(forecast) {
     let monStr5 = monthList[((forecast.day5).slice(5, 7)) - 1];
     let dayStr5 = ((forecast.day5).slice(8, 10));
 
-    let headline = `<b>5 Days Forecast :</b> (will fix the layout later)`;
+    let headline = `<b>5 Days Forecast :</b>`;
     let forecastTable1 = $('<tr>').append(`<td>${monStr1} ${dayStr1} : ${forecast.day1Cond} 
         with High ${forecast.day1High} <b>°F</b> | Low ${forecast.day1Low} <b>°F</b></td>`);
 
@@ -297,7 +296,7 @@ function renderForecastOnDom(forecast) {
     let forecastTable5 = $('<tr>').append(`<td>${monStr5} ${dayStr5} : ${forecast.day5Cond}
         with High ${forecast.day5High} <b>°F</b> | Low ${forecast.day5Low} <b>°F</b></td>`);
 
-    let forecastList = $('<table>').addClass('weather_list hidden');
+    let forecastList = $('<table>').addClass('weather_list');
     forecastList.append(headline, forecastTable1, forecastTable2, forecastTable3, forecastTable4, forecastTable5);
     $('.weather_container').append(forecastList);
 }
