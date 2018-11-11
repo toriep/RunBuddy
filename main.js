@@ -183,7 +183,6 @@ function displayMeetUp() {
     if($('.description_tab').hasClass('currentTab') || $('#direction_container').hasClass('currentTab')){
         displayMapOnDom()
     }
-    debugger;
     $('.events, .message_container').removeClass('hidden');
     $('.description, .results_list, .weather_container, #direction_container').addClass('hidden');
     $('.description_tab, .weather_tab, .direction_tab, .trails_tab').removeClass('currentTab');
