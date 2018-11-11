@@ -42,37 +42,31 @@
     </div>
 
     <div class="map_page hidden">
-        <div class="top_navigation">
-            <div class="search_and_logo">
-                <img class="map_page_logo" src="./images/RunBuddyLogo.png">
-                <div class="search_bar">
-                    <input type="text" id="search_field" placeholder="Current Location">
-                    <img class="search_button" src="./images/search.png" alt="search_button">
-                </div>
-            </div>
-            <div class="nav_tabs_top">
-                <div class="trails_tab tabLinks_top">All Trails</div> 
-                <div class="weather_tab tabLinks_top">Weather</div>
-                <div class="meetup_tab tabLinks_top">Events</div>
+        <div class="search_and_logo">
+            <img class="map_page_logo" src="./images/RunBuddyLogo.png">
+            <div class="search_bar">
+                <input type="text" id="search_field" placeholder="Current Location">
+                <img class="search_button" src="./images/search.png" alt="search_button">
             </div>
         </div>
         <div class="map_and_trail_list">
             <div id="map_area" class="map_area hidden"></div>
             <div class="list_and_details">
                 <div class="results_list"></div>
-                <div class="weather_meetup">
-                    <div class="weather_container"></div>
-                    <div class="meetup_container"></div>
-                </div>
                 <div class="detail_container">
                     <div class="nav_tabs hidden">
+                        <div class="trails_tab tabLinks">< Back</div> 
                         <div class="description_tab tabLinks">Trail Details</div>
                         <div class="direction_tab tabLinks">Direction</div>
+                        <div class="weather_tab tabLinks">Weather</div>
+                        <div class="meetup_tab tabLinks">Events</div>
                     </div>
                     <div class="container_tabs">
                         <div class="single_location_detail">
                             <div class="description_container"></div>
                             <div id="direction_container" class="hidden"></div>
+                            <div class="weather_container"></div>
+                            <div class="meetup_container"></div>
                         </div>
                     </div>
                 </div>
