@@ -82,10 +82,26 @@ function alertMsgAndRefresh() {
     //     location.reload();
     // }, 200);
     $('.invalid').removeClass('hidden');
+    (function (){
+        var modal = document.getElementById('winModal')
+        var span = document.getElementsByClassName("close")[0];
+        modal.style.display = "block";//display modal
+        span.onclick = function() {//exit modal when click on x
+              modal.style.display = "none";
+              reset_game();
+        }
+        window.onclick = function(event) {//exit modal when click anywhere outside of modal
+              if (event.target == modal) {
+                  modal.style.display = "none";
+                  reset_game();
+              }
+        }  
+    }())
 }
 
 //use the lat and long from this function to call trail API
 function geocodingResponse(response) {
+    debugger;
     if (response.status === "ZERO_RESULTS") {
         alertMsgAndRefresh();
     }
