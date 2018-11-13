@@ -99,7 +99,6 @@ function alertMsgAndRefresh() {
 
 //use the lat and long from this function to call trail API
 function geocodingResponse(response) {
-    debugger;
     if (response.status === "ZERO_RESULTS") {
         alertMsgAndRefresh();
     }
