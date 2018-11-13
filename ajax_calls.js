@@ -4,7 +4,7 @@ function getDataFromGeolocation() {
         method: 'post',
         dataType: 'json',
         success: responseFromGeolocation,
-        error: displayError('GetDataFromGeoLoaction'),
+        error: ()=>displayError('GetDataFromGeoLoaction'),
     }
     $.ajax(location);
 }
@@ -17,7 +17,7 @@ function reverseGeolocation(response) {
         method: 'post',
         dataType: 'json',
         success: getCurrentLocation,
-        error: displayError('reverseGeolocation'),
+        error: ()=>displayError('reverseGeolocation'),
     }
     $.ajax(location);
 }
@@ -41,7 +41,7 @@ function getCurrentLocationForDirection() {
         method: 'post',
         dataType: 'json',
         success: responseFromGetCurrentLocationForDirection,
-        error: displayError('GetDataFromGeoLoaction'),
+        error: ()=>displayError('GetDataFromGeoLoaction'),
     }
     $.ajax(location);
 }
@@ -64,7 +64,7 @@ function getLatLongFromGeocoding(inputAddress) {
             address: formattedAddress
         },
         success: geocodingResponse,
-        error: displayError('GetDataFromGeocoding'),
+        error: ()=>displayError('GetDataFromGeocoding'),
     }
     $.ajax(location);
 }
@@ -88,6 +88,7 @@ function getDataFromTrailsList(latitude, longitude) {
         method: 'GET',
         url: `https://www.trailrunproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxResults=30&key=${TRAIL_API_KEY}`,
         success: responseFromTrailsList,
+        error: ()=>displayError('getDataFromTraiList'),
     }
     $.ajax(runningTrails);
 }
@@ -98,7 +99,7 @@ function getDataFromWeather(lat, lon) {
         method: 'post',
         dataType: 'json',
         success: displayWeatherSuccess,
-        error: displayError('getDataFromWeather'),
+        error: ()=>displayError('getDataFromWeather'),
     }
     $.ajax(weather);
 }
@@ -109,7 +110,7 @@ function getWeatherForecast(lat, lon) {
         method: 'post',
         dataType: 'json',
         success: displayForecastSuccess,
-        error: displayError('getWeatherForecast'),
+        error: ()=>displayError('getWeatherForecast'),
     }
     $.ajax(forecast);
 }
@@ -120,7 +121,7 @@ function getDataFromMeetUp(lat, long) {
         success: displayMeetUpSuccess,
         method: 'post',
         dataType: 'jsonp',
-        error: displayError('getDataFromMeetUp'),
+        error: ()=>displayError('getDataFromMeetUp'),
     }
     $.ajax(meetup);
 }

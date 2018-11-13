@@ -94,7 +94,7 @@ body {
 }
 
 #search_field{
-    width: 38vw;
+    width: 52vw;
     height: 70%;
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -108,6 +108,13 @@ body {
     height: 60%;
     cursor: pointer;
     position: relative;
+}
+
+.invalid{
+    position: relative;
+    left: 47%;
+    transform: translateX(-50%);
+    font-size: 1rem;
 }
 
 #glass_button{
@@ -137,7 +144,7 @@ body {
     font-style: italic;
     color: #351706e5;
     text-align: center;
-    width: 40%;
+    width: 37%;
     position: absolute;
     left: 25%;
 }
@@ -415,7 +422,6 @@ a{
 }
 
 .loadingImg{
-    width: 17%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -427,8 +433,8 @@ a{
 }
 
 #runningMan, #runningWoman{
+    height: 20vh;
     display: inline-block;
-    width: 40%;
 }
 
 #direction_container{
@@ -538,6 +544,83 @@ a{
     width: 34vw;
 }
 
+
+/***********
+MODAL
+***********/
+.attribution{
+    font-size: 0.75rem;
+    color: lightgrey;
+}
+
+.invalid-modal {
+    position: absolute;
+    font-size: 2em;
+    text-align: center;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 30;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.5); 
+}
+
+.modal-content {
+    border-radius: 20px;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 50px;
+    border: 1px solid #888;
+    width: 350px;
+    height: 45%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.modal-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.invalid-icon{
+    max-width: 220px;
+    margin-bottom: 1em;
+}
+
+.invalid-msg{
+    margin-bottom: 25px;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: relative;
+    bottom: 26px;
+    left: 10px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
 /*************************
 Media Queries
 **************************/
@@ -553,6 +636,12 @@ Media Queries
     .map_page_logo{
         height: 3vh;
         padding: 0;
+    }
+    .modal-content{
+        width: 100%;
+    }
+    .close{
+        left: -15px;
     }
     #glass_button{
         display: initial;
@@ -594,24 +683,25 @@ Media Queries
     }
     #info_msg{
         font-size: 0.7em;
-        width: 95%;
+        width: 91%;
         left: 2%;
     }
 
     .search_and_logo{
         width: 100vw;
+        height: 8vh;
     }
     .map_page_logo{
         height: 3vh;
         padding: 0;
     }
     .search_bar{
-        height: 60%;
+        height: 75%;
         width: 78vw;
     }
     
     #search_field{
-        width: 55vw;
+        width: 66vw;
         font-size: 0.85rem;
     }
     
@@ -819,8 +909,8 @@ Media Queries
     }
     #info_msg{
         font-size: 0.7em;
-        width: 88%;
-        left: 5%;
+        width: 71vw;
+        left: 0%;
     }
     #search_input{
         box-shadow: none;
@@ -839,13 +929,13 @@ Media Queries
         padding: 0;
     }
     .search_bar{
-        height: 60%;
+        height: 77%;
         width: 65vw;
     }
     
     #search_field{
         font-size: 0.85rem;
-        width: 59vw;
+        width: 57vw;
     }
     
     .search_button{
@@ -1035,7 +1125,7 @@ Media Queries
         font-size: 0.8rem;
     }
     #map_area{
-        width: 57vw;
+        width: 50vw;
     }
     .search_and_logo{
         width: 100vw;
@@ -1068,7 +1158,7 @@ Media Queries
         height: 189px;
     }
     .list_and_details {
-        width: 41vw;
+        width: 48vw;
     }
 
     .tabLinks {
