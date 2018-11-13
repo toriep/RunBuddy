@@ -606,18 +606,19 @@ Media Queries
 
     .search_and_logo{
         width: 100vw;
+        height: 8vh;
     }
     .map_page_logo{
         height: 3vh;
         padding: 0;
     }
     .search_bar{
-        height: 60%;
+        height: 75%;
         width: 78vw;
     }
     
     #search_field{
-        width: 55vw;
+        width: 66vw;
         font-size: 0.85rem;
     }
     
@@ -845,13 +846,13 @@ Media Queries
         padding: 0;
     }
     .search_bar{
-        height: 60%;
+        height: 77%;
         width: 65vw;
     }
     
     #search_field{
         font-size: 0.85rem;
-        width: 59vw;
+        width: 57vw;
     }
     
     .search_button{

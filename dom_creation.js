@@ -230,6 +230,7 @@ function renderWeatherOnDom(weather) {
 }
 
 function displayForecastSuccess(responseFromServer) {
+    debugger;
     let forecast = {
         day1: responseFromServer.list[0].dt_txt,
         day1Cond: responseFromServer.list[0].weather[0].description,
@@ -251,7 +252,7 @@ function displayForecastSuccess(responseFromServer) {
         day4High: (responseFromServer.list[28].main.temp_max * 9 / 5 - 459.67).toFixed(1),
         day4Low: (responseFromServer.list[28].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
-        day5: responseFromServer.list[37].dt_txt,
+        day5: responseFromServer.list[36].dt_txt,
         day5Cond: responseFromServer.list[37].weather[0].description,
         day5High: (responseFromServer.list[37].main.temp_max * 9 / 5 - 459.67).toFixed(1),
         day5Low: (responseFromServer.list[37].main.temp_min * 9 / 5 - 459.67).toFixed(1),

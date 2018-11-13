@@ -130,7 +130,7 @@ function responseFromTrailsList(response) {
 }
 
 function displayError(error) {
-    console.log("Error:", error);
+    console.log(`Error: ${error}`);
 }
 
 // const direction_tab = $('#direction_container');
