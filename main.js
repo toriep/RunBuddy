@@ -16,6 +16,7 @@ function addClickHandlersToElements() {
     //alert info with what to input in the field
     $('#search_input').focus(function () {
         if(!$('#search_input').val()){
+            $('.invalid').addClass('hidden');
             $('#info_msg').removeClass('hidden');
         }
     });
@@ -70,16 +71,17 @@ function responseFromGeolocation(response) {
 }
 
 function alertMsgAndRefresh() {
-    $('.landing_page').addClass('hidden');
-    $('.loading').removeClass('hidden');
-    setTimeout(() => {
-        alert('Invalid Location. Please try again.');
-    }, 200);
+    // $('.landing_page').addClass('hidden');
+    // $('.loading').removeClass('hidden');
+    // setTimeout(() => {
+    //     alert('Invalid Location. Please try again.');
+    // }, 200);
 
-    setTimeout(() => {
-        window.history.back();
-        location.reload();
-    }, 200);
+    // setTimeout(() => {
+    //     window.history.back();
+    //     location.reload();
+    // }, 200);
+    $('.invalid').removeClass('hidden');
 }
 
 //use the lat and long from this function to call trail API
