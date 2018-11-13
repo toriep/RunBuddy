@@ -144,7 +144,7 @@ body {
     font-style: italic;
     color: #351706e5;
     text-align: center;
-    width: 40%;
+    width: 37%;
     position: absolute;
     left: 25%;
 }
@@ -422,7 +422,6 @@ a{
 }
 
 .loadingImg{
-    width: 17%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -434,8 +433,8 @@ a{
 }
 
 #runningMan, #runningWoman{
+    height: 20vh;
     display: inline-block;
-    width: 40%;
 }
 
 #direction_container{
@@ -601,7 +600,7 @@ Media Queries
     }
     #info_msg{
         font-size: 0.7em;
-        width: 95%;
+        width: 91%;
         left: 2%;
     }
 
@@ -826,8 +825,8 @@ Media Queries
     }
     #info_msg{
         font-size: 0.7em;
-        width: 88%;
-        left: 5%;
+        width: 71vw;
+        left: 0%;
     }
     #search_input{
         box-shadow: none;

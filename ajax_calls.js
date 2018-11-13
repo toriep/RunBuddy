@@ -4,7 +4,7 @@ function getDataFromGeolocation() {
         method: 'post',
         dataType: 'json',
         success: responseFromGeolocation,
-        error: displayError('GetDataFromGeoLoaction'),
+        error: ()=>displayError('GetDataFromGeoLoaction'),
     }
     $.ajax(location);
 }
