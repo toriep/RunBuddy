@@ -94,7 +94,7 @@ body {
 }
 
 #search_field{
-    width: 38vw;
+    width: 52vw;
     height: 70%;
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -1125,7 +1125,7 @@ Media Queries
         font-size: 0.8rem;
     }
     #map_area{
-        width: 57vw;
+        width: 50vw;
     }
     .search_and_logo{
         width: 100vw;
@@ -1158,7 +1158,7 @@ Media Queries
         height: 189px;
     }
     .list_and_details {
-        width: 41vw;
+        width: 48vw;
     }
 
     .tabLinks {

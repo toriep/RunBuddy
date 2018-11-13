@@ -88,12 +88,10 @@ function alertMsgAndRefresh() {
         modal.style.display = "block";//display modal
         span.onclick = function() {//exit modal when click on x
               modal.style.display = "none";
-              reset_game();
         }
         window.onclick = function(event) {//exit modal when click anywhere outside of modal
               if (event.target == modal) {
                   modal.style.display = "none";
-                  reset_game();
               }
         }  
     }())
