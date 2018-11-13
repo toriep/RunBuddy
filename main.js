@@ -83,7 +83,7 @@ function alertMsgAndRefresh() {
     // }, 200);
     $('.invalid').removeClass('hidden');
     (function (){
-        var modal = document.getElementById('winModal')
+        var modal = document.getElementById('invalid-modal')
         var span = document.getElementsByClassName("close")[0];
         modal.style.display = "block";//display modal
         span.onclick = function() {//exit modal when click on x
