@@ -230,7 +230,6 @@ function renderWeatherOnDom(weather) {
 }
 
 function displayForecastSuccess(responseFromServer) {
-    debugger;
     let forecast = {
         day1: responseFromServer.list[0].dt_txt,
         day1Cond: responseFromServer.list[0].weather[0].description,
