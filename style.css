@@ -556,7 +556,7 @@ MODAL
 
 .invalid-modal {
     position: absolute;
-    font-size: 1.75em;
+    font-size: 1.5em;
     text-align: center;
 }
 
@@ -593,6 +593,7 @@ MODAL
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    padding: 20px;
 }
 
 .invalid-icon{
