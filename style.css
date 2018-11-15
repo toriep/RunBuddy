@@ -1,4 +1,5 @@
 body {
+    position: relative;
    margin: 0;
    padding: 0;
    height: 100vh;
@@ -555,7 +556,7 @@ MODAL
 
 .invalid-modal {
     position: absolute;
-    font-size: 2em;
+    font-size: 1.5em;
     text-align: center;
 }
 
@@ -582,7 +583,7 @@ MODAL
     padding: 50px;
     border: 1px solid #888;
     width: 350px;
-    height: 45%;
+    height: 50%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -592,11 +593,12 @@ MODAL
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    padding: 20px;
 }
 
 .invalid-icon{
     max-width: 220px;
-    margin-bottom: 1em;
+    margin-bottom: 10px;
 }
 
 .invalid-msg{
@@ -628,7 +630,7 @@ Media Queries
 /* --- most Smartphones (portrait)  --- */
 @media all and (max-width: 480px){
     body{
-        background-position: -223px 40%;
+        background-position: -153px 40%;
     }
     .btn-blue{
         margin-top: 5%;
