@@ -296,8 +296,8 @@ function renderForecastOnDom(forecast) {
         with High ${forecast.day5High} <b>°F</b> | Low ${forecast.day5Low} <b>°F</b></td>`);
 
     let forecastList = $('<table>').addClass('weather_list');
-    forecastList.append(headline, forecastTable1, forecastTable2, forecastTable3, forecastTable4, forecastTable5);
-    $('.weather_container').append(forecastList);
+    // forecastList.append(headline, forecastTable1, forecastTable2, forecastTable3, forecastTable4, forecastTable5);
+    // $('.weather_container').append(forecastList);
 }
 
 
