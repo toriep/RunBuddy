@@ -3,7 +3,6 @@ body {
    margin: 0;
    padding: 0;
    height: 100vh;
-   width: 100vw;
    background: url(./images/runningtrail.jpg); 
    background-position: 0 40%;
    background-size: cover;
@@ -39,7 +38,7 @@ body {
 #search_input {
     width: 35vw;
     font-size: 1rem;
-    height: 5.5vh;
+    height: 36px;
     padding: 5px 0;
     display: inline-block;
     font-family: 'Poppins', sans-serif;
@@ -220,7 +219,7 @@ a{
     font-size: 1rem;
 }
 .weather_container{
-    height: 97vh;
+    /* height: 97vh; */
     background-color: whitesmoke;
 }
 .weather_list{
@@ -703,7 +702,7 @@ Media Queries
     }
     
     #search_field{
-        width: 66vw;
+        width: 64vw;
         font-size: 0.85rem;
     }
     
@@ -765,7 +764,9 @@ Media Queries
         margin-right: 0;
         position: relative;
     }
-    
+    .weather_list{
+        font-size: 1.25rem;
+    }
     .weather_list>li {
         font-size: 0.8em;
     }
@@ -830,7 +831,7 @@ Media Queries
     
     .tabLinks {
         /* line-height: 35px; */
-        font-size: 0.5rem;
+        font-size: 0.65rem;
     }
     
     .tabLinks:hover {
