@@ -37,8 +37,11 @@ body {
     font-family: 'Montserrat', sans-serif;
     color: white;
     position: absolute;
-    left: 50%;
+    /* left: 47%; */
     top: 37%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
 }
 
 #runButton {
@@ -648,10 +651,10 @@ Media Queries
         padding: 0;
     }
     .purpose{
-        left: 39%;
+        /* left: 30%;
         color: white;
-        top: 34%;
-        font-size: 1.25em;
+        top: 34%; */
+        font-size: 1em;
     }
     .modal-content{
         width: 100%;
@@ -925,6 +928,9 @@ Media Queries
         border-radius: 5px;
         width: 75vw;
     }
+    .purpose{
+
+    }
     #info_msg{
         font-size: 0.7em;
         width: 71vw;
@@ -1136,6 +1142,9 @@ Media Queries
     .btn-blue{
         margin-top: 9%;
     }
+    .purpose{
+        /* left: 41%; */
+    }
     .col-2 {
         margin: 0 10%;
     }
@@ -1194,5 +1203,8 @@ Media Queries
 @media (min-width: 1025px) and (max-width: 1280px) {
     .tabLinks{
         font-size: 0.55rem;
+    }
+    .purpose{
+
     }
 }
