@@ -31,7 +31,7 @@ function responseFromGeolocation(response) {
     runningTrails.push(center);
     getDataFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
-    getDataFromMeetUp(lat, lng);
+    // getDataFromMeetUp(lat, lng);
     getWeatherForecast(lat, lng);
 }
 
@@ -115,10 +115,10 @@ function getWeatherForecast(lat, lon) {
     $.ajax(forecast);
 }
 
-function getDataFromMeetUp(lat, long) {
+function getDataFromMeetUp(lat, long, trailName) {
     const meetup = {
         url: `https://api.meetup.com/2/open_events?&sign=true&photo-host=public&lat=${lat}&lon=${long}&topic=running&page=20&key=${MEETUP_API_KEY}`,
-        success: displayMeetUpSuccess,
+        success: (response)=>displayMeetUpSuccess(response, trailName),
         method: 'post',
         dataType: 'jsonp',
         error: ()=>displayError('getDataFromMeetUp'),

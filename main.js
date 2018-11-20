@@ -67,7 +67,7 @@ function responseFromGeolocation(response) {
     getresponseFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
     getWeatherForecast(lat, lng);
-    getDataFromMeetUp(lat, lng);
+    // getDataFromMeetUp(lat, lng);
 }
 
 function alertMsgAndRefresh() {
@@ -112,7 +112,7 @@ function geocodingResponse(response) {
     getDataFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
     getWeatherForecast(lat, lng);
-    getDataFromMeetUp(lat, lng);
+    // getDataFromMeetUp(lat, lng);
 }
 
 function responseFromTrailsList(response) {

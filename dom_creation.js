@@ -98,6 +98,9 @@ function displayTrailDescription(trail) {
     }
     $('.results_list').addClass('hidden');
     displayDescription();
+    const trailLat = trail.latitude;
+    const trailLong = trail.longitude;
+    getDataFromMeetUp(trailLat,trailLong,trail.name);
     const imageOfPlace = $('<img>').attr('src', trail.imgMedium);
     const nameOfPlace = $('<p>').addClass('trailName').text(trail.name);
     const location = $('<div>').html(`<b>Location :</b> ${trail.location}`);
@@ -108,7 +111,7 @@ function displayTrailDescription(trail) {
     const conditionDetails = $('<div>').addClass('condition_details').html(`<b>Condition :</b> ${trail.conditionDetails || 'Currently, there is no condtition information for this trail.'}`);
     const ascent = $('<div>').addClass('ascent').html(`<b>Ascent :</b> ${trail.ascent} feet`);
     const descent = $('<div>').addClass('descent').html(`<b>Descent :</b> ${trail.descent} feet<br><br>`);
-    const pointBCoordinates = trail.coordinates
+    const pointBCoordinates = trail.coordinates;
     const descriptionDiv = $('<div>').addClass('description');
     const moreInfo = $('<div>').html(`<br><a target="_blank" href="${trail.url}">More info on ${trail.name}</a>`);
     descriptionDiv.append(imageOfPlace, nameOfPlace, location, rating, distance, ascent, descent, conditionStatus, conditionDetails, summary, moreInfo);
@@ -301,7 +304,7 @@ function renderForecastOnDom(forecast) {
 }
 
 
-function displayMeetUpSuccess(response) {
+function displayMeetUpSuccess(response, trailName) {
     $('.meetup_container').empty();
     if ($('.events').length > 0) {
         $(".events").remove();
@@ -320,11 +323,11 @@ function displayMeetUpSuccess(response) {
     if ($('.meetup_result_message').length) {
         $('.meetup_result_message').remove()
     }
-    if (inputFromUser === "") {
-        message = $('<div>').addClass('meetup_result_message').text('Events near your current location:')
-    } else {
-        message = $('<div>').addClass('meetup_result_message').text(`Events near ${inputFromUser}`);
-    }
+    // if (inputFromUser === "") {
+        message = $('<div>').addClass('meetup_result_message').text(`Events near ${trailName}:`)
+    // } else {
+    //     message = $('<div>').addClass('meetup_result_message').text(`Events near ${inputFromUser}`);
+    // }
     const message_container = $('<div>').addClass('message_container');
     message_container.append(message)
     $('.meetup_container').append(message_container);
