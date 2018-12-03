@@ -1,5 +1,5 @@
 body {
-    position: relative;
+   position: relative;
    margin: 0;
    padding: 0;
    height: 100vh;
@@ -19,13 +19,18 @@ body {
 }
 
 .search_container {
-    position: absolute;
-    top: 55vh;
-    left: 50%;
+    /* position: absolute; */
+    /* top: 55vh; */
+    /* left: 50%; */
     width: 100%;
-    transform: translate(-50%,-50%);
-    text-align: center;
+    /* transform: translate(-50%,-50%); */
+    /* text-align: center; */
     font-size: 2.5rem;
+    display: flex;
+    width: 100%;
+    /* height: 45%; */
+    margin-top: 50px;
+    justify-content: center;
 }
 
 .map_page_logo{
@@ -36,19 +41,19 @@ body {
 .purpose{
     font-family: 'Montserrat', sans-serif;
     color: white;
-    position: absolute;
+    /* position: absolute; */
     /* left: 47%; */
-    top: 37%;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
+    /* top: 37%; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    /* white-space: nowrap; */
 }
 
 #runButton {
     display: none;
 }
 #search_input {
-    width: 35vw;
+    width: 550px;
     font-size: 1rem;
     height: 36px;
     padding: 5px 0;
@@ -63,9 +68,30 @@ body {
     border-radius: 5px;
 }
 
+.landing_page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-info {
+    width: 100%;
+    display: flex;
+    height: 40%;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.info {
+    width: 100%;
+    display: flex;
+    justify-content: center;}
+
 #runButton {
-    position: relative;
-    top: 16px;
+    /* position: relative; */
+    /* top: 16px; */
     font-family: 'Raleway', sans-serif;
     outline: none;
     border: none;
@@ -73,13 +99,15 @@ body {
     box-shadow: 0 5px 2px #30A3C5;
     color: white;
     font-size: 1rem;
+    margin-left: 5px;
     border-radius: 30px;
-    cursor: pointer;
-    vertical-align: top;
+    /* cursor: pointer; */
+    /* vertical-align: top; */
     display: inline-block;
     padding: 10px;
     text-shadow: 1.5px 1.5px rgb(87, 100, 104);
     white-space: nowrap;
+    height: 42px;
 }
 .top_navigation{
     display: flex;
@@ -142,13 +170,13 @@ body {
  }
 
 .logo {
-    position: relative;
-    top: 30vh;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    text-align: center;
+    /* position: relative; */
+    /* top: 30vh; */
+    /* left: 50%; */
+    /* transform: translate(-50%,-50%); */
+    /* text-align: center; */
+    width: 500px;
 }
-
 
 #info_msg {
     font-size: 1rem;
@@ -156,14 +184,16 @@ body {
     font-style: italic;
     color: #351706e5;
     text-align: center;
-    width: 37%;
-    position: absolute;
-    left: 25%;
+    width: 650px;
+    margin-top: 15px;
+    /* position: absolute; */
+    /* left: 25%; */
+    /* margin: 0 auto; */
 }
 
 .information {
-    margin-top: 1%;
-    padding: 1% 3%;
+    /* margin-top: 1%;
+    padding: 1% 3%; */
     background-color: white;
     opacity: 0.7;
     align-content: center;
