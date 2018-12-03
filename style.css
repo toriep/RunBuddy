@@ -71,6 +71,7 @@ body {
 .landing_page {
     width: 100%;
     height: 100%;
+    align-items: center;
     display: flex;
     flex-direction: column;
 }
@@ -706,7 +707,6 @@ Media Queries
         font-size: 1.2rem;
         height: 6vh;
         padding: 5px 0;
-        display: inline-block;
         font-family: 'Poppins', sans-serif;
         text-align: center;
         border: 0;
@@ -935,45 +935,49 @@ Media Queries
     }
     #glass_button{
         display: initial;
-        position: relative;
+        position: absolute;
         width: 45px;
-        height: 45px;
-        bottom: 3px;
+        right: 0;
     }
     #runButton {
         display: none;
     }
     .search_container{
         font-size: 1.2rem;
-        height: 6vh;
-        padding: 5px 0;
-        display: inline-block;
+        height: 50px;
+        display: flex;
+        /* padding: 5px 0; */
+        width: 470px;
+        /* display: inline-block; */
         font-family: 'Poppins', sans-serif;
         text-align: center;
         border: 0;
+        position: relative;
         color: black;
         background-color: rgba(255, 255, 255, 0.85);
         box-shadow: inset 1px 1px 10px rgb(90, 89, 89);
         outline: none;
         border-radius: 5px;
-        width: 75vw;
+        /* width: 75vw; */
     }
     .purpose{
 
     }
     #info_msg{
         font-size: 0.7em;
-        width: 71vw;
+        width: 470px;
         left: 0%;
     }
     #search_input{
         box-shadow: none;
-        top: -2.5vh;
-        position: relative;
+        /* top: -2.5vh; */
+        /* position: relative; */
         font-size: 1rem;
-        width: 61vw;
-        height: 2.2vh;
+        /* width: 61vw; */
+        width: 80%;
+        /* height: 2.2vh; */
         background-color: rgba(255, 255, 255, 0);
+        /* border: 1px solid black; */
     }
     .search_and_logo{
         width: 100vw;
@@ -1194,11 +1198,14 @@ Media Queries
     .search_bar {
         width: 65vw;
     }
+    #info_msg {
+        width: 600px;
+    }
     #search_field {
         width: 60vw;
     }
     #search_input {
-        width: 40vw;
+        width: 500px;
     }
     .locationPicture {
         width: 17vw;
