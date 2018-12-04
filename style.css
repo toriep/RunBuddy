@@ -120,8 +120,8 @@ body {
     justify-content: space-around;
     align-items: center;
     background-color: #1976d2;
-    height: 7vh;
-    width: 100vw;
+    height: 80px;
+    width: 100%;
 }
 
 .search_bar{
@@ -335,7 +335,7 @@ a{
     align-items: center;
     height: 190px;
     background-color: whitesmoke;
-    /* padding: 15px; */
+    padding: 10px;
     /* margin-bottom: 1.6%; */
     font-size: 2.4rem;
     opacity: 0.97;
@@ -842,13 +842,13 @@ Media Queries
     
     .list_result {
         margin:0;
-        height: 25vh;
+        height: 180px;
     }
 
     .locationDescription{
         padding: inherit;
         font-size: 0.85rem;
-        height: 38vw;
+        height: 140px;
     }
     .locationDescription>p {
         font-size: 1rem;
@@ -889,8 +889,8 @@ Media Queries
     }
     
     .locationPicture {
-        width: 38vw;
-        height: 38vw;
+        width: 140px;
+        height: 140px;
     }
     
     #direction_container{
@@ -1210,8 +1210,8 @@ Media Queries
         width: 500px;
     }
     .locationPicture {
-        width: 17vw;
-        height: 17vw;
+        width: 170px;
+        height: 170px;
     }
     .locationDescription{
         height: 180px;
@@ -1238,10 +1238,15 @@ Media Queries
     }
 }
 
-@media only screen and (max-width: 1300px) {
+
+@media (min-width: 1200px) and (max-width: 1300px) {
     .locationPicture {
-        width: 170px;
-        height: 170px;
+        width: 180px;
+        height: 180px;
+        /* margin-left: 10px; */
+    }
+    .locationDescription {
+        font-size: 17px;
     }
 }
 
@@ -1255,3 +1260,4 @@ Media Queries
 
     }
 }
+
