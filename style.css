@@ -335,8 +335,7 @@ a{
     align-items: center;
     height: 190px;
     background-color: whitesmoke;
-    padding: 3%;
-    padding-right: 0%;
+    /* padding: 15px; */
     /* margin-bottom: 1.6%; */
     font-size: 2.4rem;
     opacity: 0.97;
@@ -429,14 +428,15 @@ a{
 
 .locationPicture {
     display: inline-block;
-    width: 12vw;
-    height: 12vw;
+    width: 200px;
+    height: 100%;
+    
 }
 
 .locationDescription {
     padding: 0 3%;
-    font-size: 1vw;
-    height: 12vw;
+    font-size: 18px;
+    height: 180px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1174,7 +1174,7 @@ Media Queries
 }
 
 
-@media all and (min-width: 768px) and (max-width: 1024px) {
+@media all and (min-width: 768px) and (max-width: 1200px) {
     .btn-blue{
         margin-top: 9%;
     }
@@ -1214,7 +1214,7 @@ Media Queries
         height: 17vw;
     }
     .locationDescription{
-        height: 25.3vh;
+        height: 180px;
         font-size: 0.85rem;
     }
     .locationDescription>p {
@@ -1237,6 +1237,14 @@ Media Queries
         width: 48vw;
     }
 }
+
+@media only screen and (max-width: 1300px) {
+    .locationPicture {
+        width: 170px;
+        height: 170px;
+    }
+}
+
 
 /* --- Laptops and Desktops --- */
 @media (min-width: 1025px) and (max-width: 1280px) {
