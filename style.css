@@ -28,13 +28,13 @@ body {
     font-size: 2.5rem;
     display: flex;
     width: 100%;
-    /* height: 45%; */
+    height: 45px;
     margin-top: 50px;
     justify-content: center;
 }
 
 .map_page_logo{
-    height: 4vh;
+    height: 50px;
     cursor: pointer;
 }
 
@@ -55,8 +55,8 @@ body {
 #search_input {
     width: 550px;
     font-size: 1rem;
-    height: 36px;
-    padding: 5px 0;
+    height: 100%;
+    /* padding: 5px 0; */
     display: inline-block;
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -125,18 +125,19 @@ body {
 }
 
 .search_bar{
-    height: 60%;
-    width: 55vw;
+    height: 45px;
+    width: 65%;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 30px;
+    position: relative;
     background-color: white;
 }
 
 #search_field{
-    width: 52vw;
-    height: 70%;
+    width: 80%;
+    /* height: 70%; */
     font-family: 'Poppins', sans-serif;
     text-align: center;
     border: 0;
@@ -146,9 +147,10 @@ body {
 }
 
 .search_button{
-    height: 60%;
+    width: 30px;
     cursor: pointer;
-    position: relative;
+    position: absolute;
+    right: 10px;
 }
 
 .invalid{
@@ -223,7 +225,7 @@ body {
     height: 90vh;
     left: 1vw;
     border: 1px solid black;
-    margin-top: 2vh;
+    margin-top: 5px;
     box-shadow: 5px 10px 18px black;
 }
 
@@ -678,7 +680,7 @@ Media Queries
         margin-top: 5%;
     }
     .map_page_logo{
-        height: 3vh;
+        height: 25px;
         padding: 0;
     }
     .purpose{
@@ -699,16 +701,19 @@ Media Queries
         background-image: none;
         box-shadow: none;
         position: absolute;
-        width: 40px;
-        /* height: 40px; */
+        width: 13%;
+        height: 100%;
         /* top: -0.2vh; */
         right: 0;
+    }
+    #search_field {
+        text-align: left;
     }
 
     .search_container{
         font-size: 1.2rem;
         height: 40px;
-        padding: 5px 0;
+        /* padding: 5px 0; */
         font-family: 'Poppins', sans-serif;
         text-align: center;
         border: 0;
@@ -726,10 +731,6 @@ Media Queries
     #search_input{
         font-size: 0.85rem;
         box-shadow: none;
-        /* position: relative; */
-        top: -2vh;
-        /* left: 1.5vw; */
-        /* width: 75vw; */
         background-color: rgba(255, 255, 255, 0);
     }
     #info_msg{
@@ -740,26 +741,27 @@ Media Queries
 
     .search_and_logo{
         width: 100vw;
-        height: 8vh;
+        height: 75px;
     }
     .map_page_logo{
-        height: 3vh;
+        height: 30px;
         padding: 0;
     }
     .search_bar{
-        height: 75%;
-        width: 78vw;
+        height: 40px;
+        width: 55%;
     }
     
     #search_field{
-        width: 64vw;
+        width: 75%;
         font-size: 0.85rem;
     }
     
     .search_button{
-        height: 60%;
+        /* height: 60%; */
+        width: 20px;
         cursor: pointer;
-        position: relative;
+        /* position: relative; */
         background-image: url('./images/search.png')
     }
 
@@ -985,23 +987,24 @@ Media Queries
         width: 100vw;
     }
     .map_page_logo{
-        height: 3vh;
+        height: 45px;
+        /* width: 140px; */
         padding: 0;
     }
     .search_bar{
-        height: 77%;
-        width: 65vw;
+        height: 45px;
+        /* width: 65vw; */
     }
     
     #search_field{
         font-size: 0.85rem;
-        width: 57vw;
+        width: 70%;
     }
     
     .search_button{
         height: 60%;
         cursor: pointer;
-        position: relative;
+        /* position: relative; */
         background-image: url('./images/search.png')
     }
 
@@ -1194,17 +1197,17 @@ Media Queries
         width: 100vw;
     }
     .map_page_logo {
-        height: 4vh;
-        padding: 0px;
+        /* height: 4vh;
+        padding: 0px; */
     }
     .search_bar {
-        width: 65vw;
+        width: 60%;
     }
     #info_msg {
         width: 600px;
     }
     #search_field {
-        width: 60vw;
+        width: 80%;
     }
     #search_input {
         width: 500px;
