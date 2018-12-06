@@ -31,7 +31,6 @@ function responseFromGeolocation(response) {
     runningTrails.push(center);
     getDataFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
-    // getDataFromMeetUp(lat, lng);
     getWeatherForecast(lat, lng);
 }
 
@@ -52,7 +51,7 @@ function responseFromGetCurrentLocationForDirection(response) {
     currentLocation = new google.maps.LatLng(lat, lng);
 }
 
-//this function converts a given address, city, or zip code to lat and long
+/* this function converts a given address, city, or zip code to lat and long */
 function getLatLongFromGeocoding(inputAddress) {
     const formattedAddress = inputAddress.split(" ").join("+");
     const location = {

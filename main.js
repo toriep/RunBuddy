@@ -13,7 +13,7 @@ function initializeApp() {
 
 function addClickHandlersToElements() {
     $('#runButton, #glass_button, .search_button').click(callGoogleAPI);
-    //alert info with what to input in the field
+    /* Alert info box showing users what to input in the field */
     $('#search_input').focus(function () {
         if(!$('#search_input').val()){
             $('.invalid').addClass('hidden');
@@ -30,14 +30,15 @@ function addClickHandlersToElements() {
         }
     });
     $("#search_field").on("keyup", event => {
-        if (event.keyCode === 13) { //if enter key is released
+        /*  if enter key is released */
+        if (event.keyCode === 13) { 
             event.preventDefault();
             $(".search_button").click(callGoogleAPI(event)); //runs the function attaches to click event off add button
         }
     });
     $('.results_list').on('click', '.list_result', notifyTrailClicked);
     $('.results_list').on('mouseleave', '.list_result', resetNotifyTrailClicked);
-    /** displaying tabs */
+    /* displaying tabs */
     $('.trails_tab').click(displayResult);
     $('.description_tab').click(displayDescription);
     $('.direction_tab').click(displayDirection);
@@ -50,9 +51,11 @@ function callGoogleAPI() {
     inputFromUser = $("#search_input").val() || $("#search_field").val();
     userInput = $("#search_input").val();
     $("#search_input").val("");
-    if (inputFromUser.length === 0) {//if the search bar is empty, get current location
+    /* if the search bar is empty, get current location */
+    if (inputFromUser.length === 0) {
         getDataFromGeolocation();
-    } else {//if user typed in a location, make a Geocoding AJAX call
+    /* if user typed in a location, make a Geocoding AJAX call */
+    } else {
         getLatLongFromGeocoding(inputFromUser);
         getCurrentLocationForDirection();
     }
@@ -68,29 +71,21 @@ function responseFromGeolocation(response) {
     getresponseFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
     getWeatherForecast(lat, lng);
-    // getDataFromMeetUp(lat, lng);
 }
 
 function alertMsgAndRefresh() {
-    // $('.landing_page').addClass('hidden');
-    // $('.loading').removeClass('hidden');
-    // setTimeout(() => {
-    //     alert('Invalid Location. Please try again.');
-    // }, 200);
-
-    // setTimeout(() => {
-    //     window.history.back();
-    //     location.reload();
-    // }, 200);
     $('.invalid').removeClass('hidden');
     (function (){
         var modal = document.getElementById('invalid-modal')
         var span = document.getElementsByClassName("close")[0];
-        modal.style.display = "block";//display modal
-        span.onclick = function() {//exit modal when click on x
+        /* display modal */
+        modal.style.display = "block";
+        /* exit modal when click on x */
+        span.onclick = function() {
               modal.style.display = "none";
         }
-        window.onclick = function(event) {//exit modal when click anywhere outside of modal
+        /* exit modal when click anywhere outside of modal */
+        window.onclick = function(event) {
               if (event.target == modal) {
                   modal.style.display = "none";
               }
@@ -98,7 +93,7 @@ function alertMsgAndRefresh() {
     }())
 }
 
-//use the lat and long from this function to call trail API
+/* use the lat and long from this function to call trail API */
 function geocodingResponse(response) {
     if (response.status === "ZERO_RESULTS") {
         alertMsgAndRefresh();
@@ -113,7 +108,6 @@ function geocodingResponse(response) {
     getDataFromTrailsList(lat, lng);
     getDataFromWeather(lat, lng);
     getWeatherForecast(lat, lng);
-    // getDataFromMeetUp(lat, lng);
 }
 
 function responseFromTrailsList(response) {
@@ -131,7 +125,8 @@ function responseFromTrailsList(response) {
     trails.map((trail) => {
         const { latitude, longitude } = trail;
         let coordinates = new google.maps.LatLng(latitude, longitude);
-        if (trail.imgSqSmall) {//only include results with an image since not all results have one
+        /* only include results with an image since not all results have one */
+        if (trail.imgSqSmall) {
             runningTrails.push({
                 image: trail.imgMedium,
                 distance: `${trail.length} miles`,
@@ -140,7 +135,6 @@ function responseFromTrailsList(response) {
             });
         }
     });
-    // displayMapOnDom();
     displayResult();
 }
 
