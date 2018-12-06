@@ -326,12 +326,15 @@ a{
 .description {
     background-color: whitesmoke;
     padding: 2% 2% 5%;
+    /* margin: 0 auto; */
+    display: flex;
+    flex-direction: column;
 }
 
 .description img{
-    width: 32vw;
-    margin-bottom:3%;
-    margin-top: 1%;
+    width: 100%;
+    /* margin-bottom:3%;
+    margin-top: 1%; */
 }
 
 .description>div {
@@ -348,7 +351,7 @@ a{
 }
 
 .description>div, .description img, .trailName {
-    padding: 3px 2%;
+    /* padding: 3px 2%; */
 }
 
 /* Nav Bar */
@@ -708,7 +711,7 @@ Media Queries
     .map_and_trail_list{
         display: flex;
         flex-direction: column;
-        min-height: 93vh;
+        /* min-height: 93vh; */
     }
     
     .container_tabs{
@@ -901,20 +904,21 @@ Media Queries
         width: 100vw;
     }
     .map_page_logo{
-        height: 45px;
+        height: 42px;
+        /* width: 140px; */
         padding: 0;
     }
     .search_bar{
-        height: 45px;
-    }
-    
+        height: 40px;
+        /* width: 65vw; */
+  }
     #search_field{
         font-size: 0.85rem;
         width: 70%;
     }
     
     .search_button{
-        height: 60%;
+        height: 65%;
         cursor: pointer;
         background-image: url('./images/search.png')
     }
@@ -941,7 +945,7 @@ Media Queries
     .map_and_trail_list{
         display: flex;
         flex-direction: column;
-        min-height: 93vh;
+        /* min-height: 93vh; */
     }
     
     .container_tabs{
@@ -1018,7 +1022,7 @@ Media Queries
     }
     
     .description img{
-        width: 70vw;
+        width: 100%;
         height: auto;
         position: relative;
         left: 50%;
