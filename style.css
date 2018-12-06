@@ -425,7 +425,7 @@ a{
 }
 
 .hidden{
-    display: none;
+    display: none !important;
 }
 
 .locationPicture {
@@ -548,7 +548,8 @@ a{
 }
 
 .no-result{
-    top: 2vh;
+    top: -500px;
+    left: 30vw;
     position: relative;
     font-size: 1.5rem;
 }
@@ -749,7 +750,7 @@ Media Queries
     }
     .search_bar{
         height: 40px;
-        width: 55%;
+        width: 65%;
     }
     
     #search_field{
@@ -918,6 +919,9 @@ Media Queries
         top: 2vh;
         position: relative;
         font-size: 1.5rem;
+        top: -30vh;
+        left: 50vw;
+        transform: translateX(-50%);
     }
     .meetup_container{
         width: 100vw;
@@ -1173,6 +1177,9 @@ Media Queries
         top: 2vh;
         position: relative;
         font-size: 1.5rem;
+        top: -30vh;
+        left: 50vw;
+        transform: translateX(-50%);
     }
 }
 

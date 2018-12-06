@@ -46,6 +46,7 @@ function addClickHandlersToElements() {
 }
 
 function callGoogleAPI() {
+    $('.no-result').remove();
     inputFromUser = $("#search_input").val() || $("#search_field").val();
     userInput = $("#search_input").val();
     $("#search_input").val("");
@@ -119,11 +120,12 @@ function responseFromTrailsList(response) {
     if (response.trails.length === 0) {
         $(".results_list").empty();
         $(".map_page").removeClass("hidden");
-        $(".landing_page, .map_area, .loading").addClass('hidden');
+        $(".landing_page, .map_area, .loading, .detail_container").addClass('hidden');
         let noResult = $('<div>').addClass('no-result').text(`Your search did not match any trail results. Please try a different location.`)
-        $('.results_list').append(noResult);
+        $('.list_and_details').append(noResult);
         return;
     }
+    $(".detail_container").removeClass('hidden');
     $('.nav_tabs').addClass('hidden');
     const { trails } = response;
     trails.map((trail) => {
