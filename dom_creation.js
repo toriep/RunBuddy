@@ -1,13 +1,13 @@
 function displayMapOnDom() {
     $(".landing_page").addClass("hidden");
-    //Map options
+    /* Map options */
     const options = {
         zoom: 11,
         center: runningTrails[0],
     }
-    //New map
+    /* New map */
     map = new google.maps.Map(document.getElementById("map_area"), options);
-    //Add marker
+    /* Add marker */
     for (var trailIndex = 1; trailIndex < runningTrails.length; trailIndex++) {
         let marker = new google.maps.Marker({
             position: runningTrails[trailIndex].coordinates,
@@ -119,7 +119,7 @@ function displayTrailDescription(trail) {
     displayDirectionLineOnMap(pointBCoordinates);
     $("html, body").animate({
         scrollTop: 0
-    }, "slow"); //scroll window to the top
+    }, "slow");
 }
 
 function displayDirectionLineOnMap(pointBCoordinates) {
@@ -136,7 +136,7 @@ function displayDirectionLineOnMap(pointBCoordinates) {
         directionsDisplay = new google.maps.DirectionsRenderer({ //find me a direction
             map: map
         })
-    // get route from A to B
+    /* get route from A to B */
     calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
 }
 
@@ -144,12 +144,12 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
     directionsService.route({
         origin: pointA,
         destination: pointB,
-        //travelMode: google.maps.TravelMode.DRIVING
+        /* travelMode: google.maps.TravelMode.DRIVING */
         travelMode: 'DRIVING'
     },
         function (response, status) {
-            // if (status == google.maps.DirectionsStatus.OK) {
-            if (status == "OK") { //success function
+            /* success function */
+            if (status == "OK") { 
                 directionsDisplay.setDirections(response);
                 var result = document.getElementById('direction_container');
                 result.innerHTML = "";
@@ -174,7 +174,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                     newTr3.appendChild(td3);
                     result.appendChild(newTr3);
                 }
-            } else { //error function
+            /* error function */
+            } else {
                 console.log('Directions request failed due to ' + status);
                 var result = document.getElementById('direction_container');
                 result.innerText = "Oops. We couldn't find a direction route to this trail from your location. Please try another trail.";
@@ -189,7 +190,7 @@ function displayWeatherSuccess(responseFromServer) {
         cityName: responseFromServer.name,
         conditionDescription: responseFromServer.weather[0]['description'],
         iconId: responseFromServer.weather[0]['icon'],
-        //convert temperature in Kelvin to Fahrenheit
+        /* convert temperature in Kelvin to Fahrenheit */
         tempMinInF: (responseFromServer.main['temp_min'] * 9 / 5 - 459.67).toFixed(1),
         tempMaxInF: (responseFromServer.main['temp_max'] * 9 / 5 - 459.67).toFixed(1),
         currentTempInF: (responseFromServer.main['temp'] * 9 / 5 - 459.67).toFixed(1),
@@ -264,7 +265,6 @@ function displayForecastSuccess(responseFromServer) {
 }
 
 function renderForecastOnDom(forecast) {
-    //will clean up later~~~~~~~~~~~~~~~~~~~ just testing here for now
     let monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     let monStr1 = monthList[((forecast.day1).slice(5, 7)) - 1];
@@ -323,11 +323,7 @@ function displayMeetUpSuccess(response, trailName) {
     if ($('.meetup_result_message').length) {
         $('.meetup_result_message').remove()
     }
-    // if (inputFromUser === "") {
         message = $('<div>').addClass('meetup_result_message').text(`Events near ${trailName}:`)
-    // } else {
-    //     message = $('<div>').addClass('meetup_result_message').text(`Events near ${inputFromUser}`);
-    // }
     const message_container = $('<div>').addClass('message_container');
     message_container.append(message)
     $('.meetup_container').append(message_container);
