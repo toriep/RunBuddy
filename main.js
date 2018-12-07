@@ -155,6 +155,7 @@ function displayResult() {
     $('#map_area').text();
     if($('.weather_tab').hasClass('currentTab') || $('.meetup_tab').hasClass('currentTab')){
         $('.weather_tab, .meetup_tab').removeClass('currentTab');
+        displayMapOnDom();
         return;
     }
     $('.weather_tab, .meetup_tab').removeClass('currentTab');

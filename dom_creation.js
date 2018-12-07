@@ -157,7 +157,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 newTr1.innerHTML = `<b>Distance :</b> ${response.routes[0].legs[0].distance.text}.  <b>Duration:</b> ${response.routes[0].legs[0].duration.text}.<br><br>`;
 
                 let newTr2 = document.createElement("tr");
-                newTr2.innerHTML = `<b>Start location :</b> ${response.routes[0].legs[0].start_address}<br>`;
+                newTr2.innerHTML = `<b>Start location :</b> ${response.routes[0].legs[0].start_address}<br><br>`;
 
                 let newTr4 = document.createElement("tr");
                 newTr4.innerHTML = `<b>Destination :</b> ${response.routes[0].legs[0].end_address}<br><br>`;
@@ -176,7 +176,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, 
                 }
             /* error function */
             } else {
-                console.log('Directions request failed due to ' + status);
+                console.log('Directions request failed due to ' + status + ' for direction');
                 var result = document.getElementById('direction_container');
                 result.innerText = "Oops. We couldn't find a direction route to this trail from your location. Please try another trail.";
             }
@@ -312,7 +312,7 @@ function displayMeetUpSuccess(response, trailName) {
     if (response.code === "blocked" || response.meta.count === 0) {
         const meetupDiv = $('<div>', {
             class: `events hidden`,
-            html: '<h2>Currently, there are no upcoming meetups near your area.'
+            html: '<h2>Currently, there are no upcoming meetups near this location.'
         });
         $('.meetup_container').append(meetupDiv);
         return;

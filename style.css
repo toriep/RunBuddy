@@ -104,7 +104,7 @@ body {
     justify-content: space-around;
     align-items: center;
     background-color: #1976d2;
-    height: 80px;
+    height: 70px;
     width: 100%;
 }
 
@@ -222,7 +222,7 @@ body {
     position: relative;
     width: 100%;
     right: 0;
-    height: 89vh;
+    height: 90vh;
     margin-right: 2px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -442,6 +442,7 @@ a{
     background-color: whitesmoke;
     min-height: 90vh;
     padding: 2%;
+    padding-bottom: 10%;
     margin: auto;
     position: relative;
     font-size: 1rem;
@@ -1161,6 +1162,7 @@ Media Queries
     }
 }
 
+/* iPad */
 @media all and (width: 768px) and (height: 1024px) {
     #map_area{
         width: 100%;
@@ -1173,6 +1175,34 @@ Media Queries
     }
     #info_msg{
         width: 470px;
+    }
+    .logo{
+        width: 600px;
+    }
+    .search_container{
+        width: 600px;
+    }
+}
+
+/* iPad Pro */
+@media all and (width: 1024px) and (height: 1366px) {
+    body{
+        background-position: -234px 40%;
+    }
+    .results_list{
+        height: 95vh;
+    }
+    #map_area{
+        height: 92vh;
+    }
+    .container_tabs{
+        height: 90vh;
+    }
+    .logo{
+        width: 600px;
+    }
+    .search_container{
+        width: 600px;
     }
 }
 
