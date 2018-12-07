@@ -195,7 +195,7 @@ body {
 
 #map_area{
     width: 64vw;
-    height: 90vh;
+    height: 87vh;
     left: 1vw;
     border: 1px solid black;
     margin-top: 5px;
@@ -222,7 +222,7 @@ body {
     position: relative;
     width: 100%;
     right: 0;
-    height: 93vh;
+    height: 89vh;
     margin-right: 2px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -465,7 +465,7 @@ a{
 .meetup_container{
     background-color: whitesmoke;
 }
-.message_container{
+.meetup_container{
     background-color: beige;
     padding: 1% 0;
     border-bottom: 1px solid black;
@@ -952,7 +952,7 @@ Media Queries
         top: 0;
         position: relative;
         width: 100vw;
-        height: 51vh;
+        height: 52vh;
         right: 0;
         margin-right: 0;
     }
@@ -980,7 +980,7 @@ Media Queries
     }
     .weather_container{
         width: 100vw;
-        height: 97vh;
+        height: 100%;
         margin-top: 1px;
         background-color: whitesmoke;
     }
@@ -1128,7 +1128,7 @@ Media Queries
         height: 170px;
     }
     .locationDescription{
-        height: 180px;
+        height: 170px;
         font-size: 16px;
     }
     .locationDescription>p {
@@ -1158,6 +1158,21 @@ Media Queries
     }
     .locationDescription {
         font-size: 17px;
+    }
+}
+
+@media all and (width: 768px) and (height: 1024px) {
+    #map_area{
+        width: 100%;
+    }
+    .container_tabs{
+        width: 100%;
+    }
+    .nav_tabs{
+        width: 100%;
+    }
+    #info_msg{
+        width: 470px;
     }
 }
 

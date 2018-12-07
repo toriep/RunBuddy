@@ -142,35 +142,6 @@ function displayError(error) {
     console.log(`Error: ${error}`);
 }
 
-// const direction_tab = $('#direction_container');
-// const list_result = $('.list_result');
-// const events = $('.events');
-// const description = $('.description');
-// const weather_list = $('.weather_list');
-// const description_tab = $('.description_tab');
-// const meetup_tab = $('.meetup_tab');
-// const results = $('.results');
-// const weather_tab = $('.weather_tab');
-// const trails_tab = $('.trails_tab');
-
-function displayWeather() {
-    if($('.description_tab').hasClass('currentTab') || $('#direction_container').hasClass('currentTab')){
-        displayMapOnDom()
-    }
-    $('#direction_container, .results_list, .events, .description, .message_container').addClass('hidden');
-    $('.weather_container').removeClass('hidden');
-    $('.description_tab, .meetup_tab, .direction_tab, .trails_tab').removeClass('currentTab');
-    $('.weather_tab').addClass('currentTab');
-}
-
-function displayDescription() {
-    $('.detail_container').removeClass('hidden');
-    $('#direction_container, .events, .weather_container, .message_container').addClass('hidden');
-    $('.nav_tabs, .description').removeClass('hidden');
-    $('.weather_tab, .meetup_tab, .direction_tab, .trails_tab').removeClass('currentTab');
-    $('.description_tab').addClass('currentTab');
-}
-
 function displayResult() {
     if ($('.container_tabs').hasClass('zIndex')) {
         $('.container_tabs').removeClass('zIndex')
@@ -190,21 +161,39 @@ function displayResult() {
     displayMapOnDom();
 }
 
+function displayDescription() {
+    $('.detail_container').removeClass('hidden');
+    $('#direction_container, .events, .weather_container, .meetup_container').addClass('hidden');
+    $('.nav_tabs, .description').removeClass('hidden');
+    $('.weather_tab, .meetup_tab, .direction_tab, .trails_tab').removeClass('currentTab');
+    $('.description_tab').addClass('currentTab');
+}
+
+function displayDirection() {
+    $('.description, .results_list, .weather_container, .events, .meetup_container').addClass('hidden');
+    $('#direction_container').removeClass('hidden');
+    $('.description_tab, .meetup_tab, .weather_tab, .trails_tab').removeClass('currentTab');
+    $('.direction_tab').addClass('currentTab');
+}
+
+function displayWeather() {
+    if($('.description_tab').hasClass('currentTab') || $('#direction_container').hasClass('currentTab')){
+        displayMapOnDom()
+    }
+    $('#direction_container, .results_list, .events, .description, .meetup_container').addClass('hidden');
+    $('.weather_container').removeClass('hidden');
+    $('.description_tab, .meetup_tab, .direction_tab, .trails_tab').removeClass('currentTab');
+    $('.weather_tab').addClass('currentTab');
+}
+
 function displayMeetUp() {
     if($('.description_tab').hasClass('currentTab') || $('#direction_container').hasClass('currentTab')){
         displayMapOnDom()
     }
-    $('.events, .message_container').removeClass('hidden');
+    $('.events, .meetup_container').removeClass('hidden');
     $('.description, .results_list, .weather_container, #direction_container').addClass('hidden');
     $('.description_tab, .weather_tab, .direction_tab, .trails_tab').removeClass('currentTab');
     $('.meetup_tab').addClass('currentTab');
-}
-
-function displayDirection() {
-    $('.description, .results_list, .weather_container, .events, .message_container').addClass('hidden');
-    $('#direction_container').removeClass('hidden');
-    $('.description_tab, .meetup_tab, .weather_tab, .trails_tab').removeClass('currentTab');
-    $('.direction_tab').addClass('currentTab');
 }
 
 function notifyTrailClicked(event) {
