@@ -233,75 +233,75 @@ function renderWeatherOnDom(weather) {
     $('.weather_container').append(weatherList);
 }
 
-function displayForecastSuccess(responseFromServer) {
-    let forecast = {
-        day1: responseFromServer.list[0].dt_txt,
-        day1Cond: responseFromServer.list[0].weather[0].description,
-        day1High: (responseFromServer.list[0].main.temp_max * 9 / 5 - 459.67).toFixed(1),
-        day1Low: (responseFromServer.list[0].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+// function displayForecastSuccess(responseFromServer) {
+//     let forecast = {
+//         day1: responseFromServer.list[0].dt_txt,
+//         day1Cond: responseFromServer.list[0].weather[0].description,
+//         day1High: (responseFromServer.list[0].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+//         day1Low: (responseFromServer.list[0].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
-        day2: responseFromServer.list[10].dt_txt,
-        day2Cond: responseFromServer.list[10].weather[0].description,
-        day2High: (responseFromServer.list[10].main.temp_max * 9 / 5 - 459.67).toFixed(1),
-        day2Low: (responseFromServer.list[10].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+//         day2: responseFromServer.list[10].dt_txt,
+//         day2Cond: responseFromServer.list[10].weather[0].description,
+//         day2High: (responseFromServer.list[10].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+//         day2Low: (responseFromServer.list[10].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
-        day3: responseFromServer.list[18].dt_txt,
-        day3Cond: responseFromServer.list[18].weather[0].description,
-        day3High: (responseFromServer.list[18].main.temp_max * 9 / 5 - 459.67).toFixed(1),
-        day3Low: (responseFromServer.list[18].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+//         day3: responseFromServer.list[18].dt_txt,
+//         day3Cond: responseFromServer.list[18].weather[0].description,
+//         day3High: (responseFromServer.list[18].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+//         day3Low: (responseFromServer.list[18].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
-        day4: responseFromServer.list[28].dt_txt,
-        day4Cond: responseFromServer.list[28].weather[0].description,
-        day4High: (responseFromServer.list[28].main.temp_max * 9 / 5 - 459.67).toFixed(1),
-        day4Low: (responseFromServer.list[28].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+//         day4: responseFromServer.list[28].dt_txt,
+//         day4Cond: responseFromServer.list[28].weather[0].description,
+//         day4High: (responseFromServer.list[28].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+//         day4Low: (responseFromServer.list[28].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
-        day5: responseFromServer.list[36].dt_txt,
-        day5Cond: responseFromServer.list[37].weather[0].description,
-        day5High: (responseFromServer.list[37].main.temp_max * 9 / 5 - 459.67).toFixed(1),
-        day5Low: (responseFromServer.list[37].main.temp_min * 9 / 5 - 459.67).toFixed(1),
+//         day5: responseFromServer.list[36].dt_txt,
+//         day5Cond: responseFromServer.list[37].weather[0].description,
+//         day5High: (responseFromServer.list[37].main.temp_max * 9 / 5 - 459.67).toFixed(1),
+//         day5Low: (responseFromServer.list[37].main.temp_min * 9 / 5 - 459.67).toFixed(1),
 
-    };
-    renderForecastOnDom(forecast);
-}
+//     };
+//     renderForecastOnDom(forecast);
+// }
 
-function renderForecastOnDom(forecast) {
-    let monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+// function renderForecastOnDom(forecast) {
+//     let monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    let monStr1 = monthList[((forecast.day1).slice(5, 7)) - 1];
-    let dayStr1 = ((forecast.day1).slice(8, 10));
+//     let monStr1 = monthList[((forecast.day1).slice(5, 7)) - 1];
+//     let dayStr1 = ((forecast.day1).slice(8, 10));
 
-    let monStr2 = monthList[((forecast.day2).slice(5, 7)) - 1];
-    let dayStr2 = ((forecast.day2).slice(8, 10));
+//     let monStr2 = monthList[((forecast.day2).slice(5, 7)) - 1];
+//     let dayStr2 = ((forecast.day2).slice(8, 10));
 
-    let monStr3 = monthList[((forecast.day3).slice(5, 7)) - 1];
-    let dayStr3 = ((forecast.day3).slice(8, 10));
+//     let monStr3 = monthList[((forecast.day3).slice(5, 7)) - 1];
+//     let dayStr3 = ((forecast.day3).slice(8, 10));
 
-    let monStr4 = monthList[((forecast.day4).slice(5, 7)) - 1];
-    let dayStr4 = ((forecast.day4).slice(8, 10));
+//     let monStr4 = monthList[((forecast.day4).slice(5, 7)) - 1];
+//     let dayStr4 = ((forecast.day4).slice(8, 10));
 
-    let monStr5 = monthList[((forecast.day5).slice(5, 7)) - 1];
-    let dayStr5 = ((forecast.day5).slice(8, 10));
+//     let monStr5 = monthList[((forecast.day5).slice(5, 7)) - 1];
+//     let dayStr5 = ((forecast.day5).slice(8, 10));
 
-    let headline = `<b>5 Days Forecast :</b>`;
-    let forecastTable1 = $('<tr>').append(`<td>${monStr1} ${dayStr1} : ${forecast.day1Cond} 
-        with High ${forecast.day1High} <b>°F</b> | Low ${forecast.day1Low} <b>°F</b></td>`);
+//     let headline = `<b>5 Days Forecast :</b>`;
+//     let forecastTable1 = $('<tr>').append(`<td>${monStr1} ${dayStr1} : ${forecast.day1Cond} 
+//         with High ${forecast.day1High} <b>°F</b> | Low ${forecast.day1Low} <b>°F</b></td>`);
 
-    let forecastTable2 = $('<tr>').append(`<td>${monStr2} ${dayStr2} : ${forecast.day2Cond}
-        with High ${forecast.day2High} <b>°F</b> | Low ${forecast.day2Low} <b>°F</b></td>`);
+//     let forecastTable2 = $('<tr>').append(`<td>${monStr2} ${dayStr2} : ${forecast.day2Cond}
+//         with High ${forecast.day2High} <b>°F</b> | Low ${forecast.day2Low} <b>°F</b></td>`);
 
-    let forecastTable3 = $('<tr>').append(`<td>${monStr3} ${dayStr3} : ${forecast.day3Cond}        
-        with High ${forecast.day3High} <b>°F</b> | Low ${forecast.day3Low} <b>°F</b></td>`);
+//     let forecastTable3 = $('<tr>').append(`<td>${monStr3} ${dayStr3} : ${forecast.day3Cond}        
+//         with High ${forecast.day3High} <b>°F</b> | Low ${forecast.day3Low} <b>°F</b></td>`);
 
-    let forecastTable4 = $('<tr>').append(`<td>${monStr4} ${dayStr4} : ${forecast.day4Cond}
-        with High ${forecast.day4High} <b>°F</b> | Low ${forecast.day4Low} <b>°F</b></td>`);
+//     let forecastTable4 = $('<tr>').append(`<td>${monStr4} ${dayStr4} : ${forecast.day4Cond}
+//         with High ${forecast.day4High} <b>°F</b> | Low ${forecast.day4Low} <b>°F</b></td>`);
 
-    let forecastTable5 = $('<tr>').append(`<td>${monStr5} ${dayStr5} : ${forecast.day5Cond}
-        with High ${forecast.day5High} <b>°F</b> | Low ${forecast.day5Low} <b>°F</b></td>`);
+//     let forecastTable5 = $('<tr>').append(`<td>${monStr5} ${dayStr5} : ${forecast.day5Cond}
+//         with High ${forecast.day5High} <b>°F</b> | Low ${forecast.day5Low} <b>°F</b></td>`);
 
-    let forecastList = $('<table>').addClass('weather_list');
-    // forecastList.append(headline, forecastTable1, forecastTable2, forecastTable3, forecastTable4, forecastTable5);
-    // $('.weather_container').append(forecastList);
-}
+//     let forecastList = $('<table>').addClass('weather_list');
+//     // forecastList.append(headline, forecastTable1, forecastTable2, forecastTable3, forecastTable4, forecastTable5);
+//     // $('.weather_container').append(forecastList);
+// }
 
 
 function displayMeetUpSuccess(response, trailName) {
